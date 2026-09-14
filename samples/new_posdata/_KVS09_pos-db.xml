@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43" />
+  </RTM_Generated>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="PrintOnServe">
+      <Parameter name="DuplicateReceiptWithBarCode" value="0" />
+      <Parameter name="Picklist" value="1" />
+      <Parameter name="DuplicateReceipt" value="0" />
+      <Parameter name="PicklistWithBarCode" value="0" />
+    </Section>
+    <Section name="OrderNumber">
+      <Parameter name="PosIdFormat" value="0" />
+      <Parameter name="OrderNumberBigger" value="1" />
+      <Parameter name="OrderIdFormat" value="00" />
+      <Parameter name="OrderNumberSeperator" value="" />
+      <Parameter name="OrderNumberFormat" value="2" />
+      <Parameter name="FirstReceiptEmpty" value="0" />
+    </Section>
+    <Section name="PrintFromKioskOnCounter">
+      <Parameter name="PosIdFormat" value="0" />
+      <Parameter name="OrderNumberFormat" value="2" />
+      <Parameter name="OrderIdFormat" value="00" />
+      <Parameter name="OrderNumberSeperator" value="" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="1013" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="RPR">
+          <Member name="1013" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="groupMultiOrder" value="false" />
+          <Parameter name="OrderIDDigits" value="2" />
+          <Parameter name="RegisterMapping" value="4,1|5,1|6,1|7,1|8,1|9,1|10,1|11,1|12,1|13,4|14,1|15,1|19,3|20,3|21,3|22,3|23,3|24,3|25,2|26,2|27,2|28,2|29,2|30,2|31,2|32,2|33,2|34,2|35,2|36,2|37,2|38,2|39,2|40,2|51,1|52,4|54,2|55,1|300,1" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="printReceiptOnServe" value="false" />
+          <Parameter name="monitorType" value="OATPresenter" />
+        </Section>
+        <Section name="TouchScreen">
+          <Parameter name="button5_Click" value="toggleSideOnOff" />
+          <Parameter name="cell_Click" value="globalserve" />
+          <Parameter name="available" value="true" />
+        </Section>
+        <Section name="EnhancedBumpByTouch">
+          <Parameter name="enhancedBumpByTouchEnable" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1013" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="globalserve" value="0xe1" />
+            <Parameter name="recall" value="0xa1" />
+            <Parameter name="print" value="0xa2" />
+            <Parameter name="next" value="0xb1" />
+            <Parameter name="previous" value="0xb2" />
+            <Parameter name="home" value="" />
+            <Parameter name="serveheld" value="" />
+            <Parameter name="heldscroll" value="0xe2" />
+            <Parameter name="undo" value="" />
+            <Parameter name="zoom" value="0xd1" />
+            <Parameter name="SideOn" value="0xc2" />
+            <Parameter name="SideOff" value="0xc1" />
+            <Parameter name="logicalname" value="BumpBar7" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="1013" type="RPR" classname="npRPR.dll" startonload="true" quitOnFail="true">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="escSeq" value="printerTMControlChar_DE.properties" />
+            <Parameter name="logicalname" value="PRINTER1" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

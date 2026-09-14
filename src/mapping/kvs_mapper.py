@@ -138,6 +138,7 @@ def map_kvs_to_itonas(
 
         mapped_services = []
         missing_services = []
+        candidate_services = {}
         warnings = []
 
         for service_id in reference_services:
@@ -149,7 +150,33 @@ def map_kvs_to_itonas(
 
             if not candidates:
 
-                missing_services.append(service_id)
+                missing_services.append(
+                    service_id
+                )
+
+                available_candidates = []
+
+                for candidate_id in sorted(
+                    services_by_id.keys()
+                ):
+
+                    for candidate in services_by_id[
+                        candidate_id
+                    ]:
+
+                        available_candidates.append({
+                            "service": candidate_id,
+                            "source_file": (
+                                candidate["source_file"]
+                            ),
+                            "startonload": (
+                                candidate["startonload"]
+                            )
+                        })
+
+                candidate_services[
+                    service_id
+                ] = available_candidates
 
                 continue
 
@@ -209,6 +236,7 @@ def map_kvs_to_itonas(
             "reference_services": reference_services,
             "mapped_services": mapped_services,
             "missing_services": missing_services,
+            "candidate_services": candidate_services,
             "status": status,
             "warnings": warnings
         })

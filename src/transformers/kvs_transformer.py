@@ -189,7 +189,23 @@ def collect_source_data(
     collected = []
 
     for mapped_service in mapped_services:
-        service_id = mapped_service["service"]
+
+        #
+        # Serviço esperado pelo Itona
+        #
+        target_service_id = (
+            mapped_service["service"]
+        )
+
+        #
+        # Serviço real usado como fonte.
+        #
+        source_service_id = (
+            mapped_service.get(
+                "source_service",
+                target_service_id
+            )
+        )
 
         source_file_name = (
             mapped_service["source_file"]
@@ -201,41 +217,69 @@ def collect_source_data(
         )
 
         if not source_file_path.exists():
+
             raise FileNotFoundError(
                 "Source file not found: "
                 f"{source_file_path}"
             )
 
-        tree = load_xml(source_file_path)
+        tree = load_xml(
+            source_file_path
+        )
 
         kvs_service = find_kvs_service(
             tree,
-            service_id
+            source_service_id
         )
 
         if kvs_service is None:
+
             raise ValueError(
-                f"KVS{service_id} was not found "
-                f"inside {source_file_name}."
+                f"KVS{source_service_id} "
+                f"was not found inside "
+                f"{source_file_name}."
             )
 
-        npw_service = find_npw_service(tree)
+        npw_service = find_npw_service(
+            tree
+        )
 
         browser_sections = (
-            find_browser_sections(npw_service)
+            find_browser_sections(
+                npw_service
+            )
         )
 
         collected.append({
-            "service_id": service_id,
-            "source_file": source_file_name,
-            "tree": tree,
-            "kvs_service": kvs_service,
-            "npw_service": npw_service,
-            "browser_sections": browser_sections
+            #
+            # serviço lógico esperado
+            #
+            "service_id":
+                target_service_id,
+
+            #
+            # serviço usado como fonte
+            #
+            "source_service_id":
+                source_service_id,
+
+            "source_file":
+                source_file_name,
+
+            "tree":
+                tree,
+
+            "kvs_service":
+                kvs_service,
+
+            "npw_service":
+                npw_service,
+
+            "browser_sections":
+                browser_sections
         })
 
     return collected
-
 
 def create_base_tree(first_source_tree):
     source_root = first_source_tree.getroot()
@@ -657,45 +701,132 @@ def generate_itona_file(
     output_folder,
     reference_posdata_folder,
 ):
-    if mapping["status"] != "READY":
+    if mapping.get(
+        "status"
+    ) != "READY":
         return {
-            "machine": mapping["machine"],
+            "machine": mapping.get(
+                "machine"
+            ),
             "generated": False,
             "output_file": None,
-            "warnings": mapping["warnings"],
+            "warnings": mapping.get(
+                "warnings",
+                []
+            ),
             "errors": [
                 "Mapping status is not READY."
-            ]
+            ],
+            "changes": []
         }
 
-    output_folder = Path(output_folder)
+    output_folder = Path(
+        output_folder
+    )
 
     output_folder.mkdir(
         parents=True,
         exist_ok=True
     )
 
+    #
+    # Remove serviços lógicos duplicados.
+    #
+    # A deduplicação usa o serviço de destino,
+    # não o serviço usado como fonte.
+    #
+
     unique_mapped_services = []
-    seen_service_ids = set()
+    seen_target_service_ids = set()
 
-    for mapped_service in mapping[
-        "mapped_services"
-    ]:
-
-        service_id = str(
-            mapped_service["service"]
+    for mapped_service in mapping.get(
+        "mapped_services",
+        []
+    ):
+        target_service_id = str(
+            mapped_service.get(
+                "service",
+                ""
+            )
         ).strip().upper()
 
-        if service_id in seen_service_ids:
+        if target_service_id.startswith(
+            "KVS"
+        ):
+            target_service_id = (
+                target_service_id[3:]
+            )
+
+        if not target_service_id:
             continue
 
-        seen_service_ids.add(
-            service_id
+        if (
+            target_service_id
+            in seen_target_service_ids
+        ):
+            continue
+
+        seen_target_service_ids.add(
+            target_service_id
         )
 
-        unique_mapped_services.append(
+        normalized_mapping = dict(
             mapped_service
         )
+
+        normalized_mapping[
+            "service"
+        ] = target_service_id
+
+        source_service_id = str(
+            normalized_mapping.get(
+                "source_service",
+                target_service_id
+            )
+        ).strip().upper()
+
+        if source_service_id.startswith(
+            "KVS"
+        ):
+            source_service_id = (
+                source_service_id[3:]
+            )
+
+        normalized_mapping[
+            "source_service"
+        ] = source_service_id
+
+        unique_mapped_services.append(
+            normalized_mapping
+        )
+
+    if not unique_mapped_services:
+        return {
+            "machine": mapping.get(
+                "machine"
+            ),
+            "generated": False,
+            "output_file": None,
+            "warnings": mapping.get(
+                "warnings",
+                []
+            ),
+            "errors": [
+                "No mapped KVS services were found."
+            ],
+            "changes": []
+        }
+
+    #
+    # Coleta o conteúdo usando source_service.
+    #
+    # Para mappings normais:
+    #     service == source_service
+    #
+    # Para mappings manuais:
+    #     service        == destino lógico
+    #     source_service == serviço escolhido
+    #
 
     collected_sources = collect_source_data(
         new_posdata_folder,
@@ -704,27 +835,109 @@ def generate_itona_file(
 
     reference_npw_template, (
         reference_npw_warnings
-        ) = load_reference_npw_template(
-            reference_posdata_folder=
-                reference_posdata_folder,
-            machine=
-                mapping["machine"],
-        )
+    ) = load_reference_npw_template(
+        reference_posdata_folder=
+            reference_posdata_folder,
+        machine=
+            mapping["machine"],
+    )
+
+    if not collected_sources:
+        return {
+            "machine": mapping["machine"],
+            "generated": False,
+            "output_file": None,
+            "warnings": (
+                reference_npw_warnings
+            ),
+            "errors": [
+                "No KVS source data was collected."
+            ],
+            "changes": []
+        }
 
     first_source_tree = (
         collected_sources[0]["tree"]
     )
 
     output_tree, services_container = (
-        create_base_tree(first_source_tree)
+        create_base_tree(
+            first_source_tree
+        )
     )
 
+    generation_changes = []
+
+    #
+    # Copia cada KVS para o Itona.
+    #
+    # Importante:
+    # o XML original nunca é alterado.
+    # Somente a cópia recebe o ID lógico de destino.
+    #
+
     for source in collected_sources:
-        services_container.append(
-            deepcopy(source["kvs_service"])
+        target_service_id = str(
+            source["service_id"]
+        ).strip().upper()
+
+        if target_service_id.startswith(
+            "KVS"
+        ):
+            target_service_id = (
+                target_service_id[3:]
+            )
+
+        source_service_id = str(
+            source.get(
+                "source_service_id",
+                target_service_id
+            )
+        ).strip().upper()
+
+        if source_service_id.startswith(
+            "KVS"
+        ):
+            source_service_id = (
+                source_service_id[3:]
+            )
+
+        kvs_service_copy = deepcopy(
+            source["kvs_service"]
         )
 
-    shared_npw, warnings = (
+        #
+        # Transforma, por exemplo:
+        #
+        # origem:  KVS1070
+        # destino: KVS1071
+        #
+
+        kvs_service_copy.set(
+            "name",
+            target_service_id
+        )
+
+        services_container.append(
+            kvs_service_copy
+        )
+
+        if (
+            source_service_id
+            != target_service_id
+        ):
+            generation_changes.append(
+                f"KVS{target_service_id} created "
+                f"from KVS{source_service_id} "
+                f"using "
+                f"{source['source_file']}."
+            )
+
+    #
+    # Cria o NPW compartilhado.
+    #
+
+    shared_npw, npw_warnings = (
         create_shared_npw(
             collected_sources=
                 collected_sources,
@@ -734,8 +947,12 @@ def generate_itona_file(
     )
 
     warnings = (
-        reference_npw_warnings
-        + warnings
+        list(
+            reference_npw_warnings
+        )
+        + list(
+            npw_warnings
+        )
     )
 
     if shared_npw is None:
@@ -746,10 +963,17 @@ def generate_itona_file(
             "warnings": warnings,
             "errors": [
                 "Unable to create the shared NPW."
-            ]
+            ],
+            "changes": generation_changes
         }
 
-    services_container.append(shared_npw)
+    services_container.append(
+        shared_npw
+    )
+
+    #
+    # Aplica configurações de performance.
+    #
 
     performance_result = (
         apply_performance_kvs_configuration(
@@ -758,27 +982,51 @@ def generate_itona_file(
     )
 
     warnings.extend(
-        performance_result["warnings"]
+        performance_result.get(
+            "warnings",
+            []
+        )
     )
 
-    if performance_result["errors"]:
+    generation_changes.extend(
+        performance_result.get(
+            "changes",
+            []
+        )
+    )
 
+    if performance_result.get(
+        "errors"
+    ):
         return {
             "machine": mapping["machine"],
             "generated": False,
             "output_file": None,
             "warnings": warnings,
-            "errors": (
-                performance_result["errors"]
-            ),
-            "changes": (
-                performance_result["changes"]
-            )
+            "errors": performance_result[
+                "errors"
+            ],
+            "changes": generation_changes
         }
 
+    #
+    # A validação usa os serviços lógicos de destino.
+    #
+    # Exemplo:
+    #     KVS1003
+    #     KVS1070
+    #     KVS1071
+    #
+
     expected_services = [
-        service["service"]
-        for service in unique_mapped_services
+        str(
+            service["service"]
+        ).strip().upper().removeprefix(
+            "KVS"
+        )
+        for service in (
+            unique_mapped_services
+        )
     ]
 
     validation_errors = (
@@ -789,24 +1037,15 @@ def generate_itona_file(
     )
 
     if validation_errors:
-
         return {
-            "machine":
-                mapping["machine"],
-            "generated":
-                False,
-            "output_file":
-                None,
-            "warnings":
-                warnings,
-            "errors":
-                validation_errors,
-            "changes":
-                performance_result[
-                    "changes"
-                ],
+            "machine": mapping["machine"],
+            "generated": False,
+            "output_file": None,
+            "warnings": warnings,
+            "errors": validation_errors,
+            "changes": generation_changes
         }
-    
+
     output_path = (
         output_folder
         / mapping["target_file"]
@@ -822,11 +1061,19 @@ def generate_itona_file(
         output_path
     )
 
-    validation_tree = load_xml(output_path)
+    #
+    # Reabre e valida o arquivo físico salvo.
+    #
 
-    post_save_errors = validate_generated_itona(
-        validation_tree,
-        expected_services
+    validation_tree = load_xml(
+        output_path
+    )
+
+    post_save_errors = (
+        validate_generated_itona(
+            validation_tree,
+            expected_services
+        )
     )
 
     if post_save_errors:
@@ -840,16 +1087,18 @@ def generate_itona_file(
             "output_file": None,
             "warnings": warnings,
             "errors": post_save_errors,
-            "changes": []
+            "changes": generation_changes
         }
 
     return {
         "machine": mapping["machine"],
         "generated": True,
-        "output_file": str(output_path),
+        "output_file": str(
+            output_path
+        ),
         "warnings": warnings,
         "errors": [],
-        "changes": []
+        "changes": generation_changes
     }
 
 def generate_all_itonas(

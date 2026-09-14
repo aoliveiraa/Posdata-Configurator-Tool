@@ -2,6 +2,10 @@ from src.runtime_context import (
     RuntimeContext,
 )
 
+from src.resolution import (
+    resolve_missing_kvs,
+)
+
 from src.phases import (
     run_discovery_phase,
     run_mapping_phase,
@@ -19,29 +23,13 @@ from config.lab_loader import (
     load_lab_config,
 )
 
-from src.transformers.storedb_transformer import (
-    update_main_screen,
-    update_business_limits,
-)
-
-from src.discovery.pos_role_detector import (
-    detect_pos_roles,
-)
-
 from src.discovery.pos_browser_inventory import (
     inventory_pos_browsers,
 )
 
-from src.discovery.pos_role_inventory import (
-    inventory_pos_roles,
-)
-
-from src.discovery.pos_keyword_inventory import (
-    inventory_pos_keywords,
-)
 
 from src.validators.pos_role_validator import (
-    validate_generated_pos_roles,
+    validate_generated_pos_roles
 )
 
 
@@ -104,11 +92,21 @@ def main():
         runtime
     )
 
+    runtime.kvs_mapping = (
+        resolve_missing_kvs(
+            runtime.kvs_mapping
+        )
+    )
+    
     #
     # GENERATION
     #
 
     runtime = run_generation_phase(
+        runtime
+    )
+
+    runtime = run_validation_phase(
         runtime
     )
 
@@ -271,16 +269,10 @@ def main():
     )
 
 
-    runtime.pos_role_validation = (
-        validate_generated_pos_roles(
-            output_folder="output/pos",
-            pos_machine_lookup=
-                runtime.runtime_pos_machine_lookup,
-            config_path=
-                CONFIG_PATH
-        )
+    runtime = run_validation_phase(
+        runtime
     )
-    
+
     print_generation_report(
         runtime
     )

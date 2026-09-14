@@ -1,64 +1,44 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43"/>
+  </RTM_Generated>
   <StoreDB imports="all"/>
   <ColorDB imports="default"/>
-  <Configuration imports="Store.wide"/>
+  <Configuration imports="Store.wide">
+    <Section name="OperationMode">
+      <Parameter name="applyUpdateOperationMode" value="1"/>
+    </Section>
+  </Configuration>
   <Services>
-    <Service name="0501" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
-      <UsedServices>
-      </UsedServices>
+    <Service name="1003" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices/>
       <Configuration imports="KVSRedesign">
-        <Section name="Beep">
-          <Parameter name="enabled" value="true"/>
-        </Section>
         <Section name="UserInterface">
-          <Parameter name="horizontalPos" value="0"/>
-          <Parameter name="rows" value="2"/>
-          <Parameter name="rows1" value="2"/>
-          <Parameter name="rows2" value="2"/>
-          <Parameter name="rows3" value="2"/>
-          <Parameter name="columns" value="3"/>
-          <Parameter name="columns1" value="3"/>
-          <Parameter name="columns2" value="3"/>
-          <Parameter name="columns3" value="3"/>
-          <Parameter name="heldCells" value="2"/>
-          <Parameter name="heldCells1" value="2"/>
-          <Parameter name="heldCells2" value="2"/>
-          <Parameter name="heldCells3" value="2"/>
-          <Parameter name="orderItemFont" value="Arial-BOLD-19"/>
-          <Parameter name="orderItemFont1" value="Arial-BOLD-19"/>
-          <Parameter name="orderItemFont2" value="Arial-BOLD-19"/>
-          <Parameter name="orderItemFont3" value="Arial-BOLD-19"/>
-          <Parameter name="grillItemFont" value="Arial-BOLD-17"/>
-          <Parameter name="grillItemFont1" value="Arial-BOLD-17"/>
-          <Parameter name="grillItemFont2" value="Arial-BOLD-17"/>
-          <Parameter name="grillItemFont3" value="Arial-BOLD-17"/>
-          <Parameter name="orderItemVoidedFont" value="Arial-REGULAR-19"/>
-          <Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-19"/>
-          <Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-19"/>
-          <Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-19"/>
-          <Parameter name="grillItemVoidedFont" value="Arial-REGULAR-17"/>
-          <Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-17"/>
-          <Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-17"/>
-          <Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-17"/>
-          <Parameter name="firstThreshold" value="50"/>
-          <Parameter name="secondThreshold" value="60"/>
-          <Parameter name="displayGrillInstruction" value="ASIMAGE"/>
-          <Parameter name="displaySideStatus" value="false"/>
-          <Parameter name="displayDestinationImage" value="true"/>
           <Parameter name="displaySaleType" value="false"/>
-          <Parameter name="displayOrderAmount" value="false"/>
-          <Parameter name="groupMultiOrder" value="false"/>
-          <Parameter name="displaySideIndicator" value="multiple"/>
+          <Parameter name="displaySideIndicator" value="true"/>
+          <Parameter name="height" value="768"/>
+          <Parameter name="width" value="1024"/>
+          <Parameter name="orderItemFont" value="Arial-BOLD-12"/>
+          <Parameter name="orderItemFont1" value="Arial-BOLD-16"/>
+          <Parameter name="orderItemFont2" value="Arial-BOLD-18"/>
+          <Parameter name="grillItemFont" value="Arial-REGULAR-11"/>
+          <Parameter name="grillItemFont1" value="Arial-BOLD-14"/>
+          <Parameter name="grillItemFont2" value="Arial-BOLD-16"/>
+          <Parameter name="cellHeaderFont" value="Arial-BOLD-12"/>
+          <Parameter name="cellHeaderFont1" value="Arial-BOLD-14"/>
+          <Parameter name="cellHeaderFont2" value="Arial-BOLD-18"/>
+          <Parameter name="cellFooterFont" value="Arial-BOLD-12"/>
+          <Parameter name="cellFooterFont1" value="Arial-BOLD-14"/>
+          <Parameter name="cellFooterFont2" value="Arial-BOLD-16"/>
+          <Parameter name="presenterMonitor" value="true"/>
+          <Parameter name="dtConsumerMonitor" value="false"/>
         </Section>
         <Section name="WayOfWork">
-          <Parameter name="enableKVSProductFiltering" value="false"/>
-          <Parameter name="ordersToReleaseByFlexibleCascade" value="0"/>
+          <Parameter name="printReceiptOnServe" value="true"/>
         </Section>
-        <Section name="BumpbarCommandOnRecallMode">
-          <Parameter name="enabled" value="false"/>
-          <Parameter name="recall" value="next"/>
-          <Parameter name="serve8" value="picklist"/>
+        <Section name="OperationMode">
+          <Parameter name="kvsSelectionMode" value="BUMPONLY"/>
         </Section>
         <Section name="Touchscreen">
           <Parameter name="enable" value="true"/>
@@ -66,60 +46,315 @@
         </Section>
       </Configuration>
       <Adaptors>
-        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
         <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
-        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true"/>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1003"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
         <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="false">
           <Section name="main">
-            <Parameter name="logicalname" value="BUMPBAR1"/>
+            <Parameter name="globalserve" value="0xe1"/>
+            <Parameter name="recall" value="0xa1"/>
+            <Parameter name="print" value="0xa2"/>
+            <Parameter name="next" value="0xb1"/>
+            <Parameter name="previous" value="0xb2"/>
+            <Parameter name="home" value=""/>
+            <Parameter name="serveheld" value=""/>
+            <Parameter name="heldscroll" value="0xe2"/>
+            <Parameter name="undo" value=""/>
+            <Parameter name="held" value="0xd2"/>
+            <Parameter name="zoom" value="0xd1"/>
+            <Parameter name="SideOn" value="0xc2"/>
+            <Parameter name="SideOff" value="0xc1"/>
+            <Parameter name="logicalname" value="BumpBar1"/>
             <Parameter name="isNpSharp" value="true"/>
             <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
-            <Parameter name="hostAddress" value="localhost"/>
-            <Parameter name="portNumber" value="8123"/>
-            <Parameter name="serve" value="0xa1|0xa2"/>
-            <Parameter name="zoom" value="0xb1"/>
-            <Parameter name="recall" value="0xb2"/>
-            <Parameter name="next" value="0xc1|0xc2"/>
-            <Parameter name="held" value="0xd1"/>
-            <Parameter name="heldscroll" value="0xd2"/>
-            <Parameter name="sideon" value="0xe1"/>
-            <Parameter name="sideoff" value="0xe2"/>
           </Section>
         </Adaptor>
       </Adaptors>
     </Service>
-    <Service type="NPW" startonload="true" quitOnFail="true" classname="LocalWebView" name="0501">
+    <Service name="1070" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration type="KVSRedesign">
+        <Section name="WayOfWork">
+          <Parameter name="monitorType" value="ORB"/>
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="useRecallerId" value="ALL"/>
+          <Parameter name="OrderIDDigits" value="2"/>
+          <Parameter name="RegisterMapping" value="4,1|5,1|6,1|7,1|8,1|9,1|10,1|11,1|12,1|13,4|14,1|15,1|19,3|20,3|21,3|22,3|23,3|24,3|25,2|26,2|27,2|28,2|29,2|30,2|31,2|32,2|33,2|34,2|35,2|36,2|37,2|38,2|39,2|40,2|51,1|52,4|54,2|55,1|300,1"/>
+        </Section>
+        <Section name="ORB">
+          <Parameter name="DesiredFrameRateProperty" value="30"/>
+          <Parameter name="DesiredScreenIndex" value="0"/>
+          <Parameter name="ShowMouseCursor" value="false"/>
+          <Parameter name="StyleName" value="Default"/>
+          <Parameter name="PixelsPerFrame" value="2"/>
+          <Parameter name="PromoMessageDelayUpdateInSeconds" value="3"/>
+          <Parameter name="MarqueeAnimation" value="false"/>
+          <Parameter name="HeightChangeDurationInMilliseconds" value="250"/>
+          <Parameter name="PromoAreaEnabled" value="false"/>
+          <Parameter name="DefaultSlideTimeInSeconds" value="5"/>
+          <Parameter name="AutoBumpOrdersInMinutes" value="45"/>
+          <Parameter name="OrdersPerColumn0" value="16"/>
+          <Parameter name="BackgroundItemHeightColumn0" value="65"/>
+          <Parameter name="ForegroundItemHeightColumn0" value="65"/>
+          <Parameter name="OrdersPerColumn1" value="4"/>
+          <Parameter name="BackgroundItemHeightColumn1" value="105"/>
+          <Parameter name="ForegroundItemHeightColumn1" value="140"/>
+        </Section>
+        <Section name="Schedule.0">
+          <Parameter name="isActive" value="true"/>
+          <Parameter name="ORBFont" value="Arial"/>
+          <Parameter name="Column.0.orderStatus" value="PREPARED|ON_TOTAL|PAID"/>
+          <Parameter name="Column.0.doubleColumn" value="true"/>
+          <Parameter name="Column.0.OrderListItemBackgroundOpacity" value="1.0"/>
+          <Parameter name="Column.0.OrderListItemPathDashArray" value="2 4"/>
+          <Parameter name="Column.0.OrderListItemPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderListItemPathWidth" value="340"/>
+          <Parameter name="Column.0.OrderListItemPathVerticalAlignment" value="Bottom"/>
+          <Parameter name="Column.0.OrderListItemPathOpacity" value="0.7"/>
+          <Parameter name="Column.0.OrderListTopPathDashArray" value="1 0"/>
+          <Parameter name="Column.0.OrderListTopPathOpacity" value="0.70"/>
+          <Parameter name="Column.0.OrderListTopPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderListTopPathWidth" value="340"/>
+          <Parameter name="Column.0.OrderListBottomPathDashArray" value="1 0"/>
+          <Parameter name="Column.0.OrderListBottomPathOpacity" value="0.70"/>
+          <Parameter name="Column.0.OrderListBottomPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderListBottomPathWidth" value="340"/>
+          <Parameter name="Column.0.OrderSeparatorPathDashArray" value="1 0"/>
+          <Parameter name="Column.0.OrderSeparatorPathOpacity" value="1.0"/>
+          <Parameter name="Column.0.OrderSeparatorPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderSeparatorPathWidth" value="2"/>
+          <Parameter name="Column.1.orderStatus" value="SERVED"/>
+          <Parameter name="Column.1.doubleColumn" value="false"/>
+          <Parameter name="Column.1.OrderListItemTextColor" value="GREEN"/>
+          <Parameter name="Column.1.OrderListItemBackgroundOpacity" value="0.0"/>
+          <Parameter name="Column.1.OrderListItemPathDashArray" value="2 4"/>
+          <Parameter name="Column.1.OrderListItemPathThickness" value="2"/>
+          <Parameter name="Column.1.OrderListItemPathWidth" value="400"/>
+          <Parameter name="Column.1.OrderListItemPathVerticalAlignment" value="Bottom"/>
+          <Parameter name="Column.1.OrderListItemPathOpacity" value="0.7"/>
+          <Parameter name="Column.1.OrderListItemFontSize" value="50"/>
+          <Parameter name="Column.1.OrderListTopPathDashArray" value="1 0"/>
+          <Parameter name="Column.1.OrderListTopPathOpacity" value="0.70"/>
+          <Parameter name="Column.1.OrderListTopPathThickness" value="2"/>
+          <Parameter name="Column.1.OrderListTopPathWidth" value="400"/>
+          <Parameter name="Column.1.OrderListBottomPathDashArray" value="1 0"/>
+          <Parameter name="Column.1.OrderListBottomPathOpacity" value="0.70"/>
+          <Parameter name="Column.1.OrderListBottomPathThickness" value="2"/>
+          <Parameter name="Column.1.OrderListBottomPathWidth" value="400"/>
+          <Parameter name="Column.1.OrderSeparatorPathDashArray" value="1 0"/>
+          <Parameter name="Column.1.OrderSeparatorPathOpacity" value="1.0"/>
+          <Parameter name="Column.1.OrderSeparatorPathThickness" value="40"/>
+          <Parameter name="Column.1.OrderSeparatorPathWidth" value="40"/>
+          <Parameter name="Column.0.InstructionAreaTextColor" value="LightGRAY"/>
+          <Parameter name="Column.0.InstructionAreaBackgroundColor" value="BLACK"/>
+          <Parameter name="Column.0.OrderListItemTextColor" value="WHITE"/>
+          <Parameter name="InstoreMessageBackgroundColor" value="BLACK"/>
+          <Parameter name="DefaultTitleBackgroundColor" value="BLACK"/>
+          <Parameter name="BackgroundColor" value="BLACK"/>
+          <Parameter name="ArrowColor" value="WHITE"/>
+          <Parameter name="DefaultTitleTextColor" value="WHITE"/>
+          <Parameter name="InstructionAreaTextColor" value="WHITE"/>
+          <Parameter name="Column.1.InstructionAreaBackgroundColor" value="GREEN"/>
+          <Parameter name="Column.1.InstructionAreaTextColor" value="LightGRAY"/>
+          <Parameter name="Column.0.OrderListItemBackgroundColor" value="BLACK"/>
+          <Parameter name="Column.1.OrderListItemBackgroundColor" value="BLACK"/>
+        </Section>
+        <Section name="Touchscreen">
+          <Parameter name="enable" value="true"/>
+          <Parameter name="available" value="true"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1070"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
+        <Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="true"/>
+      </Adaptors>
+    </Service>
+    <Service name="1071" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration type="KVSRedesign">
+        <Section name="WayOfWork">
+          <Parameter name="monitorType" value="ORB"/>
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="useRecallerId" value="ALL"/>
+          <Parameter name="OrderIDDigits" value="2"/>
+          <Parameter name="RegisterMapping" value="4,1|5,1|6,1|7,1|8,1|9,1|10,1|11,1|12,1|13,4|14,1|15,1|19,3|20,3|21,3|22,3|23,3|24,3|25,2|26,2|27,2|28,2|29,2|30,2|31,2|32,2|33,2|34,2|35,2|36,2|37,2|38,2|39,2|40,2|51,1|52,4|54,2|55,1|300,1"/>
+        </Section>
+        <Section name="ORB">
+          <Parameter name="DesiredFrameRateProperty" value="30"/>
+          <Parameter name="DesiredScreenIndex" value="0"/>
+          <Parameter name="ShowMouseCursor" value="false"/>
+          <Parameter name="StyleName" value="Default"/>
+          <Parameter name="PixelsPerFrame" value="2"/>
+          <Parameter name="PromoMessageDelayUpdateInSeconds" value="3"/>
+          <Parameter name="MarqueeAnimation" value="false"/>
+          <Parameter name="HeightChangeDurationInMilliseconds" value="250"/>
+          <Parameter name="PromoAreaEnabled" value="false"/>
+          <Parameter name="DefaultSlideTimeInSeconds" value="5"/>
+          <Parameter name="AutoBumpOrdersInMinutes" value="45"/>
+          <Parameter name="OrdersPerColumn0" value="16"/>
+          <Parameter name="BackgroundItemHeightColumn0" value="65"/>
+          <Parameter name="ForegroundItemHeightColumn0" value="65"/>
+          <Parameter name="OrdersPerColumn1" value="4"/>
+          <Parameter name="BackgroundItemHeightColumn1" value="105"/>
+          <Parameter name="ForegroundItemHeightColumn1" value="140"/>
+        </Section>
+        <Section name="Schedule.0">
+          <Parameter name="isActive" value="true"/>
+          <Parameter name="ORBFont" value="Arial"/>
+          <Parameter name="Column.0.orderStatus" value="PREPARED|ON_TOTAL|PAID"/>
+          <Parameter name="Column.0.doubleColumn" value="true"/>
+          <Parameter name="Column.0.OrderListItemBackgroundOpacity" value="1.0"/>
+          <Parameter name="Column.0.OrderListItemPathDashArray" value="2 4"/>
+          <Parameter name="Column.0.OrderListItemPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderListItemPathWidth" value="340"/>
+          <Parameter name="Column.0.OrderListItemPathVerticalAlignment" value="Bottom"/>
+          <Parameter name="Column.0.OrderListItemPathOpacity" value="0.7"/>
+          <Parameter name="Column.0.OrderListTopPathDashArray" value="1 0"/>
+          <Parameter name="Column.0.OrderListTopPathOpacity" value="0.70"/>
+          <Parameter name="Column.0.OrderListTopPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderListTopPathWidth" value="340"/>
+          <Parameter name="Column.0.OrderListBottomPathDashArray" value="1 0"/>
+          <Parameter name="Column.0.OrderListBottomPathOpacity" value="0.70"/>
+          <Parameter name="Column.0.OrderListBottomPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderListBottomPathWidth" value="340"/>
+          <Parameter name="Column.0.OrderSeparatorPathDashArray" value="1 0"/>
+          <Parameter name="Column.0.OrderSeparatorPathOpacity" value="1.0"/>
+          <Parameter name="Column.0.OrderSeparatorPathThickness" value="2"/>
+          <Parameter name="Column.0.OrderSeparatorPathWidth" value="2"/>
+          <Parameter name="Column.1.orderStatus" value="SERVED"/>
+          <Parameter name="Column.1.doubleColumn" value="false"/>
+          <Parameter name="Column.1.OrderListItemTextColor" value="GREEN"/>
+          <Parameter name="Column.1.OrderListItemBackgroundOpacity" value="0.0"/>
+          <Parameter name="Column.1.OrderListItemPathDashArray" value="2 4"/>
+          <Parameter name="Column.1.OrderListItemPathThickness" value="2"/>
+          <Parameter name="Column.1.OrderListItemPathWidth" value="400"/>
+          <Parameter name="Column.1.OrderListItemPathVerticalAlignment" value="Bottom"/>
+          <Parameter name="Column.1.OrderListItemPathOpacity" value="0.7"/>
+          <Parameter name="Column.1.OrderListItemFontSize" value="50"/>
+          <Parameter name="Column.1.OrderListTopPathDashArray" value="1 0"/>
+          <Parameter name="Column.1.OrderListTopPathOpacity" value="0.70"/>
+          <Parameter name="Column.1.OrderListTopPathThickness" value="2"/>
+          <Parameter name="Column.1.OrderListTopPathWidth" value="400"/>
+          <Parameter name="Column.1.OrderListBottomPathDashArray" value="1 0"/>
+          <Parameter name="Column.1.OrderListBottomPathOpacity" value="0.70"/>
+          <Parameter name="Column.1.OrderListBottomPathThickness" value="2"/>
+          <Parameter name="Column.1.OrderListBottomPathWidth" value="400"/>
+          <Parameter name="Column.1.OrderSeparatorPathDashArray" value="1 0"/>
+          <Parameter name="Column.1.OrderSeparatorPathOpacity" value="1.0"/>
+          <Parameter name="Column.1.OrderSeparatorPathThickness" value="40"/>
+          <Parameter name="Column.1.OrderSeparatorPathWidth" value="40"/>
+          <Parameter name="Column.0.InstructionAreaTextColor" value="LightGRAY"/>
+          <Parameter name="Column.0.InstructionAreaBackgroundColor" value="BLACK"/>
+          <Parameter name="Column.0.OrderListItemTextColor" value="WHITE"/>
+          <Parameter name="InstoreMessageBackgroundColor" value="BLACK"/>
+          <Parameter name="DefaultTitleBackgroundColor" value="BLACK"/>
+          <Parameter name="BackgroundColor" value="BLACK"/>
+          <Parameter name="ArrowColor" value="WHITE"/>
+          <Parameter name="DefaultTitleTextColor" value="WHITE"/>
+          <Parameter name="InstructionAreaTextColor" value="WHITE"/>
+          <Parameter name="Column.1.InstructionAreaBackgroundColor" value="GREEN"/>
+          <Parameter name="Column.1.InstructionAreaTextColor" value="LightGRAY"/>
+          <Parameter name="Column.0.OrderListItemBackgroundColor" value="BLACK"/>
+          <Parameter name="Column.1.OrderListItemBackgroundColor" value="BLACK"/>
+        </Section>
+        <Section name="Touchscreen">
+          <Parameter name="enable" value="true"/>
+          <Parameter name="available" value="true"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1070"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
+        <Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="true"/>
+      </Adaptors>
+    </Service>
+    <Service name="1003" type="NPW" classname="" startonload="true" quitOnFail="true">
       <Configuration imports="LocalWebView">
         <Section name="BaseHosts">
-          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp/"/>
         </Section>
         <Section name="LocalWebView">
-          <Parameter name="Location" value="../NpWebView"/>
+          <Parameter name="Location" value="../npwebview"/>
+          <Parameter name="ConfigurationFileName" value="WebViewConfig.xml"/>
         </Section>
         <Section name="Log">
           <Parameter name="EnableDebug" value="true"/>
           <Parameter name="LogFileFolder" value="out/"/>
-          <Parameter name="enableConsoleLog" value="true"/>
         </Section>
         <Section name="AutoUpdate">
           <Parameter name="EnableAutoUpdate" value="true"/>
         </Section>
+        <Section name="Monitoring">
+          <Parameter name="MonitorInterval" value="60000"/>
+        </Section>
         <Section name="Monitoring.Memory">
-          <Parameter name="MonitoringInterval" value="60000"/>
-          <Parameter name="MaxMemoryPercentage" value="70"/>
+          <Parameter name="MaxMemoryPercentage" value="80"/>
           <Parameter name="LauncherLimit" value="200"/>
           <Parameter name="BrowserLimit" value="1500"/>
           <Parameter name="DriverHostLimit" value="1500"/>
         </Section>
-        <Section name="Component.Browser.KVS0501">
-          <Parameter name="HtmlKeepAliveTimeout" value="120000"/>
-          <Parameter name="Position" value="0,0"/>
-          <Parameter name="Urn" value="KVS/KVS0501"/>
+        <Section name="Component.DriverHost.Scanner">
+          <Parameter name="DriverFile" value="SerialScanner.dll"/>
+          <Parameter name="DeviceType" value="Scanner"/>
+          <Parameter name="LogicalName" value="Scanner61"/>
+          <Parameter name="NodeName" value="POS0005"/>
+          <Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
+          <Parameter name="portname" value="virtual"/>
+        </Section>
+        <Section name="Component.Browser.KVS1003">
+          <Parameter name="Position" value="1024,0"/>
+          <Parameter name="ShowFrame" value="true"/>
+          <Parameter name="Urn" value="KVS/KVS1003"/>
+          <Parameter name="ShowCursor" value="true"/>
           <Parameter name="Size" value="1024x768"/>
           <Parameter name="BrowserServer" value="messagehub"/>
-          <Parameter name="NodeName" value="KVS0501"/>
-          <Parameter name="LogicalName" value="KVS0501"/>
+          <!--Coordinator Config-->
+          <Parameter name="NodeName" value="KVS1003"/>
+          <Parameter name="LogicalName" value="KVS1003"/>
           <Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper"/>
+          <!--Coordinator Config-->
+        </Section>
+        <Section name="Component.Browser.KVS1070">
+          <Parameter name="Position" value="0,0"/>
+          <Parameter name="ShowFrame" value="true"/>
+          <Parameter name="Urn" value="KVS/KVS1070"/>
+          <Parameter name="ShowCursor" value="true"/>
+          <Parameter name="Size" value="1024x768"/>
+          <Parameter name="BrowserServer" value="messagehub"/>
+          <!--Coordinator Config-->
+          <Parameter name="NodeName" value="KVS1070"/>
+          <Parameter name="LogicalName" value="KVS1070"/>
+          <Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper"/>
+          <!--Coordinator Config-->
+        </Section>
+        <Section name="Component.Browser.KVS1071">
+          <Parameter name="Position" value="0,0"/>
+          <Parameter name="ShowFrame" value="true"/>
+          <Parameter name="Urn" value="KVS/KVS1071"/>
+          <Parameter name="ShowCursor" value="true"/>
+          <Parameter name="Size" value="1024x768"/>
+          <Parameter name="BrowserServer" value="messagehub"/>
+          <!--Coordinator Config-->
+          <Parameter name="NodeName" value="KVS1071"/>
+          <Parameter name="LogicalName" value="KVS1071"/>
+          <Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper"/>
+          <!--Coordinator Config-->
         </Section>
       </Configuration>
     </Service>

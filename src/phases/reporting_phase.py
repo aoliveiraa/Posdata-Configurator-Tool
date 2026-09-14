@@ -378,6 +378,8 @@ def print_analysis_report(
                     f"[{active_status}]"
                 )
 
+
+
         if mapping.get(
             "missing_services"
         ):
@@ -398,6 +400,40 @@ def print_analysis_report(
                 + missing_text
             )
 
+        candidate_services = (
+            mapping.get(
+                "candidate_services",
+                {}
+            )
+        )
+
+        for missing_service in (
+            mapping.get(
+                "missing_services",
+                []
+            )
+        ):
+
+            candidates = (
+                candidate_services.get(
+                    missing_service,
+                    []
+                )
+            )
+
+            if candidates:
+
+                print(
+                    f"  Candidates for "
+                    f"KVS{missing_service}:"
+                )
+
+                for candidate in candidates:
+
+                    print(
+                        f"    KVS{candidate}"
+                    )
+                    
         for warning in (
             mapping.get(
                 "warnings",

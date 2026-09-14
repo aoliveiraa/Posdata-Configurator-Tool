@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Message file for customer feedback -->
+<campaigns>
+  <campaign name="Campaign1">
+    <qrprefix>https://feedback.mcdonalds.com/jfe/form/SV_3fv6PsQJMBgs6ea?surv_cd=</qrprefix>
+    <validfrom>01/03/2016-11:58</validfrom>
+    <!-- dd/MM/yyyy-HH:mm -->
+    <validuntil>25/03/2036-09:00</validuntil>
+    <position>footer</position>
+    <textblock>
+      <item type="text" align="center">Feedback geben und als Dankeschön ein</item>
+      <item type="text" align="center">McDonald’s-Produkt für 50 Cent erhalten</item>
+      <item type="text" align="center">jetzt QR Code scannen:</item>
+      <item type="qrcode" align="center">
+      </item>
+    </textblock>
+  </campaign>
+</campaigns>

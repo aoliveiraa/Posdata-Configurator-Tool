@@ -1,0 +1,129 @@
+{
+  "campaign": [
+    {
+      "qrprefix": "www.mcdoetmoi.com?code=",
+      "validfrom": "20/01/2016-11:58",
+      "validuntil": "25/03/2019-09:00",
+      "position": "header",
+      "textblock": [
+        {
+          "type": "text",
+          "align": "",
+          "format": "",
+          "item": "***********************************"
+        },
+        {
+          "type": "text",
+          "align": "left",
+          "format": "",
+          "item": "&lt;@BoldOn&gt;   Votre avis compte pour nous ! &lt;@BoldOff&gt;"
+        },
+        {
+          "type": "text",
+          "align": "center",
+          "format": "",
+          "item": "RDV sur le site /www.mcdoetmoi.com"
+        },
+        {
+          "type": "text",
+          "align": "right",
+          "format": "",
+          "item": "et utilisez ce code:"
+        },
+        {
+          "type": "code",
+          "align": "",
+          "format": "",
+          "item": ""
+        },
+        {
+          "type": "text",
+          "align": "",
+          "format": "",
+          "item": "&lt;@UnderLineOn&gt;ou scannez ce QR code: &lt;@UnderLineOff&gt;"
+        },
+        {
+          "type": "qrcode",
+          "align": "",
+          "format": "",
+          "item": ""
+        },
+        {
+          "type": "text",
+          "align": "",
+          "format": "",
+          "item": "----------- Merci -------------"
+        },
+        {
+          "type": "text",
+          "align": "",
+          "format": "",
+          "item": "***********************************"
+        }
+      ]
+    },
+    {
+      "qrprefix": "http://www.mcfeedback.se?code=",
+      "validfrom": "01/01/2023-11:58",
+      "validuntil": "31/12/2099-23:59",
+      "position": "footer",
+      "textblock": [
+        {
+          "type": "text",
+          "align": "center",
+          "format": "",
+          "item": "MSG_RECEIPT_CUSTMERFEEDBACK_TEST"
+        },
+        {
+          "type": "text",
+          "align": "center",
+          "format": "reverse|doubleChar",
+          "item": "Hur var ditt besök?"
+        },
+        {
+          "type": "text",
+          "align": "center",
+          "format": "smallChar",
+          "item": "Lämna din åsikt på www.mcfeedback.se"
+        },
+        {
+          "type": "text",
+          "align": "left",
+          "format": "bold|underline",
+          "item": "och använd denna kod:"
+        },
+        {
+          "type": "code",
+          "align": "",
+          "format": "",
+          "item": "FFFFFFF"
+        },
+        {
+          "type": "text",
+          "align": "right",
+          "format": "",
+          "item": "Eller skanna denna QR-kod:"
+        },
+        {
+          "type": "qrcode",
+          "align": "",
+          "format": "",
+          "item": "GGGGGGG"
+        },
+        {
+          "type": "text",
+          "align": "",
+          "format": "",
+          "item": "Tack!"
+        },
+        {
+          "type": "text",
+          "align": "",
+          "format": "",
+          "item": ""
+        }
+      ]
+    }
+  ]
+ }
+  

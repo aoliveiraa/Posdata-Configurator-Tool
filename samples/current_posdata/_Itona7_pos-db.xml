@@ -1,183 +1,150 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <PosDB>
-	<StoreDB imports="all"/>
-	<ColorDB imports="default"/>
-	<Configuration imports="Store.wide"/>
-	<Services>
-		<Service name="6113" type="RPR" classname="npRPR.dll" startonload="true" quitOnFail="false">
-			<Adaptors>
-				<Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
-					<Section name="main">
-						<Parameter name="isNpSharp" value="true"/>
-						<Parameter name="service" value="npAdpPrn.dll"/>
-						<Parameter name="adaptorname" value="npAdpPrn"/>
-						<Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
-						<Parameter name="logicalname" value="PRINTER6113"/>
-					</Section>
-				</Adaptor>
-			</Adaptors>
-		</Service>
-		<Service name="1013" type="NPW" classname="" startonload="true" quitOnFail="true">
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide">
+    <Section name="OperationMode">
+      <Parameter name="applyUpdateOperationMode" value="1"/>
+    </Section>
+	<Section name="Messaging">
+	  <Parameter name="networkAdaptorBaseIp" vau="10.118.57.25" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="1008" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="groupMultiOrder" value="false"/>
+        </Section>
+        <Section name="TouchScreen">
+          <Parameter name="available" value="true"/>
+          <Parameter name="enable" value="true"/>
+          <Parameter name="cell_Click" value="serve"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+          <Section name="main">
+            <Parameter name="url" value="http://127.0.0.1:8080/goform/RPC2"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1008"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="serve" value="0xe1"/>
+            <Parameter name="recall" value="0xa1"/>
+            <Parameter name="print" value="0xa2"/>
+            <Parameter name="next" value="0xb1"/>
+            <Parameter name="previous" value="0xb2"/>
+            <Parameter name="home" value=""/>
+            <Parameter name="serveheld" value=""/>
+            <Parameter name="heldscroll" value="0xe2"/>
+            <Parameter name="undo" value=""/>
+            <Parameter name="held" value="0xd2"/>
+            <Parameter name="zoom" value="0xd1"/>
+            <Parameter name="SideOn" value="0xc2"/>
+            <Parameter name="SideOff" value="0xc1"/>
+            <Parameter name="portname" value="virtual"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+	<Service name="1008" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="groupMultiOrder" value="false"/>
+          <Parameter name="displaySideIndicator" value="true"/>
+        </Section>
+        <Section name="TouchScreen">
+          <Parameter name="available" value="true"/>
+          <Parameter name="enable" value="true"/>
+          <Parameter name="cell_Click" value="serve"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+          <Section name="main">
+            <Parameter name="url" value="http://127.0.0.1:8080/goform/RPC2"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1008"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
+      </Adaptors>
+    </Service>
+	<Service name="1008" type="NPW" classname="" startonload="true" quitOnFail="true">
 			<Configuration imports="LocalWebView">
 				<Section name="BaseHosts">
-					<Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+					<Parameter name="Urls" value="http://127.0.0.1:8123/npsharp/" />
 				</Section>
 				<Section name="LocalWebView">
-					<Parameter name="Location" value="../npwebview"/>
+					<Parameter name="Location" value="../npwebview" />
+					<Parameter name="ConfigurationFileName" value="WebViewConfig.xml" />
 				</Section>
 				<Section name="Log">
-					<Parameter name="EnableDebug" value="true"/>
+					<Parameter name="EnableDebug" value="true" />
 					<Parameter name="LogFileFolder" value="out/"/>
 				</Section>
 				<Section name="AutoUpdate">
-					<Parameter name="EnableAutoUpdate" value="false"/>
+					<Parameter name="EnableAutoUpdate" value="true" />
 				</Section>
 				<Section name="Monitoring">
-					<Parameter name="MonitoringInterval" value="0"/>
+					<Parameter name="MonitorInterval" value="60000" />
 				</Section>
 				<Section name="Monitoring.Memory">
-					<Parameter name="MaxMemoryPercentage" value="80"/>
-					<Parameter name="LauncherLimit" value="200"/>
-					<Parameter name="BrowserLimit" value="1500"/>
-					<Parameter name="DriverHostLimit" value="1500"/>
+					<Parameter name="MaxMemoryPercentage" value="80" />
+					<Parameter name="LauncherLimit" value="200" />
+					<Parameter name="BrowserLimit" value="1500" />
+					<Parameter name="DriverHostLimit" value="1500" />
 				</Section>
-				<Section name="Component.DriverHost.RPR6113">
-					<Parameter name="DeviceType" value="Printer"/>
-					<Parameter name="logicalName" value="PRINTER6113"/>
-					<Parameter name="nodeName" value="RPR6113"/>
-					<Parameter name="DriverFile" value="VirtualPrinter"/>
-					<Parameter name="AdapterFile" value="LegacyPrinterAdapter.dll"/>
-					<Parameter name="portname" value="..\..\..\..\Out\RPR6113.txt"/>
+				
+				<Section name="Component.Browser.KVS1008">
+					<!-- <Parameter name="Position" value="1024,0"/> -->
+					<Parameter name="ShowFrame" value="true"/>
+					<Parameter name="Urn" value="KVS/KVS1008"/>
+					<Parameter name="ShowCursor" value="true"/>
+					<Parameter name="Size" value="1024x768"/>
+					<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
+					<Parameter name="NodeName" value="KVS1008"/>
+					<Parameter name="LogicalName" value="KVS1008"/>
+					<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->						
 				</Section>
-			</Configuration>
-		</Service>
-		<Service name="1013" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
-			<UsedServices>
-				<UsedService serviceType="RPR">
-					<Member name="6113" alias=""/>
-				</UsedService>
-			</UsedServices>
-			<Configuration imports="KVSRedesign">
-				<Section name="Beep">
-					<Parameter name="enabled" value="false"/>
+				<Section name="Component.DriverHost.Scanner">
+					<Parameter name="DriverFile" value="SerialScanner.dll"/>
+					<Parameter name="DeviceType" value="Scanner"/>
+					<Parameter name="LogicalName" value="Scanner61"/>
+					<Parameter name="NodeName" value="KVS1008"/>
+					<Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
+					<Parameter name="portname" value="virtual"/>
 				</Section>
-				<Section name="UserInterface">
-					<Parameter name="horizontalPos" value="0"/>
-					<Parameter name="rows" value="2"/>
-					<Parameter name="rows1" value="2"/>
-					<Parameter name="rows2" value="2"/>
-					<Parameter name="rows3" value="2"/>
-					<Parameter name="columns" value="4"/>
-					<Parameter name="columns1" value="4"/>
-					<Parameter name="columns2" value="4"/>
-					<Parameter name="columns3" value="4"/>
-					<Parameter name="heldCells" value="3"/>
-					<Parameter name="heldCells1" value="3"/>
-					<Parameter name="heldCells2" value="3"/>
-					<Parameter name="heldCells3" value="3"/>
-					<Parameter name="orderItemFont" value="Arial-BOLD-15"/>
-					<Parameter name="orderItemFont1" value="Arial-BOLD-15"/>
-					<Parameter name="orderItemFont2" value="Arial-BOLD-15"/>
-					<Parameter name="orderItemFont3" value="Arial-BOLD-15"/>
-					<Parameter name="grillItemFont" value="Arial-BOLD-14"/>
-					<Parameter name="grillItemFont1" value="Arial-BOLD-14"/>
-					<Parameter name="grillItemFont2" value="Arial-BOLD-14"/>
-					<Parameter name="grillItemFont3" value="Arial-BOLD-14"/>
-					<Parameter name="orderItemVoidedFont" value="Arial-REGULAR-15"/>
-					<Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-15"/>
-					<Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-15"/>
-					<Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-15"/>
-					<Parameter name="grillItemVoidedFont" value="Arial-REGULAR-14"/>
-					<Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-14"/>
-					<Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-14"/>
-					<Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-14"/>
-					<Parameter name="firstThreshold" value="90"/>
-					<Parameter name="secondThreshold" value="100"/>
-					<Parameter name="displayGrillInstruction" value="ASTEXT"/>
-					<Parameter name="displaySideIndicator" value="true"/>
-					<Parameter name="displaySideStatus" value="false"/>
-					<Parameter name="displayDestinationImage" value="true"/>
-					<Parameter name="displaySaleType" value="true"/>
-					<Parameter name="displayOrderAmount" value="false"/>
-					<Parameter name="presenterMonitor" value="false"/>
-				</Section>
-				<Section name="WayOfWork">
-					<Parameter name="printReceiptOnServe" value="false"/>
-					<Parameter name="allowServeHeldOrders" value="true"/>
-					<Parameter name="enableKVSProductFiltering" value="false"/>
-					<Parameter name="printPickListOnRunnerServe" value="true"/>
-				</Section>
-				<Section name="EnhancedBumpByTouch">
-					<Parameter name="enhancedBumpByTouchEnable" value="false"/>
-				</Section>
-				<Section name="Touchscreen">
-					<Parameter name="available" value="true"/>
-					<Parameter name="buttons" value="9"/>
-					<Parameter name="cell_Click" value="runnerServe"/>
-					<Parameter name="enable" value="true"/>
-					<Parameter name="button1_Click" value="runnerServe"/>
-					<Parameter name="button2_Click" value="runnernext"/>
-					<Parameter name="button3_Click" value="recall"/>
-					<Parameter name="button4_Click" value="sideOn"/>
-					<Parameter name="button5_Click" value="sideOff"/>
-					<Parameter name="button6_Click" value="zoom"/>
-					<Parameter name="button7_Click" value="runnerHeld"/>
-					<Parameter name="button8_Click" value="serveheld"/>
-					<Parameter name="button9_Click" value="heldscroll"/>
-				</Section>
-			</Configuration>
-			<Adaptors>
-				<Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
-				<Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true"/>
-				<Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="false">
-					<Section name="main">
-						<Parameter name="logicalname" value=""/>
-						<Parameter name="isNpSharp" value="true"/>
-						<Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
-						<Parameter name="hostAddress" value="localhost"/>
-						<Parameter name="portNumber" value="8123"/>
-					</Section>
-				</Adaptor>
-			</Adaptors>
-		</Service>
-		<Service name="1013" type="NPW" classname="" startonload="true" quitOnFail="true">
-				<Configuration imports="LocalWebView">
-					<Section name="BaseHosts">
-						<Parameter name="Urls" value="http://localhost:8123/npsharp" />
-					</Section>
-					<Section name="Log">
-						<Parameter name="EnableDebug" value="true" />
-						<Parameter name="logfilefolder" value="out/KVS1013" />
-					</Section>
-					<Section name="Component.Browser.KVS1013">
-						<Parameter name="Position" value="0,0" />
-						<Parameter name="ShowFrame" value="true" />
-						<Parameter name="Urn" value="KVS/KVS1013" />
-						<Parameter name="ShowCursor" value="true" />
-						<Parameter name="Size" value="800x600" />
-						<Parameter name="showCloseButton" value="true" />
-						<Parameter name="allowResize" value="true" />
-						<Parameter name="windowMaximized" value="false" />
-						<Parameter name="canMoveWindow" value="true" />
-						<Parameter name="AutoFocus" value="false" />
-						<!--Coordinator Config-->
-						<Parameter name="NodeName" value="KVS1013"/>
-						<Parameter name="LogicalName" value="KVS1013"/>
-						<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->
-					</Section>
-					<Section name="Component.DriverHost.BumpBar1013">
-						<Parameter name="DriverFile" value="SerialBumpBar" />
-						<Parameter name="DeviceType" value="BumpBar" />
-						<Parameter name="LogicalName" value="BumpBar RTMS1" />
-						<Parameter name="NodeName" value="KVS1013" />
-						<Parameter name="AdapterFile" value="LegacyBumpBarAdapter" />
-						<Parameter name="portname" value="COM1" />
-						<Parameter name="baudrate" value="1200" />
-						<Parameter name="databits" value="8" />
-						<Parameter name="stopbits" value="1" />
-						<Parameter name="timeout" value="20000" />
-					</Section>
-				</Configuration>
-			</Service>
-	</Services>
-</PosDB>
+			</Configuration>	
+		</Service>	
+    <Service name="1008" type="GPR" classname="npRPR.dll" startonload="true" quitOnFail="true">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+            <Parameter name="portname" value="GPR1008.txt" />
+            <Parameter name="escSeq" value="printerTMControlChar_STAR.properties" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>	
+    <Service name="1008" type="STO" classname="npUpdtRcv.dll" startonload="false" quitOnFail="true">
+      <Configuration imports="STO">
+        <Section name="main">
+          <Parameter name="NodeType" value="KVS" />
+        </Section>
+      </Configuration>
+    </Service>
+  </Services>
+  </PosDB>

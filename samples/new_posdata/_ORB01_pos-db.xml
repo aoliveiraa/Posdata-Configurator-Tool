@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43" />
+  </RTM_Generated>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="ImageDB_de_DE">
+      <Parameter name="Schedule.0.PromoImageArea" value="../NPORB/german_black.webm" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="1070" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration type="KVSRedesign">
+        <Section name="WayOfWork">
+          <Parameter name="monitorType" value="ORB" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="useRecallerId" value="ALL" />
+          <Parameter name="OrderIDDigits" value="2" />
+          <Parameter name="RegisterMapping" value="4,1|5,1|6,1|7,1|8,1|9,1|10,1|11,1|12,1|13,4|14,1|15,1|19,3|20,3|21,3|22,3|23,3|24,3|25,2|26,2|27,2|28,2|29,2|30,2|31,2|32,2|33,2|34,2|35,2|36,2|37,2|38,2|39,2|40,2|51,1|52,4|54,2|55,1|300,1" />
+        </Section>
+        <Section name="ORB">
+          <Parameter name="DesiredFrameRateProperty" value="30" />
+          <Parameter name="DesiredScreenIndex" value="0" />
+          <Parameter name="ShowMouseCursor" value="false" />
+          <Parameter name="StyleName" value="Default" />
+          <Parameter name="PixelsPerFrame" value="2" />
+          <Parameter name="PromoMessageDelayUpdateInSeconds" value="3" />
+          <Parameter name="MarqueeAnimation" value="false" />
+          <Parameter name="HeightChangeDurationInMilliseconds" value="250" />
+          <Parameter name="PromoAreaEnabled" value="false" />
+          <Parameter name="DefaultSlideTimeInSeconds" value="5" />
+          <Parameter name="AutoBumpOrdersInMinutes" value="45" />
+          <Parameter name="OrdersPerColumn0" value="16" />
+          <Parameter name="BackgroundItemHeightColumn0" value="65" />
+          <Parameter name="ForegroundItemHeightColumn0" value="65" />
+          <Parameter name="OrdersPerColumn1" value="4" />
+          <Parameter name="BackgroundItemHeightColumn1" value="105" />
+          <Parameter name="ForegroundItemHeightColumn1" value="140" />
+        </Section>
+        <Section name="Schedule.0">
+          <Parameter name="isActive" value="true" />
+          <Parameter name="ORBFont" value="Arial" />
+          <Parameter name="Column.0.orderStatus" value="PREPARED|ON_TOTAL|PAID" />
+          <Parameter name="Column.0.doubleColumn" value="true" />
+          <Parameter name="Column.0.OrderListItemBackgroundOpacity" value="1.0" />
+          <Parameter name="Column.0.OrderListItemPathDashArray" value="2 4" />
+          <Parameter name="Column.0.OrderListItemPathThickness" value="2" />
+          <Parameter name="Column.0.OrderListItemPathWidth" value="340" />
+          <Parameter name="Column.0.OrderListItemPathVerticalAlignment" value="Bottom" />
+          <Parameter name="Column.0.OrderListItemPathOpacity" value="0.7" />
+          <Parameter name="Column.0.OrderListTopPathDashArray" value="1 0" />
+          <Parameter name="Column.0.OrderListTopPathOpacity" value="0.70" />
+          <Parameter name="Column.0.OrderListTopPathThickness" value="2" />
+          <Parameter name="Column.0.OrderListTopPathWidth" value="340" />
+          <Parameter name="Column.0.OrderListBottomPathDashArray" value="1 0" />
+          <Parameter name="Column.0.OrderListBottomPathOpacity" value="0.70" />
+          <Parameter name="Column.0.OrderListBottomPathThickness" value="2" />
+          <Parameter name="Column.0.OrderListBottomPathWidth" value="340" />
+          <Parameter name="Column.0.OrderSeparatorPathDashArray" value="1 0" />
+          <Parameter name="Column.0.OrderSeparatorPathOpacity" value="1.0" />
+          <Parameter name="Column.0.OrderSeparatorPathThickness" value="2" />
+          <Parameter name="Column.0.OrderSeparatorPathWidth" value="2" />
+          <Parameter name="Column.1.orderStatus" value="SERVED" />
+          <Parameter name="Column.1.doubleColumn" value="false" />
+          <Parameter name="Column.1.OrderListItemTextColor" value="GREEN" />
+          <Parameter name="Column.1.OrderListItemBackgroundOpacity" value="0.0" />
+          <Parameter name="Column.1.OrderListItemPathDashArray" value="2 4" />
+          <Parameter name="Column.1.OrderListItemPathThickness" value="2" />
+          <Parameter name="Column.1.OrderListItemPathWidth" value="400" />
+          <Parameter name="Column.1.OrderListItemPathVerticalAlignment" value="Bottom" />
+          <Parameter name="Column.1.OrderListItemPathOpacity" value="0.7" />
+          <Parameter name="Column.1.OrderListItemFontSize" value="50" />
+          <Parameter name="Column.1.OrderListTopPathDashArray" value="1 0" />
+          <Parameter name="Column.1.OrderListTopPathOpacity" value="0.70" />
+          <Parameter name="Column.1.OrderListTopPathThickness" value="2" />
+          <Parameter name="Column.1.OrderListTopPathWidth" value="400" />
+          <Parameter name="Column.1.OrderListBottomPathDashArray" value="1 0" />
+          <Parameter name="Column.1.OrderListBottomPathOpacity" value="0.70" />
+          <Parameter name="Column.1.OrderListBottomPathThickness" value="2" />
+          <Parameter name="Column.1.OrderListBottomPathWidth" value="400" />
+          <Parameter name="Column.1.OrderSeparatorPathDashArray" value="1 0" />
+          <Parameter name="Column.1.OrderSeparatorPathOpacity" value="1.0" />
+          <Parameter name="Column.1.OrderSeparatorPathThickness" value="40" />
+          <Parameter name="Column.1.OrderSeparatorPathWidth" value="40" />
+          <Parameter name="Column.0.InstructionAreaTextColor" value="LightGRAY" />
+          <Parameter name="Column.0.InstructionAreaBackgroundColor" value="BLACK" />
+          <Parameter name="Column.0.OrderListItemTextColor" value="WHITE" />
+          <Parameter name="InstoreMessageBackgroundColor" value="BLACK" />
+          <Parameter name="DefaultTitleBackgroundColor" value="BLACK" />
+          <Parameter name="BackgroundColor" value="BLACK" />
+          <Parameter name="ArrowColor" value="WHITE" />
+          <Parameter name="DefaultTitleTextColor" value="WHITE" />
+          <Parameter name="InstructionAreaTextColor" value="WHITE" />
+          <Parameter name="Column.1.InstructionAreaBackgroundColor" value="GREEN" />
+          <Parameter name="Column.1.InstructionAreaTextColor" value="LightGRAY" />
+          <Parameter name="Column.0.OrderListItemBackgroundColor" value="BLACK" />
+          <Parameter name="Column.1.OrderListItemBackgroundColor" value="BLACK" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1070" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="true" />
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

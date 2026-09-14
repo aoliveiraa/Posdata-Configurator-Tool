@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43" />
+  </RTM_Generated>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide" />
+  <Services>
+    <Service name="1601" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="KVSRedesign">
+        <Section name="Beep">
+          <Parameter name="beepOnNewOrder" value="ALWAYS" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="columns" value="3" />
+          <Parameter name="columns1" value="3" />
+          <Parameter name="columns2" value="3" />
+          <Parameter name="columns3" value="3" />
+          <Parameter name="cellHeaderFont" value="Arial-BOLD-23" />
+          <Parameter name="cellHeaderFont1" value="Arial-BOLD-23" />
+          <Parameter name="cellHeaderFont2" value="Arial-BOLD-23" />
+          <Parameter name="cellHeaderFont3" value="Arial-BOLD-23" />
+          <Parameter name="orderItemFont" value="Arial-BOLD-23" />
+          <Parameter name="orderItemFont1" value="Arial-BOLD-23" />
+          <Parameter name="orderItemFont2" value="Arial-BOLD-23" />
+          <Parameter name="orderItemFont3" value="Arial-BOLD-23" />
+          <Parameter name="rows" value="2" />
+          <Parameter name="rows1" value="2" />
+          <Parameter name="rows2" value="2" />
+          <Parameter name="rows3" value="2" />
+        </Section>
+        <Section name="TouchScreen">
+          <Parameter name="buttons" value="0" />
+          <Parameter name="cell_Click" value="serve" />
+          <Parameter name="available" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1601" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="serve4" value="0xe1" />
+            <Parameter name="serve5" value="0xd1" />
+            <Parameter name="serve6" value="0xb1" />
+            <Parameter name="serve1" value="0xe2" />
+            <Parameter name="serve2" value="0xd2" />
+            <Parameter name="serve3" value="0xb2" />
+            <Parameter name="logicalname" value="BumpBar7" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

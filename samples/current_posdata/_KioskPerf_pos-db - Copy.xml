@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB xsi:noNamespaceSchemaLocation="/usr/local/jboss-3.2.2/server/default/deploy/webrfmDE.war/rfmdata/pos-db.xsd" version="1.0" name="POS021 CSO" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<StoreDB imports="all" />
+	<ColorDB imports="default" />
+	<Configuration imports="Store.wide">
+		<Section name="PrintFromKioskOnCounter">
+			<Parameter name="OrderNumberFormat" value="2" />
+		</Section>
+		<Section name="OrderNumber">
+			<Parameter name="OrderNumberFormat" value="2" />
+		</Section>
+		<Section name="Security">
+			<Parameter name="managerAuthorization" value="login" />
+		</Section>
+		<!-- <Section name="Messaging"> -->
+		<!-- <Parameter name="serverPort" value="60002" /> -->
+		<!-- </Section> -->
+		<Section name="NPScripts">
+			<Parameter name="posScriptCommands" value="BusinessComponentsCHF.nps" />
+			<Parameter name="scriptCommandsLocal" value="BusinessComponentsCHFLocal.nps" />
+		</Section>
+		<Section name="Reports">
+			<Parameter name="orderIdentifierSize" value="2" />
+		</Section>
+		<Section name="OperationMode">
+			<Parameter name="enableNpSharpWorkflows" value="true" />
+			<Parameter name="isNpSharpRequired" value="true" />
+		</Section>
+	</Configuration>
+	<Services>
+		<Service name="021" type="STO" classname="npUpdtRcv.dll" startonload="true" quitOnFail="true">
+			<Configuration imports="STO" />
+		</Service>
+		<Service name="021" type="RPR" classname="com.ngpos.arch.services.printer.core.PrinterController" startonload="true" quitOnFail="true">
+			<Adaptors>
+				<Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+					<Section name="main">
+						<Parameter name="portname" value="BTP-R180" />
+						<Parameter name="drivername" value="npWinPrn.dll" />
+						<Parameter name="escSeq" value="printerTMControlChar_BTP-R180.properties" />
+						<Parameter name="baudrate" value="9600" />
+					</Section>
+				</Adaptor>
+			</Adaptors>
+		</Service>
+		<Service name="021" type="POS" classname="com.ngpos.pos.NewPOS" startonload="true" quitOnFail="true">
+			<UsedServices>
+				<UsedService serviceType="WAY">
+					<Member name="300" alias="" />
+				</UsedService>
+				<UsedService serviceType="PSW">
+					<Member name="300" alias="" />
+				</UsedService>
+				<UsedService serviceType="RPR">
+					<Member name="021" alias="" />
+					<Member name="001" alias="Till1" />
+					<Member name="002" alias="Till2" />
+				</UsedService>
+				<UsedService serviceType="PST">
+					<Member name="8000" alias="" />
+					<Member name="8001" alias="" />
+				</UsedService>
+				<UsedService serviceType="KVS">
+					<Member name="1001" alias="MFY Side 1" />
+					<Member name="1002" alias="MFY Side 2" />
+					<Member name="1003" alias="MFY Side 3" />
+					<Member name="1021" alias="Kiosk" />
+					<Member name="1040" alias="Drinks " />
+				</UsedService>
+			</UsedServices>
+			<Configuration imports="POS">
+				<Section name="PosType">
+					<Parameter name="POD" value="CSO" />
+					<Parameter name="RemPOD" value="FRONT_COUNTER" />
+				</Section>
+				<Section name="OperationMode">
+					<Parameter name="AnonymousOperatorName" value="11" />
+					<Parameter name="AnonymousOperatorID" value="11" />
+					<Parameter name="automaticOperatorLogin" value="true" />
+					<Parameter name="DisplayPrinterListOnError" value="false" />
+					<Parameter name="isHtmlUi" value="true" />
+				</Section>
+				<Section name="UserInterface">
+					<Parameter name="frameHeight" value="768" />
+					<Parameter name="frameWidth" value="1024" />
+					<Parameter name="imagesResolution" value="1024,768" />
+					<Parameter name="PrintBigNumber" value="true" />
+					<Parameter name="mainScreenNumber" value="8453" />
+				</Section>
+				<Section name="Cash">
+					<Parameter name="OverringBehaviour" value="0" />
+				</Section>
+				<Section name="CSO.UserInterface">
+					<Parameter name="isNGK" value="true" />
+				</Section>
+			</Configuration>
+			<Adaptors>
+				<Adaptor name="npAdpPrd" imports="npAdpPrd" startonload="true">
+					<Section name="main">
+						<Parameter name="SendOrder" value="ONPAID" />
+					</Section>
+				</Adaptor>
+				<Adaptor name="standard.ui" startonload="true">
+					<Section name="main">
+						<Parameter name="drivername" value="npposNewGUI.dll"/>
+						<!-- <Parameter name="drivername" value="npGUIExt.dll" /> -->
+						<!-- <Parameter name="actionPort" value="888" /> -->
+						<!-- <Parameter name="eventPort" value="999" /> -->
+						<!-- <Parameter name="_cmdTPUI" value="javaw -cp ../exerciser/NPUIExerciser.jar com.ui.app.TPUI npActionListener=localhost:%d npEventListener=localhost:%d" /> -->
+						<!-- <Parameter name="cmdTPUI" value="../NGK/npKiosk.exe" /> -->
+					</Section>
+				</Adaptor>
+				<Adaptor name="tlog" imports="tlog" startonload="true" />
+				<Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
+				<Adaptor name="nps.extension" startonload="true">
+					<Section name="main">
+						<Parameter name="service" value="npAdpNpsExt.dll"/>
+						<Parameter name="adaptorname" value="npAdpNpsExt"/>
+						<Parameter name="drivername" value="npAdpEFTSim.dll"/>
+						<Parameter name="logicalname" value="EFT"/>
+					</Section>
+					<Section name="driverconfig">
+						<Parameter name="sendPort" value="6666"/>
+						<Parameter name="receivePort" value="6667"/>
+						<Parameter name="messageTimeout" value="300"/>
+						<Parameter name="ipMessages" value="127.0.0.1"/>
+					</Section>
+				</Adaptor>
+				<Adaptor name="npAdpScanner" imports="npAdpScanner" startonload="true">
+					<Section name="main">
+						<Parameter name="service" value="npAdpScanner.dll"/>
+						<Parameter name="adaptorname" value="npAdpScanner"/>
+						<Parameter name="isNpSharp" value="true" />
+						<Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+						<Parameter name="hostAddress" value="localhost"/>
+						<Parameter name="portNumber" value="8123"/>
+						<Parameter name="nodeName" value="POS0021"/>
+						<Parameter name="logicalname" value="Scanner1"/>
+					</Section>
+				</Adaptor>
+				<Adaptor name="standard.account" imports="standard.account" startonload="true"/>
+			</Adaptors>
+		</Service>
+		<Service name="021" type="NPW" classname="" startonload="true" quitOnFail="true">
+			<Configuration imports="LocalWebView">
+				<Section name="BaseHosts">
+					<Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+				</Section>
+				<Section name="LocalWebView">
+					<Parameter name="Location" value="../NpWebView"/>
+				</Section>
+				<Section name="Log">
+					<Parameter name="EnableDebug" value="true"/>
+					<Parameter name="LogFileFolder" value="out/"/>
+				</Section>
+				<Section name="AutoUpdate">
+					<Parameter name="EnableAutoUpdate" value="true"/>
+				</Section>
+				<Section name="Monitoring.Memory">
+					<Parameter name="MonitoringInterval" value="60000"/>
+					<Parameter name="MaxMemoryPercentage" value="70"/>
+					<Parameter name="LauncherLimit" value="200"/>
+					<Parameter name="BrowserLimit" value="1500"/>
+					<Parameter name="DriverHostLimit" value="1500"/>
+				</Section>
+				<Section name="Component.Browser.Kiosk">
+				<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
+				<Parameter name="NodeName" value="POS0021"/>
+				<Parameter name="LogicalName" value="POS0021"/>
+				<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->	
+				<Parameter name="Position" value="0,0"/>
+				<Parameter name="ShowFrame" value="false"/>
+				<Parameter name="Urn" value="kiosk/POS0021"/>
+				<Parameter name="showCursor" value="true" />
+				<!-- <Parameter name="Size" value="900x1440" /> -->
+				<Parameter name="Size" value="400x700" />
+            </Section>
+				<Section name="Component.DriverHost.Scanner">
+					<Parameter name="DriverFile" value="SerialScanner.dll"/>
+					<Parameter name="DeviceType" value="Scanner"/>
+					<Parameter name="LogicalName" value="Scanner1"/>
+					<Parameter name="NodeName" value="POS0021"/>
+					<Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
+					<Parameter name="portname" value="virtual"/>
+				</Section>
+			</Configuration>
+		</Service>
+	</Services>
+</PosDB>

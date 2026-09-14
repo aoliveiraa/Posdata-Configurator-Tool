@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide">
+    <Section name="OperationMode">
+      <Parameter name="applyUpdateOperationMode" value="1"/>
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="1007" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="groupMultiOrder" value="false"/>
+        </Section>
+        <Section name="TouchScreen">
+          <Parameter name="available" value="true"/>
+          <Parameter name="enable" value="true"/>
+          <Parameter name="cell_Click" value="serve"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+          <Section name="main">
+            <Parameter name="url" value="http://127.0.0.1:8080/goform/RPC2"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1007"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="serve" value="0xe1"/>
+            <Parameter name="recall" value="0xa1"/>
+            <Parameter name="print" value="0xa2"/>
+            <Parameter name="next" value="0xb1"/>
+            <Parameter name="previous" value="0xb2"/>
+            <Parameter name="home" value=""/>
+            <Parameter name="serveheld" value=""/>
+            <Parameter name="heldscroll" value="0xe2"/>
+            <Parameter name="undo" value=""/>
+            <Parameter name="held" value="0xd2"/>
+            <Parameter name="zoom" value="0xd1"/>
+            <Parameter name="SideOn" value="0xc2"/>
+            <Parameter name="SideOff" value="0xc1"/>
+            <Parameter name="portname" value="virtual"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="1007" type="STO" classname="npUpdtRcv.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="STO"/>
+    </Service>
+    <Service name="1007" type="GPR" classname="npRPR.dll" startonload="true" quitOnFail="true">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+            <Parameter name="portname" value="GPR1007.txt"/>
+            <Parameter name="escSeq" value="printerTMControlChar_STAR.properties"/>
+            <Parameter name="logicalname" value="Printer1"/>
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
+            <Parameter name="isNpSharp" value="true"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

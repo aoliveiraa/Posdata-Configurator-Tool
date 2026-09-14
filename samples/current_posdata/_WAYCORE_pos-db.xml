@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+	<StoreDB imports="all"/>
+	<ColorDB imports="default"/>
+	<Configuration imports="Store.wide">
+		<Section name="OperationMode">
+			<Parameter name="applyUpdateOperationMode" value="1"/>
+		</Section>
+		<Section name="NPScripts">
+			<Parameter name="posScriptCommands"/>
+			<Parameter name="posCoinDispenser"/>
+			<Parameter name="posCSOBusComp"/>
+			<Parameter name="scriptCommands" value="BusinessComponents.nps"/>
+			<Parameter name="scriptCommandsLocal" value="BusinessComponentsLocal.nps"/>
+		</Section>
+	</Configuration>
+	<Services>
+		<Service name="300" type="PSW" classname="npPswMgr.dll" startonload="true" quitOnFail="true">
+			<UsedServices>
+				<UsedService serviceType="WAY">
+					<Member name="300" alias="WAYSTATION"/>
+				</UsedService>
+				<UsedService serviceType="POS">
+					<Member name="0013" alias=""/>
+					<Member name="0004" alias=""/>
+					<Member name="0005" alias=""/>
+					<Member name="0025" alias=""/>
+					<Member name="0003" alias=""/>
+					<Member name="0001" alias=""/>
+				</UsedService>
+			</UsedServices>
+			<Configuration imports="PSW"/>
+		</Service>
+		<Service name="300" type="STO" classname="npUpdtRcv.dll" startonload="false" quitOnFail="true">
+			<Configuration imports="STO">
+				<Section name="main">
+					<Parameter name="ShowConsoleWindow" value="true"/>
+				</Section>
+			</Configuration>
+		</Service>
+		<Service name="300" type="RPS" classname="npRPSService.dll" startonload="true" quitOnFail="true">
+			<Configuration imports="RPS"/>
+			<Adaptors>
+				<Adaptor name="standard.account" imports="standard.account" startonload="true"/>
+			</Adaptors>
+		</Service>
+		<Service name="300" type="WAY" classname="npway.dll" startonload="true" quitOnFail="true">
+			<UsedServices>
+				<UsedService serviceType="RPS">
+					<Member name="300" alias=""/>
+				</UsedService>
+				<UsedService serviceType="FOE">
+					<Member name="300" alias=""/>
+				</UsedService>
+				<UsedService serviceType="PSW">
+					<Member name="300" alias=""/>
+				</UsedService>
+				<UsedService serviceType="STO">
+					<Member name="1070" alias="KVS1070 ORB1|300"/>
+					<Member name="1071" alias="KVS1071 MINIORB1|300"/>
+					<Member name="1002" alias="KVS1002 MCC|300"/>
+					<Member name="1003" alias="KVS1003 DT EXPO"/>
+					<Member name="1004" alias="KVS1004 MFYM|300"/>
+					<Member name="0013" alias="POS0013 FC"/>
+					<Member name="400" alias="KVSGSC02"/>
+					<Member name="0004" alias="POS0004 FC"/>
+					<Member name="0005" alias="POS0005 FC"/>
+					<Member name="0025" alias="POS0025 CSO"/>
+					<Member name="0003" alias="POS0003 DT"/>
+					<Member name="0001" alias="POS0001 DT"/>
+					<Member name="1007" alias="KVS1007 DRKDES"/>
+					<Member name="1008" alias="KVS1008 DRKDESM"/>
+					<Member name="1001" alias="KVS1001 MFY"/>
+					<Member name="1011" alias="KVS1011 MFY"/>
+					<Member name="1013" alias="KVS1013 DP"/>
+					<Member name="1023" alias="KVS1023 DP"/>
+					<Member name="1033" alias="KVS1033 OAT"/>
+					<Member name="1043" alias="KVS1043 OAT"/>
+					<Member name="8000" alias="Production|300"/>
+					<Member name="8001" alias="PRODBACKUP|0004"/>
+					<Member name="300" alias="STO300"/>
+				</UsedService>
+				<UsedService serviceType="POS">
+					<Member name="0013" alias=""/>
+					<Member name="0004" alias=""/>
+					<Member name="0005" alias=""/>
+					<Member name="0025" alias=""/>
+					<Member name="0003" alias=""/>
+					<Member name="0001" alias=""/>
+				</UsedService>
+				<UsedService serviceType="WEB">
+					<Member name="301" alias=""/>
+				</UsedService>
+			</UsedServices>
+			<Configuration imports="WAY">
+				<Section name="main">
+					<Parameter name="ShowConsoleWindow" value="true"/>
+				</Section>
+				<Section name="STLD">
+					<Parameter name="DaysToKeep" value="60"/>
+				</Section>
+				<Section name="OperationMode">
+					<Parameter name="isNpSharp" value="true"/>
+				</Section>
+			</Configuration>
+			<Adaptors>
+				<Adaptor name="npAdpApplyUpdate" imports="npAdpApplyUpdate" startonload="true">
+					<Section name="NonMandatoryTransaction">
+						<Parameter name="nodes" value="KVS*|PRODBACKUP*|Production*"/>
+						<Parameter name="images" value="*"/>
+					</Section>
+				</Adaptor>
+				<Adaptor name="npAdpPSW" imports="npAdpPSW" startonload="true"/>
+				<Adaptor name="npAdpPubl" imports="npAdpPubl" startonload="true"/>
+				<Adaptor name="npAdpTLD" imports="npAdpTLD" startonload="true"/>
+				<Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+					<Section name="main">
+						<Parameter name="url" value="http://127.0.0.1:8080/goform/RPC2"/>
+					</Section>
+				</Adaptor>
+			</Adaptors>
+		</Service>
+		<Service name="301" type="WEB" classname="npwwebsrv.dll" startonload="true" quitOnFail="true">
+			<UsedServices>
+				<UsedService serviceType="WAY">
+					<Member name="300" alias=""/>
+				</UsedService>
+				<UsedService serviceType="PSW">
+					<Member name="300" alias=""/>
+				</UsedService>
+			</UsedServices>
+			<Configuration imports="WEB">
+				<Section name="main">
+					<Parameter name="ShowConsoleWindow" value="true"/>
+					<Parameter name="JSRuntimeMaxMBytes" value="128"/>
+				</Section>
+			</Configuration>
+		</Service>
+		<Service name="300" type="FOE" classname="npfoe.dll" startonload="true" quitOnFail="true">
+			<UsedServices>
+				<UsedService serviceType="WAY">
+					<Member name="300" alias=""/>
+				</UsedService>
+				<UsedService serviceType="PST">
+					<Member name="8000" alias=""/>
+					<Member name="8001" alias=""/>
+				</UsedService>
+			</UsedServices>
+			<Configuration imports="FOE">
+				<Section name="main">
+					<Parameter name="ShowConsoleWindow" value="true"/>
+				</Section>
+				<Section name="OperationMode">
+					<Parameter name="isNpSharp" value="true"/>
+				</Section>
+			</Configuration>
+			<Adaptors>
+				<Adaptor name="foe.xmlrpc" imports="foe.xmlrpc" startonload="true"/>
+				<Adaptor name="virtual.linedisplay" imports="virtual.linedisplay" startonload="true">
+					<Section name="main">
+						<Parameter name="LoadDriver" value="RCD"/>
+					</Section>
+				</Adaptor>
+			</Adaptors>
+		</Service>
+	</Services>
+</PosDB>

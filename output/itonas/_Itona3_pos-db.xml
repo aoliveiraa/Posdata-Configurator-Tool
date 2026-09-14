@@ -2,246 +2,191 @@
 <PosDB>
   <StoreDB imports="all"/>
   <ColorDB imports="default"/>
-  <Configuration imports="Store.wide"/>
+  <Configuration imports="Store.wide">
+    <Section name="PrintOnServe">
+      <Parameter name="DuplicateReceiptWithBarCode" value="0"/>
+      <Parameter name="Picklist" value="1"/>
+      <Parameter name="DuplicateReceipt" value="0"/>
+      <Parameter name="PicklistWithBarCode" value="0"/>
+    </Section>
+    <Section name="OrderNumber">
+      <Parameter name="PosIdFormat" value="0"/>
+      <Parameter name="OrderNumberBigger" value="1"/>
+      <Parameter name="OrderIdFormat" value="00"/>
+      <Parameter name="OrderNumberSeperator"/>
+      <Parameter name="OrderNumberFormat" value="2"/>
+      <Parameter name="FirstReceiptEmpty" value="0"/>
+    </Section>
+    <Section name="PrintFromKioskOnCounter">
+      <Parameter name="PosIdFormat" value="0"/>
+      <Parameter name="OrderNumberFormat" value="2"/>
+      <Parameter name="OrderIdFormat" value="00"/>
+      <Parameter name="OrderNumberSeperator" value=""/>
+    </Section>
+  </Configuration>
   <Services>
-    <Service name="0301" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+    <Service name="1023" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
       <UsedServices>
         <UsedService serviceType="RPR">
-          <Member name="0301" alias=""/>
+          <Member name="1023" alias=""/>
         </UsedService>
       </UsedServices>
       <Configuration imports="KVSRedesign">
-        <Section name="Beep">
-          <Parameter name="enabled" value="false"/>
-        </Section>
         <Section name="UserInterface">
-          <Parameter name="horizontalPos" value="0"/>
-          <Parameter name="rows" value="2"/>
-          <Parameter name="rows1" value="2"/>
-          <Parameter name="rows2" value="2"/>
-          <Parameter name="rows3" value="2"/>
-          <Parameter name="columns" value="4"/>
-          <Parameter name="columns1" value="4"/>
-          <Parameter name="columns2" value="4"/>
-          <Parameter name="columns3" value="4"/>
-          <Parameter name="heldCells" value="3"/>
-          <Parameter name="heldCells1" value="3"/>
-          <Parameter name="heldCells2" value="3"/>
-          <Parameter name="heldCells3" value="3"/>
-          <Parameter name="orderItemFont" value="Arial-BOLD-15"/>
-          <Parameter name="orderItemFont1" value="Arial-BOLD-15"/>
-          <Parameter name="orderItemFont2" value="Arial-BOLD-15"/>
-          <Parameter name="orderItemFont3" value="Arial-BOLD-15"/>
-          <Parameter name="grillItemFont" value="Arial-BOLD-14"/>
-          <Parameter name="grillItemFont1" value="Arial-BOLD-14"/>
-          <Parameter name="grillItemFont2" value="Arial-BOLD-14"/>
-          <Parameter name="grillItemFont3" value="Arial-BOLD-14"/>
-          <Parameter name="orderItemVoidedFont" value="Arial-REGULAR-15"/>
-          <Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-15"/>
-          <Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-15"/>
-          <Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-15"/>
-          <Parameter name="grillItemVoidedFont" value="Arial-REGULAR-14"/>
-          <Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-14"/>
-          <Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-14"/>
-          <Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-14"/>
-          <Parameter name="firstThreshold" value="90"/>
-          <Parameter name="secondThreshold" value="100"/>
-          <Parameter name="displayGrillInstruction" value="ASTEXT"/>
-          <Parameter name="displaySideIndicator" value="multiple"/>
-          <Parameter name="displaySideStatus" value="false"/>
-          <Parameter name="displayDestinationImage" value="true"/>
-          <Parameter name="displaySaleType" value="true"/>
-          <Parameter name="displayOrderAmount" value="false"/>
-          <Parameter name="enhancementToMultiChannelFulfillment" value="true"/>
-          <Parameter name="orderCellSelectorBackColor" value="BLACK"/>
-        </Section>
-        <Section name="WayOfWork">
-          <Parameter name="printReceiptOnServe" value="true"/>
-          <Parameter name="allowServeHeldOrders" value="true"/>
-          <Parameter name="enableKVSProductFiltering" value="false"/>
-          <Parameter name="ordersToReleaseByFlexibleCascade" value="2"/>
-          <Parameter name="printPickListOnRunnerServe" value="false"/>
-          <Parameter name="enableHeldAutoPrint" value="true"/>
-          <Parameter name="monitorType" value="OAT"/>
-          <Parameter name="printCSDTCLCPickListOnServe" value="true"/>
-        </Section>
-        <Section name="Touchscreen">
-          <Parameter name="enable" value="true"/>
-          <Parameter name="available" value="true"/>
-        </Section>
-        <Section name="EnhancedBumpByTouch">
-          <Parameter name="enhancedBumpByTouchEnable" value="false"/>
-        </Section>
-        <Section name="BumpbarCommandOnRecallMode">
-          <Parameter name="enabled" value="true"/>
-          <Parameter name="recall" value="next"/>
-          <Parameter name="serve8" value="picklist"/>
-        </Section>
-      </Configuration>
-      <Adaptors>
-        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
-        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true"/>
-        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="false">
-          <Section name="main">
-            <Parameter name="logicalname" value="BUMPBAR1"/>
-            <Parameter name="isNpSharp" value="true"/>
-            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
-            <Parameter name="hostAddress" value="localhost"/>
-            <Parameter name="portNumber" value="8123"/>
-            <Parameter name="serve5" value="0xa1"/>
-            <Parameter name="serve1" value="0xa2"/>
-            <Parameter name="serve6" value="0xb1"/>
-            <Parameter name="serve2" value="0xb2"/>
-            <Parameter name="serve7" value="0xc1"/>
-            <Parameter name="serve3" value="0xc2"/>
-            <Parameter name="serve8" value="0xd1"/>
-            <Parameter name="serve4" value="0xd2"/>
-            <Parameter name="toggleSideOnOff" value="0xe1"/>
-            <Parameter name="recall" value="0xe2"/>
-          </Section>
-        </Adaptor>
-      </Adaptors>
-    </Service>
-    <Service name="0302" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
-      <UsedServices>
-      </UsedServices>
-      <Configuration imports="KVSRedesign">
-        <Section name="Beep">
-          <Parameter name="enabled" value="false"/>
-        </Section>
-        <Section name="UserInterface">
-          <Parameter name="horizontalPos" value="0"/>
-          <Parameter name="rows" value="2"/>
-          <Parameter name="rows1" value="2"/>
-          <Parameter name="rows2" value="2"/>
-          <Parameter name="rows3" value="2"/>
-          <Parameter name="columns" value="4"/>
-          <Parameter name="columns1" value="4"/>
-          <Parameter name="columns2" value="4"/>
-          <Parameter name="columns3" value="4"/>
-          <Parameter name="heldCells" value="3"/>
-          <Parameter name="heldCells1" value="3"/>
-          <Parameter name="heldCells2" value="3"/>
-          <Parameter name="heldCells3" value="3"/>
-          <Parameter name="orderItemFont" value="Arial-BOLD-15"/>
-          <Parameter name="orderItemFont1" value="Arial-BOLD-15"/>
-          <Parameter name="orderItemFont2" value="Arial-BOLD-15"/>
-          <Parameter name="orderItemFont3" value="Arial-BOLD-15"/>
-          <Parameter name="grillItemFont" value="Arial-BOLD-14"/>
-          <Parameter name="grillItemFont1" value="Arial-BOLD-14"/>
-          <Parameter name="grillItemFont2" value="Arial-BOLD-14"/>
-          <Parameter name="grillItemFont3" value="Arial-BOLD-14"/>
-          <Parameter name="orderItemVoidedFont" value="Arial-REGULAR-15"/>
-          <Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-15"/>
-          <Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-15"/>
-          <Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-15"/>
-          <Parameter name="grillItemVoidedFont" value="Arial-REGULAR-14"/>
-          <Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-14"/>
-          <Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-14"/>
-          <Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-14"/>
-          <Parameter name="firstThreshold" value="120"/>
-          <Parameter name="secondThreshold" value="120"/>
-          <Parameter name="displayGrillInstruction" value="ASTEXT"/>
-          <Parameter name="displaySideIndicator" value="multiple"/>
-          <Parameter name="displaySideStatus" value="false"/>
-          <Parameter name="displayDestinationImage" value="false"/>
-          <Parameter name="displaySaleType" value="false"/>
-          <Parameter name="displayOrderAmount" value="false"/>
-          <Parameter name="enhancementToMultiChannelFulfillment" value="true"/>
-          <Parameter name="presenterMonitor" value="false"/>
+          <Parameter name="groupMultiOrder" value="false"/>
+          <Parameter name="OrderIDDigits" value="2"/>
+          <Parameter name="RegisterMapping" value="4,1|5,1|6,1|7,1|8,1|9,1|10,1|11,1|12,1|13,4|14,1|15,1|19,3|20,3|21,3|22,3|23,3|24,3|25,2|26,2|27,2|28,2|29,2|30,2|31,2|32,2|33,2|34,2|35,2|36,2|37,2|38,2|39,2|40,2|51,1|52,4|54,2|55,1|300,1"/>
         </Section>
         <Section name="WayOfWork">
           <Parameter name="printReceiptOnServe" value="false"/>
-          <Parameter name="allowServeHeldOrders" value="true"/>
-          <Parameter name="enableKVSProductFiltering" value="false"/>
-          <Parameter name="ordersToReleaseByFlexibleCascade" value="0"/>
-          <Parameter name="printPickListOnRunnerServe" value="false"/>
-          <Parameter name="printCSDTCLCPickListOnServe" value="true"/>
+          <Parameter name="monitorType" value="OATPresenter"/>
+        </Section>
+        <Section name="TouchScreen">
+          <Parameter name="button5_Click" value="toggleSideOnOff"/>
+          <Parameter name="cell_Click" value="globalserve"/>
+          <Parameter name="available" value="true"/>
+          <Parameter name="enable" value="true"/>
+        </Section>
+        <Section name="EnhancedBumpByTouch">
+          <Parameter name="enhancedBumpByTouchEnable" value="true"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true"/>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1023"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="false">
+          <Section name="main">
+            <Parameter name="globalserve" value="0xe1"/>
+            <Parameter name="recall" value="0xa1"/>
+            <Parameter name="print" value="0xa2"/>
+            <Parameter name="next" value="0xb1"/>
+            <Parameter name="previous" value="0xb2"/>
+            <Parameter name="home" value=""/>
+            <Parameter name="serveheld" value=""/>
+            <Parameter name="heldscroll" value="0xe2"/>
+            <Parameter name="undo" value=""/>
+            <Parameter name="zoom" value="0xd1"/>
+            <Parameter name="SideOn" value="0xc2"/>
+            <Parameter name="SideOff" value="0xc1"/>
+            <Parameter name="logicalname" value="BumpBar7"/>
+            <Parameter name="isNpSharp" value="true"/>
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="1033" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="RPR">
+          <Member name="1033" alias=""/>
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="groupMultiOrder" value="true"/>
+          <Parameter name="displaySideIndicator" value="true"/>
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="monitorType" value="OAT"/>
+          <Parameter name="printReceiptOnServe" value="true"/>
         </Section>
         <Section name="Touchscreen">
           <Parameter name="enable" value="true"/>
           <Parameter name="available" value="true"/>
         </Section>
-        <Section name="EnhancedBumpByTouch">
-          <Parameter name="enhancedBumpByTouchEnable" value="false"/>
-        </Section>
-        <Section name="BumpbarCommandOnRecallMode">
-          <Parameter name="enabled" value="false"/>
-          <Parameter name="recall" value="next"/>
-          <Parameter name="serve8" value="picklist"/>
-        </Section>
       </Configuration>
       <Adaptors>
         <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
-        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true"/>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1033"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
         <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="false">
           <Section name="main">
-            <Parameter name="logicalname" value="BUMPBAR2"/>
+            <Parameter name="serve1" value="0xe1"/>
+            <Parameter name="serve2" value="0xd1"/>
+            <Parameter name="serve3" value="0xb1"/>
+            <Parameter name="serve4" value="0xa1"/>
+            <Parameter name="next" value="0xc1"/>
+            <Parameter name="serve5" value="0xe2"/>
+            <Parameter name="serve6" value="0xd2"/>
+            <Parameter name="serve7" value="0xb2"/>
+            <Parameter name="serve8" value="0xa2"/>
+            <Parameter name="recall" value="0xc2"/>
+            <Parameter name="logicalname" value="BumpBar7"/>
             <Parameter name="isNpSharp" value="true"/>
             <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
-            <Parameter name="hostAddress" value="localhost"/>
-            <Parameter name="portNumber" value="8123"/>
-            <Parameter name="runnerServe" value="0xa1|0xa2"/>
-            <Parameter name="recall" value="0xb1"/>
-            <Parameter name="runnerHeld" value="0xb2"/>
-            <Parameter name="runnerNext" value="0xc1|0xc2"/>
-            <Parameter name="heldscroll" value="0xd2"/>
-            <Parameter name="sideon" value="0xe1"/>
-            <Parameter name="sideoff" value="0xe2"/>
           </Section>
         </Adaptor>
       </Adaptors>
     </Service>
-    <Service type="NPW" startonload="true" quitOnFail="true" classname="LocalWebView" name="0301">
+    <Service name="1023" type="NPW" classname="" startonload="true" quitOnFail="true">
       <Configuration imports="LocalWebView">
         <Section name="BaseHosts">
-          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp/"/>
         </Section>
         <Section name="LocalWebView">
-          <Parameter name="Location" value="../NpWebView"/>
+          <Parameter name="Location" value="../npwebview"/>
+          <Parameter name="ConfigurationFileName" value="WebViewConfig.xml"/>
         </Section>
         <Section name="Log">
           <Parameter name="EnableDebug" value="true"/>
           <Parameter name="LogFileFolder" value="out/"/>
-          <Parameter name="enableConsoleLog" value="true"/>
         </Section>
         <Section name="AutoUpdate">
           <Parameter name="EnableAutoUpdate" value="true"/>
         </Section>
+        <Section name="Monitoring">
+          <Parameter name="MonitorInterval" value="60000"/>
+        </Section>
         <Section name="Monitoring.Memory">
-          <Parameter name="MonitoringInterval" value="60000"/>
-          <Parameter name="MaxMemoryPercentage" value="70"/>
+          <Parameter name="MaxMemoryPercentage" value="80"/>
           <Parameter name="LauncherLimit" value="200"/>
           <Parameter name="BrowserLimit" value="1500"/>
           <Parameter name="DriverHostLimit" value="1500"/>
         </Section>
-        <Section name="Component.DriverHost.RPR0301">
-          <Parameter name="DriverFile" value="VirtualPrinter"/>
-          <Parameter name="DeviceType" value="Printer"/>
-          <Parameter name="logicalname" value="KVS32GrillPrinter"/>
-          <Parameter name="NodeName" value="RPR0301"/>
-          <Parameter name="AdapterFile" value="LegacyPrinterAdapter.dll"/>
-          <Parameter name="portname" value="..\RPR_3__GPR_pos-db.txt"/>
+        <Section name="Component.DriverHost.Scanner">
+          <Parameter name="DriverFile" value="SerialScanner.dll"/>
+          <Parameter name="DeviceType" value="Scanner"/>
+          <Parameter name="LogicalName" value="Scanner61"/>
+          <Parameter name="NodeName" value="KVS1023"/>
+          <Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
+          <Parameter name="portname" value="virtual"/>
         </Section>
-        <Section name="Component.Browser.KVS0301">
-          <Parameter name="HtmlKeepAliveTimeout" value="120000"/>
+        <Section name="Component.Browser.KVS1023">
           <Parameter name="Position" value="0,0"/>
-          <Parameter name="Urn" value="KVS/KVS0301"/>
+          <Parameter name="ShowFrame" value="true"/>
+          <Parameter name="Urn" value="KVS/KVS1023"/>
+          <Parameter name="ShowCursor" value="true"/>
           <Parameter name="Size" value="1024x768"/>
           <Parameter name="BrowserServer" value="messagehub"/>
-          <Parameter name="NodeName" value="KVS0301"/>
-          <Parameter name="LogicalName" value="KVS0301"/>
+          <!--Coordinator Config-->
+          <Parameter name="NodeName" value="KVS1023"/>
+          <Parameter name="LogicalName" value="KVS1023"/>
           <Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper"/>
+          <!--Coordinator Config-->
         </Section>
-        <Section name="Component.Browser.KVS0302">
-          <Parameter name="HtmlKeepAliveTimeout" value="120000"/>
+        <Section name="Component.Browser.KVS1033">
           <Parameter name="Position" value="1024,0"/>
-          <Parameter name="Urn" value="KVS/KVS0302"/>
+          <Parameter name="ShowFrame" value="true"/>
+          <Parameter name="Urn" value="KVS/KVS1033"/>
+          <Parameter name="ShowCursor" value="true"/>
           <Parameter name="Size" value="1024x768"/>
           <Parameter name="BrowserServer" value="messagehub"/>
-          <Parameter name="NodeName" value="KVS0302"/>
-          <Parameter name="LogicalName" value="KVS0302"/>
+          <!--Coordinator Config-->
+          <Parameter name="NodeName" value="KVS1033"/>
+          <Parameter name="LogicalName" value="KVS1033"/>
           <Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper"/>
+          <!--Coordinator Config-->
         </Section>
       </Configuration>
     </Service>
