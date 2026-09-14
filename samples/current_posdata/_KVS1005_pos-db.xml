@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide">
+    <Section name="NPScripts">
+      <Parameter name="kvsServeReceipt" value="reportPickList@reportsLocal.nps"/>
+      <Parameter name="kvsReceipt" value="receipt@reportsLocal.nps"/>
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="1005" type="STO" classname="npUpdtRcv.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="STO"/>
+    </Service>
+    <Service name="1005" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="columns" value="1"/>
+          <Parameter name="horizontalPos" value="0"/>
+          <Parameter name="displayTotalizatorOn" value="CELLAREA"/>
+          <Parameter name="totalizatorCell" value="1"/>
+          <Parameter name="displayZeroQtyOnSummary" value="true"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="npAdpKeyboardBumpBar" imports="npAdpKeyboardBumpBar" startonload="true"/>
+        <Adaptor name="keyboard.bumpbar" imports="keyboard.bumpbar" startonload="true"/>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true"/>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PosDB>
+	<StoreDB imports="all" />
+	<ColorDB imports="default" />
+	<Configuration imports="Store.wide">
+		<Section name="NPScripts">
+			<Parameter name="scriptCommandsLocal" value="BusinessComponentsLocal.nps" />
+		</Section>
+	</Configuration>
+	<Services>
+		<Service name="1017" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+			<Configuration imports="KVSRedesign">
+				<Section name="UserInterface">
+					<Parameter name="horizontalPos" value="0" />
+					<Parameter name="displaySideIndicator" value="false" />
+					<Parameter name="firstThreshold" value="70" />
+					<Parameter name="secondThreshold" value="90" />
+					<Parameter name="showCursor" value="true" />
+					<Parameter name="showTitleBar" value="true" />
+					<Parameter name="showCloseButton" value="true" />
+					<Parameter name="allowResize" value="true" />
+					<Parameter name="windowMaximized" value="false" />
+					<Parameter name="frameWidth" value="1024" />
+					<Parameter name="frameHeight" value="768" />
+					<Parameter name="width" value="1024" />
+					<Parameter name="height" value="768" />
+					<Parameter name="imagesResolution" value="1024,768" />
+				</Section>
+				<Section name="TouchScreen">
+					<Parameter name="available" value="true" />
+					<Parameter name="enable" value="true" />
+					<Parameter name="button1_Click" value="recall" />
+					<Parameter name="button2_Click" value="previous" />
+					<Parameter name="button3_Click" value="next" />
+					<Parameter name="button4_Click" value="zoom" />
+					<Parameter name="button5_Click" value="print" />
+					<Parameter name="button6_Click" value="serve" />
+					<Parameter name="buttons" value="6" />
+					<Parameter name="cell_Click" value="serve" />
+				</Section>
+			</Configuration>
+			<Adaptors>
+				<Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+				<Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true" />
+				<Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+				<Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+					<Section name="main">
+						<Parameter name="isNpSharp" value="true" />
+						<Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+						<Parameter name="serve" value="0xe2|0xe1" />
+						<Parameter name="next" value="0xd1" />
+						<Parameter name="previous" value="0xd2" />
+						<Parameter name="recall" value="0xb2|0xb1" />
+						<Parameter name="held" value="0xa2" />
+						<Parameter name="serveheld" value="0xa1" />
+						<Parameter name="print" value="0xc1" />
+						<Parameter name="heldscroll" value="0xc2" />
+						<Parameter name="logicalname" value="BumpBar RTMS1" />
+					</Section>
+				</Adaptor>
+			</Adaptors>
+			<!-- Service type=NPW -->
+			<Service name="1017" type="NPW" classname="" startonload="true" quitOnFail="true">
+				<Configuration imports="LocalWebView">
+					<Section name="BaseHosts">
+						<Parameter name="Urls" value="http://localhost:8123/npsharp" />
+					</Section>
+					<Section name="Log">
+						<Parameter name="EnableDebug" value="true" />
+						<Parameter name="logfilefolder" value="out/KVS1017" />
+					</Section>
+					<Section name="Component.Browser.KVS1017">
+						<Parameter name="Position" value="0,0" />
+						<Parameter name="ShowFrame" value="true" />
+						<Parameter name="Urn" value="KVS/KVS1017" />
+						<Parameter name="ShowCursor" value="true" />
+						<Parameter name="Size" value="800x600" />
+						<Parameter name="showCloseButton" value="true" />
+						<Parameter name="allowResize" value="true" />
+						<Parameter name="windowMaximized" value="false" />
+						<Parameter name="canMoveWindow" value="true" />
+						<Parameter name="AutoFocus" value="false" />
+						<!--Coordinator Config-->
+						<Parameter name="NodeName" value="KVS1017"/>
+						<Parameter name="LogicalName" value="KVS1017"/>
+						<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->
+					</Section>
+					<Section name="Component.DriverHost.BumpBar1017">
+						<Parameter name="DriverFile" value="SerialBumpBar" />
+						<Parameter name="DeviceType" value="BumpBar" />
+						<Parameter name="LogicalName" value="BumpBar RTMS1" />
+						<Parameter name="NodeName" value="KVS1017" />
+						<Parameter name="AdapterFile" value="LegacyBumpBarAdapter" />
+						<Parameter name="portname" value="COM1" />
+						<Parameter name="baudrate" value="1200" />
+						<Parameter name="databits" value="8" />
+						<Parameter name="stopbits" value="1" />
+						<Parameter name="timeout" value="20000" />
+					</Section>
+				</Configuration>
+			</Service>
+		</Service>
+	</Services>
+</PosDB>

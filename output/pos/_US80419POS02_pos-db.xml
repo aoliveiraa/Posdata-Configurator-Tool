@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PosDB>
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide"/>
+  <Services>
+    <Service name="0003" type="POS" classname="com.ngpos.pos.NewPOS" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="0300" alias=""/>
+        </UsedService>
+        <UsedService serviceType="PSW">
+          <Member name="0300" alias=""/>
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8001" alias=""/>
+          <Member name="8002" alias=""/>
+        </UsedService>
+        <UsedService serviceType="RPR">
+          <Member name="0004" alias=""/>
+          <Member name="0001" alias=""/>
+          <Member name="0002" alias=""/>
+          <Member name="0005" alias=""/>
+          <Member name="0001" alias="CASHLESS"/>
+          <Member name="0002" alias="CASHLESS"/>
+          <Member name="0004" alias="CASHLESS"/>
+          <Member name="0005" alias="CASHLESS"/>
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="0101" alias="MFYB1 - [101]"/>
+          <Member name="0102" alias="MFYL1 - [102]"/>
+          <Member name="0201" alias="MFYB2 - [201]"/>
+          <Member name="0202" alias="MFYL2 - [202]"/>
+          <Member name="0301" alias="FC - [301]"/>
+          <Member name="0302" alias="DT - [302]"/>
+          <Member name="0401" alias="DT - [401]"/>
+          <Member name="0402" alias="B2 - [402]"/>
+          <Member name="0501" alias="B1 - [501]"/>
+          <Member name="0502" alias="FRY - [502]"/>
+          <Member name="0601" alias="GM - [601]"/>
+          <Member name="0602" alias="MD - [602]"/>
+          <Member name="0701" alias="MD - [701]"/>
+          <Member name="0801" alias="FC - [801]"/>
+          <Member name="0802" alias="FC - [802]"/>
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="POS">
+        <Section name="Account">
+          <Parameter name="AcceptZeroPricePMix" value="true"/>
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="frameWidth" value="1024"/>
+          <Parameter name="frameHeight" value="768"/>
+          <Parameter name="DDTSupport" value="true"/>
+          <Parameter name="SRMActive" value="false"/>
+          <Parameter name="doubleCrewStatus" value="false"/>
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="autoRecall" value="false"/>
+          <Parameter name="waitEmptyQueueForAutomaticChangeBusinessDay" value="true"/>
+          <Parameter name="blockWhenWaitingEmptyQueueForAutomaticChangeBusinessDay" value="true"/>
+        </Section>
+        <Section name="PosType">
+          <Parameter name="POD" value="DRIVE_THRU"/>
+          <Parameter name="RemPOD" value="DRIVE_THRU"/>
+        </Section>
+        <Section name="Report">
+          <Parameter name="DualPoint" value="false"/>
+        </Section>
+        <Section name="InactiveDimension">
+          <Parameter name="buttonState" value="disable"/>
+        </Section>
+        <Section name="SmartRouting">
+          <Parameter name="podBlackListException" value="false"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="standard.ui" imports="standard.ui" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+          <Section name="main">
+            <Parameter name="url" value="http://10.159.119.71:8080/goform/RPC2"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="tlog" imports="tlog" startonload="true"/>
+        <Adaptor name="standard.account" imports="standard.account" startonload="true"/>
+        <Adaptor name="npAdpScanner" imports="npAdpScanner" startonload="false">
+          <Section name="main">
+            <Parameter name="service" value="npAdpScanner.dll"/>
+            <Parameter name="adaptorname" value="npAdpScanner"/>
+            <Parameter name="isNpSharp" value="true"/>
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
+            <Parameter name="hostAddress" value="localhost"/>
+            <Parameter name="portNumber" value="8123"/>
+            <Parameter name="logicalname" value="Scanner1"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="DSLDevDrv.linedisplay" imports="DSLDevDrv.linedisplay" startonload="true">
+          <Section name="main">
+            <Parameter name="LoadDriver" value="RCD"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="0003" type="NPW" classname="" startonload="true" quitOnFail="true">
+      <Configuration imports="LocalWebView">
+        <Section name="BaseHosts">
+          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+        </Section>
+        <Section name="LocalWebView">
+          <Parameter name="Location" value="../NpWebView"/>
+        </Section>
+        <Section name="Log">
+          <Parameter name="EnableDebug" value="true"/>
+          <Parameter name="LogFileFolder" value="out/"/>
+        </Section>
+        <Section name="AutoUpdate">
+          <Parameter name="EnableAutoUpdate" value="true"/>
+        </Section>
+        <Section name="Monitoring.Memory">
+          <Parameter name="MonitoringInterval" value="60000"/>
+          <Parameter name="MaxMemoryPercentage" value="80"/>
+          <Parameter name="LauncherLimit" value="1500"/>
+          <Parameter name="BrowserLimit" value="1500"/>
+          <Parameter name="DriverHostLimit" value="1500"/>
+        </Section>
+        <Section name="Component.Browser.POS0003">
+          <Parameter name="Position" value="-10,0"/>
+          <Parameter name="Urn" value="POS/POS0003"/>
+          <Parameter name="Zoom" value="100"/>
+          <Parameter name="ShowFrame" value="true"/>
+          <Parameter name="ShowCursor" value="false"/>
+          <Parameter name="Size" value="1024x768"/>
+          <Parameter name="BrowserServer" value="messagehub"/>
+          <Parameter name="NodeName" value="POS0003"/>
+          <Parameter name="LogicalName" value="POS0003"/>
+          <Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper"/>
+        </Section>
+        <Section name="Component.DriverHost.Scanner">
+          <Parameter name="DriverFile" value="SerialScanner.dll"/>
+          <Parameter name="DeviceType" value="Scanner"/>
+          <Parameter name="LogicalName" value="Scanner1"/>
+          <Parameter name="NodeName" value="POS0003"/>
+          <Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
+          <Parameter name="portname" value="COM5"/>
+        </Section>
+      </Configuration>
+    </Service>
+  </Services>
+</PosDB>

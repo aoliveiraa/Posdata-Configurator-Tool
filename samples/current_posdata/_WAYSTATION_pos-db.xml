@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <!-- <Section name="Messaging">
+	  <Parameter name="networkAdaptorBaseIp" vau="127.0.0.1" />
+    </Section> -->
+  </Configuration>
+  <Services>
+    <Service name="0300" type="BOI" classname="npboi.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="BOI" />
+      <Adaptors>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+          <Section name="main">
+            <Parameter name="url" value="http://10.115.51.25:8080/goform/RPC2" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="0300" type="PSW" classname="npPswMgr.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="PSW" />
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="0300" alias="" />
+        </UsedService>
+        <UsedService serviceType="POS">
+          <Member name="0001" alias="" />
+          <Member name="0002" alias="" />
+          <Member name="0003" alias="" />
+          <Member name="0004" alias="" />
+          <Member name="0005" alias="" />
+          <Member name="0001" alias="" />
+          <Member name="0002" alias="" />
+          <Member name="0003" alias="" />
+          <Member name="0004" alias="" />
+          <Member name="0005" alias="" />
+        </UsedService>
+      </UsedServices>
+    </Service>
+    <Service name="0300" type="STO" classname="npUpdtRcv.dll" startonload="false" quitOnFail="true">
+      <Configuration imports="STO" />
+    </Service>
+    <Service name="0300" type="WEB" classname="npwwebsrv.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="WEB">
+        <Section name="WebServer">
+          <Parameter name="port" value="8080" />
+        </Section>
+      </Configuration>
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="0300" alias="" />
+        </UsedService>
+      </UsedServices>
+    </Service>
+    <Service name="0300" type="WAY" classname="npway.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="WAY">
+        <Section name="STLD">
+          <Parameter name="AlwaysNeedsProduction" value="false" />
+          <Parameter name="DaysToKeep" value="30" />
+        </Section>
+      </Configuration>
+      <UsedServices>
+        <UsedService serviceType="STO">
+          <Member name="0300" alias="WAYSTATION" />
+          <Member name="8201" alias="PRODPRI|STO0300" />
+          <Member name="8202" alias="PRODSEC|STO0001" />
+          <Member name="0001" alias="POS0001" />
+          <Member name="0002" alias="POS0002" />
+          <Member name="0003" alias="POS0003" />
+          <Member name="0004" alias="POS0004" />
+          <Member name="0005" alias="POS0005" />
+          <Member name="1001" alias="KVS0001" />
+          <Member name="1002" alias="KVS0002" />
+          <Member name="1003" alias="KVS0003" />
+          <Member name="1004" alias="KVS0004" />
+          <Member name="1005" alias="KVS0005" />
+          <Member name="1006" alias="KVS0006" />
+        </UsedService>
+        <UsedService serviceType="POS">
+          <Member name="21" alias="FOE" />
+          <Member name="22" alias="FOE" />
+          <Member name="25" alias="FOE" />
+		  <Member name="16" alias="FOE"/>
+          <!--Lobby Mobile-->
+          <Member name="19" alias="FOE"/>
+          <!--Curbside Mobile-->
+          <Member name="0001" alias="" />
+          <Member name="0002" alias="" />
+          <Member name="0003" alias="" />
+          <Member name="0004" alias="" />
+          <Member name="0005" alias="" />
+        </UsedService>
+        <UsedService serviceType="PSW">
+          <Member name="0300" alias="" />
+        </UsedService>
+        <UsedService serviceType="FOE">
+          <Member name="300" alias="" />
+        </UsedService>
+        <UsedService serviceType="RPS">
+          <Member name="300" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Adaptors>
+        <Adaptor name="npAdpPSW" imports="npAdpPSW" startonload="true" />
+        <Adaptor name="npAdpProductPricing" imports="npAdpDataExport" startonload="true">
+          <Section name="ProductPricing">
+            <Parameter name="enable" value="true" />
+            <Parameter name="targetPath" value="./ProductPricing" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpPubl" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="npAdpPubl.dll" />
+            <Parameter name="adaptorname" value="npAdpPubl" />
+            <Parameter name="drivername" value="npDrvPubl.dll" />
+            <Parameter name="driverbasename" value="npDrvPubl" />
+            <Parameter name="logicalname" value="Publisher adaptor" />
+            <Parameter name="loaddriver" value="EVT|MNI|PRD" />
+            <Parameter name="TLDdir" value="C:\newpos\TLD" />
+            <Parameter name="productionlist" value="FC|DT|MCC|FCE|DTE|MFY|FRY|CBS" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpTLD" startonload="true">
+          <Section name="main">
+            <Parameter name="adaptorname" value="npAdpTLD" />
+            <Parameter name="drivername" value="npTLDEng.dll" />
+            <Parameter name="service" value="npAdpTLD.dll" />
+            <Parameter name="subscribers" value="EVT|MNI|PRD" />
+            <Parameter name="outdir" value="C:\newpos\STLD" />
+            <Parameter name="tmpdir" value="C:\newpos\STLD\TEMP" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="standard.account" imports="standard.account" startonload="true" />
+        <Adaptor name="npAdpApplyUpdate" imports="npAdpApplyUpdate" startonload="true">
+          <Section name="NonMandatoryTransaction">
+            <Parameter name="nodes" value="KVS*|PRODSEC" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <!-- <Service classname="npfoe.dll" name="300" quitOnFail="true" startonload="true" type="FOE">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member alias="" name="300" />
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member alias="" name="8001" />
+          <Member alias="" name="8002" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="FOE">
+        <Section name="podNameMapping">
+          <Parameter name="FC" value="FOE0021" />
+          <Parameter name="DLV" value="FOE0022" />
+          <Parameter name="CK" value="FOE0025" />
+          <Parameter name="CURB" value="FOE0025" />
+        </Section>
+        <Section name="routing">
+          <Parameter name="podSource" value="FC;FC;DLV;DLV;CK;CK" />
+          <Parameter name="paidStatus" value="PAID;NOTPAID;PAID;NOTPAID;PAID;NOTPAID" />
+          <Parameter name="targetStoreArea" value="FC;FC;FC;FC;FC;FC" />
+          <Parameter name="orderNumberPrefix" value="21;21;22;22;25;25" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor imports="foe.xmlrpc" name="foe.xmlrpc" startonload="true" />
+        <Adaptor imports="standard.account" name="standard.account" startonload="true" />
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
+      </Adaptors>
+    </Service> -->
+	<Service name="300" type="FOE" classname="npfoe.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="300" alias="" />
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8000" alias="" />
+          <Member name="8001" alias="" />
+        </UsedService>
+        <UsedService serviceType="QUE">
+          <Member name="8007" alias="PAID_DT" />
+          <Member name="8007" alias="DT" />
+          <Member name="8004" alias="PAID_FC" />
+          <Member name="8004" alias="FC" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="FOE">
+        <Section name="podNameMapping">
+          <Parameter name="FC" value="FOE0021" />
+          <Parameter name="DLV" value="FOE0022" />
+          <Parameter name="CK" value="FOE0025" />
+          <Parameter name="CURB" value="FOE0025" />
+        </Section>
+        <Section name="routing">
+          <Parameter name="podSource" value="FC;FC;DLV;DLV;CK;CK" />
+          <Parameter name="paidStatus" value="PAID;NOTPAID;PAID;NOTPAID;PAID;NOTPAID" />
+          <Parameter name="targetStoreArea" value="FC;FC;MCC;MCC;FC;FC" />
+          <Parameter name="orderNumberPrefix" value="21;21;22;22;25;25" />
+        </Section>
+		<Section name="productionMonitors">
+					<Parameter name="FOE_FC" value="ONPAID"/>
+					<Parameter name="FOE_DT" value="ONPAID"/>
+					<Parameter name="FOE_DLV" value="ONSTART"/>
+					<Parameter name="FOE_CK" value="ONPAID"/>
+				</Section>
+				<Section name="expoMonitors">
+					<Parameter name="FOE_FC" value="ONPAID"/>
+					<Parameter name="FOE_DT" value="ONRECALL"/>
+					<Parameter name="FOE_DLV" value="ONRECALL"/>
+					<Parameter name="FOE_CK" value="ONRECALL"/>
+				</Section>
+				<Section name="main">
+					<Parameter name="ShowConsoleWindow" value="true"/>
+					<Parameter name="PriceDiffThreshold" value="3.00"/>
+					<Parameter name="TLOGDstName" value="POS0016"/>
+					<Parameter name="FC" value="ONRECALL"/>
+					<Parameter name="ValidateRPSState" value="true"/>
+				</Section>
+      </Configuration>
+      <Adaptors>
+          <Adaptor name="foe.xmlrpc" imports="foe.xmlrpc" startonload="true">
+					<Section name="main">
+						<Parameter name="port" value="8088"/>
+						<Parameter name="uri" value="RPC2"/>
+						<Parameter name="httpLogName" value="../out/http.log"/>
+						<Parameter name="httpLogTrace" value="false"/>
+					</Section>
+				</Adaptor>
+        <Adaptor name="standard.account" imports="standard.account" startonload="true" />
+      </Adaptors>
+	</Service>
+    <Service name="0300" type="RPS" classname="npRPSService.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="RPR">
+          <Member name="0002" alias="" />
+          <Member name="0001" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="RPS">
+        <Section name="main">
+          <Parameter name="FOEOperatorId" value="99998" />
+          <Parameter name="FOEOperatorName" value="FOE Orders" />
+          <Parameter name="baseAlias" value="POS0100" />
+          <Parameter name="clientsList" value="FOE0021:FC=POS0021;FOE0022:FC=POS0022;FOE0025:CK=POS0025" />
+          <Parameter name="autoPrintReceipts" value="true" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="SRMActive" value="false" />
+        </Section>
+        <Section name="EPayment.Reconciliation">
+          <Parameter name="enable" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="standard.account" imports="standard.account" startonload="true" />
+      </Adaptors>
+    </Service>	
+	<Service type="NPW" startonload="false" quitOnFail="true" classname="LocalWebView" name="12">
+         <Configuration imports="LocalWebView">
+            <Section name="BaseHosts">
+               <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+            </Section>
+            <Section name="LocalWebView">
+               <Parameter name="Location" value="../NpWebView"/>
+            </Section>
+            <Section name="Log">
+               <Parameter name="EnableDebug" value="true"/>
+               <Parameter name="LogFileFolder" value="out/"/>
+               <Parameter name="enableConsoleLog" value="true"/>
+            </Section>
+            <Section name="AutoUpdate">
+               <Parameter name="EnableAutoUpdate" value="true"/>
+            </Section>
+            <Section name="Monitoring.Memory">
+               <Parameter name="MonitoringInterval" value="60000"/>
+               <Parameter name="MaxMemoryPercentage" value="70"/>
+               <Parameter name="LauncherLimit" value="200"/>
+               <Parameter name="BrowserLimit" value="1500"/>
+               <Parameter name="DriverHostLimit" value="1500"/>
+            </Section>
+            <Section name="Component.Browser.Kiosk">
+               <Parameter name="Position" value="0,0"/>
+               <Parameter name="Urn" value="waystation"/>
+               <Parameter name="Zoom" value="100"/>
+               <Parameter name="ShowFrame" value="true"/>
+               <Parameter name="showCursor" value="true" />
+               <Parameter name="Size" value="962x690"/>
+			<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
+			<Parameter name="NodeName" value="waystation"/>
+			<Parameter name="LogicalName" value="waystation"/>
+			<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->
+            </Section>
+            <Section name="Component.DriverHost.Scanner">
+               <Parameter name="DriverFile" value="SerialScanner.dll"/>
+               <Parameter name="DeviceType" value="Scanner"/>
+               <Parameter name="LogicalName" value="Scanner1"/>
+               <Parameter name="NodeName" value="waystation"/>
+               <Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
+               <Parameter name="portname" value="virtual"/>
+            </Section>
+				<!-- <Section name="Component.DriverHost.RPR0012"> -->
+               <!-- <Parameter name="DriverFile" value="npWinPrn.dll"/> -->
+               <!-- <Parameter name="DeviceType" value="Printer"/> -->
+               <!-- <Parameter name="LogicalName" value="POS_12_Printer"/> -->
+               <!-- <Parameter name="NodeName" value="RPR0012"/> -->
+               <!-- <Parameter name="AdapterFile" value="LegacyPrinterAdapter.dll"/> -->
+               <!-- <Parameter name="portname" value="USBprinter"/> -->
+            <!-- </Section> -->
+         </Configuration>
+      </Service>
+	
+  </Services>
+</PosDB>

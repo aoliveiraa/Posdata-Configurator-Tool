@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Endpoints>
+  <Endpoint id="LOCALHOST" hardwareType="LAPTOP" description="LOCALHOST">
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0101" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+      <Parameter name="ShowCursor" value="true" />
+    </UI>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0102" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <EndpointPeripheral type="Printer" driver="VirtualPrinter" logicalName="PRINTER1" nodeName="GPR0101">
+      <Parameter name="name" value="GPR0101" />
+      <Parameter name="portname" value="GPR0101.txt" />
+    </EndpointPeripheral>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0201" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0202" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0301" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0302" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <EndpointPeripheral type="Printer" driver="VirtualPrinter" logicalName="PRINTER2" nodeName="GPR0301">
+      <Parameter name="name" value="GPR0101" />
+      <Parameter name="portname" value="GPR0301.txt" />
+    </EndpointPeripheral>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0401" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0501" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/KVS/KVS0601" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1024x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+    <UI>
+      <Parameter name="Urls" value="http://localhost:8123/npsharp/ORB/KVS0602" />
+      <Parameter name="Position" value="0,0" />
+      <Parameter name="Size" value="1366x768" />
+      <Parameter name="ShowFrame" value="true" />
+    </UI>
+  </Endpoint>
+</Endpoints>

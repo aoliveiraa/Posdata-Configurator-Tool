@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide">
+    <Section name="NPScripts">
+      <Parameter name="kvsServeReceipt" value="reportPickList@reportsLocal.nps"/>
+      <Parameter name="kvsReceipt" value="receipt@reportsLocal.nps"/>
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="1009" type="STO" classname="npUpdtRcv.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="STO"/>
+    </Service>
+    <Service name="1009" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices></UsedServices>
+      <Configuration imports="KVSRedesign">
+        <Section name="Beep">
+          <Parameter name="enabled" value="true"/>
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="horizontalPos" value="0"/>
+          <Parameter name="rows" value="2"/>
+          <Parameter name="rows1" value="2"/>
+          <Parameter name="rows2" value="2"/>
+          <Parameter name="rows3" value="2"/>
+          <Parameter name="columns" value="3"/>
+          <Parameter name="columns1" value="3"/>
+          <Parameter name="columns2" value="3"/>
+          <Parameter name="columns3" value="3"/>
+          <Parameter name="heldCells" value="2"/>
+          <Parameter name="heldCells1" value="2"/>
+          <Parameter name="heldCells2" value="2"/>
+          <Parameter name="heldCells3" value="2"/>
+          <Parameter name="orderItemFont" value="Arial-BOLD-19"/>
+          <Parameter name="orderItemFont1" value="Arial-BOLD-19"/>
+          <Parameter name="orderItemFont2" value="Arial-BOLD-19"/>
+          <Parameter name="orderItemFont3" value="Arial-BOLD-19"/>
+          <Parameter name="grillItemFont" value="Arial-BOLD-17"/>
+          <Parameter name="grillItemFont1" value="Arial-BOLD-17"/>
+          <Parameter name="grillItemFont2" value="Arial-BOLD-17"/>
+          <Parameter name="grillItemFont3" value="Arial-BOLD-17"/>
+          <Parameter name="orderItemVoidedFont" value="Arial-REGULAR-19"/>
+          <Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-19"/>
+          <Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-19"/>
+          <Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-19"/>
+          <Parameter name="grillItemVoidedFont" value="Arial-REGULAR-17"/>
+          <Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-17"/>
+          <Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-17"/>
+          <Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-17"/>
+          <Parameter name="firstThreshold" value="50"/>
+          <Parameter name="secondThreshold" value="60"/>
+          <Parameter name="displayGrillInstruction" value="ASIMAGE"/>
+          <Parameter name="displaySideStatus" value="false"/>
+          <Parameter name="displayDestinationImage" value="true"/>
+          <Parameter name="displaySaleType" value="false"/>
+          <Parameter name="displayOrderAmount" value="false"/>
+          <Parameter name="groupMultiOrder" value="false"/>
+          <Parameter name="width" value="1024"/>
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="enableKVSProductFiltering" value="true"/>
+          <Parameter name="KVSProductFilteringScript" value="filterLargeMonitor@GrillScriptC.nps"/>
+          <Parameter name="RemoteKVS" value="0503"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
+        <Adaptor name="npAdpKeyboardBumpBar" imports="npAdpKeyboardBumpBar" startonload="true"/>
+        <Adaptor name="keyboard.bumpbar" imports="keyboard.bumpbar" startonload="true"/>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true"/>
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="logicalname" value="BUMPBAR1"/>
+            <Parameter name="isNpSharp" value="true"/>
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
+            <Parameter name="hostAddress" value="localhost"/>
+            <Parameter name="portNumber" value="8123"/>
+            <Parameter name="serve" value="0xa1"/>
+            <Parameter name="serveRemoteKVS" value="0xa2"/>
+            <Parameter name="recall" value="0xb1|0xb2"/>
+            <Parameter name="next" value="0xc1"/>
+            <Parameter name="nextRemoteKVS" value="0xc2"/>
+            <Parameter name="sideon" value="0xe1"/>
+            <Parameter name="sideoff" value="0xe2"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="1009" type="GPR" classname="npRPR.dll" startonload="true" quitOnFail="false">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+            <Parameter name="portname" value="KVS005.txt"/>
+            <!-- <Parameter name="logicalname" value="PRINTER1"/> -->
+            <!-- <Parameter name="isNpSharp" value="true"/> -->
+            <!-- <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/> -->
+            <!-- <Parameter name="hostAddress" value="localhost"/> -->
+            <!-- <Parameter name="portNumber" value="8123"/> -->
+            <Parameter name="utf8table" value="Utf8ToAnsi.txt"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

@@ -1,0 +1,214 @@
+{
+  "lab": "RENEIGH",
+  "network_base": "10.118.51",
+  "way_ip": "10.118.51.25",
+
+  "scope": {
+    "pos_count": 4,
+    "active_itonas": [
+      "Itona1",
+      "Itona2",
+      "Itona3",
+      "Itona4",
+      "Itona5"
+    ],
+    "include_way": true,
+    "include_production": true,
+    "include_foe": true,
+    "exclude_name_patterns": [
+      "KIOSK",
+      "ORB",
+      "MINIORB",
+      "ITONA6",
+      "ITONA7",
+      "ITONA8"
+    ]
+  },
+
+  "pos_roles": {
+    "FC": [
+      {
+        "logical_machine": "POS0001",
+        "ip": "10.118.51.1"
+      },
+      {
+        "logical_machine": "POS0002",
+        "ip": "10.118.51.3"
+      }
+    ],
+
+    "DT": [
+      {
+        "logical_machine": "POS0003",
+        "ip": "10.118.51.2"
+      },
+      {
+        "logical_machine": "POS0004",
+        "ip": "10.118.51.12"
+      }
+    ]
+  },
+
+  "reference_pos_files": [
+    {
+      "source_file": "_US80419POS01_pos-db.xml",
+      "target_node": "POS0001"
+    },
+    {
+      "source_file": "_US80419POS03_pos-db.xml",
+      "target_node": "POS0002"
+    },
+    {
+      "source_file": "_US80419POS02_pos-db.xml",
+      "target_node": "POS0003"
+    },
+    {
+      "source_file": "_US80419POS12_pos-db.xml",
+      "target_node": "POS0004"
+    }  
+  ],
+
+  "cod": {
+  "enabled": true,
+  "reference_machine": "_NCRXR7PR7_pos-db.xml",
+  "service": {
+    "name": "0002",
+    "type": "COD",
+    "classname": "npCODNew.dll",
+    "startonload": true,
+    "quitOnFail": true
+  },
+  "routing": {
+    "mapping": "COD0001=1|COD0002=2",
+    "routes": {
+      "POS0004": "DCOD0002",
+      "POS0013": "DCOD0002",
+      "POS0014": "DCOD0014",
+      "POS0001": "DCOD0012",
+      "POS0002": "DCOD0012",
+      "POS0003": "DCOD0012"
+    }
+  },
+  "used_services": [
+    {
+      "name": "01",
+      "alias": ""
+    },
+    {
+      "name": "02",
+      "alias": ""
+    }
+  ],
+  "cod_adaptor": {
+    "name": "npAdpCOD",
+    "imports": "npAdpCOD",
+    "startonload": true,
+    "serial_port": "2",
+    "cod_type": "everbrite lcd"
+  },
+  "cod_update_adaptor": {
+    "name": "npAdpCodUpdt",
+    "imports": "npAdpCodUpdt",
+    "startonload": false
+  },
+  "cod_comm_adaptor": {
+    "name": "npAdpCodComm",
+    "imports": "npAdpCodComm",
+    "startonload": true
+  },
+  "cod_ui_adaptor": {
+    "name": "npAdpCodUI",
+    "imports": "npAdpCodUI",
+    "startonload": true,
+    "operation_mode": "DT",
+    "pod_type": "DT",
+    "tcp_setting": "127.0.0.1:225"
+  },
+  "cod_host": {
+    "address": "127.0.0.1",
+    "alive_interval": "20",
+    "port": "225",
+    "timeout": "15000",
+    "version": "3"
+  },
+  "npw": {
+    "service_name": "102",
+    "startonload": true,
+    "quitOnFail": true,
+    "imports": "LocalWebView",
+    "auto_update": false,
+    "browser": {
+      "section_name": "Component.Browser.POS",
+      "position": "800,0",
+      "urn": "COD/COD0002",
+      "size": "800x600",
+      "show_frame": true,
+      "show_cursor": true,
+      "show_close_button": true,
+      "allow_resize": true,
+      "window_maximized": false,
+      "can_move_window": true,
+      "auto_focus": false
+    }
+  },
+  "store_db": {
+    "cod_adaptor": {
+      "type": "npAdpCOD",
+      "startonload": true,
+      "cod_max_line_length": "20",
+      "cod_max_line_quantity": "9",
+      "cod_type": "delphi",
+      "code_page": "1252",
+      "out_to_file": false,
+      "serial_port": "1",
+      "adaptor_name": "npAdpCOD",
+      "driver_name": "npDrvCOD.dll",
+      "logical_name": "Customer Order Display",
+      "service": "npAdpCOD.dll",
+      "baud_rate": "9600",
+      "connection_type": "tcp",
+      "tcp_ip": "127.0.0.1",
+      "tcp_port": "48501",
+      "utf8_table_folder": ".\\newpos\\posdata\\",
+      "store_controller_ip": "10.118.51.25"
+    },
+    "ng_cod_unit_setting": {
+      "backup_path": "..\\Backup\\",
+      "log_files_kept_in_days": "7",
+      "log_level": "126",
+      "log_path": "..\\Logs\\",
+      "media_path": "..\\Media\\",
+      "monitor_margin": "5;5;5;5",
+      "multiple_monitor_support": true,
+      "new_pos_version": "6.1",
+      "operation_mode": "DT",
+      "pod_type": "DT;FC",
+      "provision_log": true,
+      "standby_enable": true,
+      "standby_handler": "default",
+      "standby_minutes": "60",
+      "target_display_number": "1",
+      "updater_path": "..\\Updates\\",
+      "volume": "10",
+      "working_directory": ".\\",
+      "communication_timeout": "30000",
+      "tcp_setting": "127.0.0.1:225"
+    },
+    "cod_host": {
+      "address": "127.0.0.1",
+      "alive_interval": "20",
+      "port": "225",
+      "timeout": "15000",
+      "version": "3"
+    }
+  }
+},
+
+  "kvs_machines": [
+    "Itona1",
+    "Itona2",
+    "Itona3",
+    "Itona4",
+    "Itona5"
+  ]
+}

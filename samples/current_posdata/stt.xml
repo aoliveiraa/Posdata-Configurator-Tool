@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<StdLogTrace>
+  <Period>
+    <DateInterval start="20120101" end="20301231"/>
+    <TimeInterval start="0000" end="2359"/>
+  </Period>
+  <!-- 50 MB -->
+  <FileSize>50</FileSize>
+  <Filters>
+    <Module name="*.exe" logType="0"/>
+    <Module name="*.dll" logType="0"/>
+    <Module name="*.nps" logType="0"/>
+  </Filters>
+</StdLogTrace>
