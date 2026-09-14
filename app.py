@@ -19,6 +19,10 @@ from src.phases import (
     print_validation_report,
 )
 
+from src.resolution.pos_resolver import (
+    resolve_missing_positions
+)
+
 from config.lab_loader import (
     load_lab_config,
 )
@@ -83,6 +87,14 @@ def main():
     runtime = run_mapping_phase(
         runtime
     )
+
+    runtime.pos_mapping = (
+        resolve_missing_positions(
+            runtime.pos_mapping
+        )
+    )
+
+
 
     #
     # ANALYSIS

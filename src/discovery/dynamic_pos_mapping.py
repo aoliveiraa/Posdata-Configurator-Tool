@@ -255,47 +255,100 @@ def build_dynamic_pos_mapping(
             selection_reason = "first available source with required role"
 
         if selected_source is None:
+
+            candidate_positions = []
+
+            for candidate in grouped_sources.get(
+                expected_role,
+                []
+            ):
+
+                source_nodes = candidate.get(
+                    "node_candidates",
+                    []
+                )
+
+                candidate_positions.append({
+                    "node":
+                        source_nodes[0]
+                        if source_nodes
+                        else None,
+
+                    "source_file":
+                        candidate.get(
+                            "file"
+                        ),
+
+                    "role":
+                        candidate.get(
+                            "role"
+                        ),
+                })
+
             result["mappings"].append(
                 {
-                    "target_node": target_node,
-                    "expected_role": expected_role,
-                    "machine_ip": target.get("machine_ip"),
-                    "source_file": None,
-                    "source_path": None,
-                    "source_node": None,
-                    "source_role": None,
-                    "selection_reason": None,
-                    "status": "MISSING",
-                    "warnings": [
-                        f"No unused {expected_role} POS source is available."
+                    "target_node":
+                        target_node,
+
+                    "expected_role":
+                        expected_role,
+
+                    "machine_ip":
+                        target.get(
+                            "machine_ip"
+                        ),
+
+                    "output_file":
+                        target.get(
+                            "output_file"
+                        ),
+
+                    "source_file":
+                        None,
+
+                    "source_path":
+                        None,
+
+                    "source_node":
+                        None,
+
+                    "source_role":
+                        None,
+
+                    "selection_reason":
+                        None,
+
+                    "status":
+                        "REVIEW REQUIRED",
+
+                    "missing_positions": [
+                        target_node
                     ],
+
+                    "candidate_positions": {
+                        target_node:
+                            candidate_positions
+                    },
+
+                    "resolved_positions": [],
+
+                    "warnings": [
+                        f"No unused "
+                        f"{expected_role} "
+                        f"POS source is available."
+                    ],
+
                     "errors": [],
-                            "output_file": target.get(
-                    "output_file"
-                ),
                 }
             )
-            source_nodes = selected_source.get(
-                "node_candidates",
-                []
-            )
-
-            source_node = (
-                source_nodes[0]
-                if source_nodes
-                else None
-            )
-
-            source_path = selected_source.get(
-                "path"
-            )
-
-            used_paths.add(source_path)
 
             result["warnings"].append(
-                f"No unused {expected_role} POS source is available "
-                f"for target {target_node}."
+                f"No unused "
+                f"{expected_role} POS source "
+                f"is available for "
+                f"target {target_node}."
             )
+
             continue
 
         source_nodes = selected_source.get("node_candidates", [])
@@ -334,6 +387,12 @@ def build_dynamic_pos_mapping(
                     selection_reason,
 
                 "status": "READY",
+
+                "missing_positions": [],
+
+                "candidate_positions": {},
+
+                "resolved_positions": [],
 
                 "warnings": list(
                     selected_source.get(

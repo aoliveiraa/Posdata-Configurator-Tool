@@ -49,6 +49,28 @@ def run_mapping_phase(
         ),
     }
 
+    runtime.pos_mapping = {
+        "mappings": [],
+
+        "candidate_positions": {},
+
+        "manual_resolutions": [],
+
+        "warnings": list(
+            runtime.dynamic_pos_mapping.get(
+                "warnings",
+                []
+            )
+        ),
+
+        "errors": list(
+            runtime.dynamic_pos_mapping.get(
+                "errors",
+                []
+            )
+        ),
+    }
+
     for mapping in runtime.dynamic_pos_mapping.get(
         "mappings",
         []
