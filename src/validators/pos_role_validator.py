@@ -104,11 +104,6 @@ def validate_generated_pos_roles(
     config_path="config/rio_lab.json"
 ):
 
-    print()
-    print("########################################")
-    print("POS ROLE VALIDATOR EXECUTED")
-    print("########################################")
-
     config = load_json_config(
     config_path
     )
@@ -153,16 +148,6 @@ def validate_generated_pos_roles(
     output_folder = Path(
         output_folder
     )
-
-    print()
-    print("ROLE MAPPING DEBUG")
-    print("---------------------------------")
-
-    for key, value in role_mapping.items():
-
-        print(
-            f"{key} -> {value}"
-        )
 
     for file_path in output_folder.glob(
         "*_pos-db.xml"

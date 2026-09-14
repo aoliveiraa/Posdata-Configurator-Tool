@@ -221,23 +221,6 @@ def collect_source_data(
 
         npw_service = find_npw_service(tree)
 
-        if npw_service is not None:
-
-            print(
-                f"NPW FOUND "
-                f"{source_file_name}"
-            )
-
-            print(
-                f"TYPE="
-                f"{npw_service.get('type')}"
-            )
-
-            print(
-                f"NAME="
-                f"{npw_service.get('name')}"
-            )
-
         browser_sections = (
             find_browser_sections(npw_service)
         )

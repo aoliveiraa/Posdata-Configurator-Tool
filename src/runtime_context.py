@@ -175,7 +175,10 @@ class RuntimeContext:
     generated_store_cod = field(
         default_factory=dict
     )
-
+    pos_role_validation: list = field(
+        default_factory=list
+    )
+    
     xmlrpccli_result = field(
         default_factory=dict
     )

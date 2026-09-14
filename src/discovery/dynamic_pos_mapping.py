@@ -123,6 +123,8 @@ def load_lab_pos_targets(config_path: str | Path) -> Dict:
         result["errors"].append(
             "No valid POS targets were found in pos_roles."
         )
+
+    return result
     
 
 
