@@ -127,11 +127,6 @@ def run_generation_phase(
         )
     )
 
-    print()
-    print("DEBUG RUNTIME KVS MAPPING")
-    print(type(runtime.kvs_mapping))
-    print(runtime.kvs_mapping)
-
     #
     # ITONAS
     #
@@ -155,10 +150,6 @@ def run_generation_phase(
     #
     # COD
     #
-
-    print()
-    print("DEBUG COD INSIDE GENERATION")
-    print(runtime.cod_target)
 
     runtime.generated_cod = (
         generate_cod_file(

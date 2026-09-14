@@ -18,6 +18,10 @@ from .analysis_phase import (
     run_analysis_phase,
 )
 
+from .reporting_phase import (
+    print_discovery_report,
+    print_mapping_report,
+)
 
 __all__ = [
     "run_discovery_phase",
@@ -25,4 +29,6 @@ __all__ = [
     "run_analysis_phase",
     "run_generation_phase",
     "run_validation_phase",
+    "print_discovery_report",
+    "print_mapping_report",
 ]

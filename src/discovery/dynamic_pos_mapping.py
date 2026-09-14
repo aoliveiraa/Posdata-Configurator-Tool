@@ -123,11 +123,6 @@ def load_lab_pos_targets(config_path: str | Path) -> Dict:
         result["errors"].append(
             "No valid POS targets were found in pos_roles."
         )
-    print()
-    print("DEBUG LAB TARGETS")
-    for item in result["targets"]:
-        print(item)
-    return result
     
 
 
@@ -352,11 +347,6 @@ def build_dynamic_pos_mapping(
                     )
                 ),
             }
-        )
-        print()
-        print("DEBUG FINAL MAPPING")
-        print(
-            result["mappings"][-1]
         )
 
     result["unused_sources"] = [

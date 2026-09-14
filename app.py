@@ -8,6 +8,8 @@ from src.phases import (
     run_analysis_phase,
     run_generation_phase,
     run_validation_phase,
+    print_discovery_report,
+    print_mapping_report,
 )
 
 from config.lab_loader import (
@@ -183,174 +185,16 @@ def main():
 
     store_db = runtime.store_db_path
 
-    print()
-    print("DYNAMIC POS DISCOVERY")
-    print("-" * 50)
-
-    print(
-        f"Status: "
-        f"{dynamic_pos_discovery['status']}"
+    print_discovery_report(
+        runtime
     )
 
-    print(
-        f"POS candidates: "
-        f"{len(dynamic_pos_discovery['pos_files'])}"
+
+    print_mapping_report(
+        runtime
     )
 
-    for pos_source in (
-        dynamic_pos_discovery["pos_files"]
-    ):
-        print()
 
-        print(
-            f"File: "
-            f"{pos_source['file']}"
-        )
-
-        print(
-            f"Role: "
-            f"{pos_source['role']}"
-        )
-
-        print(
-            f"Role source: "
-            f"{pos_source['role_source']}"
-        )
-
-        print(
-            f"Role value: "
-            f"{pos_source.get('role_value')}"
-        )
-
-        print(
-            f"Role confidence: "
-            f"{pos_source.get('role_confidence')}"
-        )
-
-        print(
-            f"Role status: "
-            f"{pos_source.get('role_status')}"
-        )
-
-
-        print(
-            "Node candidates: "
-            + (
-                ", ".join(
-                    pos_source[
-                        "node_candidates"
-                    ]
-                )
-                or "None"
-            )
-        )
-
-    if dynamic_pos_discovery["errors"]:
-
-        print()
-        print("Errors:")
-
-        for error in (
-            dynamic_pos_discovery["errors"]
-        ):
-            print(
-                f"  - {error}"
-            )
-    print()
-    print("DYNAMIC POS MAPPING")
-    print("-" * 50)
-
-    print(
-        f"Status: "
-        f"{dynamic_pos_mapping['status']}"
-    )
-
-    print()
-
-    for mapping in (
-        dynamic_pos_mapping["mappings"]
-    ):
-
-        print(
-            f"{mapping['target_node']} "
-            f"[{mapping['expected_role']}]"
-        )
-
-        print(
-            f"  Source: "
-            f"{mapping['source_file']}"
-        )
-
-        print(
-            f"  Source node: "
-            f"{mapping['source_node']}"
-        )
-
-        print(
-            f"  Source role: "
-            f"{mapping['source_role']}"
-        )
-
-        print(
-            f"  Selection: "
-            f"{mapping['selection_reason']}"
-        )
-
-        print(
-            f"  Status: "
-            f"{mapping['status']}"
-        )
-
-        for warning in mapping["warnings"]:
-            print(
-                f"  WARNING: {warning}"
-            )
-
-        print()
-
-
-    print()
-    print("REFERENCE POS FILES IN USE")
-    print("-" * 50)
-
-    for item in dynamic_reference_pos_files:
-
-        print(
-            f"{item['target_node']} "
-            f"<- "
-            f"{item['source_file']}"
-        )
-
-    if dynamic_pos_mapping["unused_sources"]:
-
-        print("UNUSED POS SOURCES")
-        print("-" * 50)
-
-        for source in (
-            dynamic_pos_mapping[
-                "unused_sources"
-            ]
-        ):
-
-            print(
-                f"{source['file']} "
-                f"[{source['role']}]"
-            )
-
-    if dynamic_pos_mapping["errors"]:
-
-        print()
-        print("MAPPING ERRORS")
-        print("-" * 50)
-
-        for error in (
-            dynamic_pos_mapping["errors"]
-        ):
-
-            print(
-                f"  - {error}"
-            )
-    
     # Integrates Ticket 10.1/10.2 with the existing POS transformer.
     # The selected source files come from dynamic discovery, while the
     # physical output machine is resolved by the lab IP. This avoids
