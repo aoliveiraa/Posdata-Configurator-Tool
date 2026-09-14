@@ -14,9 +14,15 @@ from .validation_phase import (
     run_validation_phase,
 )
 
+from .analysis_phase import (
+    run_analysis_phase,
+)
+
+
 __all__ = [
     "run_discovery_phase",
     "run_mapping_phase",
+    "run_analysis_phase",
     "run_generation_phase",
     "run_validation_phase",
 ]

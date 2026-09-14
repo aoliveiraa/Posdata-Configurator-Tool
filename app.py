@@ -1,75 +1,44 @@
 from src.runtime_context import (
-    RuntimeContext
+    RuntimeContext,
 )
 
 from src.phases import (
     run_discovery_phase,
     run_mapping_phase,
+    run_analysis_phase,
     run_generation_phase,
     run_validation_phase,
 )
 
-from config.lab_loader import load_lab_config
-
-from src.discovery.cod_discovery import (
-    discover_cod_target
-)
-
-from src.transformers.pos_transformer import (
-    generate_all_pos
+from config.lab_loader import (
+    load_lab_config,
 )
 
 from src.transformers.storedb_transformer import (
     update_main_screen,
-    update_business_limits
-)
-
-from src.discovery.node_detector import (
-    detect_nodes
+    update_business_limits,
 )
 
 from src.discovery.pos_role_detector import (
-    detect_pos_roles
+    detect_pos_roles,
 )
-
-from src.discovery.reference_analyzer import (
-    analyze_reference
-)
-
-from src.discovery.itona_analyzer import (
-    analyze_itonas
-)
-
-from src.discovery.foe_analyzer import (
-    analyze_foe
-)
-
-from src.mapping.kvs_mapper import map_kvs_to_itonas
 
 from src.discovery.pos_browser_inventory import (
-    inventory_pos_browsers
+    inventory_pos_browsers,
 )
 
 from src.discovery.pos_role_inventory import (
-    inventory_pos_roles
+    inventory_pos_roles,
 )
 
 from src.discovery.pos_keyword_inventory import (
-    inventory_pos_keywords
+    inventory_pos_keywords,
 )
 
 from src.validators.pos_role_validator import (
-    validate_generated_pos_roles
+    validate_generated_pos_roles,
 )
 
-from src.discovery.pos_machine_discovery import (
-    discover_current_pos_nodes,
-    build_node_lookup
-)
-
-from src.discovery.pos_source_discovery import (
-    discover_pos_sources,
-)
 
 def main():
 
@@ -84,6 +53,11 @@ def main():
     CONFIG_PATH = (
         f"config/{LAB.lower()}_lab.json"
     )
+
+    #
+    # IMPORTANTE
+    #
+    runtime.config_path = CONFIG_PATH
 
     runtime.store_db_path = (
         "samples/new_posdata/store-db.xml"
@@ -109,8 +83,6 @@ def main():
         runtime
     )
 
-    runtime.config_path = CONFIG_PATH
-
     #
     # MAPPING
     #
@@ -120,24 +92,38 @@ def main():
     )
 
     #
-    # COMPATIBILIDADE TEMPORÁRIA
+    # ANALYSIS
+    #
+
+    runtime = run_analysis_phase(
+        runtime
+    )
+
+    #
+    # GENERATION
+    #
+
+    runtime = run_generation_phase(
+        runtime
+    )
+
+    #
+    # SHORTCUTS
     #
 
     market = runtime.market
-
     info = runtime.store_info
-
     screens = runtime.screens
-
     lunch_screen = runtime.lunch_screen
 
-    pos_machine_mapping = (
-        runtime.pos_machine_mapping
-    )
+    nodes = runtime.nodes
+    reference = runtime.reference_analysis
 
-    pos_machine_lookup = (
-        runtime.current_node_lookup
-    )
+    itonas = runtime.itonas
+    kvs_mapping = runtime.kvs_mapping
+
+    cod_target = runtime.cod_target
+    foe_info = runtime.foe_result
 
     dynamic_pos_discovery = (
         runtime.dynamic_pos_discovery
@@ -159,87 +145,9 @@ def main():
         runtime.pos_mapping
     )
 
-    store_db = runtime.store_db_path
-
-    #
-    # ANALYSIS
-    #
-
-    nodes = detect_nodes(
-        "samples/new_posdata"
+    pos_machine_mapping = (
+        runtime.pos_machine_mapping
     )
-
-    reference = analyze_reference(
-        "samples/current_posdata"
-    )
-
-    cod_target = discover_cod_target(
-        pos_machine_mapping=
-            pos_machine_mapping,
-        config_path=
-            CONFIG_PATH
-    )
-
-    runtime.cod_target = cod_target
-
-    #
-    # COD Multi-Lab Override
-    #
-
-    cod_node = runtime.cod_target.get(
-        "node_name"
-    )
-
-    if (
-        cod_node
-        and cod_node in runtime.runtime_pos_machine_lookup
-    ):
-
-        resolved_output_file = (
-            runtime.runtime_pos_machine_lookup[
-                cod_node
-            ].get(
-                "output_file"
-            )
-        )
-
-        if resolved_output_file:
-
-            runtime.cod_target[
-                "output_file"
-            ] = resolved_output_file
-
-
-    itonas = analyze_itonas(
-        "samples/current_posdata"
-    )
-
-    runtime.itonas = itonas
-
-    kvs_mapping = map_kvs_to_itonas(
-        reference_itonas=
-            itonas,
-        new_posdata_folder=
-            runtime.new_posdata_folder,
-    )
-
-    runtime.kvs_mapping = (
-        kvs_mapping
-    )
-
-    #
-    # GENERATION
-    #
-    # SOMENTE AGORA
-    #
-
-    runtime = run_generation_phase(
-        runtime
-    )
-
-    #
-    # RESULTADOS
-    #
 
     generated_pos = (
         runtime.generated_pos
@@ -273,6 +181,7 @@ def main():
         runtime.generated_store_cod
     )
 
+    store_db = runtime.store_db_path
 
     print()
     print("DYNAMIC POS DISCOVERY")
@@ -467,28 +376,14 @@ def main():
             f"but found {ready_count}."
         )
 
-
-    foe_info = analyze_foe(
-        "samples/new_posdata/_WAYSTATION_pos-db.xml"
-    )
-
     pos_browsers = inventory_pos_browsers(
         "samples/current_posdata"
     )
 
-    itonas = analyze_itonas(
-        "samples/current_posdata"
-    )
-    runtime.itonas = itonas
 
-    kvs_mapping = map_kvs_to_itonas(
-    reference_itonas=itonas,
-    new_posdata_folder="samples/new_posdata"
-    )
-    runtime.kvs_mapping = kvs_mapping  
 
     runtime = run_generation_phase(
-    runtime
+        runtime
     )
 
     generated_pos = runtime.generated_pos
@@ -529,6 +424,7 @@ def main():
                 CONFIG_PATH
         )
     )
+
 
     print()
     print(
@@ -652,15 +548,6 @@ def main():
     print()
     print(
         "✅ BusinessLimits updated"
-    )
-
-    generated_pos = generate_all_pos(
-        pos_mapping=pos_mapping,
-        pos_machine_lookup=runtime_pos_machine_lookup,
-        new_posdata_folder=(
-            "samples/new_posdata"
-        ),
-        output_folder="output/pos"
     )
 
     print()

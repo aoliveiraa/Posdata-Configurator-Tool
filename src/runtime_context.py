@@ -229,3 +229,16 @@ class RuntimeContext:
     kvs_mapping: Dict[str, Any] = field(
         default_factory=dict
     )
+
+    # ==========================================================
+    # ANALYSIS
+    # ==========================================================
+
+    nodes: Dict[str, Any] = field(
+        default_factory=dict
+    )
+
+    itonas: List[Dict[str, Any]] = field(
+        default_factory=list
+    )
+    

@@ -2,7 +2,12 @@
 <PosDB>
   <StoreDB imports="all"/>
   <ColorDB imports="default"/>
-  <Configuration imports="Store.wide"/>
+  <Configuration imports="Store.wide">
+    <Section name="CODRouting">
+      <Parameter name="Mapping" value="COD0001=1|COD0002=2"/>
+      <Parameter name="Routing" value="POS0004=DCOD0002|POS0013=DCOD0002|POS0014=DCOD0014|POS0001=DCOD0012|POS0002=DCOD0012|POS0003=DCOD0012"/>
+    </Section>
+  </Configuration>
   <Services>
     <Service name="0004" type="POS" classname="com.ngpos.pos.NewPOS" startonload="true" quitOnFail="true">
       <UsedServices>
@@ -42,6 +47,10 @@
           <Member name="0701" alias="MD - [701]"/>
           <Member name="0801" alias="FC - [801]"/>
           <Member name="0802" alias="FC - [802]"/>
+        </UsedService>
+        <UsedService serviceType="COD">
+          <Member name="01" alias=""/>
+          <Member name="02" alias=""/>
         </UsedService>
       </UsedServices>
       <Configuration imports="POS">
@@ -197,6 +206,86 @@
           </Section>
         </Adaptor>
       </Adaptors>
+    </Service>
+    <Service name="0002" type="COD" classname="npCODNew.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="COD">
+        <Section name="OperationMode">
+          <Parameter name="isHtmlUi" value="true"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpCOD" imports="npAdpCOD" startonload="true">
+          <Section name="main">
+            <Parameter name="SerialPort" value="2"/>
+            <Parameter name="CODType" value="everbrite lcd"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpCodUpdt" imports="npAdpCodUpdt" startonload="false"/>
+        <Adaptor name="npAdpCodComm" imports="npAdpCodComm" startonload="true"/>
+        <Adaptor name="npAdpCodUI" imports="npAdpCodUI" startonload="true">
+          <Section name="NGCODUnitSetting">
+            <Parameter name="OperationMode" value="DT"/>
+            <Parameter name="TCPSETTING" value="127.0.0.1:225"/>
+            <Parameter name="PODType" value="DT"/>
+          </Section>
+          <Section name="codHost">
+            <Parameter name="address" value="127.0.0.1"/>
+            <Parameter name="aliveInterval" value="20"/>
+            <Parameter name="port" value="225"/>
+            <Parameter name="timeout" value="15000"/>
+            <Parameter name="version" value="3"/>
+          </Section>
+          <Section name="main">
+            <Parameter name="adaptorname" value="npAdpCodUI"/>
+            <Parameter name="logicalname" value="COD UI Adaptor"/>
+            <Parameter name="orderformatterscript" value="CODViewFormatterJS@CODUI.nps"/>
+            <Parameter name="service" value="npAdpCodUI.dll"/>
+          </Section>
+          <Section name="Generic">
+            <Parameter name="CODDumpEnabled" value="true"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="102" type="NPW" classname="" startonload="true" quitOnFail="true">
+      <Configuration imports="LocalWebView">
+        <Section name="BaseHosts">
+          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+        </Section>
+        <Section name="LocalWebView">
+          <Parameter name="Location" value="../npwebview"/>
+        </Section>
+        <Section name="Log">
+          <Parameter name="EnableDebug" value="true"/>
+          <Parameter name="LogFileFolder" value="out/"/>
+        </Section>
+        <Section name="AutoUpdate">
+          <Parameter name="EnableAutoUpdate" value="false"/>
+        </Section>
+        <Section name="Monitoring">
+          <Parameter name="MonitorInterval" value="60000"/>
+        </Section>
+        <Section name="Monitoring.Memory">
+          <Parameter name="MaxMemoryPercentage" value="80"/>
+          <Parameter name="LauncherLimit" value="200"/>
+          <Parameter name="BrowserLimit" value="1500"/>
+          <Parameter name="DriverHostLimit" value="1500"/>
+        </Section>
+        <Section name="Component.Browser.POS">
+          <Parameter name="Position" value="800,0"/>
+          <Parameter name="Urn" value="COD/COD0002"/>
+          <Parameter name="ShowCursor" value="true"/>
+          <Parameter name="ShowFrame" value="true"/>
+          <Parameter name="showCloseButton" value="true"/>
+          <Parameter name="showMinimizeButton" value="true"/>
+          <Parameter name="showMaximizeButton" value="true"/>
+          <Parameter name="allowResize" value="true"/>
+          <Parameter name="windowMaximized" value="false"/>
+          <Parameter name="canMoveWindow" value="true"/>
+          <Parameter name="AutoFocus" value="false"/>
+          <Parameter name="Size" value="800x600"/>
+        </Section>
+      </Configuration>
     </Service>
   </Services>
 </PosDB>
