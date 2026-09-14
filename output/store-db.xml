@@ -38,34 +38,33 @@
         <StoreLongitude>-121.973010</StoreLongitude>
       </StoreDetails>
       <BusinessLimits>
-        <SkimTimeLimit>120</SkimTimeLimit>
-        <SkimAmountLimit>10000.00</SkimAmountLimit>
-        <ManagerModeTimeLimit>60</ManagerModeTimeLimit>
-        <HighAmountSaleLimit>100.00</HighAmountSaleLimit>
-        <HighQuantitySaleLimit>51</HighQuantitySaleLimit>
-        <AutoReceiptPrintAmount>0.00</AutoReceiptPrintAmount>
-        <FcOrderTakerTimeOver>30</FcOrderTakerTimeOver>
-        <FcCashieringTimeOver>30</FcCashieringTimeOver>
-        <FcStoreTimeOver>10</FcStoreTimeOver>
-        <DtWinOneTimeOver>0</DtWinOneTimeOver>
-        <DtWinTwoTimeOver>0</DtWinTwoTimeOver>
-        <DtHeldTimeOver>10</DtHeldTimeOver>
-        <ReductionValidationMode>Limits</ReductionValidationMode>
-        <TRedBeforeTotal>3</TRedBeforeTotal>
-        <TRedAfterTotalAmount>3.00</TRedAfterTotalAmount>
-        <TRedAfterTotalQuantity>1</TRedAfterTotalQuantity>
-        <BreakfastStartTimeWeekDay>05:00</BreakfastStartTimeWeekDay>
-        <BreakfastStopTimeWeekDay>10:30</BreakfastStopTimeWeekDay>
-        <BreakfastStartTimeWeekEnd>05:00</BreakfastStartTimeWeekEnd>
-        <BreakfastStopTimeWeekEnd>10:30</BreakfastStopTimeWeekEnd>
-        <BlockTime>23:59</BlockTime>
-        <InitialFloatLimit>100.00</InitialFloatLimit>
-        <FutureDayOpenLimit>-1</FutureDayOpenLimit>
-        <StoreWidePettyCashAmountLimit>500.00</StoreWidePettyCashAmountLimit>
-        <BypassPromoPerItemQuantityLimit>false</BypassPromoPerItemQuantityLimit>
-        <BypassIndividualDiscountAmountLimit>false</BypassIndividualDiscountAmountLimit>
-      </BusinessLimits>
-      <HHOTBusinessLimits>
+    <SkimTimeLimit>120</SkimTimeLimit>
+    <SkimAmountLimit>10000.00</SkimAmountLimit>
+    <ManagerModeTimeLimit>60</ManagerModeTimeLimit>
+    <HighAmountSaleLimit>100.00</HighAmountSaleLimit>
+    <HighQuantitySaleLimit>51</HighQuantitySaleLimit>
+    <AutoReceiptPrintAmount>0.00</AutoReceiptPrintAmount>
+    <FcOrderTakerTimeOver>30</FcOrderTakerTimeOver>
+    <FcCashieringTimeOver>30</FcCashieringTimeOver>
+    <FcStoreTimeOver>10</FcStoreTimeOver>
+    <DtWinOneTimeOver>0</DtWinOneTimeOver>
+    <DtWinTwoTimeOver>0</DtWinTwoTimeOver>
+    <DtHeldTimeOver>10</DtHeldTimeOver>
+    <ReductionValidationMode>Limits</ReductionValidationMode>
+    <TRedBeforeTotal>3</TRedBeforeTotal>
+    <TRedAfterTotalAmount>3.00</TRedAfterTotalAmount>
+    <TRedAfterTotalQuantity>1</TRedAfterTotalQuantity>
+    <BreakfastStartTimeWeekDay>05:00</BreakfastStartTimeWeekDay>
+    <BreakfastStopTimeWeekDay>10:30</BreakfastStopTimeWeekDay>
+    <BreakfastStartTimeWeekEnd>05:00</BreakfastStartTimeWeekEnd>
+    <BreakfastStopTimeWeekEnd>10:30</BreakfastStopTimeWeekEnd>
+    <BlockTime>23:59</BlockTime>
+    <InitialFloatLimit>100.00</InitialFloatLimit>
+    <FutureDayOpenLimit>-1</FutureDayOpenLimit>
+    <StoreWidePettyCashAmountLimit>500.00</StoreWidePettyCashAmountLimit>
+    <BypassPromoPerItemQuantityLimit>false</BypassPromoPerItemQuantityLimit>
+    <BypassIndividualDiscountAmountLimit>false</BypassIndividualDiscountAmountLimit>
+</BusinessLimits><HHOTBusinessLimits>
         <ManagerModeTimeLimit>20</ManagerModeTimeLimit>
         <HighAmountSaleLimit>999.00</HighAmountSaleLimit>
         <HighQuantitySaleLimit>99</HighQuantitySaleLimit>
@@ -2019,12 +2018,6 @@
       <DrinkVolume code="02" name="Medium"/>
       <DrinkVolume code="01" name="Small"/>
     </DrinkVolumeTable>
-    <Configuration>
-      <Section name="CODRouting">
-        <Parameter name="Mapping" value="COD0001=1|COD0002=2"/>
-        <Parameter name="Routing" value="POS0004=DCOD0002|POS0013=DCOD0002|POS0014=DCOD0014|POS0001=DCOD0012|POS0002=DCOD0012|POS0003=DCOD0012"/>
-      </Section>
-    </Configuration>
   </StoreDB>
   <ColorDB type="default">
     <ColorName name="SADDLEBROWN" value="#8B4513">
@@ -5806,7 +5799,7 @@
         <Parameter name="drivername" value="npDrvHTTP.dll"/>
         <Parameter name="logicalname" value="XML RPC Client"/>
         <Parameter name="service" value="npAdpHttp.dll"/>
-        <Parameter name="url" value="http://10.118.51.25:8888/goform/RPC2"/>
+        <Parameter name="url" value="http://10.2.2.25:8888/goform/RPC2"/>
       </Section>
     </Adaptor>
     <Adaptor type="bunarea.serial.bumpbar" startonload="true">

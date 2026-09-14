@@ -19,23 +19,6 @@ from src.transformers.pos_transformer import (
     generate_all_pos
 )
 
-from src.transformers.way_transformer import (
-    generate_way_file
-)
-
-from src.transformers.production_transformer import (
-    generate_all_production
-)
-
-from src.transformers.foe_transformer import (
-    generate_all_foe
-)
-
-from src.transformers.cod_transformer import (
-    generate_cod_file,
-    generate_store_cod_file
-)
-
 from src.transformers.storedb_transformer import (
     update_main_screen,
     update_business_limits
@@ -63,10 +46,6 @@ from src.discovery.foe_analyzer import (
 
 from src.mapping.kvs_mapper import map_kvs_to_itonas
 
-from src.transformers.kvs_transformer import (
-    generate_all_itonas
-)
-
 from src.discovery.pos_browser_inventory import (
     inventory_pos_browsers
 )
@@ -88,25 +67,14 @@ from src.discovery.pos_machine_discovery import (
     build_node_lookup
 )
 
-from src.transformers.xmlrpccli_transformer import (
-    generate_xmlrpccli_configuration
-)
-
 from src.discovery.pos_source_discovery import (
     discover_pos_sources,
 )
 
-from src.discovery.dynamic_pos_mapping import (
-    build_dynamic_pos_mapping,
-    to_legacy_reference_pos_files,
-)
-
-from src.discovery.lab_independent_machine_mapping import (
-    resolve_machine_for_target,
-)
-
 def main():
+
     runtime = RuntimeContext()
+
     LAB = "RENEIGH"
 
     lab_config = load_lab_config(
@@ -117,9 +85,6 @@ def main():
         f"config/{LAB.lower()}_lab.json"
     )
 
-
-    runtime = RuntimeContext()
-
     runtime.store_db_path = (
         "samples/new_posdata/store-db.xml"
     )
@@ -129,16 +94,34 @@ def main():
     )
 
     runtime.current_posdata_folder = (
-    "samples/current_posdata"
+        "samples/current_posdata"
     )
 
     runtime.new_posdata_folder = (
         "samples/new_posdata"
     )
 
+    #
+    # DISCOVERY
+    #
+
     runtime = run_discovery_phase(
         runtime
     )
+
+    runtime.config_path = CONFIG_PATH
+
+    #
+    # MAPPING
+    #
+
+    runtime = run_mapping_phase(
+        runtime
+    )
+
+    #
+    # COMPATIBILIDADE TEMPORÁRIA
+    #
 
     market = runtime.market
 
@@ -159,8 +142,28 @@ def main():
     dynamic_pos_discovery = (
         runtime.dynamic_pos_discovery
     )
-    
+
+    dynamic_pos_mapping = (
+        runtime.dynamic_pos_mapping
+    )
+
+    dynamic_reference_pos_files = (
+        runtime.dynamic_reference_pos_files
+    )
+
+    runtime_pos_machine_lookup = (
+        runtime.runtime_pos_machine_lookup
+    )
+
+    pos_mapping = (
+        runtime.pos_mapping
+    )
+
     store_db = runtime.store_db_path
+
+    #
+    # ANALYSIS
+    #
 
     nodes = detect_nodes(
         "samples/new_posdata"
@@ -170,12 +173,6 @@ def main():
         "samples/current_posdata"
     )
 
-    pos_machine_mapping = (
-        discover_current_pos_nodes(
-            "samples/current_posdata"
-        )
-    )
-
     cod_target = discover_cod_target(
         pos_machine_mapping=
             pos_machine_mapping,
@@ -183,23 +180,99 @@ def main():
             CONFIG_PATH
     )
 
-    
-    
-    pos_machine_lookup = (
-        build_node_lookup(
-            pos_machine_mapping
-        )
+    runtime.cod_target = cod_target
+
+    #
+    # COD Multi-Lab Override
+    #
+
+    cod_node = runtime.cod_target.get(
+        "node_name"
     )
 
-    dynamic_pos_discovery = (
-        discover_pos_sources(
-            new_posdata_folder=(
-                "samples/new_posdata"
+    if (
+        cod_node
+        and cod_node in runtime.runtime_pos_machine_lookup
+    ):
+
+        resolved_output_file = (
+            runtime.runtime_pos_machine_lookup[
+                cod_node
+            ].get(
+                "output_file"
             )
         )
+
+        if resolved_output_file:
+
+            runtime.cod_target[
+                "output_file"
+            ] = resolved_output_file
+
+
+    itonas = analyze_itonas(
+        "samples/current_posdata"
     )
 
-    
+    runtime.itonas = itonas
+
+    kvs_mapping = map_kvs_to_itonas(
+        reference_itonas=
+            itonas,
+        new_posdata_folder=
+            runtime.new_posdata_folder,
+    )
+
+    runtime.kvs_mapping = (
+        kvs_mapping
+    )
+
+    #
+    # GENERATION
+    #
+    # SOMENTE AGORA
+    #
+
+    runtime = run_generation_phase(
+        runtime
+    )
+
+    #
+    # RESULTADOS
+    #
+
+    generated_pos = (
+        runtime.generated_pos
+    )
+
+    xmlrpccli_result = (
+        runtime.xmlrpccli_result
+    )
+
+    generated_way = (
+        runtime.generated_way
+    )
+
+    generated_production = (
+        runtime.generated_production
+    )
+
+    generated_foe = (
+        runtime.generated_foe
+    )
+
+    generated_itonas = (
+        runtime.generated_itonas
+    )
+
+    generated_cod = (
+        runtime.generated_cod
+    )
+
+    generated_store_cod = (
+        runtime.generated_store_cod
+    )
+
 
     print()
     print("DYNAMIC POS DISCOVERY")
@@ -274,20 +347,6 @@ def main():
             print(
                 f"  - {error}"
             )
-
-    dynamic_pos_mapping = (
-        build_dynamic_pos_mapping(
-            discovery_result=
-                dynamic_pos_discovery,
-            config_path=CONFIG_PATH
-        )
-    )
-
-    dynamic_reference_pos_files = (
-        to_legacy_reference_pos_files(
-            dynamic_pos_mapping
-        )
-    )
     print()
     print("DYNAMIC POS MAPPING")
     print("-" * 50)
@@ -393,194 +452,6 @@ def main():
         if str(item.get("ip", "")).strip()
     }
 
-    runtime_pos_machine_lookup = dict(pos_machine_lookup)
-
-
-    #
-    # Multi-Lab:
-    # COD deve usar o filename final resolvido
-    # pelo lab e não o filename do Current PosData.
-    #
-
-    cod_node = cod_target.get(
-        "node_name"
-    )
-
-    if (
-        cod_node
-        and cod_node in runtime_pos_machine_lookup
-    ):
-
-        resolved_output_file = (
-            runtime_pos_machine_lookup[
-                cod_node
-            ].get(
-                "output_file"
-            )
-        )
-
-        if resolved_output_file:
-
-            cod_target["output_file"] = (
-                resolved_output_file
-            )
-
-    pos_mapping = {
-        "mappings": [],
-        "warnings": list(dynamic_pos_mapping.get("warnings", [])),
-        "errors": list(dynamic_pos_mapping.get("errors", [])),
-    }
-
-    print()
-    print("DEBUG CURRENT MACHINES")
-    print(len(pos_machine_mapping))
-
-    for item in pos_machine_mapping:
-        print(item)
-
-    for mapping in dynamic_pos_mapping.get("mappings", []):
-        target_node = mapping["target_node"]
-
-        print()
-        print("DEBUG MAPPING INPUT")
-        print("target_node =", target_node)
-        print("target_file =", mapping.get("target_file"))
-        print("output_file =", mapping.get("output_file"))
-        print(mapping)
-        
-        machine_resolution = (
-            resolve_machine_for_target(
-                target={
-                    "node": target_node,
-                    "machine_ip": mapping.get(
-                        "machine_ip"
-                    ),
-                    "output_file": (
-                        mapping.get(
-                            "target_file"
-                        )
-                        or mapping.get(
-                            "output_file"
-                        )
-                    ),
-                },
-                current_machines=
-                    pos_machine_mapping,
-            )
-        )
-        mapping_warnings = list(mapping.get("warnings", []))
-        mapping_errors = list(mapping.get("errors", []))
-
-        if mapping.get("status") != "READY":
-            status = "MISSING"
-        elif (machine_resolution["status"]!= "READY"):            
-            status = "MISSING"
-            mapping_warnings.extend(
-                machine_resolution.get(
-                    "warnings",
-                    []
-                )
-            )
-        else:
-            status = "READY"
-            # Alias the desired lab node to the actual physical machine.
-            # generate_all_pos can keep using its existing lookup contract.
-        runtime_pos_machine_lookup[
-            target_node
-        ] = {
-
-            "machine_file":
-                machine_resolution[
-                    "current_machine_file"
-                ],
-
-            #
-            # destino do lab
-            #
-            "ip":
-                machine_resolution[
-                    "target_machine_ip"
-                ],
-
-            #
-            # origem
-            #
-            "current_ip":
-                machine_resolution[
-                    "current_machine_ip"
-                ],
-
-            "output_file":
-                machine_resolution[
-                    "output_file"
-                ],
-
-            "detected_node":
-                target_node,
-
-            "status":
-                "READY",
-        }
-        pos_mapping["mappings"].append(
-            {
-                "source_file": mapping.get("source_file"),
-                "node_name": target_node,
-                "target_file": (
-                    machine_resolution.get(
-                        "output_file"
-                    )
-                ),                "status": status,
-                "warnings": mapping_warnings,
-                "errors": mapping_errors,
-            }
-        )
-
-    print()
-    print("DEBUG MACHINE RESOLUTION")
-    print("target_node =", target_node)
-    print(machine_resolution)
-
-    #
-    # Multi-Lab COD filename override
-    #
-
-    cod_node = cod_target.get(
-        "node_name"
-    )
-
-    if (
-        cod_node
-        and cod_node in runtime_pos_machine_lookup
-    ):
-
-        resolved_output_file = (
-            runtime_pos_machine_lookup[
-                cod_node
-            ].get(
-                "output_file"
-            )
-        )
-
-        if resolved_output_file:
-
-            print()
-            print("DEBUG COD OVERRIDE")
-            print(
-                "OLD:",
-                cod_target.get(
-                    "output_file"
-                )
-            )
-
-            print(
-                "NEW:",
-                resolved_output_file
-            )
-
-            cod_target["output_file"] = (
-                resolved_output_file
-            )
-
 
     ready_count = sum(
         item["status"] == "READY"
@@ -596,50 +467,9 @@ def main():
             f"but found {ready_count}."
         )
 
-    generated_pos = generate_all_pos(
-        pos_mapping=pos_mapping,
-        pos_machine_lookup=runtime_pos_machine_lookup,
-        new_posdata_folder=(
-            "samples/new_posdata"
-        ),
-        output_folder="output/pos"
-    )
-
-    generated_cod = generate_cod_file(
-        cod_target=cod_target,
-        config_path=CONFIG_PATH,
-        output_folder="output/pos"
-    )
-
-
-    generated_way = generate_way_file(
-        new_posdata_folder=(
-            "samples/new_posdata"
-        ),
-        output_folder="output/way",
-        config_path=CONFIG_PATH
-    )
 
     foe_info = analyze_foe(
         "samples/new_posdata/_WAYSTATION_pos-db.xml"
-    )
-
-    generated_production = (
-        generate_all_production(
-            new_posdata_folder=
-                "samples/new_posdata",
-            output_folder=
-                "output/production"
-        )
-    )
-
-    generated_foe = (
-        generate_all_foe(
-            new_posdata_folder=
-                "samples/new_posdata",
-            output_folder=
-                "output/foe"
-        )
     )
 
     pos_browsers = inventory_pos_browsers(
@@ -649,27 +479,46 @@ def main():
     itonas = analyze_itonas(
         "samples/current_posdata"
     )
+    runtime.itonas = itonas
 
     kvs_mapping = map_kvs_to_itonas(
     reference_itonas=itonas,
     new_posdata_folder="samples/new_posdata"
     )
+    runtime.kvs_mapping = kvs_mapping  
+
+    runtime = run_generation_phase(
+    runtime
+    )
+
+    generated_pos = runtime.generated_pos
+
+    xmlrpccli_result = runtime.xmlrpccli_result
+
+    generated_way = runtime.generated_way
+
+    generated_production = (
+        runtime.generated_production
+    )
+
+    generated_foe = (
+        runtime.generated_foe
+    )
 
     generated_itonas = (
-        generate_all_itonas(
-            kvs_mapping=kvs_mapping,
-            new_posdata_folder=(
-                "samples/new_posdata"
-            ),
-            output_folder=(
-                "output/itonas"
-            ),
-            reference_posdata_folder=(
-                "samples/current_posdata"
-            ),
-        )
+        runtime.generated_itonas
     )
-    
+
+    generated_cod = (
+        runtime.generated_cod
+    )
+
+    generated_store_cod = (
+        runtime.generated_store_cod
+    )
+
+
+      
 
     pos_role_validation = (
         validate_generated_pos_roles(
@@ -776,15 +625,6 @@ def main():
             "✅ output/store-db.xml generated"
         )
 
-        generated_store_cod = (
-            generate_store_cod_file(
-                cod_target=cod_target,
-                store_file=(
-                    "output/store-db.xml"
-                )
-            )
-        )
-
     else:
 
         generated_store_cod = {
@@ -821,27 +661,6 @@ def main():
             "samples/new_posdata"
         ),
         output_folder="output/pos"
-    )
-
-    xmlrpccli_result = (
-        generate_xmlrpccli_configuration(
-            config_path=(
-                CONFIG_PATH
-            ),
-            current_pos_folder=(
-                "samples/current_posdata"
-            ),
-            output_pos_folder=(
-                "output/pos"
-            ),
-            current_store_file=(
-                "samples/current_posdata/store-db.xml"
-            ),
-            output_store_file=(
-                "output/store-db.xml"
-            ),
-            allowed_pos_nodes=generated_pos
-        )
     )
 
     print()
