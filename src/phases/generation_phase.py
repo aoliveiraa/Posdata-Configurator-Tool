@@ -21,9 +21,6 @@ from src.transformers.production_transformer import (
     generate_all_production,
 )
 
-from src.transformers.foe_transformer import (
-    generate_all_foe,
-)
 
 from src.transformers.kvs_transformer import (
     generate_all_itonas,
@@ -226,16 +223,50 @@ def run_generation_phase(
     #
     # FOE
     #
+    # FOE is embedded in the generated WAYSTATION file.
+    # No separate FOE file must be exported.
+    #
 
-    runtime.generated_foe = (
-        generate_all_foe(
-            new_posdata_folder=
-                runtime.new_posdata_folder,
-
-            output_folder=
-                "output/foe",
+    way_generated = (
+        runtime.generated_way.get(
+            "generated",
+            False
         )
     )
+
+    runtime.generated_foe = [
+        {
+            "generated": way_generated,
+            "file": (
+                runtime.generated_way.get(
+                    "output_file"
+                )
+            ),
+            "output_file": (
+                runtime.generated_way.get(
+                    "output_file"
+                )
+            ),
+            "changes": [
+                (
+                    "FOE configuration validated "
+                    "inside WAYSTATION output."
+                )
+            ] if way_generated else [],
+            "warnings": (
+                runtime.generated_way.get(
+                    "warnings",
+                    []
+                )
+            ),
+            "errors": (
+                runtime.generated_way.get(
+                    "errors",
+                    []
+                )
+            ),
+        }
+    ]
 
     #
     # ITONAS
@@ -293,12 +324,7 @@ def run_generation_phase(
         update_storedb_runtime_configuration(
             store_db_path="output/store-db.xml",
             output_path="output/store-db.xml",
-           lab=(
-                "RENEIGH"
-                if "reneigh"
-                in str(runtime.config_path).lower()
-                else "RIO"
-            )
+            lab=runtime.selected_lab,
         )
     )
 

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from src.runtime_context import (
     RuntimeContext,
 )
@@ -45,11 +47,86 @@ from src.phases.reporting_phase import (
 )
 
 
-def main():
-
+def main(
+    selected_lab=None,
+    current_posdata_folder=None,
+    new_posdata_folder=None,
+):
     runtime = RuntimeContext()
 
-    LAB = "RENEIGH"
+    #
+    # INPUT NORMALIZATION
+    #
+
+    normalized_lab = (
+        str(selected_lab).strip().upper()
+        if selected_lab
+        else "RENEIGH"
+    )
+
+    supported_labs = {
+        "RIO",
+        "RENEIGH",
+        "BR",
+    }
+
+    if normalized_lab not in supported_labs:
+        raise ValueError(
+            "Unsupported laboratory: "
+            f"{selected_lab}. "
+            "Supported laboratories: "
+            "RIO, RENEIGH and BR."
+        )
+
+    current_posdata_folder = Path(
+        current_posdata_folder
+        or "samples/current_posdata"
+    )
+
+    new_posdata_folder = Path(
+        new_posdata_folder
+        or "samples/new_posdata"
+    )
+
+    if not current_posdata_folder.is_dir():
+        raise FileNotFoundError(
+            "Current PosData folder was not found: "
+            f"{current_posdata_folder}"
+        )
+
+    if not new_posdata_folder.is_dir():
+        raise FileNotFoundError(
+            "New PosData folder was not found: "
+            f"{new_posdata_folder}"
+        )
+
+    store_db_path = (
+        new_posdata_folder
+        / "store-db.xml"
+    )
+
+    screen_xml_path = (
+        new_posdata_folder
+        / "screen.xml"
+    )
+
+    if not store_db_path.is_file():
+        raise FileNotFoundError(
+            "New StoreDB file was not found: "
+            f"{store_db_path}"
+        )
+
+    if not screen_xml_path.is_file():
+        raise FileNotFoundError(
+            "New screen.xml file was not found: "
+            f"{screen_xml_path}"
+        )
+
+    #
+    # LAB CONFIGURATION
+    #
+
+    LAB = normalized_lab
 
     lab_config = load_lab_config(
         LAB
@@ -60,25 +137,62 @@ def main():
     )
 
     #
-    # IMPORTANTE
+    # RUNTIME CONFIGURATION
     #
+
+    runtime.selected_lab = LAB
     runtime.config_path = CONFIG_PATH
 
-    runtime.store_db_path = (
-        "samples/new_posdata/store-db.xml"
-    )
-
-    runtime.screen_xml_path = (
-        "samples/new_posdata/screen.xml"
-    )
-
     runtime.current_posdata_folder = (
-        "samples/current_posdata"
+        current_posdata_folder
     )
 
     runtime.new_posdata_folder = (
-        "samples/new_posdata"
+        new_posdata_folder
     )
+
+    runtime.store_db_path = (
+        store_db_path
+    )
+
+    runtime.screen_xml_path = (
+        screen_xml_path
+    )
+
+    print()
+    print("UI CONFIGURATION")
+    print("-" * 50)
+    print(
+        f"Selected Lab: {LAB}"
+    )
+    print(
+        f"Configuration: {CONFIG_PATH}"
+    )
+    print(
+        "Current PosData: "
+        f"{current_posdata_folder}"
+    )
+    print(
+        "New PosData: "
+        f"{new_posdata_folder}"
+    )
+    print(
+        f"StoreDB: {store_db_path}"
+    )
+    print(
+        f"Screen XML: {screen_xml_path}"
+    )
+
+    #
+    # DISCOVERY
+    #
+
+    runtime = run_discovery_phase(
+        runtime
+    )
+
+    runtime.selected_lab = LAB
+    runtime.config_path = CONFIG_PATH
 
     #
     # DISCOVERY
