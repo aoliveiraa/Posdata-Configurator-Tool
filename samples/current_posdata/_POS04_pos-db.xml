@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide"/>
+  <Services>
+    <Service name="04" type="POS" classname="com.ngpos.pos.NewPOS" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="0300" alias=""/>
+        </UsedService>
+        <UsedService serviceType="PSW">
+          <Member name="0300" alias=""/>
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8001" alias=""/>
+          <Member name="8002" alias=""/>
+        </UsedService>
+        <UsedService serviceType="RPR">
+          <Member name="04" alias=""/>
+          <Member name="01" alias=""/>
+          <Member name="02" alias=""/>
+          <Member name="05" alias=""/>
+          <Member name="04" alias="CASHLESS"/>
+          <Member name="01" alias="CASHLESS"/>
+          <Member name="02" alias="CASHLESS"/>
+          <Member name="05" alias="CASHLESS"/>
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="1001" alias="MFY1 - [1001]"/>
+          <Member name="1002" alias="MFY2 - [1002]"/>
+          <Member name="1003" alias="FC - [1003]"/>
+          <Member name="1004" alias="CBS - [1004]"/>
+          <Member name="1005" alias="FRY - [1005]"/>
+          <Member name="1006" alias="GM - [1006]"/>
+          <Member name="1007" alias="DT - [1007]"/>
+          <Member name="1008" alias="DT - [1008]"/>
+          <Member name="1009" alias="CP-A - [1009]"/>
+          <Member name="1010" alias="CP-B - [1010]"/>
+          <Member name="1011" alias="FC Assembly - [1011]"/>
+		  <Member name="1013" alias="Delivery Runner [1013]"/>
+          <Member name="1014" alias="Delivery Presenter - [1014]"/>
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="POS">
+        <Section name="TestHelper">
+          <Parameter name="load" value="true"/>
+          <Parameter name="port" value="1493"/>
+        </Section>
+        <Section name="Account">
+          <Parameter name="AcceptZeroPricePMix" value="true"/>
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="frameWidth" value="1024"/>
+          <Parameter name="frameHeight" value="768"/>
+          <Parameter name="DDTSupport" value="true"/>
+          <Parameter name="SRMActive" value="false"/>
+          <Parameter name="doubleCrewStatus" value="false"/>
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="autoRecall" value="false"/>
+        </Section>
+        <Section name="PosType">
+          <Parameter name="POD" value="DRIVE_THRU"/>
+          <Parameter name="RemPOD" value="DRIVE_THRU"/>
+        </Section>
+        <Section name="Report">
+          <Parameter name="DualPoint" value="false"/>
+        </Section>
+        <Section name="InactiveDimension">
+          <Parameter name="buttonState" value="disable"/>
+        </Section>
+        <Section name="SmartRouting">
+          <Parameter name="podBlackListException" value="false"/>
+        </Section>
+      </Configuration>
+      <Adaptors AutomationIdentifier="POS04_Adaptors">
+        <Adaptor name="standard.ui" imports="standard.ui" startonload="true"/>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true"/>
+        <Adaptor name="tlog" imports="tlog" startonload="true"/>
+        <Adaptor name="standard.account" imports="standard.account" startonload="true"/>
+        <Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="true"/>
+      </Adaptors>
+    </Service>
+    <Service name="04" type="STO" classname="npUpdtRcv.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="STO"/>
+    </Service>
+    <Service name="04" type="RPR" classname="npRPR.dll" startonload="true" quitOnFail="true">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+            <Parameter name="portname" value="POS004.txt"/>
+            <Parameter name="utf8table" value="Utf8ToAnsi.txt"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

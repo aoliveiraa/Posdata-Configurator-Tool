@@ -1,251 +1,148 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <PosDB>
-	<StoreDB imports="all"/>
-	<ColorDB imports="default"/>
-	<Configuration imports="Store.wide">
-		<Section name="Messaging">
-		  <Parameter name="networkAdaptorBaseIp" vau="10.118.57.25" />
-		</Section>	
-		<Section name="OperationMode">
-			<Parameter name="applyUpdateOperationMode" value="1"/>
-		</Section>
-		<Section name="NPScripts">
-			<Parameter name="posScriptCommands"/>
-			<Parameter name="posCoinDispenser"/>
-			<Parameter name="posCSOBusComp"/>
-			<Parameter name="scriptCommands" value="BusinessComponents.nps"/>
-			<Parameter name="scriptCommandsLocal" value="BusinessComponentsLocal.nps"/>
-		</Section>
-		<Section name="OrderNumber">
-			<Parameter name="PosIdFormat" value="0"/>
-			<Parameter name="OrderNumberBigger" value="1"/>
-			<Parameter name="OrderIdFormat" value="00"/>
-			<Parameter name="OrderNumberSeperator"/>
-			<Parameter name="OrderNumberFormat" value="2"/>
-			<Parameter name="FirstReceiptEmpty" value="0"/>
-		</Section>
-		<Section name="Security">
-			<Parameter name="managerAuthorization" value="login"/>
-		</Section>
-		<Section name="OrbMatch">
-			<Parameter name="ShowORBNumberOnReceipt" value="false"/>
-		</Section>
-	</Configuration>
-	<Services>
-		<Service name="04" type="POS" classname="npPOS.dll" startonload="true" quitOnFail="true">
-			<UsedServices>
-				<UsedService serviceType="WAY">
-					<Member name="300" alias=""/>
-				</UsedService>
-				<UsedService serviceType="PSW">
-					<Member name="300" alias=""/>
-				</UsedService>
-				<!-- <UsedService serviceType="RPR">
-					<Member name="0004" alias=""/>
-					<Member name="0005" alias=""/>
-					<Member name="0025" alias=""/>
-					<Member name="0003" alias=""/>
-					<Member name="1013" alias=""/>
-					<Member name="1023" alias=""/>
-					<Member name="1033" alias=""/>
-					<Member name="1043" alias=""/>
-				</UsedService> -->
-				<UsedService serviceType="PST">
-					<Member name="8000" alias="PRODMAIN"/>
-					<Member name="8001" alias="PRODBACK"/>
-				</UsedService>
-				<UsedService serviceType="KVS">
-					<Member name="1070" alias="KVS ORB1 1070"/>
-					<Member name="1071" alias="KVS MINIORB1 1071"/>
-					<Member name="1002" alias="KVS MCC 1002"/>
-					<Member name="1004" alias="KVS MFYM 1004"/>
-					<Member name="1003" alias="KVS DT 1003"/>
-					<Member name="1007" alias="KVS DRKDES 1007"/>
-					<Member name="1008" alias="KVS DRKDESM 1008"/>
-					<Member name="1001" alias="KVS MFY 1001"/>
-					<Member name="1011" alias="KVS MFY 1011"/>
-					<Member name="1013" alias="KVS DP 1013"/>
-					<Member name="1023" alias="KVS DP 1023"/>
-					<Member name="1033" alias="KVS OAT 1033"/>
-					<Member name="1043" alias="KVS OAT 1043"/>
-				</UsedService>
-			</UsedServices>
-			<Configuration imports="POS">
-				<Section name="UserInterface">
-					<Parameter name="doubleCrewStatusFC" value="false"/>
-					<Parameter name="frameWidth" value="1024"/>
-					<Parameter name="frameHeight" value="768"/>
-				</Section>
-				<Section name="PosType">
-					<Parameter name="POD" value="FRONT_COUNTER"/>
-					<Parameter name="RemPOD" value="FRONT_COUNTER"/>
-				</Section>
-				<Section name="OperationMode">
-               <Parameter name="restartAfterOpen" value="false"/>
-               <Parameter name="autoRecall" value="false"/>
-               <Parameter name="enableMobileOrdering" value="true"/>
-               <Parameter name="isHtmlUi" value="true"/>
-            </Section>
-			</Configuration>
-			<Adaptors AutomationIdentifier="POS_Adaptor">
-				<Adaptor name="standard.ui" imports="standard.ui" startonload="true">
-					<Section name="main">
-						<Parameter name="drivername" value="npDrvGui.dll"/>
-					</Section>
-				</Adaptor>
-				<Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
-					<Section name="main">
-						<Parameter name="url" value="http://10.118.57.25:8080/goform/RPC2"/>
-					</Section>
-				</Adaptor>
-				<Adaptor name="tlog" imports="tlog" startonload="true"/>
-				<Adaptor name="npCLayer" imports="npCLayer" startonload="true"/>
-				<Adaptor name="standard.account" imports="standard.account" startonload="true"/>
-				<!--<Adaptor name="DSLDevDrv.cardreader2" imports="DSLDevDrv.cardreader2" startonload="true"/>-->
-				<Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="false"/>
-				<Adaptor name="nps.extension.CloseLoopRedemption" imports="nps.extension.CloseLoopRedemption" startonload="true"/>
-				<!--<Adaptor name="DSLDevDrv.linedisplay2" imports="DSLDevDrv.linedisplay2" startonload="true"/>-->
-				<Adaptor name="virtual.linedisplay" imports="virtual.linedisplay" startonload="false"/>
-			</Adaptors>
-		</Service>
-		<Service type="RPR" classname="com.ngpos.arch.services.printer.core.PrinterController" startonload="true" quitOnFail="true" name="0004">
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="Messaging">
+	  <Parameter name="networkAdaptorBaseIp" vau="10.118.57.25" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="0001" type="POS" classname="com.ngpos.pos.NewPOS" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="0300" alias="" />
+        </UsedService>
+        <UsedService serviceType="PSW">
+          <Member name="0300" alias="" />
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8001" alias="" />
+          <Member name="8002" alias="" />
+        </UsedService>
+        <UsedService serviceType="RPR">
+          <Member name="0001" alias="" />
+          <Member name="0001" alias="CASHLESS" />
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="0501" alias="GM - [501]" />
+          <Member name="0401" alias="FRY - [401]" />
+          <Member name="0301" alias="CBS - [301]" />
+          <Member name="0302" alias="CP - [302]" />
+          <Member name="0101" alias="MFY1 - [101]" />
+          <Member name="0102" alias="MFY2 - [102]" />
+          <Member name="0201" alias="FC - [201]" />
+          <Member name="0202" alias="DT - [202]" />
+          <Member name="0601" alias="FC Assembly - [601]" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="POS">
+        <Section name="TestHelper">
+          <Parameter name="load" value="true" />
+          <Parameter name="port" value="1490" />
+        </Section>	  
+        <Section name="Account">
+          <Parameter name="AcceptZeroPricePMix" value="true" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="frameWidth" value="1024" />
+          <Parameter name="frameHeight" value="768" />
+          <Parameter name="DDTSupport" value="false" />
+          <Parameter name="SRMActive" value="false" />
+          <Parameter name="doubleCrewStatus" value="true" />
+          <Parameter name="showCloseButton" value="true" /> 
+          <Parameter name="showCursor" value="true" />
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="autoRecall" value="false" />
+        </Section>
+        <Section name="PosType">
+          <Parameter name="POD" value="FRONT_COUNTER" />
+          <Parameter name="RemPOD" value="FRONT_COUNTER" />
+        </Section>
+        <Section name="Report">
+          <Parameter name="DualPoint" value="true" />
+        </Section>
+        <Section name="InactiveDimension">
+          <Parameter name="buttonState" value="disable" />
+        </Section>
+        <Section name="SmartRouting">
+          <Parameter name="podBlackListException" value="false" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="standard.ui" imports="standard.ui" startonload="true" />
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+          <Section name="main">
+            <Parameter name="url" value="http://10.118.57.25:8080/goform/RPC2" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="tlog" imports="tlog" startonload="true" />
+        <Adaptor name="standard.account" imports="standard.account" startonload="true" />
+        <Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="true" />
+      </Adaptors>
+    </Service>
+    <Service name="0001" type="STO" classname="npUpdtRcv.dll" startonload="false" quitOnFail="true">
+      <Configuration imports="STO" />
+    </Service>
+    <Service name="0001" type="RPR" classname="com.ngpos.arch.services.printer.core.PrinterController" startonload="true" quitOnFail="true">
       <Adaptors>
         <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
           <Section name="main">
-            <Parameter name="drivername" value="virtualPrinter.dll" />
-            <Parameter name="portname" value="..\RPR_4__POS04_pos-db.xml.txt" />
-            <Parameter name="escSeq" value="printerControlChar.properties" />
-            <Parameter name="fileAppend" value="true" />
-            <Parameter name="flush" value="false" />
-            <Parameter name="overwrite" value="true" />
+            <Parameter name="drivername" value="npSerPrn.dll" />
+            <Parameter name="portname" value="RPR0001.txt" />
+            <Parameter name="printHiddenData" value="false" />
+            <Parameter name="baudrate" value="115200" />
+            <Parameter name="utf8table" value="Utf8ToAnsi.txt" />
           </Section>
         </Adaptor>
       </Adaptors>
     </Service>
-		 <Service type="STO" classname="npUpdtRcv.dll" startonload="false" quitOnFail="true" name="04">
-         <Configuration imports="STO">
-            <Section name="main">
-               <Parameter name="NodeType" value="POS"/>
-               <Parameter name="WayNode" value="300"/>
-            </Section>
-         </Configuration>
-      </Service>
-		<Service type="NPW" startonload="true" quitOnFail="true" classname="LocalWebView" name="04">
-         <Configuration imports="LocalWebView">
-            <Section name="BaseHosts">
-               <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
-            </Section>
-            <Section name="LocalWebView">
-               <Parameter name="Location" value="../NpWebView"/>
-            </Section>
-            <Section name="Log">
-               <Parameter name="EnableDebug" value="true"/>
-               <Parameter name="LogFileFolder" value="out/"/>
-               <Parameter name="enableConsoleLog" value="true"/>
-            </Section>
-            <Section name="AutoUpdate">
-               <Parameter name="EnableAutoUpdate" value="true"/>
-            </Section>
-            <Section name="Monitoring.Memory">
-               <Parameter name="MonitoringInterval" value="60000"/>
-               <Parameter name="MaxMemoryPercentage" value="70"/>
-               <Parameter name="LauncherLimit" value="200"/>
-               <Parameter name="BrowserLimit" value="1500"/>
-               <Parameter name="DriverHostLimit" value="1500"/>
-            </Section>
-            <Section name="Component.Browser.Kiosk">
-               <Parameter name="Position" value="0,0"/>
-               <Parameter name="Urn" value="POS/POS0004"/>
-               <Parameter name="Zoom" value="100"/>
-               <Parameter name="ShowFrame" value="true"/>
-               <Parameter name="showCursor" value="true" />
-               <Parameter name="Size" value="1024x768"/>
-			   <Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
-			   <Parameter name="NodeName" value="POS0004"/>
-			   <Parameter name="LogicalName" value="POS0004"/>
-			   <Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->
-            </Section>
-            <Section name="Component.DriverHost.Scanner">
-               <Parameter name="DriverFile" value="SerialScanner.dll"/>
-               <Parameter name="DeviceType" value="Scanner"/>
-               <Parameter name="LogicalName" value="Scanner1"/>
-               <Parameter name="NodeName" value="POS0004"/>
-               <Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
-               <Parameter name="portname" value="virtual"/>
-            </Section>
-            <Section name="Component.DriverHost.RPR0004">
-               <Parameter name="DriverFile" value="npWinPrn.dll"/>
-               <Parameter name="DeviceType" value="Printer"/>
-               <Parameter name="LogicalName" value="POS_04_Printer"/>
-               <Parameter name="NodeName" value="RPR0004"/>
-               <Parameter name="AdapterFile" value="LegacyPrinterAdapter.dll"/>
-               <Parameter name="portname" value="USBprinter"/>
-            </Section>
-         </Configuration>
-      </Service>
-	  <Service name="301" type="FOE" classname="npfoe.dll" startonload="true" quitOnFail="true">
-         <UsedServices>
-            <UsedService serviceType="WAY">
-               <Member name="300" alias=""/>
-            </UsedService>
-            <UsedService serviceType="PST">
-               <Member name="8002" alias=""/>
-               <Member name="8013" alias=""/>
-            </UsedService>
-         </UsedServices>
-         <Configuration imports="FOE">
-            <Section name="main">
-               <Parameter name="ShowConsoleWindow" value="false"/>
-               <Parameter name="PriceDiffThreshold" value="3.00"/>
-               <Parameter name="FC" value="ONRECALL"/>
-               <Parameter name="ValidateRPSState" value="true"/>
-            </Section>
-            <Section name="podNameMapping">
-               <Parameter name="FC" value="FOE0016"/>
-               <Parameter name="CK" value="FOE0019"/>
-               <Parameter name="CURB" value="FOE0019"/>
-            </Section>
-            <Section name="routing">
-               <Parameter name="podSource" value="FC;FC;CK;CK"/>
-               <Parameter name="paidStatus" value="PAID;NOTPAID;PAID;NOTPAID"/>
-               <Parameter name="targetStoreArea" value="FC;FC;FC;FC"/>
-               <Parameter name="orderNumberPrefix" value="16;16;19;19"/>
-            </Section>
-            <Section name="productionMonitors">
-               <Parameter name="FC" value="ONPAID"/>
-               <Parameter name="CK" value="ONPAID"/>
-               <Parameter name="DT" value="ONTOTAL"/>
-            </Section>
-            <Section name="expoMonitors">
-               <Parameter name="FC" value="ONPAID"/>
-               <Parameter name="CK" value="ONPAID"/>
-               <Parameter name="DT" value="ONTOTAL"/>
-            </Section>
-         </Configuration>
-         <Adaptors>
-            <Adaptor name="foe.xmlrpc" imports="foe.xmlrpc" startonload="true">
-               <Section name="main">
-                  <Parameter name="port" value="8088"/>
-                  <Parameter name="uri" value="RPC2"/>
-                  <Parameter name="httpLogName" value="../out/http.log"/>
-                  <Parameter name="httpLogTrace" value="false"/>
-               </Section>
-            </Adaptor>
-            <Adaptor name="virtual.linedisplay" imports="virtual.linedisplay" startonload="true">
-               <Section name="main">
-                  <Parameter name="LoadDriver" value="RCD"/>
-               </Section>
-            </Adaptor>
-            <Adaptor name="standard.account" imports="standard.account" startonload="true">
-               <Section name="main">
-                  <Parameter name="drivername" value="npAccTax.dll"/>
-               </Section>
-               <Section name="tax">
-                  <Parameter name="drivername" value="npAccTax.dll"/>
-               </Section>
-            </Adaptor>
-            <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true"/>
-         </Adaptors>
-      </Service>
-	</Services>
+	<Service name="0001" type="NPW" classname="" startonload="true" quitOnFail="true">
+			<Configuration imports="LocalWebView">
+				<Section name="BaseHosts">
+					<Parameter name="Urls" value="http://127.0.0.1:8123/npsharp/" />
+				</Section>
+				<Section name="LocalWebView">
+					<Parameter name="Location" value="../npwebview" />
+					<Parameter name="ConfigurationFileName" value="WebViewConfig.xml" />
+				</Section>
+				<Section name="Log">
+					<Parameter name="EnableDebug" value="true" />
+					<Parameter name="LogFileFolder" value="out/"/>
+				</Section>
+				<Section name="AutoUpdate">
+					<Parameter name="EnableAutoUpdate" value="true" />
+				</Section>
+				<Section name="Monitoring">
+					<Parameter name="MonitorInterval" value="60000" />
+				</Section>
+				<Section name="Monitoring.Memory">
+					<Parameter name="MaxMemoryPercentage" value="80" />
+					<Parameter name="LauncherLimit" value="200" />
+					<Parameter name="BrowserLimit" value="1500" />
+					<Parameter name="DriverHostLimit" value="1500" />
+				</Section>
+				<Section name="Component.Browser.POS0001">
+					<Parameter name="Position" value="0,0"/>
+					<Parameter name="ShowFrame" value="true"/>
+					<Parameter name="Urn" value="POS/POS0001"/>
+					<Parameter name="ShowCursor" value="true"/>
+					<Parameter name="Size" value="1024x768"/>
+					<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
+					<Parameter name="NodeName" value="POS0001"/>
+					<Parameter name="LogicalName" value="POS0001"/>
+					<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->						
+				</Section>
+				<Section name="Component.DriverHost.Scanner">
+					<Parameter name="DriverFile" value="SerialScanner.dll"/>
+					<Parameter name="DeviceType" value="Scanner"/>
+					<Parameter name="LogicalName" value="Scanner61"/>
+					<Parameter name="NodeName" value="POS0001"/>
+					<Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
+					<Parameter name="portname" value="virtual"/>
+				</Section>
+			</Configuration>	
+		</Service>
+  </Services>
 </PosDB>

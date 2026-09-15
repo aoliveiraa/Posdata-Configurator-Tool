@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="Messaging">
+	  <Parameter name="networkAdaptorBaseIp" vau="127.0.0.1" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="0401" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="columns" value="1" />
+          <Parameter name="horizontalPos" value="0" />
+          <Parameter name="displayTotalizatorOn" value="CELLAREA" />
+          <Parameter name="totalizatorCell" value="1" />
+          <Parameter name="displayZeroQtyOnSummary" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="enableKVSProductFiltering" value="false" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true" />
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

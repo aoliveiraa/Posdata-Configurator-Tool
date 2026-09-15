@@ -1,153 +1,244 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <PosDB>
-  <StoreDB imports="all"/>
-  <ColorDB imports="default"/>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
   <Configuration imports="Store.wide">
-    <Section name="OperationMode">
-      <Parameter name="applyUpdateOperationMode" value="1"/>
-    </Section>
-	<Section name="Messaging">
+    <Section name="Messaging">
 	  <Parameter name="networkAdaptorBaseIp" vau="10.118.57.25" />
     </Section>
   </Configuration>
   <Services>
-    <Service name="1001" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
-      <Configuration imports="KVSRedesign">
-        <Section name="UserInterface">
-          <Parameter name="groupMultiOrder" value="false"/>
-        </Section>
-        <Section name="TouchScreen">
-          <Parameter name="available" value="true"/>
-          <Parameter name="enable" value="true"/>
-          <Parameter name="cell_Click" value="serve"/>
-        </Section>
-      </Configuration>
-      <Adaptors>
-        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true"/>
-        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
-          <Section name="main">
-            <Parameter name="url" value="http://127.0.0.1:8080/goform/RPC2"/>
-          </Section>
-        </Adaptor>
-        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
-          <Section name="main">
-            <Parameter name="kvsUIPort" value="1001"/>
-          </Section>
-        </Adaptor>
-        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true"/>
-        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
-          <Section name="main">
-            <Parameter name="serve" value="0xe1"/>
-            <Parameter name="recall" value="0xa1"/>
-            <Parameter name="print" value="0xa2"/>
-            <Parameter name="next" value="0xb1"/>
-            <Parameter name="previous" value="0xb2"/>
-            <Parameter name="home" value=""/>
-            <Parameter name="serveheld" value=""/>
-            <Parameter name="heldscroll" value="0xe2"/>
-            <Parameter name="undo" value=""/>
-            <Parameter name="held" value="0xd2"/>
-            <Parameter name="zoom" value="0xd1"/>
-            <Parameter name="SideOn" value="0xc2"/>
-            <Parameter name="SideOff" value="0xc1"/>
-            <Parameter name="portname" value="COM7"/>
-          </Section>
-        </Adaptor>
-      </Adaptors>
+    <Service name="1001" type="STO" classname="npUpdtRcv.dll" startonload="false" quitOnFail="true">
+      <Configuration imports="STO" />
     </Service>
-    <Service name="1005" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+    <Service name="0101" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices></UsedServices>
       <Configuration imports="KVSRedesign">
         <Section name="Beep">
-          <Parameter name="beepOnNewOrder" value="FIRST" />
+          <Parameter name="enabled" value="true" />
         </Section>
         <Section name="UserInterface">
+          <Parameter name="horizontalPos" value="0" />
+          <Parameter name="rows" value="2" />
+          <Parameter name="rows1" value="2" />
+          <Parameter name="rows2" value="2" />
+          <Parameter name="rows3" value="2" />
+          <Parameter name="columns" value="3" />
+          <Parameter name="columns1" value="3" />
+          <Parameter name="columns2" value="3" />
+          <Parameter name="columns3" value="3" />
+          <Parameter name="heldCells" value="2" />
+          <Parameter name="heldCells1" value="2" />
+          <Parameter name="heldCells2" value="2" />
+          <Parameter name="heldCells3" value="2" />
+          <Parameter name="orderItemFont" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont1" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont2" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont3" value="Arial-BOLD-19" />
+          <Parameter name="grillItemFont" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont1" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont2" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont3" value="Arial-BOLD-17" />
+          <Parameter name="orderItemVoidedFont" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-19" />
+          <Parameter name="grillItemVoidedFont" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-17" />
+          <Parameter name="firstThreshold" value="50" />
+          <Parameter name="secondThreshold" value="60" />
+          <Parameter name="displayGrillInstruction" value="ASIMAGE" />
+          <Parameter name="displaySideStatus" value="true" />
+          <Parameter name="displayDestinationImage" value="true" />
+          <Parameter name="displaySaleType" value="false" />
+          <Parameter name="displayOrderAmount" value="false" />
           <Parameter name="groupMultiOrder" value="false" />
         </Section>
-      </Configuration>
-      <Adaptors>
-        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
-        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
-        <Adaptor name="npAdpKeyboardBumpBar" imports="npAdpKeyboardBumpBar" startonload="true" />
-        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
-          <Section name="main">
-            <Parameter name="kvsUIPort" value="1005" />
-          </Section>
-        </Adaptor>
-        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
-      </Adaptors>
-    </Service>	
-    <Service name="1001" type="STO" classname="npUpdtRcv.dll" startonload="false" quitOnFail="true">
-      <Configuration imports="STO">
-        <Section name="main">
-          <Parameter name="NodeType" value="KVS" />
+        <Section name="WayOfWork">
+          <Parameter name="enableKVSProductFiltering" value="false" />
         </Section>
       </Configuration>
-    </Service>
-		<Service name="1001" type="NPW" classname="" startonload="true" quitOnFail="true">
-			<Configuration imports="LocalWebView">
-				<Section name="BaseHosts">
-					<Parameter name="Urls" value="http://127.0.0.1:8123/npsharp/" />
-				</Section>
-				<Section name="LocalWebView">
-					<Parameter name="Location" value="../npwebview" />
-					<Parameter name="ConfigurationFileName" value="WebViewConfig.xml" />
-				</Section>
-				<Section name="Log">
-					<Parameter name="EnableDebug" value="true" />
-					<Parameter name="LogFileFolder" value="out/"/>
-				</Section>
-				<Section name="AutoUpdate">
-					<Parameter name="EnableAutoUpdate" value="true" />
-				</Section>
-				<Section name="Monitoring">
-					<Parameter name="MonitorInterval" value="60000" />
-				</Section>
-				<Section name="Monitoring.Memory">
-					<Parameter name="MaxMemoryPercentage" value="80" />
-					<Parameter name="LauncherLimit" value="200" />
-					<Parameter name="BrowserLimit" value="1500" />
-					<Parameter name="DriverHostLimit" value="1500" />
-				</Section>
-				<Section name="Component.Browser.KVS1001">
-					<Parameter name="Position" value="0,0"/>
-					<Parameter name="ShowFrame" value="true"/>
-					<Parameter name="Urn" value="KVS/KVS1001"/>
-					<Parameter name="ShowCursor" value="true"/>
-					<Parameter name="Size" value="1024x768"/>
-					<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
-					<Parameter name="NodeName" value="KVS1001"/>
-					<Parameter name="LogicalName" value="KVS1001"/>
-					<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->						
-				</Section>
-				<Section name="Component.Browser.KVS1005">
-					<Parameter name="Position" value="1024,0"/>
-					<Parameter name="ShowFrame" value="true"/>
-					<Parameter name="Urn" value="KVS/KVS1005"/>
-					<Parameter name="ShowCursor" value="true"/>
-					<Parameter name="Size" value="1024x768"/>
-					<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
-					<Parameter name="NodeName" value="KVS1005"/>
-					<Parameter name="LogicalName" value="KVS1005"/>
-					<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->						
-				</Section>
-				<Section name="Component.DriverHost.Scanner">
-					<Parameter name="DriverFile" value="SerialScanner.dll"/>
-					<Parameter name="DeviceType" value="Scanner"/>
-					<Parameter name="LogicalName" value="Scanner61"/>
-					<Parameter name="NodeName" value="KVS1001"/>
-					<Parameter name="AdapterFile" value="LegacyScannerAdapter"/>
-					<Parameter name="portname" value="virtual"/>
-				</Section>
-			</Configuration>	
-		</Service>			
-    <Service name="1001" type="GPR" classname="npRPR.dll" startonload="true" quitOnFail="true">
       <Adaptors>
-        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true" />
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
           <Section name="main">
-            <Parameter name="portname" value="GPR1001.txt" />
-            <Parameter name="escSeq" value="printerTMControlChar_STAR.properties" />
+            <Parameter name="logicalname" value="BUMPBAR1" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+            <Parameter name="hostAddress" value="localhost" />
+            <Parameter name="portNumber" value="8123" />
+            <Parameter name="serve" value="0xa1|0xa2" />
+            <Parameter name="zoom" value="0xb1" />
+            <Parameter name="recall" value="0xb2" />
+            <Parameter name="next" value="0xc1|0xc2" />
+            <Parameter name="held" value="0xd1" />
+            <Parameter name="heldscroll" value="0xd2" />
+            <Parameter name="sideon" value="0xe1" />
+            <Parameter name="sideoff" value="0xe2" />
           </Section>
         </Adaptor>
       </Adaptors>
     </Service>
-  </Services><![CDATA[<StoreConfiguration ipBase="10.169.254.255"><Queries><QueryRow screenGroup="KVS Zero MFY Configuration"><Query title="Drive Getränke Anzeige auf Drink-Monitor" action="Cold und Hot Drinks auf Drink-Monitor anzeigen (nur ohne ABS)=ACTION_DONOTHING|Nur Cold Drinks anzeigen (nur ohne ABS)=ACTION_DT_COLD_DRK_ROUTING|Nur Hot Drinks anzeigen (nur ohne ABS)=ACTION_DT_HOT_BEV_ROUTING|Weder Cold, noch Hot Drinks anzeigenn (nur ohne ABS)=ACTION_DT_NON_BEV_ROUTING|Hot Drinks anzeigen (nur mit ABS)=ACTION_DONOTHING|Weder Cold, noch Hot Drinks anzeigen (nur mit ABS)=ACTION_DT_COLD_DRK_ROUTING" isMandatory="true" inputType="LIST" /><Answer>Cold und Hot Drinks auf Drink-Monitor anzeigen (nur ohne ABS)</Answer></QueryRow><QueryRow screenGroup="KVS Zero MFY Configuration"><Query title="McCafe sendet Getränke an Drink-Dessert?" action="Standard Routing=ACTION_DONOTHING|Produkte nur auf MCC-Expo=ACTION_MCC_NON_BEV_ROUTING" isMandatory="true" inputType="LIST" /><Answer>Standard Routing</Answer></QueryRow><QueryRow screenGroup="KVS Zero MFY Configuration"><Query title="McCafe at all POS?" action="Yes=ACTION_MCC_ALLPOS|No=ACTION_DONOTHING" isMandatory="true" inputType="LIST" /><Answer>Yes</Answer></QueryRow><QueryRow screenGroup="KVS Zero MFY Configuration"><Query title="Expo Bildschirme" action="1 Expo=ACTION_EXPO_PI,ACTION_NPORB_ONLY|2 Expos=ACTION_EXPO_PI,ACTION_2EXPO_PI,ACTION_NPORB_ONE|2 Expos 2 ORBs=ACTION_EXPO_PI,ACTION_2EXPO_PI,ACTION_ZWEI_ORB,ACTION_NPORB_ONE,ACTION_NPORB_TWO" isMandatory="true" inputType="LIST" /><Answer>2 Expos 2 ORBs</Answer></QueryRow><QueryRow screenGroup="KVS Zero MFY Configuration"><Query title="Dual Point - MFY Linien" action="ALLE Linien AUS=ACTION_DONOTHING|1 MFY Linie=ACTION_MFY1_PI|2 MFY Linien=ACTION_MFY1_PI,ACTION_MFY2_PI|3 MFY Linien=ACTION_MFY1_PI,ACTION_MFY2_PI,ACTION_MFY3_PI|4 MFY Linien=ACTION_MFY1_PI,ACTION_MFY2_PI,ACTION_MFY3_PI,ACTION_MFY4_PI" isMandatory="true" inputType="LIST" /><Answer>2 MFY Linien</Answer></QueryRow><QueryRow screenGroup="Drive Settings"><Query title="Zero Mistake vorhanden?" action="Yes=ACTION_ZERO_MISTAKE_DT|No=ACTION_DONOTHING" isMandatory="true" inputType="LIST" /><Answer>No</Answer></QueryRow><QueryRow screenGroup="Drive Settings"><Query title="ABS vorhanden?" action="Yes=ACTION_ABS_VORHANDEN|No=ACTION_DONOTHING" isMandatory="true" inputType="LIST" /><Answer>No</Answer></QueryRow><QueryRow screenGroup="Drive Settings"><Query title="Walk Through vorhanden?" action="Yes=ACTION_Walk_Through|No=ACTION_DONOTHING" isMandatory="true" inputType="LIST" /><Answer>No</Answer></QueryRow></Queries><ImportRoutingData>false</ImportRoutingData><SelectedTopology name="KVS Zero MFY"><Node type="FC_DP" quantity="2" isVisible="true" /><Node type="TAP" quantity="0" isVisible="true" /><Node type="WT_PI" quantity="0" isVisible="true" /><Node type="DLV_PI" quantity="0" isVisible="true" /><Node type="DT_CS_PI" quantity="2" isVisible="true" /><Node type="DT_OT" quantity="1" isVisible="true" /><Node type="DT_NGCOD_ZERO" quantity="0" isVisible="true" /><Node type="CSO_NGK" quantity="4" isVisible="true" /><Node type="MCC_ZERO" quantity="1" isVisible="true" /><Node type="MCC_EXPO_ZERO" quantity="1" isVisible="true" /><Node type="MCCPROD_ZERO" quantity="1" isVisible="true" /><Node type="DP_KVS_ZERO" quantity="2" isVisible="true" /><Node type="OAT_KVS_ZERO" quantity="2" isVisible="true" /><Node type="MFY_KVS_ZERO" quantity="2" isVisible="true" /><Node type="MFYM_KVS_ZERO" quantity="2" isVisible="true" /><Node type="DRKDES_KVS_ZERO" quantity="2" isVisible="true" /><Node type="DRK_KVS_ZERO" quantity="0" isVisible="true" /><Node type="ORB_KVS_ZERO" quantity="0" isVisible="true" /><Node type="MINIORB_KVS_ZERO" quantity="0" isVisible="true" /><Node type="WAY_ZERO" quantity="1" isVisible="true" /><Node type="GSC02" quantity="1" isVisible="false" /><Node type="PST(P)_ZERO" quantity="1" isVisible="false" /><Node type="PST(S)_ZERO" quantity="1" isVisible="false" /></SelectedTopology><SelectedMachines><Machine type="MCC_EXPO_ZERO" screenGroup="MCC Configuration"><PosDB name="KVS1002_MCC" IP="111" targetPath="NewPOS61\"><Service name="KVS1002" alias="KVS MCC 1002" description="KVS MCC 1002" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="KVS RES 1024x768" availableServiceName="KVS1002" templateType="1" machineType="MCC_EXPO_ZERO" posdbName="KVS1002_MCC" /><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI GS" availableServiceName="KVS1002" templateType="1" machineType="MCC_EXPO_ZERO" posdbName="KVS1002_MCC" /></Adaptors></Service><Service name="STO1002" alias="KVS1002 MCC|300" description="KVS1002 MCC" templates="STO Z STD" isVisible="false"><Adaptors /></Service></PosDB></Machine><Machine type="MCCPROD_ZERO" screenGroup="MCC Configuration"><PosDB name="KVS1049_MCCPROD" IP="111" targetPath="NewPOS61\"><Service name="KVS1049" alias="KVS MCCPROD 1049" description="KVS MCCPROD 1049" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="KVS RES 1024x768" availableServiceName="KVS1002" templateType="1" machineType="MCC_EXPO_ZERO" posdbName="KVS1002_MCC" /><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI" availableServiceName="KVS1049" templateType="1" machineType="MCCPROD_ZERO" posdbName="KVS1049_MCCPROD" /></Adaptors></Service><Service name="GPR1049" alias="" description="GPR MCCPROD 1049" templates="GPR KVS MFY" isVisible="true"><Adaptors /></Service><Service name="STO1049" alias="KVS1049 MCCPROD|300" description="KVS1049 MCCPROD" templates="STO Z STD" isVisible="true"><Adaptors /></Service></PosDB></Machine><Machine type="DP_KVS_ZERO" screenGroup="KVS Configuration"><PosDB name="KVS1013_DP1" IP="111" targetPath="NewPOS61\"><Service name="KVS1013" alias="KVS DP 1013" description="KVS DP 1013" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI GS" availableServiceName="KVS1002" templateType="1" machineType="MCC_EXPO_ZERO" posdbName="KVS1002_MCC" /></Adaptors></Service><Service name="STO1013" alias="KVS1013 DP|300" description="KVS 1013" templates="STO Z STD" isVisible="false"><Adaptors /></Service><Service name="RPR1013" alias="" description="RPR DP 1013" templates="RPR KVS" isVisible="false"><Adaptors /></Service></PosDB><PosDB name="KVS1023_DP2" IP="111" targetPath="NewPOS61\"><Service name="KVS1023" alias="KVS DP 1023" description="KVS DP 1023" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI GS" availableServiceName="KVS1002" templateType="1" machineType="MCC_EXPO_ZERO" posdbName="KVS1002_MCC" /></Adaptors></Service><Service name="STO1023" alias="KVS1023 DP|300" description="KVS 1023" templates="STO Z STD" isVisible="false"><Adaptors /></Service><Service name="RPR1023" alias="" description="RPR DP 1023" templates="RPR KVS" isVisible="false"><Adaptors /></Service></PosDB></Machine><Machine type="OAT_KVS_ZERO" screenGroup="KVS Configuration"><PosDB name="KVS1033_OAT1" IP="111" targetPath="NewPOS61\"><Service name="KVS1033" alias="KVS OAT 1033" description="KVS OAT 1033" templates="KVS TPL" isVisible="false"><Adaptors /></Service><Service name="STO1033" alias="KVS1033 OAT|300" description="KVS 1033" templates="STO Z STD" isVisible="false"><Adaptors /></Service></PosDB><PosDB name="KVS1043_OAT2" IP="111" targetPath="NewPOS61\"><Service name="KVS1043" alias="KVS OAT 1043" description="KVS OAT 1043" templates="KVS TPL" isVisible="false"><Adaptors /></Service><Service name="STO1043" alias="KVS1043 OAT|300" description="KVS 1043" templates="STO Z STD" isVisible="false"><Adaptors /></Service></PosDB></Machine><Machine type="MFY_KVS_ZERO" screenGroup="KVS Configuration"><PosDB name="KVS1001_MFY1" IP="111" targetPath="NewPOS61\"><Service name="KVS1001" alias="KVS MFY 1001" description="KVS MFY 1001" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI" availableServiceName="KVS1049" templateType="1" machineType="MCCPROD_ZERO" posdbName="KVS1049_MCCPROD" /></Adaptors></Service><Service name="STO1001" alias="KVS1001 MFY|300" description="KVS 1001" templates="STO Z STD" isVisible="false"><Adaptors /></Service><Service name="GPR1001" alias="" description="GPR MFY 1001" templates="GPR KVS MFY" isVisible="false"><Adaptors /></Service></PosDB><PosDB name="KVS1011_MFY2" IP="111" targetPath="NewPOS61\"><Service name="KVS1011" alias="KVS MFY 1011" description="KVS MFY 1011" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI" availableServiceName="KVS1049" templateType="1" machineType="MCCPROD_ZERO" posdbName="KVS1049_MCCPROD" /></Adaptors></Service><Service name="STO1011" alias="KVS1011 MFY|300" description="KVS 1011" templates="STO Z STD" isVisible="false"><Adaptors /></Service><Service name="GPR1011" alias="" description="GPR MFY 1011" templates="GPR KVS MFY" isVisible="false"><Adaptors /></Service></PosDB></Machine><Machine type="MFYM_KVS_ZERO" screenGroup="KVS Configuration"><PosDB name="KVS1004_MFY1M" IP="111" targetPath="NewPOS61\"><Service name="KVS1004" alias="KVS MFYM 1004" description="KVS MFYM 1004" templates="KVS TPL" isVisible="false"><Adaptors /></Service><Service name="STO1004" alias="KVS1004 MFYM|300" description="KVS 1004" templates="STO Z STD" isVisible="false"><Adaptors /></Service></PosDB><PosDB name="KVS1005_MFY2M" IP="111" targetPath="NewPOS61\"><Service name="KVS1005" alias="KVS MFYM 1005" description="KVS MFYM 1005" templates="KVS TPL" isVisible="false"><Adaptors /></Service><Service name="STO1005" alias="KVS1005 MFYM|300" description="KVS 1005" templates="STO Z STD" isVisible="false"><Adaptors /></Service></PosDB></Machine><Machine type="DRKDES_KVS_ZERO" screenGroup="KVS Configuration"><PosDB name="KVS1007_DRKDES" IP="111" targetPath="NewPOS61\"><Service name="KVS1007" alias="KVS DRKDES 1007" description="KVS DRKDES 1007" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI" availableServiceName="KVS1049" templateType="1" machineType="MCCPROD_ZERO" posdbName="KVS1049_MCCPROD" /></Adaptors></Service><Service name="STO1007" alias="KVS1007 DRKDES|300" description="KVS 1007" templates="STO Z STD" isVisible="false"><Adaptors /></Service><Service name="GPR1007" alias="" description="GPR DRKDES 1007" templates="GPR KVS MFY" isVisible="false"><Adaptors /></Service></PosDB><PosDB name="KVS1008_DRKDESM" IP="111" targetPath="NewPOS61\"><Service name="KVS1008" alias="KVS DRKDESM 1008" description="KVS DRKDESM 1008" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI" availableServiceName="KVS1049" templateType="1" machineType="MCCPROD_ZERO" posdbName="KVS1049_MCCPROD" /></Adaptors></Service><Service name="STO1008" alias="KVS1008 DRKDESM|300" description="KVS 1008" templates="STO Z STD" isVisible="false"><Adaptors /></Service><Service name="GPR1008" alias="" description="GPR DRKDES 1008" templates="GPR KVS MFY" isVisible="false"><Adaptors /></Service></PosDB></Machine><Machine type="MCC_ZERO" screenGroup="MCC Configuration"><PosDB name="POS16_MCC" IP="96" targetPath="NewPOS61\" templates="NON SERVICES ECASH"><Service name="POS0016" alias="POS MCC 16" description="POS MCC 16" templates="MCC TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="POS RES 1024x768" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="ECASH" templateName="ECASH SLAVE (193)" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="RPR0016" alias="" description="RPR MCC 16" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="Seriell (COM1)" availableServiceName="RPR0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="COD0016" alias="COD0016 MCC" description="COD0016 MCC" templates="NGCOD MCC" isVisible="true"><Adaptors /></Service><Service name="STO0016" alias="POS0016 MCC" description="STO 16" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB></Machine><Machine type="CSO_NGK" screenGroup="CSO Configuration"><PosDB name="POS25_CSO" IP="105" targetPath="NewPOS61\" templates="ECASH SLAVE (198)"><Service name="POS0025" alias="POS CSO 25" description="POS CSO 25" templates="CSO TPL" isVisible="true"><Adaptors /></Service><Service name="RPR0025" alias="" description="RPR CSO 25" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="RPR ACRELEC UNI (USB)" availableServiceName="RPR0025" templateType="1" machineType="CSO_NGK" posdbName="POS25_CSO" /></Adaptors></Service><Service name="STO0025" alias="POS0025 CSO" description="STO 25" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB><PosDB name="POS26_CSO" IP="106" targetPath="NewPOS61\" templates="ECASH SLAVE (199)"><Service name="POS0026" alias="POS CSO 26" description="POS CSO 26" templates="CSO TPL" isVisible="true"><Adaptors /></Service><Service name="RPR0026" alias="" description="RPR CSO 26" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="RPR ACRELEC UNI (USB)" availableServiceName="RPR0025" templateType="1" machineType="CSO_NGK" posdbName="POS25_CSO" /></Adaptors></Service><Service name="STO0026" alias="POS0026 CSO" description="STO 26" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB><PosDB name="POS27_CSO" IP="107" targetPath="NewPOS61\" templates="ECASH SLAVE (200)"><Service name="POS0027" alias="POS CSO 27" description="POS CSO 27" templates="CSO TPL" isVisible="true"><Adaptors /></Service><Service name="RPR0027" alias="" description="RPR CSO 27" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="RPR ACRELEC UNI (USB)" availableServiceName="RPR0025" templateType="1" machineType="CSO_NGK" posdbName="POS25_CSO" /></Adaptors></Service><Service name="STO0027" alias="POS0027 CSO" description="STO 27" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB><PosDB name="POS28_CSO" IP="108" targetPath="NewPOS61\" templates="ECASH SLAVE (201)"><Service name="POS0028" alias="POS CSO 28" description="POS CSO 28" templates="CSO TPL" isVisible="true"><Adaptors /></Service><Service name="RPR0028" alias="" description="RPR CSO 28" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="RPR ACRELEC UNI (USB)" availableServiceName="RPR0025" templateType="1" machineType="CSO_NGK" posdbName="POS25_CSO" /></Adaptors></Service><Service name="STO0028" alias="POS0028 CSO" description="STO 28" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB></Machine><Machine type="FC_DP" screenGroup="FC DP Configuration"><PosDB name="POS04_FC" IP="84" targetPath="NewPOS61\" templates="NON SERVICES ECASH"><Service name="POS0004" alias="POS FC 04" description="POS FC 04" templates="FC TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="POS RES 1024x768" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="ECASH" templateName="ECASH SLAVE (208)" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="RPR0004" alias="" description="RPR FC 04" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="Seriell (COM1)" availableServiceName="RPR0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="COD0004" alias="COD0004 FC" description="COD0004 FC" templates="NGCOD FC" isVisible="true"><Adaptors /></Service><Service name="STO0004" alias="POS0004 FC" description="STO 04" templates="STO C STD" isVisible="false"><Adaptors /></Service></PosDB><PosDB name="POS05_FC" IP="85" targetPath="NewPOS61\" templates="NON SERVICES ECASH"><Service name="KVS1001" alias="POS FC 05" description="POS FC 05" templates="FC TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="POS RES 1024x768" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="ECASH" templateName="ECASH SLAVE (209)" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="RPR0005" alias="" description="RPR FC 05" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="Seriell (COM1)" availableServiceName="RPR0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="COD0005" alias="COD0005 FC" description="COD0005 FC" templates="NGCOD FC" isVisible="true"><Adaptors /></Service><Service name="STO0005" alias="POS0005 FC" description="STO 05" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB></Machine><Machine type="DT_CS_PI" screenGroup="DT Configuration"><PosDB name="POS03_CS" IP="83" targetPath="NewPOS61\" templates=""><Service name="POS0003" alias="POS CS 03" description="POS CS 03" templates="DT TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="POS RES 1024x768" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="ECASH" templateName="ECASH SLAVE (195)" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="Cashdrawer" templateName="Cashdrawer" availableServiceName="POS0013" templateType="1" machineType="DLV" posdbName="POS13_FC" /></Adaptors></Service><Service name="RPR0300" alias="PICKLISTKVS" description="RPRZ CS 03" templates="RPR ZERO OPTIONAL" isVisible="true"><Adaptors /></Service><Service name="RPR0003" alias="" description="RPR CS 03" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="Seriell (COM1)" availableServiceName="RPR0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="ABS0003" alias="ABS CS 03" description="ABS CS 03" templates="disable" isVisible="true"><Adaptors /></Service><Service name="KVS1003" alias="KVS DT 1003" description="KVS DT 1003" templates="KVS TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="KVS HPx1024" availableServiceName="KVS1174" templateType="1" machineType="WT" posdbName="POS22_FC" /><AdaptorTemplate groupName="BumpBar" templateName="Bumpbar (COM7) PI GS" availableServiceName="KVS1002" templateType="1" machineType="MCC_EXPO_ZERO" posdbName="KVS1002_MCC" /></Adaptors></Service><Service name="COD0003" alias="" description="NG COD DRV" templates="disable" isVisible="true"><Adaptors /></Service><Service name="STO0003" alias="POS0003 DT" description="STO 03" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB><PosDB name="POS01_CS" IP="81" targetPath="NewPOS61\" templates=""><Service name="POS0001" alias="POS CS 01" description="POS CS 01" templates="DT TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="POS RES 1024x768" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="ECASH" templateName="ECASH SLAVE (195)" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="Cashdrawer" templateName="Cashdrawer" availableServiceName="POS0013" templateType="1" machineType="DLV" posdbName="POS13_FC" /></Adaptors></Service><Service name="RPR0100" alias="PICKLISTKVS" description="RPRZ CS 01" templates="RPR ZERO OPTIONAL" isVisible="true"><Adaptors /></Service><Service name="RPR0001" alias="" description="RPR CS 01" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors><AdaptorTemplate groupName="RPR" templateName="Seriell (COM1)" availableServiceName="RPR0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /></Adaptors></Service><Service name="COD0001" alias="" description="NG COD DRV" templates="disable" isVisible="true"><Adaptors /></Service><Service name="STO0001" alias="POS0001 DT" description="STO 01" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB></Machine><Machine type="DT_OT" screenGroup="DT Configuration"><PosDB name="POS02_OT" IP="82" targetPath="NewPOS61\" templates=""><Service name="POS0002" alias="POS OT 02" description="POS OT 02" templates="DT TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Resolution" templateName="POS RES 1024x768" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="ECASH" templateName="ECASH SLAVE (195)" availableServiceName="POS0016" templateType="1" machineType="MCC_ZERO" posdbName="POS16_MCC" /><AdaptorTemplate groupName="Cashdrawer" templateName="Cashdrawer" availableServiceName="POS0013" templateType="1" machineType="DLV" posdbName="POS13_FC" /></Adaptors></Service><Service name="RPR0200" alias="PICKLISTKVS" description="RPRZ OT 02" templates="RPR ZERO OPTIONAL" isVisible="true"><Adaptors /></Service><Service name="RPR0002" alias="" description="RPR OT 02" templates="RPR POS OPTIONAL" isVisible="true"><Adaptors /></Service><Service name="COD0002" alias="" description="NG COD DRV" templates="disable" isVisible="true"><Adaptors /></Service><Service name="STO0002" alias="POS0002 DT" description="STO 02" templates="STO C STD" isVisible="true"><Adaptors /></Service></PosDB></Machine><Machine type="WAY_ZERO" screenGroup="Tablet Configuration"><PosDB name="POS300_WAY_STATION" IP="71" targetPath="NewPOS61\" templates="NON SERVICES ECASH"><Service name="WAY300" alias="" description="" templates="WAY STD TPL" isVisible="true"><Adaptors><AdaptorTemplate groupName="Tablets" templateName="NONE" availableServiceName="WAY300" templateType="1" machineType="WAY_ZERO" posdbName="POS300_WAY_STATION" /></Adaptors></Service><Service name="STO300" alias="WAYSTATION" description="WAYSTATION" templates="STO C STD" isVisible="false"><Adaptors /></Service></PosDB></Machine><Machine type="PST(P)_ZERO" screenGroup="Production PI"><PosDB name="POS8000_PST(P)" IP="71" targetPath="NewPOS61\" templates="PRODUCTION_TPL_PI_NEW"><Service name="STO8000" alias="Production" description="PRIMARY" templates="STO PROD TPL" isVisible="false"><Adaptors /></Service><Service name="PST8000" alias="Production" description="PST 8000" isVisible="false" isFailover="false"><Adaptors /></Service></PosDB></Machine><Machine type="PST(S)_ZERO" screenGroup="Production PI"><PosDB name="POS8001_PST(S)" IP="84" targetPath="NewPOS61\" templates="PRODUCTION_TPL_PI_NEW"><Service name="STO8001" alias="PRODBACKUP" description="SECONDARY" templates="STO PROD TPL" isVisible="false"><Adaptors /></Service><Service name="PST8001" alias="Production" description="PST 8001" isVisible="false" isFailover="true"><Adaptors /></Service></PosDB></Machine><Machine type="GSC02" screenGroup="Tablet Configuration"><PosDB name="KVSGSC02_STO" IP="111" targetPath="NewPOS61\" templates="NON SERVICES ECASH"><Service name="STO400" alias="KVSGSC02" description="KVSGSC02" templates="KVSGSC02_STO" isVisible="false"><Adaptors /></Service></PosDB></Machine></SelectedMachines><PrinterOrders><PrinterOrder serviceName="POS0025" primaryPrinterService="RPR0025" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0026" primaryPrinterService="RPR0026" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0027" primaryPrinterService="RPR0027" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0028" primaryPrinterService="RPR0028" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0001" primaryPrinterService="RPR0001" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0003" primaryPrinterService="RPR0003" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0002" primaryPrinterService="RPR0003" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0004" primaryPrinterService="RPR0004" secondaryPrinterService="None" /><PrinterOrder serviceName="KVS1001" primaryPrinterService="RPR0005" secondaryPrinterService="None" /><PrinterOrder serviceName="POS0016" primaryPrinterService="RPR0016" secondaryPrinterService="None" /></PrinterOrders><CODDefinitions /><SelectedVersion number="6.1.23" description="NewPOS 6.1.23" /></StoreConfiguration>]]></PosDB>
+    <Service name="0102" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices></UsedServices>
+      <Configuration imports="KVSRedesign">
+        <Section name="Beep">
+          <Parameter name="enabled" value="true" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="horizontalPos" value="1024" />
+          <Parameter name="rows" value="2" />
+          <Parameter name="rows1" value="2" />
+          <Parameter name="rows2" value="2" />
+          <Parameter name="rows3" value="2" />
+          <Parameter name="columns" value="3" />
+          <Parameter name="columns1" value="3" />
+          <Parameter name="columns2" value="3" />
+          <Parameter name="columns3" value="3" />
+          <Parameter name="heldCells" value="2" />
+          <Parameter name="heldCells1" value="2" />
+          <Parameter name="heldCells2" value="2" />
+          <Parameter name="heldCells3" value="2" />
+          <Parameter name="orderItemFont" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont1" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont2" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont3" value="Arial-BOLD-19" />
+          <Parameter name="grillItemFont" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont1" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont2" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont3" value="Arial-BOLD-17" />
+          <Parameter name="orderItemVoidedFont" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-19" />
+          <Parameter name="grillItemVoidedFont" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-17" />
+          <Parameter name="firstThreshold" value="50" />
+          <Parameter name="secondThreshold" value="60" />
+          <Parameter name="displayGrillInstruction" value="ASIMAGE" />
+          <Parameter name="displaySideStatus" value="true" />
+          <Parameter name="displayDestinationImage" value="true" />
+          <Parameter name="displaySaleType" value="false" />
+          <Parameter name="displayOrderAmount" value="false" />
+          <Parameter name="groupMultiOrder" value="false" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="enableKVSProductFiltering" value="false" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true" />
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="logicalname" value="BUMPBAR2" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+            <Parameter name="hostAddress" value="localhost" />
+            <Parameter name="portNumber" value="8123" />
+            <Parameter name="serve" value="0xa1|0xa2" />
+            <Parameter name="zoom" value="0xb1" />
+            <Parameter name="recall" value="0xb2" />
+            <Parameter name="next" value="0xc1|0xc2" />
+            <Parameter name="held" value="0xd1" />
+            <Parameter name="heldscroll" value="0xd2" />
+            <Parameter name="sideon" value="0xe1" />
+            <Parameter name="sideoff" value="0xe2" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service type="NPW" startonload="true" quitOnFail="true" classname="LocalWebView" name="0101">
+			<Configuration imports="LocalWebView">
+            <Section name="BaseHosts">
+               <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp"/>
+            </Section>
+            <Section name="LocalWebView">
+               <Parameter name="Location" value="../NpWebView"/>
+            </Section>
+            <Section name="Log">
+               <Parameter name="EnableDebug" value="true"/>
+               <Parameter name="LogFileFolder" value="out/"/>
+               <Parameter name="enableConsoleLog" value="true"/>
+            </Section>
+            <Section name="AutoUpdate">
+               <Parameter name="EnableAutoUpdate" value="true"/>
+            </Section>
+            <Section name="Monitoring.Memory">
+               <Parameter name="MonitoringInterval" value="60000"/>
+               <Parameter name="MaxMemoryPercentage" value="70"/>
+               <Parameter name="LauncherLimit" value="200"/>
+               <Parameter name="BrowserLimit" value="1500"/>
+               <Parameter name="DriverHostLimit" value="1500"/>
+            </Section>
+            <Section name="Component.Browser.KVS0101">
+               <Parameter name="Position" value="0,0"/>
+               <Parameter name="Urn" value="kvs/kvs0101"/>
+               <Parameter name="Zoom" value="100"/>
+               <Parameter name="ShowFrame" value="false"/>
+               <Parameter name="ShowCursor" value="false"/>
+               <Parameter name="Size" value="1024x768"/>
+				<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
+				<Parameter name="NodeName" value="KVS0101"/>
+				<Parameter name="LogicalName" value="KVS0101"/>
+				<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->				   
+            </Section>
+            <Section name="Component.Browser.KVS0102">
+               <Parameter name="Position" value="1024,0"/>
+               <Parameter name="Urn" value="kvs/kvs0102"/>
+               <Parameter name="Zoom" value="100"/>
+               <Parameter name="ShowFrame" value="false"/>
+               <Parameter name="ShowCursor" value="false"/>
+               <Parameter name="Size" value="1024x768"/>
+				<Parameter name="BrowserServer" value="messagehub"/> <!--Coordinator Config-->
+				<Parameter name="NodeName" value="KVS0102"/>
+				<Parameter name="LogicalName" value="KVS0102"/>
+				<Parameter name="InjectJavascriptCode" value="ClickPOSButtonHelper,MessageHubResponseHelper" />	<!--Coordinator Config-->				   
+            </Section>
+            <Section name="Component.DriverHost.BUMPBAR3110">
+               <Parameter name="DriverFile" value="SerialBumpBar.dll"/>
+               <Parameter name="DeviceType" value="BumpBar"/>
+               <Parameter name="QueueName" value="Kitchen - Lunch - S1"/>
+               <Parameter name="logicalname" value="BumpBar MFY 1"/>
+               <Parameter name="NodeName" value="KVS3110"/>
+               <Parameter name="AdapterFile" value="LegacyBumpBarAdapter.dll"/>
+               <Parameter name="name" value="HTML BB"/>
+               <Parameter name="baudrate" value="1200"/>
+               <Parameter name="databits" value="8"/>
+               <Parameter name="portname" value="virtual"/>
+            </Section>
+            <Section name="Component.DriverHost.GPR0101">
+               <Parameter name="DriverFile" value="VirtualPrinter"/>
+               <Parameter name="DeviceType" value="Printer"/>
+               <Parameter name="logicalname" value="KVS31GrillPrinter"/>
+               <Parameter name="NodeName" value="GPR0101"/>
+               <Parameter name="AdapterFile" value="LegacyPrinterAdapter.dll"/>
+               <Parameter name="portname" value="..\RPR_1__GPR_pos-db.txt" />
+            </Section>
+         </Configuration>
+      </Service>
+    <Service type="GPR" startonload="true" quitOnFail="false" classname="npRPR.dll" name="0101">
+         <Adaptors>
+            <Adaptor startonload="true" name="npAdpRpr" imports="npAdpRpr">
+               <Section name="main">
+                  <Parameter name="portname" value="LPT1"/>
+                  <Parameter name="printerInitCode" value="28|67|1"/>
+                  <Parameter name="printerCutCode" value="27|109"/>
+                  <Parameter name="logicalname" value="KVS31GrillPrinter"/>
+                  <Parameter name="printerSleepTime" value="20"/>
+                  <Parameter name="isNpSharp" value="true"/>
+                  <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll"/>
+                  <Parameter name="nodeName" value="KVS3106"/>
+               </Section>
+            </Adaptor>
+         </Adaptors>
+      </Service>
+  </Services>
+</PosDB>

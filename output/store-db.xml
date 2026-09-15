@@ -38,32 +38,34 @@
         <StoreLongitude>-121.973010</StoreLongitude>
       </StoreDetails>
       <BusinessLimits>
-        <SkimTimeLimit>120</SkimTimeLimit>
-        <SkimAmountLimit>10000.00</SkimAmountLimit>
-        <ManagerModeTimeLimit>60</ManagerModeTimeLimit>
-        <HighAmountSaleLimit>100.00</HighAmountSaleLimit>
-        <HighQuantitySaleLimit>51</HighQuantitySaleLimit>
+        <SkimTimeLimit>200</SkimTimeLimit>
+        <SkimAmountLimit>250.00</SkimAmountLimit>
+        <ManagerModeTimeLimit>20</ManagerModeTimeLimit>
+        <HighAmountSaleLimit>99.99</HighAmountSaleLimit>
+        <HighQuantitySaleLimit>99</HighQuantitySaleLimit>
         <AutoReceiptPrintAmount>0.00</AutoReceiptPrintAmount>
         <FcOrderTakerTimeOver>30</FcOrderTakerTimeOver>
-        <FcCashieringTimeOver>30</FcCashieringTimeOver>
-        <FcStoreTimeOver>10</FcStoreTimeOver>
-        <DtWinOneTimeOver>0</DtWinOneTimeOver>
-        <DtWinTwoTimeOver>0</DtWinTwoTimeOver>
-        <DtHeldTimeOver>10</DtHeldTimeOver>
-        <ReductionValidationMode>Limits</ReductionValidationMode>
-        <TRedBeforeTotal>3</TRedBeforeTotal>
-        <TRedAfterTotalAmount>3.00</TRedAfterTotalAmount>
-        <TRedAfterTotalQuantity>1</TRedAfterTotalQuantity>
-        <BreakfastStartTimeWeekDay>05:00</BreakfastStartTimeWeekDay>
-        <BreakfastStopTimeWeekDay>10:30</BreakfastStopTimeWeekDay>
-        <BreakfastStartTimeWeekEnd>05:00</BreakfastStartTimeWeekEnd>
-        <BreakfastStopTimeWeekEnd>10:30</BreakfastStopTimeWeekEnd>
-        <BlockTime>23:59</BlockTime>
-        <InitialFloatLimit>100.00</InitialFloatLimit>
-        <FutureDayOpenLimit>-1</FutureDayOpenLimit>
-        <StoreWidePettyCashAmountLimit>500.00</StoreWidePettyCashAmountLimit>
+        <FcCashieringTimeOver>15</FcCashieringTimeOver>
+        <FcStoreTimeOver>99</FcStoreTimeOver>
+        <DtWinOneTimeOver>15</DtWinOneTimeOver>
+        <DtWinTwoTimeOver>15</DtWinTwoTimeOver>
+        <DtHeldTimeOver>60</DtHeldTimeOver>
+        <ReductionValidationMode>2</ReductionValidationMode>
+        <TRedBeforeTotal>10</TRedBeforeTotal>
+        <TRedAfterTotalAmount>10.00</TRedAfterTotalAmount>
+        <TRedAfterTotalQuantity>3</TRedAfterTotalQuantity>
+        <BreakfastStartTimeWeekDay>04:00</BreakfastStartTimeWeekDay>
+        <BreakfastStopTimeWeekDay>11:00</BreakfastStopTimeWeekDay>
+        <BreakfastStartTimeWeekEnd>04:00</BreakfastStartTimeWeekEnd>
+        <BreakfastStopTimeWeekEnd>11:00</BreakfastStopTimeWeekEnd>
+        <BlockTime>48:00</BlockTime>
+        <InitialFloatLimit>125.00</InitialFloatLimit>
+        <FutureDayOpenLimit>3</FutureDayOpenLimit>
+        <StoreWidePettyCashAmountLimit>0.00</StoreWidePettyCashAmountLimit>
+        <PromoItemQuantityLimit>5</PromoItemQuantityLimit>
         <BypassPromoPerItemQuantityLimit>false</BypassPromoPerItemQuantityLimit>
-        <BypassIndividualDiscountAmountLimit>false</BypassIndividualDiscountAmountLimit>
+        <BypassIndividualDiscountAmountLimit>true</BypassIndividualDiscountAmountLimit>
+        <PromoItemAmountLimit>10.00</PromoItemAmountLimit>
       </BusinessLimits>
       <HHOTBusinessLimits>
         <ManagerModeTimeLimit>20</ManagerModeTimeLimit>
@@ -2405,7 +2407,7 @@
         <Parameter name="grillImage" value="h_grillimg.png"/>
         <Parameter name="imagesSource" value=".\images\repositoryH.zip"/>
         <Parameter name="indentConsolidatedSale" value="true"/>
-        <Parameter name="mainScreenNumber" value="2"/>
+        <Parameter name="mainScreenNumber" value="6000"/>
         <Parameter name="messageBtnColor" value="CORAL"/>
         <Parameter name="messageBtnFont" value="Arial-BOLD-10"/>
         <Parameter name="messageBtnFontColor" value="BLACK"/>
@@ -2939,6 +2941,10 @@
         <Parameter name="waitingSectionBullet" value="true"/>
         <Parameter name="waitingSectionTitleFontColor" value="BLUE"/>
         <Parameter name="yearPrefix"/>
+        <Parameter name="enableInfoAlertPOSUIDesign" value="false"/>
+        <Parameter name="enableListPOSUIDesign" value="false"/>
+        <Parameter name="enableAlphanumericKeyboardPOSUIDesign" value="false"/>
+        <Parameter name="enableSpacebarOnAlphanumericKeyboardPOSUIDesign" value="false"/>
       </Section>
       <Section name="OperationMode">
         <Parameter name="CheckOrderTotal" value="true"/>
@@ -3712,11 +3718,11 @@
       <Section name="Messaging">
         <Parameter name="WSCheckTime" value="60"/>
         <Parameter name="fixedResource"/>
-        <Parameter name="multicastIp" value="233.0.0.176"/>
+        <Parameter name="multicastIp" value="233.2.3.179"/>
         <Parameter name="multicastPackageLength" value="5120"/>
         <Parameter name="multicastPort" value="4176"/>
         <Parameter name="multicastTTL" value="5"/>
-        <Parameter name="networkAdaptorBaseIp" value="10.1"/>
+        <Parameter name="networkAdaptorBaseIp" value="10.118.51"/>
         <Parameter name="networkCheckTime" value="5"/>
         <Parameter name="obligate" value="true"/>
         <Parameter name="serverPort"/>
@@ -5806,7 +5812,7 @@
         <Parameter name="drivername" value="npDrvHTTP.dll"/>
         <Parameter name="logicalname" value="XML RPC Client"/>
         <Parameter name="service" value="npAdpHttp.dll"/>
-        <Parameter name="url" value="http://10.118.51.25:8888/goform/RPC2"/>
+        <Parameter name="url" value="http://10.2.2.25:8888/goform/RPC2"/>
       </Section>
     </Adaptor>
     <Adaptor type="bunarea.serial.bumpbar" startonload="true">

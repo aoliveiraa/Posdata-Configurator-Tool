@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="Messaging">
+      <Parameter name="networkAdaptorBaseIp" vau="127.0.0.1" />
+    </Section>
+    <Section name="NPScripts">
+      <Parameter name="posScriptCommands" value="BusinessComponentsCHF.nps" />
+      <Parameter name="scriptCommandsLocal" value="BusinessComponentsCHFLocal.nps" />
+    </Section>
+    <Section name="OperationMode">
+      <Parameter name="enableNpSharpWorkflows" value="true" />
+      <Parameter name="isNpSharpRequired" value="true" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="0005" type="POS" classname="com.ngpos.pos.NewPOS" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="0300" alias="" />
+        </UsedService>
+        <UsedService serviceType="PSW">
+          <Member name="0300" alias="" />
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8001" alias="" />
+          <Member name="8002" alias="" />
+        </UsedService>
+        <UsedService serviceType="RPR">
+          <Member name="0005" alias="" />
+          <Member name="0005" alias="CASHLESS" />
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="0501" alias="GM - [501]" />
+          <Member name="0401" alias="FRY - [401]" />
+          <Member name="0301" alias="CBS - [301]" />
+          <Member name="0302" alias="CP - [302]" />
+          <Member name="0101" alias="MFY1 - [101]" />
+          <Member name="0102" alias="MFY2 - [102]" />
+          <Member name="0201" alias="FC - [201]" />
+          <Member name="0202" alias="DT - [202]" />
+          <Member name="0601" alias="FC Assembly - [601]" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="POS">
+        <Section name="Account">
+          <Parameter name="AcceptZeroPricePMix" value="true" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="frameWidth" value="1080" />
+          <Parameter name="frameHeight" value="1920" />
+          <Parameter name="DDTSupport" value="false" />
+          <Parameter name="SRMActive" value="false" />
+          <Parameter name="doNotShowInGrillScreen" value="40000003" />
+          <Parameter name="doubleCrewStatus" value="true" />
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="autoRecall" value="false" />
+          <Parameter name="AutomaticOperatorLogin" value="true" />
+          <Parameter name="AnonymousOperatorID" value="99999" />
+          <Parameter name="AnonymousOperatorName" value="CSO User" />
+          <Parameter name="DisplayPrinterListOnError" value="false" />
+          <Parameter name="isHtmlUi" value="true" />
+        </Section>
+        <Section name="PosType">
+          <Parameter name="POD" value="CSO" />
+          <Parameter name="RemPOD" value="FRONT_COUNTER" />
+        </Section>
+        <Section name="Report">
+          <Parameter name="DualPoint" value="true" />
+        </Section>
+        <Section name="InactiveDimension">
+          <Parameter name="buttonState" value="disable" />
+        </Section>
+        <Section name="CSO">
+          <Parameter name="networkCheckServices" value="QUE1000" />
+        </Section>
+        <Section name="SmartRouting">
+          <Parameter name="podBlackListException" value="false" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpPrd" imports="npAdpPrd" startonload="true">
+          <Section name="main">
+            <Parameter name="SendOrder" value="ONPAID" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="standard.ui" imports="standard.ui" startonload="true">
+          <Section name="main">
+            <Parameter name="drivername" value="npposNewGUI.dll" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
+          <Section name="main">
+            <Parameter name="url" value="http://127.0.0.1:8080/goform/RPC2" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="tlog" imports="tlog" startonload="true" />
+        <Adaptor name="standard.account" imports="standard.account" startonload="true" />
+        <!--<Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="true" />-->
+        <Adaptor name="npAdpScanner" imports="npAdpScanner" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="npAdpScanner.dll" />
+            <Parameter name="adaptorname" value="npAdpScanner" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+            <Parameter name="hostAddress" value="localhost" />
+            <Parameter name="portNumber" value="8123" />
+            <Parameter name="logicalname" value="Scanner5" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="0005" type="NPW" classname="" startonload="true" quitOnFail="true">
+      <Configuration imports="LocalWebView">
+        <Section name="BaseHosts">
+          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp" />
+        </Section>
+        <Section name="LocalWebView">
+          <Parameter name="Location" value="../NpWebView" />
+        </Section>
+        <Section name="Log">
+          <Parameter name="EnableDebug" value="true" />
+          <Parameter name="LogFileFolder" value="out/" />
+        </Section>
+        <Section name="AutoUpdate">
+          <Parameter name="EnableAutoUpdate" value="false" />
+        </Section>
+        <Section name="Monitoring.Memory">
+          <Parameter name="MonitoringInterval" value="60000" />
+          <Parameter name="MaxMemoryPercentage" value="80" />
+          <Parameter name="LauncherLimit" value="1500" />
+          <Parameter name="BrowserLimit" value="1500" />
+          <Parameter name="DriverHostLimit" value="1500" />
+        </Section>
+        <Section name="Component.Browser.Kiosk">
+          <Parameter name="Position" value="0,0" />
+          <Parameter name="Urn" value="kiosk/POS0005" />
+          <Parameter name="Zoom" value="100" />
+          <Parameter name="ShowFrame" value="true" />
+          <Parameter name="ShowCursor" value="true" />
+          <Parameter name="Size" value="607x1080" />
+          <Parameter name="canMoveWindow" value="true"/>
+        </Section>
+        <Section name="Component.DriverHost.Scanner5">
+          <Parameter name="DriverFile" value="SerialScanner.dll" />
+          <Parameter name="DeviceType" value="Scanner" />
+          <Parameter name="LogicalName" value="Scanner5" />
+          <Parameter name="NodeName" value="POS0005" />
+          <Parameter name="AdapterFile" value="LegacyScannerAdapter" />
+          <Parameter name="portname" value="COM3" />
+        </Section>
+		<Section name="Component.DriverHost.Printer5">
+			<Parameter name="DeviceType" value="Printer" />
+			<Parameter name="logicalName" value="RPR0005" />
+			<Parameter name="nodeName" value="RPR0005" />
+			<Parameter name="DriverFile" value="VirtualPrinter.dll" />
+			<Parameter name="AdapterFile" value="LegacyPrinterAdapter" />
+			<Parameter name="PortName" value="..\..\..\..\TEMPPOS5\RPR0005.txt" />
+		</Section>
+      </Configuration>
+    </Service>
+    <Service name="0005" type="RPR" classname="com.ngpos.arch.services.printer.core.PrinterController" startonload="true" quitOnFail="true">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+			<Parameter name="isNpSharp" value="true" />
+			<Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+			<Parameter name="nodeName" value="POS0005"/>
+			<Parameter name="logicalname" value="RPR0005" />
+            <!--<Parameter name="portname" value="RPR0001.txt" />
+            <Parameter name="printHiddenData" value="false" />
+            <Parameter name="baudrate" value="115200" />
+            <Parameter name="utf8table" value="Utf8ToAnsi.txt" />-->
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide">
+    <Section name="NPScripts">
+      <Parameter name="scriptCommands" value="BusinessComponentsCSO.nps"/>
+      <Parameter name="scriptCommandsLocal" value="BusinessComponentsCSOLocal.nps"/>
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="07" type="POS" classname="com.ngpos.pos.NewPOS" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="0300" alias=""/>
+        </UsedService>
+        <UsedService serviceType="PSW">
+          <Member name="0300" alias=""/>
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8001" alias=""/>
+          <Member name="8002" alias=""/>
+        </UsedService>
+        <UsedService serviceType="RPR">
+          <Member name="07" alias=""/>
+          <Member name="07" alias="CASHLESS"/>
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="1001" alias="MFY1 - [1001]"/>
+          <Member name="1002" alias="MFY2 - [1002]"/>
+          <Member name="1003" alias="FC - [1003]"/>
+          <Member name="1004" alias="CBS - [1004]"/>
+          <Member name="1005" alias="FRY - [1005]"/>
+          <Member name="1006" alias="GM - [1006]"/>
+          <Member name="1007" alias="DT - [1007]"/>
+          <Member name="1008" alias="DT - [1008]"/>
+          <Member name="1009" alias="CP-A - [1009]"/>
+          <Member name="1010" alias="CP-B - [1010]"/>
+          <Member name="1011" alias="FC Assembly - [1011]"/>
+		  <Member name="1013" alias="Delivery Runner [1013]"/>
+          <Member name="1014" alias="Delivery Presenter - [1014]"/>
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="POS">
+        <Section name="TestHelper">
+          <Parameter name="load" value="true"/>
+          <Parameter name="port" value="1496"/>
+        </Section>
+        <Section name="Account">
+          <Parameter name="AcceptZeroPricePMix" value="true"/>
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="frameWidth" value="1080"/>
+          <Parameter name="frameHeight" value="1920"/>
+          <Parameter name="DDTSupport" value="false"/>
+          <Parameter name="SRMActive" value="false"/>
+          <Parameter name="doNotShowInGrillScreen" value="40000003"/>
+          <Parameter name="doubleCrewStatus" value="true"/>
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="autoRecall" value="false"/>
+          <Parameter name="AutomaticOperatorLogin" value="true"/>
+          <Parameter name="AnonymousOperatorID" value="99999"/>
+          <Parameter name="AnonymousOperatorName" value="CSO User"/>
+          <Parameter name="DisplayPrinterListOnError" value="false"/>
+        </Section>
+        <Section name="PosType">
+          <Parameter name="POD" value="CSO"/>
+          <Parameter name="RemPOD" value="FRONT_COUNTER"/>
+        </Section>
+        <Section name="Report">
+          <Parameter name="DualPoint" value="true"/>
+        </Section>
+        <Section name="InactiveDimension">
+          <Parameter name="buttonState" value="disable"/>
+        </Section>
+        <Section name="CSO">
+          <Parameter name="networkCheckServices" value="QUE1000"/>
+        </Section>
+        <Section name="CSO.UserInterface">
+          <Parameter name="order.EatingPaymentScreenLocationMode" value="2"/>
+          <Parameter name="payAtCounter.enabled" value="true"/>
+          <Parameter name="enableBarcode" value="true"/>
+          <Parameter name="showEditButtonOnCart" value="true"/>
+          <Parameter name="coupon.enableLandingScreen" value="true"/>
+          <Parameter name="enableOffers" value="true"/>
+          <Parameter name="tender.allowZeroTotalOrderAlways" value="true"/>
+          <Parameter name="clamshell.platen.1.name" value="MSG_CLAMSHELL_PLTN_1"/>
+          <Parameter name="clamshell.platen.2.name" value="MSG_CLAMSHELL_PLTN_2"/>
+          <Parameter name="clamshell.platen.3.name" value="MSG_CLAMSHELL_PLTN_3"/>
+          <Parameter name="clamshell.platen.4.name" value="MSG_CLAMSHELL_PLTN_4"/>
+          <Parameter name="clamshell.platen.5.name" value="MSG_CLAMSHELL_PLTN_5"/>
+        </Section>
+        <Section name="SmartRouting">
+          <Parameter name="podBlackListException" value="false"/>
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpPrd" imports="npAdpPrd" startonload="true">
+          <Section name="main">
+            <Parameter name="SendOrder" value="ONPAID"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="standard.ui" imports="standard.ui" startonload="true">
+          <Section name="main">
+            <Parameter name="drivername" value="npGUIExt.dll"/>
+            <Parameter name="_drivername" value="npDrvGUI.dll"/>
+            <Parameter name="actionPort" value="888"/>
+            <Parameter name="eventPort" value="999"/>
+            <Parameter name="cmdTPUI" value="../NGK/npKiosk.exe"/>
+          </Section>
+        </Adaptor>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true"/>
+        <Adaptor name="tlog" imports="tlog" startonload="true"/>
+        <Adaptor name="standard.account" imports="standard.account" startonload="true"/>
+      </Adaptors>
+    </Service>
+    <Service name="07" type="STO" classname="npUpdtRcv.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="STO"/>
+    </Service>
+    <Service name="07" type="RPR" classname="npRPR.dll" startonload="true" quitOnFail="true">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+            <Parameter name="drivername" value="npSerPrn.dll"/>
+            <Parameter name="portname" value="POS007.txt"/>
+            <Parameter name="printHiddenData" value="false"/>
+            <Parameter name="baudrate" value="115200"/>
+            <Parameter name="utf8table" value="Utf8ToAnsi.txt"/>
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

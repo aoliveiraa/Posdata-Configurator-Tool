@@ -36,6 +36,14 @@ from src.validators.pos_role_validator import (
     validate_generated_pos_roles
 )
 
+from src.phases.market_readiness_phase import (
+    run_market_readiness_phase
+)
+
+from src.phases.reporting_phase import (
+    print_market_readiness_report
+)
+
 
 def main():
 
@@ -108,6 +116,14 @@ def main():
         resolve_missing_kvs(
             runtime.kvs_mapping
         )
+    )
+
+    runtime = run_market_readiness_phase(
+        runtime
+    )
+
+    print_market_readiness_report(
+        runtime
     )
     
     #

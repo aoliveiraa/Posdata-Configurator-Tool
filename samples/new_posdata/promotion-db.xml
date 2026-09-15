@@ -1,27 +1,469 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<PromotionDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
-  <PromotionDBSeqNumber>10216089</PromotionDBSeqNumber>
-  <PromotionData code="200" instanceID="971" priority="1000" status="ACTIVE" template="Preis-Deal - Preisreduzierung" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="LAUT" image="gui_de_main_5600.png">
-    <Language code="de_DE" name="Deutsch" parent="de">
-      <Name>Marketing Stunt Test</Name>
-      <ShortDescription>Ruhestörung</ShortDescription>
-      <LongDescription>Ihr seid so leise!</LongDescription>
+<PromotionDB version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <PromotionData code="202103091" instanceID="2128" priority="1000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20211101" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>One Can Dine Regular Menu (mobile)</Name>
+      <ShortDescription>One Can Dine Regular Menu</ShortDescription>
+      <LongDescription>One Can Dine Regular Menu</LongDescription>
     </Language>
-    <Promotion allowedQty="1" barcode="LAUT" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="969" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>Trio-déjeuner à 4,69 $</Name>
+      <ShortDescription>Trio-déjeuner à 4,69 $</ShortDescription>
+      <LongDescription>Trio-déjeuner à 4,69 $</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211101" countTowardsPromotionLimit="false" EOLVEnhancedLogic="false" exclusive="false" id="441" redemptionMode="Manual" showIndividualPrices="false" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="4.69" />
+      </Actions>
+      <Conditions>
+        <Date from="2023-02-03" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="255|256|277|1517|5249|11262|11265|11956|11960|11964|11968|12154|12155" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202302212" instanceID="2155" priority="2000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="P20212105" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>2 for $6 McMfn or McGriddle Sandwiches</Name>
+      <ShortDescription>2 for $6 McMfn or McGriddle</ShortDescription>
+      <LongDescription>2 for $6 McMfn or McGriddle Sandwiches</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>2 for $6 McMfn or McGriddle Sandwiches</Name>
+      <ShortDescription>2 for $6 McMfn or McGriddle</ShortDescription>
+      <LongDescription>2 for $6 McMfn or McGriddle Sandwiches</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212105" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="468" redemptionMode="Manual" showIndividualPrices="true" type="2forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="3.00" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="3.00" />
+      </Actions>
+      <Conditions>
+        <Date from="2023-02-21" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="15503|15701|46|68|10966|11955|11959|12151|12152|10969|5248|11963" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="15503|15701|46|68|10966|11955|11959|12151|12152|5248|10969|11963" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202302216" instanceID="2163" priority="3000" status="INACTIVE" template="Price Deal - Four Product Sets - Reduced Price" templateId="0e2813d7-da66-4498-8a47-df1b99e07064" barcode="P20211114" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Four Can Dine Lunch $29.96</Name>
+      <ShortDescription>Four Can Dine Lunch $29.96</ShortDescription>
+      <LongDescription>Four Can Dine Lunch $29.96</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>Four Can Dine Lunch $29.96</Name>
+      <ShortDescription>Four Can Dine Lunch $29.96</ShortDescription>
+      <LongDescription>Four Can Dine Lunch $29.96</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211114" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="476" redemptionMode="Manual" showIndividualPrices="true" type="4forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="7.49" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="7.49" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="7.49" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 4" price="7.49" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-01-02" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="312|313|647|14091|14330|311" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="312|313|647|14091|14330|311" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 3" codes="312|313|647|14091|14330|311" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 4" codes="312|313|647|14091|14330|311" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202403053" instanceID="2568" priority="4000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20241101" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Buy a Sandwich at $4</Name>
+      <ShortDescription>Buy a Sandwich</ShortDescription>
+      <LongDescription>Buy a Sandwich at $4</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>Buy a Sandwich at $4</Name>
+      <ShortDescription>Buy a Sandwich</ShortDescription>
+      <LongDescription>Buy a Sandwich at $4</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20241101" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="516" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="4.00" />
+      </Actions>
+      <Conditions>
+        <Date from="2024-03-05" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="8|9|14090|14329" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202410115" instanceID="2821" priority="5000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20242101" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Breakfast Wrap EVM @6.29</Name>
+      <ShortDescription>Breakfast Wrap EVM</ShortDescription>
+      <LongDescription>Breakfast Wrap EVM</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20242101" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="538" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="6.29" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-01-02" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="18881|18885|18889" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202502202" instanceID="3106" priority="6000" status="INACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>4 Nuggets Add On - BC</Name>
+    </Language>
+    <Promotion allowedQty="5" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="583" redemptionMode="OnItemSold" showIndividualPrices="true" type="BOGO">
       <Actions>
         <SetItemPrice discountLimit="0.00" item="Eligible Items" price="2.99" />
       </Actions>
       <Conditions>
-        <Date from="2023-09-11" to="2023-09-15" />
+        <Date from="2025-02-20" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|CSO" />
+        <ProductSet codes="196|245|311|312|313|372|428|647|733|1646|2522|4133|6299|6777|14330|17061|17065|17069|17074|17078|17082|17775|17780|17879|17885|17903|17909|18183|18185|18932|18936|14091|261|16757|18714|18822|11403|11404|12447|17806|18829|18831|18833|18835|18940|18942|17173|17179|18838|18840|18842|18844|18910|18906|18908|18912|19030" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items" codes="213" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <SaleType name="EAT-IN|TAKE-OUT" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504011" instanceID="3126" priority="7000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20212100" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>One Can Dine Breakfast for $5.79</Name>
+      <ShortDescription>One Can Dine Breakfast</ShortDescription>
+      <LongDescription>One Can Dine Breakfast for $5.79</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212100" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="595" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="5.79" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="255|256|11956|11960|11262|11265|5249|11964|3604|12074|18856" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504012" instanceID="3127" priority="8000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="P20212102" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Two Can Dine Breakfast for $11.58</Name>
+      <ShortDescription>Two Can Dine Breakfast</ShortDescription>
+      <LongDescription>Two Can Dine  for $11.58</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212102" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="596" redemptionMode="Manual" showIndividualPrices="true" type="2forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="5.79" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="5.79" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="255|256|11956|11960|11262|11265|5249|11964|3604|12074|18856" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="255|256|11956|11960|11262|11265|5249|11964|3604|12074|18856" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504013" instanceID="3128" priority="9000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20211100" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>One Can Dine Regular Menu $9.29</Name>
+      <ShortDescription>One Can Dine Regular Menu</ShortDescription>
+      <LongDescription>One Can Dine Regular Menu $9.29</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211100" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="597" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="9.29" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="14091|311|313|312|14330|647|196|19087|19090" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504014" instanceID="3129" priority="10000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="P20211102" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Two Can Dine Regular Menu for $18.58</Name>
+      <ShortDescription>Two Can Dine Regular Menu</ShortDescription>
+      <LongDescription>Two Can Dine Regular Menu for $18.58</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211102" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="598" redemptionMode="Manual" showIndividualPrices="true" type="2forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="9.29" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="9.29" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="311|312|313|647|14091|14330|196|19087|19090" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="311|312|313|647|14091|14330|196|19087|19090" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504015" instanceID="3130" priority="11000" status="INACTIVE" template="Price Deal - Four Product Sets - Reduced Price" templateId="0e2813d7-da66-4498-8a47-df1b99e07064" barcode="P20211105" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Four Can Dine Lunch (2x 2CD)</Name>
+      <ShortDescription>Four Can Dine Lunch (2x 2CD)</ShortDescription>
+      <LongDescription>Four Can Dine Lunch (2x 2CD)</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211105" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="599" redemptionMode="Manual" showIndividualPrices="true" type="4forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="9.29" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="9.29" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="9.29" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 4" price="9.29" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="311|312|313|647|14091|14330|196" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="311|312|313|647|14091|14330|196" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 3" codes="311|312|313|647|14091|14330|196" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 4" codes="311|312|313|647|14091|14330|196" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504016" instanceID="3131" priority="12000" status="INACTIVE" template="Price Deal - Four Product Sets - Reduced Price" templateId="0e2813d7-da66-4498-8a47-df1b99e07064" barcode="P20212107" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Four Can Dine Breakfast (2x 2CD</Name>
+      <ShortDescription>Four Can Dine Breakfast</ShortDescription>
+      <LongDescription>Four Can Dine Breakfast (2x 2CD</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212107" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="600" redemptionMode="Manual" showIndividualPrices="true" type="4forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="5.79" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="5.79" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="5.79" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 4" price="5.79" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="255|256|11262|11265|11956|11960|5249|11964|15506|15704|277|1517|3604|11968|12074|16538|18856" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="255|256|11262|11265|11956|11960|5249|11964|15506|15704|277|1517|3604|11968|12074|16538|18856" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 3" codes="255|256|11262|11265|11956|11960|5249|11964|15506|15704|277|1517|3604|11968|12074|16538|18856" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 4" codes="255|256|11262|11265|11956|11960|5249|11964|15506|15704|277|1517|3604|11968|12074|16538|18856" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504017" instanceID="3132" priority="13000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="P20211112" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>2 Sandwiches for $10.00 Reg Menu</Name>
+      <ShortDescription>2 Sandwiches for $10.00 Reg Me</ShortDescription>
+      <LongDescription>2 Sandwiches for $10.00 Reg Menu</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211112" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="601" redemptionMode="Manual" showIndividualPrices="true" type="2forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="5.00" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="5.00" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="6|7|8|9|14090|14329|18|19086|19089" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="6|7|8|9|14090|14329|18|19086|19089" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504018" instanceID="3133" priority="14000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="P20241103" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>McNuggets Bundle (2x 10pieces EVM) @22</Name>
+      <ShortDescription>McNuggets Bundle (2x 10pc VM)</ShortDescription>
+      <LongDescription>McNuggets Bundle (2x 10pieces EVM)</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20241103" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="602" redemptionMode="Manual" showIndividualPrices="true" type="2forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="11.00" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="11.00" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-09-02" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="2522" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="2522" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202504019" instanceID="3134" priority="15000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20221100" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>McCrispy EVM $10.29</Name>
+      <ShortDescription>McCrispy EVM</ShortDescription>
+      <LongDescription>McCrispy EVM $10.29</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20221100" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="603" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="10.29" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-09-02" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="17065|17069" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202506131" instanceID="3135" priority="16000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20252100" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Breakfast Bagel EVM for $6.49</Name>
+      <ShortDescription>Breakfast Bagel EVM</ShortDescription>
+      <LongDescription>Breakfast Bagel EVM for $6.49</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20252100" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="604" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="6.49" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-09-02" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="12660|12663|12664|12667|12668|12671|12672|12673|13488" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202510102" instanceID="3361" priority="17000" status="INACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="P20252101" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Free S/M Coffee with Purchase of any McMuffin</Name>
+      <ShortDescription>Free S/M Coffee with Purchase</ShortDescription>
+      <LongDescription>Free S/M Coffee with Purchase of any McMuffin</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>Free S/M Coffee with Purchase of any McMuffin</Name>
+      <ShortDescription>Free S/M Coffee with Purchase</ShortDescription>
+      <LongDescription>Free S/M Coffee with Purchase of any McMuffin</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20252101" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="637" redemptionMode="Manual" showIndividualPrices="true" type="BOGO">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="0.00" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet codes="46|68|5248|11955|11959|11963|12151|12152|15701|69|1508|10966|10969|12614|12617|12618|12621|12622|12625|12654|12655|12656|15503|17726|17732|18453|18455|18880|18884|18888" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items" codes="2372|2373|3835|3838" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202510103" instanceID="3362" priority="18000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="P20251103" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Regular Poutine &amp; Medium Fountain drink for $7</Name>
+      <ShortDescription>Regular Poutine &amp; Medium Fount</ShortDescription>
+      <LongDescription>Regular Poutine &amp; Medium Fountain drink for $7</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>Regular Poutine &amp; Medium Fountain drink for $7</Name>
+      <ShortDescription>Regular Poutine &amp; Medium Fount</ShortDescription>
+      <LongDescription>Regular Poutine &amp; Medium Fountain drink for $7</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20251103" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="638" redemptionMode="Manual" showIndividualPrices="true" type="2forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="4.50" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="2.50" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="13524" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="112|116|3386|115|18970|2589|3338|114" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202510131" instanceID="3368" priority="19000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20252105" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>Breakfast Meal Deal for $6.79 + tax</Name>
+      <ShortDescription>Breakfast Meal Deal for $6.79</ShortDescription>
+      <LongDescription>Breakfast Meal Deal for $6.79 + tax</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>Breakfast Meal Deal for $6.79 + tax</Name>
+      <ShortDescription>Breakfast Meal Deal for $6.79</ShortDescription>
+      <LongDescription>Breakfast Meal Deal for $6.79 + tax</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20252105" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="640" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="6.79" />
+      </Actions>
+      <Conditions>
+        <Date from="2025-12-27" to="2026-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="12660|12663|12664|12667|12668|12671|12672|12673|13488|12154|18454|18456|12155|18458|12074|18495|18497" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501160" instanceID="3557" priority="20000" status="INACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="P20212104" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_BOGO Breakfast Sandwich</Name>
+      <ShortDescription>BOGO Breakfast Sandwich</ShortDescription>
+      <LongDescription>BOGO Breakfast Sandwich</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>2 sandw-déj pour le prix d’un</Name>
+      <ShortDescription>2 sandw-déj pour le prix d’un</ShortDescription>
+      <LongDescription>2 sandw-déj pour le prix d’un</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212104" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="704" redemptionMode="Manual" showIndividualPrices="true" type="BOGO">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="0.00%" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet codes="46|68|5248|10966|10969|11955|11959|11963|7193|7416|7898|12614|12615|12617|12618|12619|12621|12622|12623|12625|7425|12654|12655|12656" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items" codes="46|68|5248|10966|10969|11955|11959|11963|7193|7416|7898|12614|12615|12617|12618|12619|12621|12622|12623|12625|7425|12654|12655|12656" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501161" instanceID="3558" priority="21000" status="INACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="P20211104" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_BOGO Regular Menu Core Sandwiches</Name>
+      <ShortDescription>BOGO Regular Menu Core Sandwic</ShortDescription>
+      <LongDescription>BOGO Regular Menu Core Sandwiches</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>2 Classiques pour le prix d’1</Name>
+      <ShortDescription>2 Classiques pour le prix d’1</ShortDescription>
+      <LongDescription>2 Classiques pour le prix d’1</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211104" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="705" redemptionMode="Manual" showIndividualPrices="true" type="BOGO">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="0.00%" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet codes="6|7|8|9|18|14090|14329" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items" codes="6|7|8|9|18|14090|14329" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501162" instanceID="3559" priority="22000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20215100" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_6 McPops for $X</Name>
+      <ShortDescription>6 McPops for $X</ShortDescription>
+      <LongDescription>6 McPops for $X</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>6 McPops pour X$</Name>
+      <ShortDescription>6 McPops pour X$</ShortDescription>
+      <LongDescription>6 McPops pour X$</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20215100" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="706" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.99" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
         <or>
           <and>
             <DayOfWeek days="Monday" />
             <or>
               <and>
-                <HourOfDay from="00:00" to="05:59" />
+                <HourOfDay from="04:00" to="10:59" />
               </and>
               <and>
-                <HourOfDay from="16:00" to="23:59" />
+                <HourOfDay from="11:00" to="23:59" />
+              </and>
+              <and>
+                <HourOfDay from="00:00" to="03:59" />
               </and>
             </or>
           </and>
@@ -29,10 +471,13 @@
             <DayOfWeek days="Tuesday" />
             <or>
               <and>
-                <HourOfDay from="00:00" to="05:59" />
+                <HourOfDay from="04:00" to="10:59" />
               </and>
               <and>
-                <HourOfDay from="16:00" to="23:59" />
+                <HourOfDay from="11:00" to="23:59" />
+              </and>
+              <and>
+                <HourOfDay from="00:00" to="03:59" />
               </and>
             </or>
           </and>
@@ -40,10 +485,13 @@
             <DayOfWeek days="Wednesday" />
             <or>
               <and>
-                <HourOfDay from="00:00" to="05:59" />
+                <HourOfDay from="04:00" to="10:59" />
               </and>
               <and>
-                <HourOfDay from="16:00" to="23:59" />
+                <HourOfDay from="11:00" to="23:59" />
+              </and>
+              <and>
+                <HourOfDay from="00:00" to="03:59" />
               </and>
             </or>
           </and>
@@ -51,10 +499,13 @@
             <DayOfWeek days="Thursday" />
             <or>
               <and>
-                <HourOfDay from="00:00" to="05:59" />
+                <HourOfDay from="04:00" to="10:59" />
               </and>
               <and>
-                <HourOfDay from="16:00" to="23:59" />
+                <HourOfDay from="11:00" to="23:59" />
+              </and>
+              <and>
+                <HourOfDay from="00:00" to="03:59" />
               </and>
             </or>
           </and>
@@ -62,10 +513,13 @@
             <DayOfWeek days="Friday" />
             <or>
               <and>
-                <HourOfDay from="00:00" to="05:59" />
+                <HourOfDay from="04:00" to="10:59" />
               </and>
               <and>
-                <HourOfDay from="16:00" to="23:59" />
+                <HourOfDay from="11:00" to="23:59" />
+              </and>
+              <and>
+                <HourOfDay from="00:00" to="03:59" />
               </and>
             </or>
           </and>
@@ -73,10 +527,13 @@
             <DayOfWeek days="Saturday" />
             <or>
               <and>
-                <HourOfDay from="00:00" to="05:59" />
+                <HourOfDay from="04:00" to="10:59" />
               </and>
               <and>
-                <HourOfDay from="16:00" to="23:59" />
+                <HourOfDay from="11:00" to="23:59" />
+              </and>
+              <and>
+                <HourOfDay from="00:00" to="03:59" />
               </and>
             </or>
           </and>
@@ -84,16 +541,147 @@
             <DayOfWeek days="Sunday" />
             <or>
               <and>
-                <HourOfDay from="00:00" to="05:59" />
+                <HourOfDay from="04:00" to="10:59" />
               </and>
               <and>
-                <HourOfDay from="16:00" to="23:59" />
+                <HourOfDay from="11:00" to="23:59" />
+              </and>
+              <and>
+                <HourOfDay from="00:00" to="03:59" />
               </and>
             </or>
           </and>
         </or>
-        <Pod type="CSO" />
-        <ProductSet alias="Eligible Items" codes="77" qty="1" sort="MostExpensiveFirst" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="18948" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501163" instanceID="3560" priority="23000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="P20213100" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_2 Regular McFlurry</Name>
+      <ShortDescription>2 Regular McFlurry</ShortDescription>
+      <LongDescription>2 Regular McFlurry</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>2 McFlurry, format classique</Name>
+      <ShortDescription>2 McFlurry, format classique</ShortDescription>
+      <LongDescription>2 McFlurry, format classique</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20213100" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="707" redemptionMode="Manual" showIndividualPrices="true" type="2forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="2.50" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="2.50" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="5229|5468|11678|16763" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="5229|5468|11678|16763" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501164" instanceID="3561" priority="24000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20212106" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_Any Bagel Sandwich for $X</Name>
+      <ShortDescription>Any Bagel Sandwich for $X</ShortDescription>
+      <LongDescription>Any Bagel Sandwich for $X</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>Sandwich sur bagel</Name>
+      <ShortDescription>Sandwich sur bagel</ShortDescription>
+      <LongDescription>Sandwich sur bagel</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212106" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="708" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.00" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="7193|7416|7898|12614|12615|12617|12618|12619|12621|12622|12623|12625|12628|12629|12631|12632|12633|12635|12636|12637|12651" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501165" instanceID="3562" priority="25000" status="INACTIVE" template="Price Deal - Five Product Sets - Reduced Price" templateId="16e0bf7a-3cdf-41ef-b6d7-1842e5a0c115" barcode="P20212108" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_Five Can Dine Breakfast</Name>
+      <ShortDescription>Five Can Dine Breakfast</ShortDescription>
+      <LongDescription>Five Can Dine Breakfast</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>5 Trios-déjeuner</Name>
+      <ShortDescription>5 Trios-déjeuner</ShortDescription>
+      <LongDescription>5 Trios-déjeuner</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212108" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="709" redemptionMode="Manual" showIndividualPrices="true" type="5forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="4.19" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="4.19" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="4.19" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 4" price="4.19" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 5" price="4.19" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="255|256|277|1517|5249|11262|11265|11956|11960|11964|11274|11277|11283|12660|12661|12663|12664|12665|12667|12668|11968|12669|12671|12672|12673|13488|13489|13490|13491|13571" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="255|256|277|1517|5249|11262|11265|11956|11960|11964|11274|11277|11283|12660|12661|12663|12664|12665|12667|12668|11968|12669|12671|12672|12673|13488|13489|13490|13491|13571" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 3" codes="255|256|277|1517|5249|11262|11265|11956|11960|11964|11274|11277|11283|12660|12661|12663|12664|12665|12667|12668|11968|12669|12671|12672|12673|13488|13489|13490|13491|13571" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 4" codes="255|256|277|1517|5249|11262|11265|11956|11960|11964|11274|11277|11283|12660|12661|12663|12664|12665|12667|12668|11968|12669|12671|12672|12673|13488|13489|13490|13491|13571" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 5" codes="255|256|277|1517|5249|11262|11265|11956|11960|11964|11274|11277|11283|12660|12661|12663|12664|12665|12667|12668|11968|12669|12671|12672|12673|13488|13489|13490|13491|13571" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501166" instanceID="3563" priority="26000" status="INACTIVE" template="Price Deal - Five Product Sets - Reduced Price" templateId="16e0bf7a-3cdf-41ef-b6d7-1842e5a0c115" barcode="P20211106" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_Five Can Dine Lunch</Name>
+      <ShortDescription>Five Can Dine Lunch</ShortDescription>
+      <LongDescription>Five Can Dine Lunch</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>5 Trios</Name>
+      <ShortDescription>5 Trios</ShortDescription>
+      <LongDescription>5 Trios</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20211106" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="710" redemptionMode="Manual" showIndividualPrices="true" type="5forPromotion">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="6.49" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="6.49" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="6.49" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 4" price="6.49" />
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 5" price="6.49" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|HOT" />
+        <ProductSet alias="Eligible Items 1" codes="196|311|312|313|647|14091|14330|16453" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 2" codes="196|311|312|313|647|14091|14330|16453" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 3" codes="196|311|312|313|647|14091|14330|16453" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 4" codes="196|311|312|313|647|14091|14330|16453" minQty="1" qty="1" sort="MostExpensiveFirst" />
+        <ProductSet alias="Eligible Items 5" codes="196|311|312|313|647|14091|14330|16453" minQty="1" qty="1" sort="MostExpensiveFirst" />
+      </Conditions>
+    </Promotion>
+  </PromotionData>
+  <PromotionData code="202501167" instanceID="3564" priority="27000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="P20212111" image="">
+    <Language code="en_CA" name="English" parent="en">
+      <Name>BTA_Any McMuffin or McGriddle</Name>
+      <ShortDescription>Any McMuffin or McGriddle</ShortDescription>
+      <LongDescription>Any McMuffin or McGriddle</LongDescription>
+    </Language>
+    <Language code="fr_CA" name="French" parent="fr">
+      <Name>McMuffin ou McCrêpes sandwich</Name>
+      <ShortDescription>McMuffin ou McCrêpes sandwich</ShortDescription>
+      <LongDescription>McMuffin ou McCrêpes sandwich</LongDescription>
+    </Language>
+    <Promotion allowedQty="1" barcode="P20212111" countTowardsPromotionLimit="true" EOLVEnhancedLogic="false" exclusive="false" id="711" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+      <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.79" />
+      </Actions>
+      <Conditions>
+        <Date from="2026-01-15" to="2031-12-31" />
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT" />
+        <ProductSet alias="Eligible Items" codes="46|68|5248|10966|10969|11955|11959|11963|15701|16535|15503|18453|18455|18457|18855|3603" qty="1" sort="MostExpensiveFirst" />
       </Conditions>
     </Promotion>
   </PromotionData>

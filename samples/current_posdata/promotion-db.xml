@@ -1,0 +1,418 @@
+<?xml version= "1.0" encoding="UTF-8"?><PromotionDB version = "1.0" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"><PromotionData code="202004021" priority="1000" status="ACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_BOGO Reg McFlurry</Name><ShortDescription>NP6_5.2_BOGO Reg McFlurry</ShortDescription><LongDescription>Buy One Regular McFlurry Get One Free</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_BOGO Reg McFlurry</Name><ShortDescription>FR NP6_5.2_BOGO Reg McFlurry</ShortDescription><LongDescription>FR Buy One Regular McFlurry Get One Free</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="1" redemptionMode="OnItemSold" showIndividualPrices="true" type="BOGO">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="0.00%"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-04" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT|PICKUP"/>
+        <ProductSet codes="5229|10561|11678|15037" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items" codes="5229|10561|11678|15037" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002042" priority="2000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="120161565" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_1 Can dine for $5.89 (Regular Menu) (Mailers)</Name><ShortDescription>NP6_5.2_1 Can dine for $5.89 (</ShortDescription><LongDescription>1 Can Dine for $5.89</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_1 Can dine for $5.89 (Regular Menu) (Mailers)</Name><ShortDescription>NP6_5.2_1 Can dine for $5.89 (</ShortDescription><LongDescription>FR 1 Can Dine for $5.89</LongDescription></Language><Promotion allowedQty="1" barcode="120161565" countTowardsPromotionLimit="true" exclusive="false" id="2" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="5.89"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-04" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items" codes="196|311|312|313|14091" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002043" priority="3000" status="ACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Coffee Carafe and 12 Cookies for $8.99</Name><ShortDescription>NP6_5.2_Coffee Carafe and 12 C</ShortDescription><LongDescription>Coffee Carafe &amp; 12 Cookies for $8.99</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_Coffee Carafe and 12 Cookies for $8.99</Name><ShortDescription>NP6_5.2_Coffee Carafe and 12 C</ShortDescription><LongDescription>FR Coffee Carafe &amp; 12 Cookies for $8.99</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="3" redemptionMode="OnItemSold" showIndividualPrices="true" type="2forPromotion">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="5.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="3.99"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-04" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|DELIVERY|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items 1" codes="5997" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="13913" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002061" priority="4000" status="ACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Buy one Sandwich and get another Sandwich 50% Off</Name><ShortDescription>NP6_5.2_Buy one Sandwich and g</ShortDescription><LongDescription>Buy One Get Another 50% Off</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_Buy one Sandwich and get another Sandwich 50% Off</Name><ShortDescription>NP6_5.2_Buy one Sandwich and g</ShortDescription><LongDescription>FR Buy One Get Another 50% Off</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="4" redemptionMode="OnItemSold" showIndividualPrices="true" type="BOGO">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="50.00%"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet codes="7|8|9|18|14090" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items" codes="7|8|9|18|14090" eligible="true" minQty="1" qty="1" sort="CheapestFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002062" priority="5000" status="ACTIVE" template="Price Deal - Four Product Sets - Reduced Price" templateId="0e2813d7-da66-4498-8a47-df1b99e07064" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_4 Can Dine  Menu for $20.00 (Regular Menu)</Name><ShortDescription>NP6_5.2_4 Can Dine  Menu for $</ShortDescription><LongDescription>4 Can Dine Lunch</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_4 Can Dine  Menu for $20.00 (Regular Menu)</Name><ShortDescription>NP6_5.2_4 Can Dine  Menu for $</ShortDescription><LongDescription>FR 4 Can Dine Lunch</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="5" redemptionMode="OnItemSold" showIndividualPrices="true" type="4forPromotion">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="7.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="7.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="3.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 4" price="3.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items 1" codes="311|312|313|14091" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="311|312|313|14091" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 3" codes="11952|11956|11960|11964" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 4" codes="11952|11956|11960|11964" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002063" priority="6000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_$3 Happy Meal (Regular Menu)</Name><ShortDescription>NP6_5.2_$3 Happy Meal (Regular</ShortDescription><LongDescription>$3 Happy Meal</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_$3 Happy Meal (Regular Menu)</Name><ShortDescription>NP6_5.2_$3 Happy Meal (Regular</ShortDescription><LongDescription>FR $3 Happy Meal</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="6" redemptionMode="OnItemSold" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items" codes="5493|5494|5495" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002064" priority="7000" status="ACTIVE" template="Price Deal - Three Product Sets - Reduced Price" templateId="4ced210f-4fdf-4a4c-a604-4b3f7f7f9f83" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_20 McNuggets_14.99 Sharebox</Name><ShortDescription>SD_20 McNugget Sharebox</ShortDescription><LongDescription>20 McNugget Sharebox for $14.99</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR_NP6_5.2_20 McNuggets_14.99 Sharebox</Name><ShortDescription>FR_SD_20 McNugget Sharebox</ShortDescription><LongDescription>FR 20 McNugget Sharebox for $14.99</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="7" redemptionMode="OnItemSold" showIndividualPrices="true" type="3forPromotion">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="10.99"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="1.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="1.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items 1" codes="67" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="12" minQty="2" qty="2" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 3" codes="112|114|115|116" minQty="2" qty="2" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002065" priority="8000" status="ACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Large Sandwich &amp; Med Fry for $5.00 (Regular Menu)</Name><ShortDescription>NP6_5.2_Large Sandwich &amp; Med F</ShortDescription><LongDescription>Large Sandwich &amp; Med Fries for $5.00</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_Large Sandwich &amp; Med Fry for $5.00 (Regular Menu)</Name><ShortDescription>NP6_5.2_Large Sandwich &amp; Med F</ShortDescription><LongDescription>FR Large Sandwich &amp; Med Fries for $5.00</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="8" redemptionMode="OnItemSold" showIndividualPrices="true" type="2forPromotion">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="2.50"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="2.50"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items 1" codes="6|8|9|14090" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="12" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002067" priority="9000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_2 Breakfast Sandwiches for $5 (Breakfast)</Name><ShortDescription>NP6_5.2_2 Breakfast Sandwiches</ShortDescription><LongDescription>2 Breakfast Sandwiches for $5.00 (BK)</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR_NP6_5.2_2 Breakfast Sandwiches for $5 (Breakfast)</Name><ShortDescription>NP6_5.2_2 Breakfast Sandwiches</ShortDescription><LongDescription>FR 2 Breakfast Sandwiches for $5.00 (BK)</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="10" redemptionMode="OnItemSold" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="2.50"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items" codes="46|68|5248" qty="2" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002068" priority="10000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_2 Breakfast Sandwiches for $5 ADB</Name><ShortDescription>NP6_5.2_2 Breakfast Sandwiches</ShortDescription><LongDescription>2 ADB Sandwiches for $5.00</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR_NP6_5.2_2 Breakfast Sandwiches for $5 ADB</Name><ShortDescription>NP6_5.2_2 Breakfast Sandwiches</ShortDescription><LongDescription>FR_2 ADB Sandwiches for $5.00</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="11" redemptionMode="OnItemSold" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="2.50"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items" codes="11955|11959|11963" qty="2" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002069" priority="11000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="220162582" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_2 Can Dine for $6.78 Breakfast - Meals (Mailers)</Name><ShortDescription>NP6_5.2_2 Can Dine for $6.78 B</ShortDescription><LongDescription>2 Can Dine for $6.78 Breakfast - Meals</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_2 Can Dine for $6.78 Breakfast - Meals (Mailers)</Name><ShortDescription>NP6_5.2_2 Can Dine for $6.78 B</ShortDescription><LongDescription>FR 2 Can Dine for $6.78 Breakfast - Meals</LongDescription></Language><Promotion allowedQty="1" barcode="220162582" countTowardsPromotionLimit="true" exclusive="false" id="12" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.39"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items" codes="255|277|12660" qty="2" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002611" priority="12000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="220161551" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_2 Can Dine for $10.98 - Meals (Mailer)</Name><ShortDescription>NP6_5.2_2 Can Dine for $10.98</ShortDescription><LongDescription>2 Can Dine for $10.98 - Meals (Mailer)</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_2 Can Dine for $10.98 - Meals (Mailer)</Name><ShortDescription>NP6_5.2_2 Can Dine for $10.98</ShortDescription><LongDescription>FR 2 Can Dine for $10.98 - Meals (Mailer)</LongDescription></Language><Promotion allowedQty="1" barcode="220161551" countTowardsPromotionLimit="true" exclusive="false" id="14" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="5.49"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items" codes="196|311|312|313|14091" qty="2" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002612" priority="13000" status="ACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Buy One Large Sandwich and Get one Free (Lunch Menu)</Name><ShortDescription>NP6_5.2_Buy One Large Sandwich</ShortDescription><LongDescription>Buy One Large Sandwich and Get one Free</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>NP6_5.2_Buy One Large Sandwich and Get one Free (Lunch Menu)</Name><ShortDescription>NP6_5.2_Buy One Large Sandwich</ShortDescription><LongDescription>FR Buy One Large Sandwich and Get one Free</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="15" redemptionMode="OnItemSold" showIndividualPrices="true" type="BOGO">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="0.00%"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet codes="4132|14097" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items" codes="4132|14097" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202002613" priority="14000" status="ACTIVE" template="Buy One Get Two - Reduced Price" templateId="11f3b552-718b-4fa0-af8a-4bf2431cec20" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Make it a Meal for $2.00 (Regular Menu)</Name><ShortDescription>NP6_5.2_Make it a Meal for $2.</ShortDescription><LongDescription>Make it a Meal for $2.00 (Regular Menu)</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_Make it a Meal for $2.00 (Regular Menu)</Name><ShortDescription>NP6_5.2_Make it a Meal for $2.</ShortDescription><LongDescription>FR Make it a Meal for $2.00 (Regular Menu)</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="16" redemptionMode="OnItemSold" showIndividualPrices="true" type="BOGO">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="1.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="1.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-06" to="2020-04-30"/>
+        <ProductSet codes="6|7|8|9|14090" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 1" codes="12" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="112|114|115|116" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201902" priority="15000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Free coffee (All Dayparts)</Name><ShortDescription>NP6_5.2_Free coffee</ShortDescription><LongDescription>Free Coffee</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_Free coffee (All Dayparts)</Name><ShortDescription>FR NP6_5.2_Free coffee</ShortDescription><LongDescription>FR Free Coffee</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="17" redemptionMode="OnItemSold" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="0.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items" codes="2373|3835|3838|2372" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201921" priority="16000" status="INACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Free coffee when you buy a Breakfast McMuffin</Name><ShortDescription>Free coffee with McMuffin</ShortDescription><LongDescription>Free coffee with McMuffin</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_Free coffee when you buy a Breakfast McMuffin</Name><ShortDescription>FR Free coffee with McMuffin</ShortDescription><LongDescription>FR Free coffee with McMuffin</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="18" redemptionMode="OnItemSold" showIndividualPrices="true" type="2forPromotion">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="100.00%"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="0.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items 1" codes="46|68" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="2372" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201922" priority="17000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_$1 Drink Days - Soft Drinks (All Dayparts)</Name><ShortDescription>$1 Drink Days - Soft Drinks</ShortDescription><LongDescription>$1 Drink Days - Soft Drinks</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_$1 Drink Days - Soft Drinks (All Dayparts)</Name><ShortDescription>FR $1 Drink Days - Soft Drinks</ShortDescription><LongDescription>FR $1 Drink Days - Soft Drinks</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="19" redemptionMode="OnItemSold" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="1.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items" codes="112|114|115|116" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201923" priority="18000" status="INACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_$5 plus tax Angus Burger (Regular Menu)</Name><ShortDescription>$5 plus tax Angus Burger</ShortDescription><LongDescription>$5 plus tax Angus Burger</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_$5 plus tax Angus Burger (Regular Menu)</Name><ShortDescription>FR $5 plus tax Angus Burger</ShortDescription><LongDescription>FR $5 plus tax Angus Burger</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="20" redemptionMode="OnItemSold" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="5.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items" codes="8562|12059" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201924" priority="19000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="120162542" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_1 Can Dine for $3.49 Breakfast Deal - Meals (ADB)</Name><ShortDescription>1 Can Dine for $3.49 Breakfast</ShortDescription><LongDescription>1 Can Dine for $3.49 Breakfast Deal - Meals (ADB)</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_1 Can Dine for $3.49 Breakfast Deal - Meals (ADB)</Name><ShortDescription>1 Can Dine for $3.49 Breakfast</ShortDescription><LongDescription>1 Can Dine for $3.49 Breakfast Deal - Meals (ADB)</LongDescription></Language><Promotion allowedQty="1" barcode="120162542" countTowardsPromotionLimit="true" exclusive="false" id="21" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.49"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items" codes="11956|11968|13492" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201925" priority="20000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="120162542" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_1 Can Dine for $3.49 Breakfast</Name><ShortDescription>1 Can Dine for $3.49 Breakfast</ShortDescription><LongDescription>1 Can Dine for $3.49 Breakfast</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_1 Can Dine for $3.49 Breakfast</Name><ShortDescription>1 Can Dine for $3.49 Breakfast</ShortDescription><LongDescription>1 Can Dine for $3.49 Breakfast</LongDescription></Language><Promotion allowedQty="1" barcode="120162542" countTowardsPromotionLimit="true" exclusive="false" id="22" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.49"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items" codes="255|277|12660" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201926" priority="21000" status="ACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>SS_NP6_5.2_BOGO Cone</Name><ShortDescription>BOGO Cone</ShortDescription><LongDescription>BOGO Cone</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR SS_NP6_5.2_BOGO Cone</Name><ShortDescription>FR BOGO Cone</ShortDescription><LongDescription>FR BOGO Cone</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="23" redemptionMode="OnTotal" showIndividualPrices="true" type="BOGO">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="0.00%"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <or>
+            <and>
+                <DayOfWeek days="Monday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="10:59" to="23:59"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Wednesday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="10:59" to="23:59"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Friday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="10:59" to="23:59"/>
+                    </and>
+                </or>
+            </and>
+        </or>
+        <ProductSet codes="3762" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items" codes="3762" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201927" priority="22000" status="ACTIVE" template="BOGO - Reduced Price" templateId="56c0052c-1bb8-4eb2-89db-34cb7346954c" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>SS_NP6_5.2_Buy one Sandwich and get another Sandwich at  50%</Name><ShortDescription>Buy one Sandwich and get anoth</ShortDescription><LongDescription>Buy one Sandwich and get another Sandwich at  50%</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>SS_NP6_5.2_Buy one Sandwich and get another Sandwich at  50%</Name><ShortDescription>Buy one Sandwich and get anoth</ShortDescription><LongDescription>Buy one Sandwich and get another Sandwich at  50%</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="24" redemptionMode="OnItemSold" showIndividualPrices="true" type="BOGO">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="50.00%"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <or>
+            <and>
+                <DayOfWeek days="Monday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Tuesday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Wednesday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Thursday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Friday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Saturday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Sunday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+        </or>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|DELIVERY|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet codes="1|3" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items" codes="1|3" eligible="true" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201928" priority="23000" status="INACTIVE" template="Price Deal - Four Product Sets - Reduced Price" templateId="0e2813d7-da66-4498-8a47-df1b99e07064" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>SS_NP6_5.2_4 Can Dine  Menu for $20.00 (Regular Menu)</Name><ShortDescription>4 Can Dine  Menu for $20.00</ShortDescription><LongDescription>4 Can Dine  Menu for $20.00</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR SS_NP6_5.2_4 Can Dine  Menu for $20.00 (Regular Menu)</Name><ShortDescription>FR 4 Can Dine  Menu for $20.00</ShortDescription><LongDescription>FR 4 Can Dine  Menu for $20.00</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="25" redemptionMode="OnItemSold" showIndividualPrices="true" type="4forPromotion">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="5.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="5.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 3" price="5.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 4" price="5.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items 1" codes="311|312|14091" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="311|312|14091" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 3" codes="311|312|14091" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 4" codes="311|312|14091" minQty="1" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201929" priority="25000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>SS_NP6_5.2_$3 Happy Meal (Regular Menu)</Name><ShortDescription>$3 Happy Meal</ShortDescription><LongDescription>$3 Happy Meal</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR SS_NP6_5.2_$3 Happy Meal (Regular Menu)</Name><ShortDescription>FR $3 Happy Meal</ShortDescription><LongDescription>FR $3 Happy Meal</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="26" redemptionMode="OnTotal" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-03-10" to="2020-04-30"/>
+        <ProductSet alias="Eligible Items" codes="5493|5494|5495" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20201931" priority="26000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>SS_NP6_5.2_$5 plus tax Angus Burger (Regular Menu)</Name><ShortDescription>$5 plus tax Angus Burger</ShortDescription><LongDescription>$5 plus tax Angus Burger</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>SS_NP6_5.2_$5 plus tax Angus Burger (Regular Menu)</Name><ShortDescription>$5 plus tax Angus Burger</ShortDescription><LongDescription>$5 plus tax Angus Burger</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="28" redemptionMode="OnItemSold" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="5.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-19" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT|PICKUP"/>
+        <ProductSet alias="Eligible Items" codes="8562|12059" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20200224" priority="27000" status="ACTIVE" template="Price Deal - Reduced Price" templateId="7e0c328c-135c-49b0-b6a5-bff2046f4aea" barcode="220162582" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_2 Can Dine for $6.78 ADB - Meals</Name><ShortDescription>2 Can Dine for $6.78 ADB</ShortDescription><LongDescription>2 Can Dine for $6.78 ADB</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>FR NP6_5.2_2 Can Dine for $6.78 ADB - Meals</Name><ShortDescription>FR 2 Can Dine for $6.78 ADB</ShortDescription><LongDescription>FR 2 Can Dine for $6.78 ADB</LongDescription></Language><Promotion allowedQty="1" barcode="220162582" countTowardsPromotionLimit="true" exclusive="false" id="29" redemptionMode="Manual" showIndividualPrices="true" type="PriceDeal">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items" price="3.39"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-24" to="2020-04-30"/>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items" codes="11956|11968" qty="2" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="20200225" priority="28000" status="ACTIVE" template="Price Deal - Two Product Sets - Reduced Price" templateId="cd580e86-3768-40d5-a654-86396187682b" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>SS_NP6_5.2_Large Sandwich &amp; Med Fry for $5.00 (Regular Menu)</Name><ShortDescription>Large Sandwich &amp; Med Fry for $</ShortDescription><LongDescription>Large Sandwich &amp; Med Fry for $5.00</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>SS_NP6_5.2_Large Sandwich &amp; Med Fry for $5.00 (Regular Menu)</Name><ShortDescription>Large Sandwich &amp; Med Fry for $</ShortDescription><LongDescription>FR Large Sandwich &amp; Med Fry for $5.00</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="true" id="30" redemptionMode="OnItemSold" showIndividualPrices="true" type="2forPromotion">
+    <Actions>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 1" price="5.00"/>
+        <SetItemPrice discountLimit="0.00" item="Eligible Items 2" price="0.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-02-24" to="2020-04-30"/>
+        <or>
+            <and>
+                <DayOfWeek days="Monday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Tuesday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Wednesday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Thursday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Friday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Saturday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+            <and>
+                <DayOfWeek days="Sunday"/>
+                <or>
+                    <and>
+                        <HourOfDay from="11:00" to="14:00"/>
+                    </and>
+                </or>
+            </and>
+        </or>
+        <Pod type="FRONT_COUNTER|DRIVE_THRU|WALK_THRU|DELIVERY|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT"/>
+        <ProductSet alias="Eligible Items 1" codes="4132|14097" qty="1" sort="MostExpensiveFirst"/>
+        <ProductSet alias="Eligible Items 2" codes="12" qty="1" sort="MostExpensiveFirst"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202003121" priority="51000" status="ACTIVE" template="Simple order discount" templateId="84dd0345-e901-40c1-91ab-97f565d7e604" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6_5.2_Order Discount</Name><ShortDescription>NP6_5.2_Order Discount</ShortDescription><LongDescription>NP6_5.2_Order Discount</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>NP6_5.2_Order Discount</Name><ShortDescription>NP6_5.2_Order Discount</ShortDescription><LongDescription>NP6_5.2_Order Discount</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="true" id="31" redemptionMode="OnTotal" showIndividualPrices="true" type="OrderDiscount">
+    <Actions>
+        <SetSaleDiscount discount="5.00" discountLimit="0.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-03-12" to="2020-04-30"/>
+        <SaleAmount includeEligible="false" includeNonProduct="true" includePromotional="true" minimum="20" preTaxValidation="true"/>
+    </Conditions>
+</Promotion></PromotionData><PromotionData code="202003231" priority="53000" status="INACTIVE" template="Simple order discount" templateId="84dd0345-e901-40c1-91ab-97f565d7e604" barcode="" image=""><Language code="en_CA" name="English" parent="en"><Name>NP6 $2.00 Off HM</Name><ShortDescription>NP6 $2.00 Off HM</ShortDescription><LongDescription>NP6 $2.00 Off HM</LongDescription></Language><Language code="fr_CA" name="French" parent="fr"><Name>NP6 $2.00 Off HM</Name><ShortDescription>NP6 $2.00 Off HM</ShortDescription><LongDescription>NP6 $2.00 Off HM</LongDescription></Language><Promotion allowedQty="1" countTowardsPromotionLimit="true" exclusive="false" id="36" redemptionMode="OnTotal" showIndividualPrices="true" type="OrderDiscount">
+    <Actions>
+        <SetSaleDiscount discount="2.00" discountLimit="0.00"/>
+    </Actions>
+    <Conditions>
+        <Date from="2020-03-23" to="2020-04-30"/>
+        <ItemsQuantity includeEligible="true" includeNonProduct="false" includePromotional="false" maximum="1"/>
+    </Conditions>
+</Promotion></PromotionData></PromotionDB>

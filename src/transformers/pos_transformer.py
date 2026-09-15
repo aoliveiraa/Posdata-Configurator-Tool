@@ -688,7 +688,21 @@ def generate_pos_file(
             ]
         )
 
-    if mapping.get("status") != "READY":
+    status = mapping.get("status")
+
+    if status == "SKIPPED":
+        return build_result(
+            node_name=node_name,
+            generated=False,
+            source_file=source_file,
+            machine_info=machine_info,
+            warnings=[
+                "POS generation skipped by user."
+            ],
+            errors=[]
+        )
+
+    if status != "READY":
         return build_result(
             node_name=node_name,
             generated=False,
@@ -701,6 +715,22 @@ def generate_pos_file(
             errors=[
                 "POS mapping status "
                 "is not READY."
+            ]
+        )
+
+    if not source_file:
+        return build_result(
+            node_name=node_name,
+            generated=False,
+            source_file=None,
+            machine_info=machine_info,
+            warnings=mapping.get(
+                "warnings",
+                []
+            ),
+            errors=[
+                "No source POS file was selected "
+                f"for {node_name}."
             ]
         )
 
@@ -728,6 +758,30 @@ def generate_pos_file(
             errors=[
                 "RIO output file was not defined "
                 f"for {node_name}."
+            ]
+        )
+
+    if new_posdata_folder is None:
+        return build_result(
+            node_name=node_name,
+            generated=False,
+            source_file=source_file,
+            machine_info=machine_info,
+            output_filename=output_filename,
+            errors=[
+                "new_posdata_folder is None."
+            ]
+        )
+
+    if output_folder is None:
+        return build_result(
+            node_name=node_name,
+            generated=False,
+            source_file=source_file,
+            machine_info=machine_info,
+            output_filename=output_filename,
+            errors=[
+                "output_folder is None."
             ]
         )
 
@@ -788,6 +842,12 @@ def generate_pos_file(
     changes = []
     warnings = []
     errors = []
+
+    changes.extend(
+        normalize_messaging_section(
+            tree
+        )
+    )
 
     browser_section = (
         select_main_pos_browser(
@@ -938,11 +998,9 @@ def generate_pos_file(
             output_filename=output_filename,
             changes=changes,
             warnings=warnings,
-            errors=(
-                post_save_validation[
-                    "errors"
-                ]
-            )
+            errors=post_save_validation[
+                "errors"
+            ]
         )
 
     return build_result(
@@ -986,3 +1044,46 @@ def generate_all_pos(
         results.append(result)
 
     return results
+
+
+def normalize_messaging_section(
+    tree
+):
+    changes = []
+
+    messaging_sections = tree.xpath(
+        ".//Section[@name='Messaging']"
+    )
+
+    for section in messaging_sections:
+
+        for child in list(section):
+            section.remove(child)
+
+        parameter = etree.SubElement(
+            section,
+            "Parameter"
+        )
+
+        parameter.set(
+            "name",
+            "networkAdaptorBaseIp"
+        )
+
+        parameter.set(
+            "value",
+            "127.0.0.1"
+        )
+
+        changes.append(
+            "Messaging section normalized."
+        )
+
+        if messaging_sections:
+            print(
+                f"Messaging sections updated: "
+                f"{len(messaging_sections)}"
+            )
+
+
+    return changes

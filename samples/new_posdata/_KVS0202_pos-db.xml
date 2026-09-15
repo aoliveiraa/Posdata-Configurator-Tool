@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide" />
+  <Services>
+    <Service name="0202" type="NPW" classname="" startonload="true" quitOnFail="true">
+      <Configuration imports="LocalWebView">
+        <Section name="BaseHosts">
+          <Parameter name="Urls" value="http://127.0.0.1:8123/npsharp" />
+        </Section>
+        <Section name="LocalWebView">
+          <Parameter name="Location" value="../npwebview" />
+        </Section>
+        <Section name="Log">
+          <Parameter name="EnableDebug" value="true" />
+          <Parameter name="LogFileFolder" value="out/" />
+        </Section>
+        <Section name="AutoUpdate">
+          <Parameter name="EnableAutoUpdate" value="false" />
+        </Section>
+        <Section name="Monitoring">
+          <Parameter name="MonitoringInterval" value="0" />
+        </Section>
+        <Section name="Monitoring.Memory">
+          <Parameter name="MaxMemoryPercentage" value="80" />
+          <Parameter name="LauncherLimit" value="200" />
+          <Parameter name="BrowserLimit" value="1500" />
+          <Parameter name="DriverHostLimit" value="1500" />
+        </Section>
+        <Section name="Component.Browser.KVS0202">
+          <Parameter name="HtmlKeepAliveTimeout" value="120000" />
+          <Parameter name="Position" value="1024,0" />
+          <Parameter name="Urn" value="KVS/KVS0202" />
+          <Parameter name="Size" value="1024x768" />
+        </Section>
+        <Section name="Component.DriverHost.BUMPBAR2">
+          <Parameter name="DriverFile" value="SerialBumpBar.dll" />
+          <Parameter name="DeviceType" value="BumpBar" />
+          <Parameter name="LogicalName" value="BUMPBAR2" />
+          <Parameter name="NodeName" value="KVS0202" />
+          <Parameter name="AdapterFile" value="LegacyBumpBarAdapter" />
+          <Parameter name="name" value="BUMPBAR2" />
+          <Parameter name="baudrate" value="1200" />
+          <Parameter name="databits" value="8" />
+          <Parameter name="portname" value="COM2" />
+          <Parameter name="parity" value="NO" />
+          <Parameter name="stopbits" value="1" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="0202" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+      </UsedServices>
+      <Configuration imports="KVSRedesign">
+        <Section name="Beep">
+          <Parameter name="enabled" value="true" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="horizontalPos" value="0" />
+          <Parameter name="rows" value="2" />
+          <Parameter name="rows1" value="2" />
+          <Parameter name="rows2" value="2" />
+          <Parameter name="rows3" value="2" />
+          <Parameter name="columns" value="3" />
+          <Parameter name="columns1" value="3" />
+          <Parameter name="columns2" value="3" />
+          <Parameter name="columns3" value="3" />
+          <Parameter name="heldCells" value="2" />
+          <Parameter name="heldCells1" value="2" />
+          <Parameter name="heldCells2" value="2" />
+          <Parameter name="heldCells3" value="2" />
+          <Parameter name="orderItemFont" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont1" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont2" value="Arial-BOLD-19" />
+          <Parameter name="orderItemFont3" value="Arial-BOLD-19" />
+          <Parameter name="grillItemFont" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont1" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont2" value="Arial-BOLD-17" />
+          <Parameter name="grillItemFont3" value="Arial-BOLD-17" />
+          <Parameter name="orderItemVoidedFont" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont1" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont2" value="Arial-REGULAR-19" />
+          <Parameter name="orderItemVoidedFont3" value="Arial-REGULAR-19" />
+          <Parameter name="grillItemVoidedFont" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont1" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont2" value="Arial-REGULAR-17" />
+          <Parameter name="grillItemVoidedFont3" value="Arial-REGULAR-17" />
+          <Parameter name="firstThreshold" value="50" />
+          <Parameter name="secondThreshold" value="60" />
+          <Parameter name="displayGrillInstruction" value="ASIMAGE" />
+          <Parameter name="displaySideStatus" value="true" />
+          <Parameter name="displayDestinationImage" value="true" />
+          <Parameter name="displaySaleType" value="true" />
+          <Parameter name="displayOrderAmount" value="false" />
+          <Parameter name="groupMultiOrder" value="false" />
+          <Parameter name="displaySideIndicator" value="multiple" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="enableKVSProductFiltering" value="false" />
+          <Parameter name="ordersToReleaseByFlexibleCascade" value="0" />
+        </Section>
+        <Section name="BumpbarCommandOnRecallMode">
+          <Parameter name="enabled" value="false" />
+          <Parameter name="recall" value="next" />
+          <Parameter name="serve8" value="picklist" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true" />
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="logicalname" value="BUMPBAR2" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+            <Parameter name="hostAddress" value="localhost" />
+            <Parameter name="portNumber" value="8123" />
+            <Parameter name="serve" value="0xa1|0xa2" />
+            <Parameter name="zoom" value="0xb1" />
+            <Parameter name="recall" value="0xb2" />
+            <Parameter name="next" value="0xc1|0xc2" />
+            <Parameter name="held" value="0xd1" />
+            <Parameter name="heldscroll" value="0xd2" />
+            <Parameter name="sideon" value="0xe1" />
+            <Parameter name="sideoff" value="0xe2" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

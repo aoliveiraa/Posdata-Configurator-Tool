@@ -1,34 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <StdLogTrace>
-	<Period>
-		<DateInterval start="20111201" end="20991231"/>
-		<TimeInterval start="0000" end="2359"/>
-	</Period>
-	<!-- 25 MB -->
-	<FileSize>25</FileSize>
-	<Filters>
-		<Module name="npBusCom.dll" logType="0"/>
-		<Module name="npreModule.dll" logType="0"/>
-		<Module name="npParsTb.dll" logType="0"/>
-		<Module name="npAdpPrd.dll" logType="0"/>
-		<Module name="npRpr.dll" logType="0"/>
-		<Module name="npTlog.dll" logType="0"/>
-		<Module name="npPrdSend.dll" logType="0"/>
-		<Module name="eSocketDrv.dll" logType="0"/>
-		<!-- <Module name="npApp.exe" logType="0"/> -->
-		<!-- <Module name="npupdtrcv.dll" logType="0"/> -->
-		<Module name="nppos.dll" logType="0"/>
-		<Module name="npservicemanager.dll" logType="0"/>
-		<!-- <Module name="npadpapplyupdate.dll" logType="0"/> -->
-		<Module name="npWAY.dll" logType="0"/>
-		<Module name="npWayBusinessComponents.dll" logType="0"/>
-		<Module name="npWayBusCom.dll" logType="0"/>
-		<Module name="npWayTLOG.dll" logType="0"/>
-		<Module name="npAdpTLD.dll" logType="0"/>
-		<Module name="npTLDEng.dll" logType="0"/>
-		<Module name="npAdpXmlRpcFOE.dll" logType="0"/>
-		<Module name="npFOEHelper.dll" logType="0"/>
-		<Module name="npRPSService.dll" logType="0"/>
-		<Module name="npFailover.dll" logType="0"/>
-	</Filters>
+  <Period>
+    <DateInterval start="20120101" end="20301231"/>
+    <TimeInterval start="0000" end="2359"/>
+  </Period>
+  <!-- 50 MB -->
+  <FileSize>50</FileSize>
+  <Filters>
+    <Module name="*.exe" logType="0"/>
+    <Module name="*.dll" logType="0"/>
+    <Module name="*.nps" logType="0"/>
+  </Filters>
 </StdLogTrace>

@@ -1033,3 +1033,176 @@ def print_validation_report(
                 f"  ERROR: {error}"
             )
 
+def print_market_readiness_report(
+    runtime,
+):
+    """
+    Sprint 14.1
+
+    Exibe o estado geral do mercado
+    antes da geração.
+    """
+
+    readiness = getattr(
+        runtime,
+        "market_readiness",
+        None
+    )
+
+    if not readiness:
+        return
+
+    print()
+    print(
+        "MARKET READINESS REPORT"
+    )
+
+    print(
+        "=" * 50
+    )
+
+    for component in readiness.get(
+        "components",
+        []
+    ):
+
+        status = component.get(
+            "status",
+            "UNKNOWN"
+        )
+
+        if status == "READY":
+
+            status_text = (
+                "✅ READY"
+            )
+
+        elif (
+            status
+            == "REVIEW REQUIRED"
+        ):
+
+            status_text = (
+                "⚠ REVIEW REQUIRED"
+            )
+
+        else:
+
+            status_text = (
+                "❌ FAIL"
+            )
+
+        print()
+        print(
+            component["name"]
+        )
+
+        print(
+            status_text
+        )
+
+        for detail in component.get(
+            "details",
+            []
+        ):
+
+            print(
+                f"  - {detail}"
+            )
+
+    print()
+
+    manual_kvs = readiness.get(
+        "manual_kvs_resolutions",
+        0
+    )
+
+    manual_pos = readiness.get(
+        "manual_pos_resolutions",
+        0
+    )
+
+    skipped_pos = readiness.get(
+        "skipped_pos",
+        0
+    )
+
+    unresolved_pos = readiness.get(
+        "unresolved_pos",
+        0
+    )
+
+    print(
+        "RESOLUTION SUMMARY"
+    )
+
+    print(
+        "-" * 50
+    )
+
+    print(
+        f"Manual KVS Resolutions: "
+        f"{manual_kvs}"
+    )
+
+    print(
+        f"Manual POS Resolutions: "
+        f"{manual_pos}"
+    )
+
+    print(
+        f"Skipped POS: "
+        f"{skipped_pos}"
+    )
+
+    print(
+        f"Unresolved POS: "
+        f"{unresolved_pos}"
+    )
+
+    print()
+    print(
+        "-" * 50
+    )
+
+    print(
+        "OVERALL READINESS"
+    )
+
+    print(
+        "-" * 50
+    )
+
+    overall_status = readiness.get(
+        "overall_status",
+        "UNKNOWN"
+    )
+
+    if (
+        overall_status
+        == "READY FOR GENERATION"
+    ):
+
+        print(
+            "✅ READY FOR GENERATION"
+        )
+
+    elif (
+        overall_status
+        == "REVIEW REQUIRED"
+    ):
+
+        print(
+            "⚠ REVIEW REQUIRED"
+        )
+
+    else:
+
+        print(
+            "❌ NOT READY FOR GENERATION"
+        )
+
+    print(
+        "=" * 50
+    )
+
