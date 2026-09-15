@@ -5812,7 +5812,7 @@
         <Parameter name="drivername" value="npDrvHTTP.dll"/>
         <Parameter name="logicalname" value="XML RPC Client"/>
         <Parameter name="service" value="npAdpHttp.dll"/>
-        <Parameter name="url" value="http://10.2.2.25:8888/goform/RPC2"/>
+        <Parameter name="url" value="http://10.118.51.25:8888/goform/RPC2"/>
       </Section>
     </Adaptor>
     <Adaptor type="bunarea.serial.bumpbar" startonload="true">

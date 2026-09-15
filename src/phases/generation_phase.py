@@ -143,6 +143,20 @@ def run_generation_phase(
     runtime: RuntimeContext,
 ) -> RuntimeContext:
 
+
+    store_db_result = prepare_store_db(
+        new_posdata_folder=(
+            runtime.new_posdata_folder
+        ),
+        output_folder="output"
+    )
+
+    runtime.store_db_generation = (
+        store_db_result
+    )
+
+
+
     #
     # POS
     #
@@ -308,17 +322,6 @@ def run_generation_phase(
     #
     # STORE COD
     #
-
-    store_db_result = prepare_store_db(
-        new_posdata_folder=(
-            runtime.new_posdata_folder
-        ),
-        output_folder="output"
-    )
-
-    runtime.store_db_generation = (
-        store_db_result
-    )
 
     store_db_config_result = (
         update_storedb_runtime_configuration(

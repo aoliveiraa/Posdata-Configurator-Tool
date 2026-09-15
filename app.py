@@ -1,114 +1,74 @@
 from pathlib import Path
 
-from src.runtime_context import (
-    RuntimeContext,
-)
-
-from src.resolution import (
-    resolve_missing_kvs,
-)
-
+from config.lab_loader import load_lab_config
 from src.phases import (
-    run_discovery_phase,
-    run_mapping_phase,
-    run_analysis_phase,
-    run_generation_phase,
-    run_validation_phase,
-    print_discovery_report,
-    print_mapping_report,
     print_analysis_report,
+    print_discovery_report,
     print_generation_report,
+    print_mapping_report,
     print_validation_report,
+    run_analysis_phase,
+    run_discovery_phase,
+    run_generation_phase,
+    run_mapping_phase,
+    run_validation_phase,
 )
-
-from src.resolution.pos_resolver import (
-    resolve_missing_positions
-)
-
-from config.lab_loader import (
-    load_lab_config,
-)
-
-from src.discovery.pos_browser_inventory import (
-    inventory_pos_browsers,
-)
+from src.phases.market_readiness_phase import run_market_readiness_phase
+from src.phases.reporting_phase import print_market_readiness_report
+from src.resolution import resolve_missing_kvs
+from src.resolution.pos_resolver import resolve_missing_positions
+from src.runtime_context import RuntimeContext
 
 
-from src.validators.pos_role_validator import (
-    validate_generated_pos_roles
-)
-
-from src.phases.market_readiness_phase import (
-    run_market_readiness_phase
-)
-
-from src.phases.reporting_phase import (
-    print_market_readiness_report
-)
+SUPPORTED_LABS = {
+    "RIO",
+    "RENEIGH",
+    "BR",
+}
 
 
-def main(
+def normalize_inputs(
     selected_lab=None,
     current_posdata_folder=None,
     new_posdata_folder=None,
 ):
-    runtime = RuntimeContext()
-
-    #
-    # INPUT NORMALIZATION
-    #
-
     normalized_lab = (
         str(selected_lab).strip().upper()
         if selected_lab
         else "RENEIGH"
     )
 
-    supported_labs = {
-        "RIO",
-        "RENEIGH",
-        "BR",
-    }
-
-    if normalized_lab not in supported_labs:
+    if normalized_lab not in SUPPORTED_LABS:
         raise ValueError(
             "Unsupported laboratory: "
             f"{selected_lab}. "
-            "Supported laboratories: "
-            "RIO, RENEIGH and BR."
+            "Supported laboratories: RIO, RENEIGH and BR."
         )
 
-    current_posdata_folder = Path(
+    current_folder = Path(
         current_posdata_folder
         or "samples/current_posdata"
     )
 
-    new_posdata_folder = Path(
+    new_folder = Path(
         new_posdata_folder
         or "samples/new_posdata"
     )
 
-    if not current_posdata_folder.is_dir():
+    if not current_folder.is_dir():
         raise FileNotFoundError(
             "Current PosData folder was not found: "
-            f"{current_posdata_folder}"
+            f"{current_folder}"
         )
 
-    if not new_posdata_folder.is_dir():
+    if not new_folder.is_dir():
         raise FileNotFoundError(
             "New PosData folder was not found: "
-            f"{new_posdata_folder}"
+            f"{new_folder}"
         )
 
-    store_db_path = (
-        new_posdata_folder
-        / "store-db.xml"
-    )
-
-    screen_xml_path = (
-        new_posdata_folder
-        / "screen.xml"
-    )
+    store_db_path = new_folder / "store-db.xml"
+    screen_xml_path = new_folder / "screen.xml"
 
     if not store_db_path.is_file():
         raise FileNotFoundError(
@@ -122,311 +82,126 @@ def main(
             f"{screen_xml_path}"
         )
 
-    #
-    # LAB CONFIGURATION
-    #
-
-    LAB = normalized_lab
-
-    lab_config = load_lab_config(
-        LAB
-    )
-
-    CONFIG_PATH = (
-        f"config/{LAB.lower()}_lab.json"
-    )
-
-    #
-    # RUNTIME CONFIGURATION
-    #
-
-    runtime.selected_lab = LAB
-    runtime.config_path = CONFIG_PATH
-
-    runtime.current_posdata_folder = (
-        current_posdata_folder
-    )
-
-    runtime.new_posdata_folder = (
-        new_posdata_folder
-    )
-
-    runtime.store_db_path = (
-        store_db_path
-    )
-
-    runtime.screen_xml_path = (
-        screen_xml_path
-    )
-
-    print()
-    print("UI CONFIGURATION")
-    print("-" * 50)
-    print(
-        f"Selected Lab: {LAB}"
-    )
-    print(
-        f"Configuration: {CONFIG_PATH}"
-    )
-    print(
-        "Current PosData: "
-        f"{current_posdata_folder}"
-    )
-    print(
-        "New PosData: "
-        f"{new_posdata_folder}"
-    )
-    print(
-        f"StoreDB: {store_db_path}"
-    )
-    print(
-        f"Screen XML: {screen_xml_path}"
-    )
-
-    #
-    # DISCOVERY
-    #
-
-    runtime = run_discovery_phase(
-        runtime
-    )
-
-    runtime.selected_lab = LAB
-    runtime.config_path = CONFIG_PATH
-
-    #
-    # DISCOVERY
-    #
-
-    runtime = run_discovery_phase(
-        runtime
-    )
-
-    #
-    # MAPPING
-    #
-
-    runtime = run_mapping_phase(
-        runtime
-    )
-
-    runtime.pos_mapping = (
-        resolve_missing_positions(
-            runtime.pos_mapping
-        )
-    )
-
-
-
-    #
-    # ANALYSIS
-    #
-
-    runtime = run_analysis_phase(
-        runtime
-    )
-
-    runtime.kvs_mapping = (
-        resolve_missing_kvs(
-            runtime.kvs_mapping
-        )
-    )
-
-    runtime = run_market_readiness_phase(
-        runtime
-    )
-
-    print_market_readiness_report(
-        runtime
-    )
-    
-    #
-    # GENERATION
-    #
-
-    runtime = run_generation_phase(
-        runtime
-    )
-
-    runtime = run_validation_phase(
-        runtime
-    )
-
-    #
-    # SHORTCUTS
-    #
-
-    market = runtime.market
-    info = runtime.store_info
-    screens = runtime.screens
-    lunch_screen = runtime.lunch_screen
-
-    nodes = runtime.nodes
-    reference = runtime.reference_analysis
-
-    itonas = runtime.itonas
-    kvs_mapping = runtime.kvs_mapping
-
-    cod_target = runtime.cod_target
-    foe_info = runtime.foe_result
-
-    dynamic_pos_discovery = (
-        runtime.dynamic_pos_discovery
-    )
-
-    dynamic_pos_mapping = (
-        runtime.dynamic_pos_mapping
-    )
-
-    dynamic_reference_pos_files = (
-        runtime.dynamic_reference_pos_files
-    )
-
-    runtime_pos_machine_lookup = (
-        runtime.runtime_pos_machine_lookup
-    )
-
-    pos_mapping = (
-        runtime.pos_mapping
-    )
-
-    pos_machine_mapping = (
-        runtime.pos_machine_mapping
-    )
-
-    generated_pos = (
-        runtime.generated_pos
-    )
-
-    xmlrpccli_result = (
-        runtime.xmlrpccli_result
-    )
-
-    generated_way = (
-        runtime.generated_way
-    )
-
-    generated_production = (
-        runtime.generated_production
-    )
-
-    generated_foe = (
-        runtime.generated_foe
-    )
-
-    generated_itonas = (
-        runtime.generated_itonas
-    )
-
-    generated_cod = (
-        runtime.generated_cod
-    )
-
-    generated_store_cod = (
-        runtime.generated_store_cod
-    )
-
-    store_db = runtime.store_db_path
-
-    print_discovery_report(
-        runtime
-    )
-
-    print_mapping_report(
-        runtime
-    )
-
-    print_analysis_report(
-        runtime
-    )
-
-    print_generation_report(
-        runtime
-    )
-
-    print_validation_report(
-        runtime
-    )
-
-
-    # Integrates Ticket 10.1/10.2 with the existing POS transformer.
-    # The selected source files come from dynamic discovery, while the
-    # physical output machine is resolved by the lab IP. This avoids
-    # assuming that logical POS numbers are identical across markets.
-    machine_by_ip = {
-        str(item.get("ip", "")).strip(): item
-        for item in pos_machine_mapping
-        if str(item.get("ip", "")).strip()
+    return {
+        "lab": normalized_lab,
+        "config_path": (
+            f"config/{normalized_lab.lower()}_lab.json"
+        ),
+        "current_folder": current_folder,
+        "new_folder": new_folder,
+        "store_db_path": store_db_path,
+        "screen_xml_path": screen_xml_path,
     }
 
 
-    ready_count = sum(
-        item["status"] == "READY"
-        for item in pos_mapping["mappings"]
+def configure_runtime(runtime, inputs):
+    runtime.selected_lab = inputs["lab"]
+    runtime.config_path = inputs["config_path"]
+    runtime.current_posdata_folder = inputs["current_folder"]
+    runtime.new_posdata_folder = inputs["new_folder"]
+    runtime.store_db_path = inputs["store_db_path"]
+    runtime.screen_xml_path = inputs["screen_xml_path"]
+    return runtime
+
+
+def print_ui_configuration(inputs):
+    print()
+    print("UI CONFIGURATION")
+    print("-" * 50)
+    print(f"Selected Lab: {inputs['lab']}")
+    print(f"Configuration: {inputs['config_path']}")
+    print(f"Current PosData: {inputs['current_folder']}")
+    print(f"New PosData: {inputs['new_folder']}")
+    print(f"StoreDB: {inputs['store_db_path']}")
+    print(f"Screen XML: {inputs['screen_xml_path']}")
+
+
+def main(
+    selected_lab=None,
+    current_posdata_folder=None,
+    new_posdata_folder=None,
+):
+    inputs = normalize_inputs(
+        selected_lab=selected_lab,
+        current_posdata_folder=current_posdata_folder,
+        new_posdata_folder=new_posdata_folder,
     )
 
-    
-    expected_count = len(dynamic_pos_mapping.get("mappings", []))
+    # Validate that the selected laboratory configuration exists.
+    load_lab_config(inputs["lab"])
 
-    if ready_count != expected_count:
-        pos_mapping["warnings"].append(
-            f"Expected {expected_count} ready POS mappings, "
-            f"but found {ready_count}."
-        )
-
-    pos_browsers = inventory_pos_browsers(
-        "samples/current_posdata"
+    runtime = configure_runtime(
+        RuntimeContext(),
+        inputs,
     )
 
+    print_ui_configuration(inputs)
 
+    # ==================================================
+    # DISCOVERY
+    # ==================================================
+    runtime = run_discovery_phase(runtime)
 
-    runtime = run_generation_phase(
-        runtime
+    # Some phase implementations may return a new context.
+    # Preserve the UI-selected values explicitly.
+    runtime = configure_runtime(runtime, inputs)
+
+    # ==================================================
+    # MAPPING AND RESOLUTIONS
+    # ==================================================
+    runtime = run_mapping_phase(runtime)
+
+    runtime.pos_mapping = resolve_missing_positions(
+        runtime.pos_mapping
     )
 
-    generated_pos = runtime.generated_pos
+    # ==================================================
+    # ANALYSIS
+    # ==================================================
+    runtime = run_analysis_phase(runtime)
 
-    xmlrpccli_result = runtime.xmlrpccli_result
-
-    generated_way = runtime.generated_way
-
-    generated_production = (
-        runtime.generated_production
+    runtime.kvs_mapping = resolve_missing_kvs(
+        runtime.kvs_mapping
     )
 
-    generated_foe = (
-        runtime.generated_foe
-    )
+    # ==================================================
+    # MARKET READINESS
+    # ==================================================
+    runtime = run_market_readiness_phase(runtime)
+    print_market_readiness_report(runtime)
 
-    generated_itonas = (
-        runtime.generated_itonas
-    )
+    # ==================================================
+    # GENERATION
+    # ==================================================
+    runtime = run_generation_phase(runtime)
 
-    generated_cod = (
-        runtime.generated_cod
-    )
+    # ==================================================
+    # VALIDATION
+    # ==================================================
+    runtime = run_validation_phase(runtime)
 
-    generated_store_cod = (
-        runtime.generated_store_cod
-    )
-
-
-    runtime = run_validation_phase(
-        runtime
-    )
-
-    print_generation_report(
-        runtime
-    )
+    # ==================================================
+    # REPORTING
+    # Each report is printed exactly once.
+    # ==================================================
+    print_discovery_report(runtime)
+    print_mapping_report(runtime)
+    print_analysis_report(runtime)
+    print_generation_report(runtime)
+    print_validation_report(runtime)
 
     print_execution_summary(
-        generated_pos=generated_pos,
-        generated_way=generated_way,
-        generated_foe=generated_foe,
-        generated_itonas=generated_itonas,
-        generated_cod=generated_cod,
-        generated_store_cod=generated_store_cod,
+        generated_pos=runtime.generated_pos or [],
+        generated_way=runtime.generated_way or {},
+        generated_foe=runtime.generated_foe or [],
+        generated_itonas=runtime.generated_itonas or [],
+        generated_cod=runtime.generated_cod or {},
+        generated_store_cod=(
+            runtime.generated_store_cod or {}
+        ),
     )
+
+    return runtime
 
 
 def print_execution_summary(
@@ -445,156 +220,124 @@ def print_execution_summary(
     summary_warnings = []
     summary_errors = []
 
-    #
     # POS
-    #
     total_pos = len(generated_pos)
-
     generated_pos_count = sum(
-        result.get("generated", False)
+        bool(result.get("generated", False))
         for result in generated_pos
     )
 
-    if generated_pos_count == total_pos:
+    if total_pos > 0 and generated_pos_count == total_pos:
         print(
-            f"POS       : ✅ GENERATED "
+            "POS       : GENERATED "
             f"({generated_pos_count}/{total_pos})"
         )
     else:
         print(
-            f"POS       : ⚠ GENERATED "
+            "POS       : WARNING "
             f"({generated_pos_count}/{total_pos})"
         )
+        summary_warnings.append(
+            "One or more POS files were not generated."
+        )
 
-    #
     # WAY
-    #
     if generated_way.get("generated"):
-        print("WAY       : ✅ GENERATED")
+        print("WAY       : GENERATED")
     else:
-        print("WAY       : ❌ FAILED")
-        summary_errors.append(
-            "WAY generation failed"
-        )
+        print("WAY       : FAILED")
+        summary_errors.append("WAY generation failed")
 
-    #
-    # FOE
-    #
-    foe_generated = all(
+    # FOE is validated inside the generated WAYSTATION file.
+    foe_generated = bool(generated_foe) and all(
         item.get("generated", False)
         for item in generated_foe
     )
 
     if foe_generated:
-        print("FOE       : ✅ GENERATED")
+        print("FOE       : GENERATED")
     else:
-        print("FOE       : ❌ FAILED")
-        summary_errors.append(
-            "FOE generation failed"
-        )
+        print("FOE       : FAILED")
+        summary_errors.append("FOE generation failed")
 
-    #
     # COD
-    #
     if generated_cod.get("generated"):
-        print("COD       : ✅ GENERATED")
+        print("COD       : GENERATED")
     else:
-        print("COD       : ❌ FAILED")
-        summary_errors.append(
-            "COD generation failed"
-        )
+        print("COD       : FAILED")
+        summary_errors.append("COD generation failed")
 
-    #
     # STORE COD
-    #
     if generated_store_cod.get("generated"):
-        print("STORE COD : ✅ GENERATED")
+        print("STORE COD : GENERATED")
     else:
-        print("STORE COD : ❌ FAILED")
-        summary_errors.append(
-            "Store COD generation failed"
-        )
+        print("STORE COD : FAILED")
+        summary_errors.append("Store COD generation failed")
 
-    #
     # ITONAS
-    #
     generated_itona_count = sum(
-        result.get("generated", False)
+        bool(result.get("generated", False))
         for result in generated_itonas
     )
-
     total_itonas = len(generated_itonas)
 
     print(
-        f"ITONAS    : "
+        "ITONAS    : "
         f"{generated_itona_count}/{total_itonas}"
     )
 
     for result in generated_itonas:
+        machine = result.get("machine", "UNKNOWN")
 
         if result.get("generated"):
-            print(
-                f"  ✅ {result['machine']}"
-            )
+            print(f"  OK {machine}")
         else:
-            print(
-                f"  ⚠ {result['machine']}"
-            )
-
+            print(f"  WARNING {machine}")
             summary_warnings.extend(
                 result.get("warnings", [])
             )
-
             summary_errors.extend(
                 result.get("errors", [])
             )
 
-    #
-    # ISSUES
-    #
-    if summary_warnings or summary_errors:
+    if generated_itona_count != total_itonas:
+        summary_warnings.append(
+            "One or more Itona files were not generated."
+        )
 
+    # Avoid repeated messages in the summary.
+    summary_warnings = list(
+        dict.fromkeys(summary_warnings)
+    )
+    summary_errors = list(
+        dict.fromkeys(summary_errors)
+    )
+
+    if summary_warnings or summary_errors:
         print()
         print("-" * 50)
         print("ISSUES")
         print("-" * 50)
 
         for warning in summary_warnings:
-            print(
-                f"⚠ {warning}"
-            )
+            print(f"WARNING: {warning}")
 
         for error in summary_errors:
-            print(
-                f"❌ {error}"
-            )
+            print(f"ERROR: {error}")
 
-    #
-    # OVERALL STATUS
-    #
     print()
     print("-" * 50)
     print("OVERALL STATUS")
     print("-" * 50)
 
     if summary_errors:
-
-        print("❌ FAILED")
-
+        print("FAILED")
     elif summary_warnings:
-
-        print(
-            "✅ SUCCESS WITH WARNINGS"
-        )
-
+        print("SUCCESS WITH WARNINGS")
     else:
-
-        print(
-            "✅ SUCCESS"
-        )
+        print("SUCCESS")
 
     print("=" * 50)
-
 
 
 if __name__ == "__main__":

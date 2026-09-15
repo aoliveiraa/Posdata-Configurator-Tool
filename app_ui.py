@@ -10,50 +10,47 @@ from app import main
 
 
 class PosDataConfiguratorUI:
-    BG = "#15171c"
-    PANEL = "#1f2229"
-    PANEL_LIGHT = "#272b33"
-    ENTRY = "#111318"
-    BORDER = "#343a46"
-    PRIMARY = "#2563eb"
-    PRIMARY_HOVER = "#1d4ed8"
-    TEXT = "#f8fafc"
-    MUTED = "#aeb6c2"
-    SUCCESS = "#4ade80"
-    WARNING = "#facc15"
-    ERROR = "#f87171"
-    RUNNING = "#60a5fa"
-    LOG_BG = "#0d1117"
+    BG = "#07111f"
+    SIDEBAR = "#0a1727"
+    PANEL = "#0d1b2c"
+    PANEL_ALT = "#101f32"
+    ENTRY = "#0a1625"
+    BORDER = "#29405a"
+    PRIMARY = "#1677ff"
+    PRIMARY_DARK = "#105fc8"
+    TEXT = "#f2f6fb"
+    MUTED = "#9fb0c4"
+    SUCCESS = "#52d273"
+    WARNING = "#f5c451"
+    ERROR = "#ff6b6b"
+    INFO = "#58a6ff"
 
     LABS = {
-        "RIO": "10.118.57",
-        "RENEIGH": "10.118.51",
-        "BR": "10.0.12",
+        "RENEIGH": "10.118.51.0/24",
+        "RIO": "10.118.57.0/24",
+        "BR": "10.0.12.0/24",
     }
-
-    SUMMARY_KEYS = (
-        "POS",
-        "WAY",
-        "FOE",
-        "COD",
-        "STORE COD",
-        "ITONAS",
-        "OVERALL",
+    NAV_ITEMS = (
+        "Dashboard", "Discovery", "Resolutions", "Readiness",
+        "Generation", "Output", "Settings",
     )
+    STEPS = ("Discovery", "Resolutions", "Readiness", "Generation", "Output")
 
     def __init__(self, root):
         self.root = root
         self.running = False
-        self.lab_cards = {}
-        self.summary_cards = {}
-        self.browse_buttons = []
+        self.execution_id = 0
+        self.views = {}
+        self.nav_buttons = {}
+        self.lab_buttons = {}
+        self.progress_steps = {}
+        self.progress_connectors = []
+        self.readiness_rows = {}
+        self.readiness_page_rows = {}
         self.execution_options = {}
-        self.preflight_labels = {}
-        self.log_visible = True
 
         self.project_folder = os.path.dirname(os.path.abspath(__file__))
         self.output_folder = os.path.join(self.project_folder, "output")
-
         self.current_folder = tk.StringVar(
             value=os.path.join(self.project_folder, "samples", "current_posdata")
         )
@@ -61,747 +58,491 @@ class PosDataConfiguratorUI:
             value=os.path.join(self.project_folder, "samples", "new_posdata")
         )
         self.selected_lab = tk.StringVar(value="RENEIGH")
-        self.status_var = tk.StringVar(value="Ready to configure")
-        self.current_folder.trace_add("write", lambda *_: self.defer_preflight_update())
-        self.new_folder.trace_add("write", lambda *_: self.defer_preflight_update())
+        self.status_var = tk.StringVar(value="Ready")
 
         self.configure_window()
-        self.build_interface()
+        self.build_shell()
         self.select_lab("RENEIGH")
-        self.reset_summary()
-        self.update_preflight_validation()
+        self.reset_progress()
 
     def configure_window(self):
-        self.root.title("PosData Configurator")
-        self.root.geometry("1450x920")
-        self.root.minsize(1100, 760)
+        self.root.title("PosData Configurator Tool")
+        self.root.geometry("1536x1024")
+        self.root.minsize(1180, 760)
         self.root.configure(bg=self.BG)
-        self.root.grid_columnconfigure(0, weight=1)
-        self.root.grid_rowconfigure(4, weight=1)
+        self.root.grid_columnconfigure(1, weight=1)
+        self.root.grid_rowconfigure(1, weight=1)
         try:
             self.root.state("zoomed")
         except tk.TclError:
             pass
 
-    def build_interface(self):
+    def build_shell(self):
+        self.build_title_bar()
+        self.build_sidebar()
+        self.main_frame = tk.Frame(self.root, bg=self.BG)
+        self.main_frame.grid(row=1, column=1, sticky="nsew")
+        self.main_frame.grid_columnconfigure(0, weight=1)
+        self.main_frame.grid_rowconfigure(2, weight=1)
         self.build_header()
-        self.build_configuration_panel()
-        self.build_hero_status_card()
-        self.build_summary_panel()
-        self.build_log_panel()
-        self.build_status_bar()
+        self.build_progress()
+        self.build_content()
+        self.build_footer()
+
+    def build_title_bar(self):
+        bar = tk.Frame(self.root, bg="#081422", height=42)
+        bar.grid(row=0, column=0, columnspan=2, sticky="ew")
+        bar.grid_propagate(False)
+        tk.Label(bar, text="  PosData Configurator Tool", bg="#081422", fg=self.TEXT,
+                 font=("Segoe UI", 10)).pack(side="left", pady=11)
+
+    def build_sidebar(self):
+        sidebar = tk.Frame(self.root, bg=self.SIDEBAR, width=230,
+                           highlightbackground=self.BORDER, highlightthickness=1)
+        sidebar.grid(row=1, column=0, sticky="nsew")
+        sidebar.grid_propagate(False)
+        sidebar.grid_rowconfigure(8, weight=1)
+        for row, item in enumerate(self.NAV_ITEMS):
+            button = tk.Button(
+                sidebar, text=f"  {item}", anchor="w",
+                command=lambda name=item: self.show_view(name),
+                bg=self.SIDEBAR, fg=self.TEXT,
+                activebackground="#123765", activeforeground="#75b7ff",
+                relief="flat", bd=0, cursor="hand2", padx=20, pady=13,
+                font=("Segoe UI", 11),
+            )
+            button.grid(row=row, column=0, sticky="ew", padx=10,
+                        pady=(12 if row == 0 else 1, 0))
+            self.nav_buttons[item] = button
+
+        lab_card = self.card(sidebar)
+        lab_card.grid(row=9, column=0, sticky="ew", padx=14, pady=(10, 12))
+        tk.Label(lab_card, text="CURRENT LAB", bg=self.PANEL, fg=self.MUTED,
+                 font=("Segoe UI", 9, "bold")).pack(anchor="w", padx=16, pady=(14, 5))
+        self.sidebar_lab = tk.Label(lab_card, text="RENEIGH", bg=self.PANEL,
+                                    fg=self.SUCCESS, font=("Segoe UI", 11, "bold"))
+        self.sidebar_lab.pack(anchor="w", padx=16)
+        tk.Label(lab_card, text="Network Prefix", bg=self.PANEL, fg=self.MUTED,
+                 font=("Segoe UI", 9)).pack(anchor="w", padx=16, pady=(14, 2))
+        self.sidebar_network = tk.Label(lab_card, text=self.LABS["RENEIGH"],
+                                        bg=self.PANEL, fg=self.TEXT, font=("Segoe UI", 10))
+        self.sidebar_network.pack(anchor="w", padx=16, pady=(0, 14))
 
     def build_header(self):
-        header = tk.Frame(self.root, bg=self.BG)
-        header.grid(row=0, column=0, sticky="ew", padx=28, pady=(18, 8))
+        header = tk.Frame(self.main_frame, bg=self.BG)
+        header.grid(row=0, column=0, sticky="ew", padx=28, pady=(20, 8))
         header.grid_columnconfigure(0, weight=1)
+        tk.Label(header, text="PosData Configurator", bg=self.BG, fg=self.TEXT,
+                 font=("Segoe UI", 24, "bold")).grid(row=0, column=0, sticky="w")
+        tk.Label(header, text="Automated configuration and generation for PosData environments",
+                 bg=self.BG, fg=self.MUTED, font=("Segoe UI", 10)).grid(
+                     row=1, column=0, sticky="w", pady=(2, 0))
+        tk.Label(header, text="v2.1.0", bg="#0c2c50", fg="#72b8ff",
+                 padx=10, pady=4, font=("Segoe UI", 9)).grid(
+                     row=0, column=1, rowspan=2, sticky="e")
 
-        title_box = tk.Frame(header, bg=self.BG)
-        title_box.grid(row=0, column=0, sticky="w")
+    def build_progress(self):
+        frame = tk.Frame(self.main_frame, bg=self.BG)
+        frame.grid(row=1, column=0, sticky="ew", padx=35, pady=(5, 14))
+        for index, name in enumerate(self.STEPS):
+            circle = tk.Label(frame, text=str(index + 1), bg=self.BORDER, fg=self.TEXT,
+                              width=2, pady=5, font=("Segoe UI", 10, "bold"))
+            circle.grid(row=0, column=index * 2)
+            title = tk.Label(frame, text=name, bg=self.BG, fg=self.TEXT,
+                             font=("Segoe UI", 9))
+            title.grid(row=1, column=index * 2, pady=(4, 0))
+            status = tk.Label(frame, text="PENDING", bg=self.BG, fg=self.MUTED,
+                              font=("Segoe UI", 7))
+            status.grid(row=2, column=index * 2)
+            self.progress_steps[name] = {"circle": circle, "title": title, "status": status}
+            if index < len(self.STEPS) - 1:
+                frame.grid_columnconfigure(index * 2 + 1, weight=1)
+                connector = tk.Frame(frame, bg=self.BORDER, height=2)
+                connector.grid(row=0, column=index * 2 + 1, sticky="ew")
+                self.progress_connectors.append(connector)
 
-        tk.Label(
-            title_box,
-            text="PosData Configurator",
-            bg=self.BG,
-            fg=self.TEXT,
-            font=("Segoe UI", 27, "bold"),
-        ).pack(anchor="w")
+    def reset_progress(self):
+        self.set_progress(active_step=None, completed_steps=[])
 
-        tk.Label(
-            title_box,
-            text="Multi-Lab Configuration Automation  |  Simplify  |  Validate  |  Generate",
-            bg=self.BG,
-            fg=self.MUTED,
-            font=("Segoe UI", 11),
-        ).pack(anchor="w", pady=(3, 0))
-
-        self.header_status_label = tk.Label(
-            header,
-            text="READY",
-            bg=self.PANEL_LIGHT,
-            fg=self.SUCCESS,
-            font=("Segoe UI", 10, "bold"),
-            padx=18,
-            pady=9,
-        )
-        self.header_status_label.grid(row=0, column=1, sticky="e")
-
-    def build_configuration_panel(self):
-        panel = tk.Frame(
-            self.root,
-            bg=self.PANEL,
-            highlightbackground=self.BORDER,
-            highlightthickness=1,
-        )
-        panel.grid(row=1, column=0, sticky="ew", padx=28, pady=10)
-        panel.grid_columnconfigure(1, weight=1)
-
-        tk.Label(
-            panel,
-            text="CONFIGURATION",
-            bg=self.PANEL,
-            fg=self.TEXT,
-            font=("Segoe UI", 11, "bold"),
-        ).grid(row=0, column=0, columnspan=3, sticky="w", padx=20, pady=(15, 10))
-
-        self.current_entry = self.build_folder_row(
-            panel, 1, "Current PosData Folder", self.current_folder, self.browse_current
-        )
-        self.new_entry = self.build_folder_row(
-            panel, 2, "New PosData Folder", self.new_folder, self.browse_new
-        )
-
-        tk.Frame(panel, height=1, bg=self.BORDER).grid(
-            row=3, column=0, columnspan=3, sticky="ew", padx=20, pady=(12, 10)
-        )
-
-        tk.Label(
-            panel,
-            text="Target Laboratory",
-            bg=self.PANEL,
-            fg=self.MUTED,
-            font=("Segoe UI", 10, "bold"),
-        ).grid(row=4, column=0, sticky="nw", padx=(20, 15), pady=6)
-
-        labs = tk.Frame(panel, bg=self.PANEL)
-        labs.grid(row=4, column=1, columnspan=2, sticky="w", padx=(10, 20), pady=2)
-
-        for index, (lab, prefix) in enumerate(self.LABS.items()):
-            card = tk.Button(
-                labs,
-                text=f"{lab}\n{prefix}",
-                command=lambda name=lab: self.select_lab(name),
-                width=19,
-                height=3,
-                bg=self.PANEL_LIGHT,
-                fg=self.MUTED,
-                activebackground=self.PRIMARY_HOVER,
-                activeforeground=self.TEXT,
-                relief="flat",
-                bd=0,
-                highlightthickness=1,
-                highlightbackground=self.BORDER,
-                cursor="hand2",
-                font=("Segoe UI", 10, "bold"),
-            )
-            card.grid(row=0, column=index, padx=(0, 12))
-            self.lab_cards[lab] = card
-
-        actions = tk.Frame(panel, bg=self.PANEL)
-        actions.grid(row=5, column=0, columnspan=3, sticky="ew", padx=20, pady=(17, 17))
-        actions.grid_columnconfigure(0, weight=3)
-        actions.grid_columnconfigure(1, weight=1)
-
-        self.run_button = tk.Button(
-            actions,
-            text="RUN CONFIGURATION",
-            command=self.run_configuration,
-            bg=self.PRIMARY,
-            fg=self.TEXT,
-            activebackground=self.PRIMARY_HOVER,
-            activeforeground=self.TEXT,
-            relief="flat",
-            bd=0,
-            cursor="hand2",
-            height=2,
-            font=("Segoe UI", 12, "bold"),
-        )
-        self.run_button.grid(row=0, column=0, sticky="ew", padx=(0, 10))
-
-        self.output_button = tk.Button(
-            actions,
-            text="OPEN OUTPUT",
-            command=self.open_output,
-            bg=self.PANEL_LIGHT,
-            fg=self.TEXT,
-            activebackground=self.BORDER,
-            activeforeground=self.TEXT,
-            relief="flat",
-            bd=0,
-            cursor="hand2",
-            height=2,
-            font=("Segoe UI", 10, "bold"),
-        )
-        self.output_button.grid(row=0, column=1, sticky="ew")
-
-    def build_folder_row(self, parent, row, label, variable, command):
-        tk.Label(
-            parent,
-            text=label,
-            bg=self.PANEL,
-            fg=self.MUTED,
-            font=("Segoe UI", 10, "bold"),
-        ).grid(row=row, column=0, sticky="w", padx=(20, 15), pady=7)
-
-        entry = tk.Entry(
-            parent,
-            textvariable=variable,
-            bg=self.ENTRY,
-            fg=self.TEXT,
-            insertbackground=self.TEXT,
-            selectbackground=self.PRIMARY,
-            selectforeground=self.TEXT,
-            relief="flat",
-            bd=0,
-            font=("Segoe UI", 10),
-        )
-        entry.grid(row=row, column=1, sticky="ew", padx=10, pady=7, ipady=9)
-
-        button = tk.Button(
-            parent,
-            text="Browse",
-            command=command,
-            bg=self.PANEL_LIGHT,
-            fg=self.TEXT,
-            activebackground=self.BORDER,
-            activeforeground=self.TEXT,
-            relief="flat",
-            bd=0,
-            cursor="hand2",
-            width=13,
-            font=("Segoe UI", 9, "bold"),
-        )
-        button.grid(row=row, column=2, padx=(0, 20), pady=7, ipady=7)
-        self.browse_buttons.append(button)
-        return entry
-
-    def select_lab(self, lab_name):
-        if self.running:
-            return
-        self.selected_lab.set(lab_name)
-        for name, card in self.lab_cards.items():
-            selected = name == lab_name
-            card.configure(
-                bg=self.PRIMARY if selected else self.PANEL_LIGHT,
-                fg=self.TEXT if selected else self.MUTED,
-                highlightbackground=self.RUNNING if selected else self.BORDER,
-                highlightthickness=2 if selected else 1,
-            )
-        if hasattr(self, "lab_status_label"):
-            self.lab_status_label.configure(text=f"Selected Lab: {lab_name}")
-        if hasattr(self, "hero_frame") and not self.running:
-            self.set_hero_status(
-                "READY TO CONFIGURE",
-                f"Target laboratory: {lab_name} | Network prefix: {self.LABS[lab_name]}",
-                "ready",
-            )
-        if hasattr(self, "preflight_overall_label"):
-            self.update_preflight_validation()
-
-    def build_hero_status_card(self):
-        self.hero_frame = tk.Frame(
-            self.root,
-            bg="#20283a",
-            highlightbackground=self.PRIMARY,
-            highlightthickness=2,
-        )
-        self.hero_frame.grid(
-            row=2,
-            column=0,
-            sticky="ew",
-            padx=28,
-            pady=(2, 8),
-        )
-        self.hero_frame.grid_columnconfigure(0, weight=1)
-        self.hero_frame.grid_columnconfigure(1, weight=2)
-
-        status_box = tk.Frame(self.hero_frame, bg="#20283a")
-        status_box.grid(row=0, column=0, sticky="nsew", padx=(20, 16), pady=12)
-
-        self.hero_title_label = tk.Label(
-            status_box,
-            text="READY TO CONFIGURE",
-            bg="#20283a",
-            fg=self.SUCCESS,
-            font=("Segoe UI", 18, "bold"),
-            anchor="w",
-        )
-        self.hero_title_label.pack(anchor="w")
-
-        self.hero_detail_label = tk.Label(
-            status_box,
-            text="Select the folders and target laboratory.",
-            bg="#20283a",
-            fg=self.MUTED,
-            font=("Segoe UI", 9),
-            anchor="w",
-            justify="left",
-        )
-        self.hero_detail_label.pack(anchor="w", pady=(3, 9))
-
-        self.preflight_overall_label = tk.Label(
-            status_box,
-            text="CHECKING INPUTS",
-            bg="#20283a",
-            fg=self.WARNING,
-            font=("Segoe UI", 10, "bold"),
-            anchor="w",
-        )
-        self.preflight_overall_label.pack(anchor="w")
-
-        checks_box = tk.Frame(self.hero_frame, bg="#20283a")
-        checks_box.grid(row=0, column=1, sticky="nsew", padx=(16, 20), pady=12)
-
-        tk.Label(
-            checks_box,
-            text="PRE-FLIGHT VALIDATION",
-            bg="#20283a",
-            fg=self.TEXT,
-            font=("Segoe UI", 10, "bold"),
-            anchor="w",
-        ).grid(row=0, column=0, columnspan=3, sticky="w", pady=(0, 7))
-
-        checks = (
-            ("current", "Current PosData"),
-            ("new", "New PosData"),
-            ("lab", "Laboratory"),
-            ("storedb", "store-db.xml"),
-            ("screen", "screen.xml"),
-        )
-
-        for index, (key, label_text) in enumerate(checks):
-            row = 1 + index // 3
-            column = index % 3
-            label = tk.Label(
-                checks_box,
-                text=f"[ ] {label_text}",
-                bg="#20283a",
-                fg=self.MUTED,
-                font=("Segoe UI", 9),
-                anchor="w",
-                padx=0,
-            )
-            label.grid(row=row, column=column, sticky="w", padx=(0, 22), pady=3)
-            self.preflight_labels[key] = label
-
-    def set_hero_status(self, title, detail, state):
-        colors = {
-            "ready": self.SUCCESS,
-            "running": self.RUNNING,
-            "success": self.SUCCESS,
-            "warning": self.WARNING,
-            "error": self.ERROR,
-        }
-        backgrounds = {
-            "ready": "#20283a",
-            "running": "#1e2b42",
-            "success": "#183327",
-            "warning": "#3a321a",
-            "error": "#3b2023",
-        }
-        borders = {
-            "ready": self.PRIMARY,
-            "running": self.RUNNING,
-            "success": self.SUCCESS,
-            "warning": self.WARNING,
-            "error": self.ERROR,
-        }
-
-        background = backgrounds[state]
-        self.hero_frame.configure(
-            bg=background,
-            highlightbackground=borders[state],
-        )
-        self.hero_title_label.configure(
-            text=title,
-            bg=background,
-            fg=colors[state],
-        )
-        self.hero_detail_label.configure(
-            text=detail,
-            bg=background,
-            fg=self.TEXT if state != "ready" else self.MUTED,
-        )
-        for child in self.hero_frame.winfo_children():
-            child.configure(bg=background)
-            for nested in child.winfo_children():
-                nested.configure(bg=background)
-
-    def update_preflight_validation(self):
-        current_path = self.current_folder.get().strip()
-        new_path = self.new_folder.get().strip()
-
-        checks = {
-            "current": os.path.isdir(current_path),
-            "new": os.path.isdir(new_path),
-            "lab": self.selected_lab.get() in self.LABS,
-            "storedb": os.path.isfile(os.path.join(new_path, "store-db.xml")),
-            "screen": os.path.isfile(os.path.join(new_path, "screen.xml")),
-        }
-
-        labels = {
-            "current": "Current PosData",
-            "new": "New PosData",
-            "lab": "Laboratory",
-            "storedb": "store-db.xml",
-            "screen": "screen.xml",
-        }
-
-        for key, valid in checks.items():
-            label = self.preflight_labels.get(key)
-            if label is not None:
-                label.configure(
-                    text=f"{'OK' if valid else 'X'}  {labels[key]}",
-                    fg=self.SUCCESS if valid else self.ERROR,
-                )
-
-        ready = all(checks.values())
-        if ready:
-            self.preflight_overall_label.configure(
-                text="READY TO RUN",
-                fg=self.SUCCESS,
-            )
-        else:
-            missing_count = sum(not value for value in checks.values())
-            self.preflight_overall_label.configure(
-                text=f"{missing_count} CHECK(S) REQUIRED",
-                fg=self.ERROR,
-            )
-
-        if not self.running:
-            self.run_button.configure(state=tk.NORMAL if ready else tk.DISABLED)
-
-        return ready
-
-    def refresh_preflight_from_entry(self, _event=None):
-        self.update_preflight_validation()
-
-    def build_summary_panel(self):
-        panel = tk.Frame(self.root, bg=self.BG)
-        panel.grid(row=3, column=0, sticky="ew", padx=28, pady=(2, 7))
-
-        tk.Label(
-            panel,
-            text="LAST EXECUTION SUMMARY",
-            bg=self.BG,
-            fg=self.TEXT,
-            font=("Segoe UI", 11, "bold"),
-        ).pack(anchor="w", pady=(0, 8))
-
-        cards = tk.Frame(panel, bg=self.BG)
-        cards.pack(fill="x")
-
-        icons = {
-            "POS": "POS",
-            "WAY": "WAY",
-            "FOE": "FOE",
-            "COD": "COD",
-            "STORE COD": "STORE COD",
-            "ITONAS": "ITONAS",
-            "OVERALL": "OVERALL STATUS",
-        }
-
-        for column in range(8):
-            cards.grid_columnconfigure(column, weight=1, uniform="summary")
-
-        positions = {
-            "POS": (0, 1),
-            "WAY": (1, 1),
-            "FOE": (2, 1),
-            "COD": (3, 1),
-            "STORE COD": (4, 1),
-            "ITONAS": (5, 1),
-            "OVERALL": (6, 2),
-        }
-
-        for key in self.SUMMARY_KEYS:
-            column, span = positions[key]
-            accent = key == "OVERALL"
-            base_bg = "#20283a" if accent else self.PANEL
-            frame = tk.Frame(
-                cards,
-                bg=base_bg,
-                highlightbackground=self.PRIMARY if accent else self.BORDER,
-                highlightthickness=2 if accent else 1,
-            )
-            frame.grid(
-                row=0,
-                column=column,
-                columnspan=span,
-                sticky="nsew",
-                padx=(0, 8),
-                ipady=4,
-            )
-            title = tk.Label(
-                frame,
-                text=icons[key],
-                bg=base_bg,
-                fg=self.MUTED,
-                font=("Segoe UI", 9 if not accent else 10, "bold"),
-            )
-            title.pack(pady=(9, 2))
-            value = tk.Label(
-                frame,
-                text="NOT RUN",
-                bg=base_bg,
-                fg=self.MUTED,
-                font=("Segoe UI", 11 if not accent else 14, "bold"),
-            )
-            value.pack(pady=(0, 9))
-            self.summary_cards[key] = {
-                "frame": frame,
-                "title": title,
-                "value": value,
-                "base_bg": base_bg,
-            }
-
-    def update_summary_card(self, key, value, state):
-        card = self.summary_cards[key]
-        colors = {
-            "idle": self.MUTED,
-            "running": self.RUNNING,
-            "success": self.SUCCESS,
-            "warning": self.WARNING,
-            "error": self.ERROR,
-        }
-        backgrounds = {
-            "idle": card["base_bg"],
-            "running": "#1e2b42",
-            "success": "#183327",
-            "warning": "#3a321a",
-            "error": "#3b2023",
-        }
-        bg = backgrounds[state]
-        card["frame"].configure(bg=bg)
-        card["title"].configure(bg=bg)
-        card["value"].configure(text=value, fg=colors[state], bg=bg)
-
-    def reset_summary(self):
-        for key in self.SUMMARY_KEYS:
-            self.update_summary_card(key, "NOT RUN", "idle")
-
-    def set_summary_running(self):
-        for key in self.SUMMARY_KEYS:
-            self.update_summary_card(key, "RUNNING", "running")
-
-    def parse_execution_summary(self, output_text):
-        summary = {}
-        block_match = re.search(
-            r"EXECUTION SUMMARY(?P<body>.*?)(?:OVERALL STATUS)(?P<overall>.*?)(?:={10,}|\Z)",
-            output_text,
-            re.IGNORECASE | re.DOTALL,
-        )
-        body = block_match.group("body") if block_match else output_text
-        overall = block_match.group("overall") if block_match else output_text
-
-        patterns = {
-            "POS": r"^\s*POS\s*:\s*(.+?)\s*$",
-            "WAY": r"^\s*WAY\s*:\s*(.+?)\s*$",
-            "FOE": r"^\s*FOE\s*:\s*(.+?)\s*$",
-            "COD": r"^\s*COD\s*:\s*(.+?)\s*$",
-            "STORE COD": r"^\s*STORE\s+COD\s*:\s*(.+?)\s*$",
-            "ITONAS": r"^\s*ITONAS\s*:\s*(.+?)\s*$",
-        }
-        for key, pattern in patterns.items():
-            match = re.search(pattern, body, re.IGNORECASE | re.MULTILINE)
-            if match:
-                summary[key] = match.group(1).strip()
-
-        upper = overall.upper()
-        if "SUCCESS WITH WARNINGS" in upper:
-            summary["OVERALL"] = "SUCCESS WITH WARNINGS"
-        elif "FAILED" in upper:
-            summary["OVERALL"] = "FAILED"
-        elif "SUCCESS" in upper:
-            summary["OVERALL"] = "SUCCESS"
-        elif "REVIEW REQUIRED" in upper:
-            summary["OVERALL"] = "REVIEW REQUIRED"
-        return summary
-
-    def classify_result(self, value):
-        upper = value.upper()
-        if "FAILED" in upper or "NOT GENERATED" in upper or "ERROR" in upper:
-            return "error"
-        if "WARNING" in upper or "REVIEW" in upper or "⚠" in value:
-            return "warning"
-        fraction = re.search(r"(\d+)\s*/\s*(\d+)", value)
-        if fraction:
-            return "success" if fraction.group(1) == fraction.group(2) else "warning"
-        if "SUCCESS" in upper or "GENERATED" in upper or "READY" in upper or "✅" in value:
-            return "success"
-        return "warning"
-
-    def clean_summary_value(self, key, value):
-        clean = value.replace("✅", "").replace("⚠", "").replace("❌", "").strip()
-        fraction = re.search(r"(\d+)\s*/\s*(\d+)", clean)
-        if key in ("POS", "ITONAS") and fraction:
-            return f"{fraction.group(1)}/{fraction.group(2)}"
-        if "NOT GENERATED" in clean.upper():
-            return "FAILED"
-        if "GENERATED" in clean.upper():
-            return "GENERATED"
-        return clean
-
-    def update_summary_from_output(self, output_text):
-        summary = self.parse_execution_summary(output_text)
-        for key in self.SUMMARY_KEYS:
-            value = summary.get(key)
-            if value is None:
-                self.update_summary_card(key, "NO RESULT", "warning")
+    def set_progress(self, active_step=None, completed_steps=None, failed_step=None):
+        completed = set(completed_steps or [])
+        for name, widgets in self.progress_steps.items():
+            if name == failed_step:
+                bg, text, fg = self.ERROR, "FAILED", self.ERROR
+            elif name in completed:
+                bg, text, fg = self.PRIMARY, "COMPLETE", self.SUCCESS
+            elif name == active_step:
+                bg, text, fg = self.WARNING, "RUNNING", self.WARNING
             else:
-                self.update_summary_card(
-                    key,
-                    self.clean_summary_value(key, value),
-                    self.classify_result(value),
-                )
-        return summary
+                bg, text, fg = self.BORDER, "PENDING", self.MUTED
+            widgets["circle"].configure(bg=bg)
+            widgets["status"].configure(text=text, fg=fg)
 
-    def build_log_panel(self):
-        panel = tk.Frame(
-            self.root,
-            bg=self.PANEL,
-            highlightbackground=self.BORDER,
-            highlightthickness=1,
+        for index, connector in enumerate(self.progress_connectors):
+            previous_step = self.STEPS[index]
+            connector.configure(bg=self.PRIMARY if previous_step in completed else self.BORDER)
+        self.root.update_idletasks()
+
+    def start_progress_sequence(self):
+        self.execution_id += 1
+        token = self.execution_id
+        self.set_progress(active_step="Discovery")
+        schedule = (
+            (900, "Resolutions", ["Discovery"]),
+            (1800, "Readiness", ["Discovery", "Resolutions"]),
+            (2800, "Generation", ["Discovery", "Resolutions", "Readiness"]),
+            (4200, "Output", ["Discovery", "Resolutions", "Readiness", "Generation"]),
         )
-        self.log_panel = panel
-        panel.grid(row=4, column=0, sticky="nsew", padx=28, pady=(3, 10))
-        panel.grid_columnconfigure(0, weight=1)
-        panel.grid_rowconfigure(1, weight=1)
+        for delay, active, complete in schedule:
+            self.root.after(delay, self.advance_progress_if_running, token, active, complete)
 
-        header = tk.Frame(panel, bg=self.PANEL)
-        header.grid(row=0, column=0, sticky="ew", padx=14, pady=(10, 8))
-        header.grid_columnconfigure(0, weight=1)
+    def advance_progress_if_running(self, token, active, completed):
+        if self.running and token == self.execution_id:
+            self.set_progress(active_step=active, completed_steps=completed)
+            self.status_var.set(f"{active} running...")
 
-        tk.Label(
-            header,
-            text="EXECUTION LOG",
-            bg=self.PANEL,
-            fg=self.TEXT,
-            font=("Segoe UI", 11, "bold"),
-        ).grid(row=0, column=0, sticky="w")
+    def build_content(self):
+        self.content_area = tk.Frame(self.main_frame, bg=self.BG)
+        self.content_area.grid(row=2, column=0, sticky="nsew", padx=20, pady=(0, 12))
+        self.content_area.grid_rowconfigure(0, weight=1)
+        self.content_area.grid_columnconfigure(0, weight=1)
+        self.build_views()
+        self.show_view("Dashboard")
 
-        self.clear_button = tk.Button(
-            header,
-            text="CLEAR LOG",
-            command=self.clear_log,
-            bg=self.PANEL_LIGHT,
-            fg=self.MUTED,
-            activebackground=self.BORDER,
-            activeforeground=self.TEXT,
-            relief="flat",
-            bd=0,
-            cursor="hand2",
-            padx=12,
-            pady=5,
-            font=("Segoe UI", 9, "bold"),
+    def build_views(self):
+        self.views = {
+            "Dashboard": self.build_dashboard_view(),
+            "Discovery": self.build_discovery_view(),            
+            "Resolutions": self.build_resolutions_view(),
+            "Readiness": self.build_readiness_view(),
+            "Generation": self.build_text_view("Generation", "Generation results", "generation_page_text"),
+            "Output": self.build_output_view(),
+            "Settings": self.build_settings_view(),
+        }
+
+    def build_dashboard_view(self):
+        frame = tk.Frame(self.content_area, bg=self.BG)
+        frame.grid_columnconfigure(0, weight=3)
+        frame.grid_columnconfigure(1, weight=2)
+        frame.grid_rowconfigure(1, weight=1)
+        self.build_configuration_card(frame)
+        self.build_readiness_card(frame)
+        self.build_discovery_card(frame)
+        self.build_log_card(frame)
+        return frame
+
+    def page_shell(self, title, subtitle):
+        frame = tk.Frame(self.content_area, bg=self.BG)
+        frame.grid_columnconfigure(0, weight=1)
+        frame.grid_rowconfigure(1, weight=1)
+        heading = tk.Frame(frame, bg=self.BG)
+        heading.grid(row=0, column=0, sticky="ew", pady=(0, 12))
+        tk.Label(heading, text=title, bg=self.BG, fg=self.TEXT,
+                 font=("Segoe UI", 20, "bold")).pack(anchor="w")
+        tk.Label(heading, text=subtitle, bg=self.BG, fg=self.MUTED,
+                 font=("Segoe UI", 10)).pack(anchor="w")
+        body = self.card(frame)
+        body.grid(row=1, column=0, sticky="nsew")
+        body.grid_columnconfigure(0, weight=1)
+        body.grid_rowconfigure(0, weight=1)
+        return frame, body
+
+    def build_discovery_view(self):
+        frame, body = self.page_shell(
+            "Discovery",
+            "Files, services and mappings detected in the selected PosData."
         )
-        self.clear_button.grid(row=0, column=2, sticky="e", padx=(8, 0))
 
-        self.toggle_log_button = tk.Button(
-            header,
-            text="HIDE LOG",
-            command=self.toggle_log,
-            bg=self.PANEL_LIGHT,
-            fg=self.MUTED,
-            activebackground=self.BORDER,
-            activeforeground=self.TEXT,
-            relief="flat",
-            bd=0,
-            cursor="hand2",
-            padx=12,
-            pady=5,
-            font=("Segoe UI", 9, "bold"),
-        )
-        self.toggle_log_button.grid(row=0, column=1, sticky="e")
-
-        self.log = scrolledtext.ScrolledText(
-            panel,
-            bg=self.LOG_BG,
-            fg="#d1fae5",
+        self.discovery_page_text = scrolledtext.ScrolledText(
+            body,
+            bg="#08111c",
+            fg="#b9c8d8",
             insertbackground=self.TEXT,
-            selectbackground=self.PRIMARY,
-            selectforeground=self.TEXT,
-            font=("Consolas", 10),
             relief="flat",
             bd=0,
+            font=("Consolas", 10),
             wrap=tk.WORD,
             padx=14,
             pady=14,
         )
+
+        self.discovery_page_text.grid(
+            row=0,
+            column=0,
+            sticky="nsew",
+            padx=14,
+            pady=14,
+        )
+
+        self.discovery_page_text.insert(
+            tk.END,
+            "Run the configuration to load discovery data.\n"
+        )
+
+        self.discovery_page_text.configure(
+            state=tk.DISABLED
+        )
+
+        return frame
+
+    def build_text_view(self, title, subtitle, attribute):
+        frame, body = self.page_shell(title, subtitle)
+        widget = scrolledtext.ScrolledText(body, bg="#08111c", fg="#b9c8d8",
+                                           insertbackground=self.TEXT, relief="flat", bd=0,
+                                           font=("Consolas", 10), wrap=tk.WORD, padx=14, pady=14)
+        widget.grid(row=0, column=0, sticky="nsew", padx=14, pady=14)
+        widget.insert(tk.END, "Run the configuration to load results.\n")
+        widget.configure(state=tk.DISABLED)
+        setattr(self, attribute, widget)
+        return frame
+
+    def build_resolutions_view(self):
+        frame, body = self.page_shell("Resolutions", "Manual and automatic resolution summary")
+        self.resolution_page_labels = {}
+        for row, item in enumerate(("Manual KVS Resolutions", "Manual POS Resolutions",
+                                    "Skipped POS", "Unresolved POS")):
+            line = tk.Frame(body, bg=self.PANEL_ALT, highlightbackground=self.BORDER,
+                            highlightthickness=1)
+            line.grid(row=row, column=0, sticky="ew", padx=20,
+                      pady=(18 if row == 0 else 5, 5))
+            line.grid_columnconfigure(0, weight=1)
+            tk.Label(line, text=item, bg=self.PANEL_ALT, fg=self.TEXT,
+                     font=("Segoe UI", 11)).grid(row=0, column=0, sticky="w", padx=16, pady=13)
+            value = tk.Label(line, text="0", bg=self.PANEL_ALT, fg=self.SUCCESS,
+                             font=("Segoe UI", 13, "bold"))
+            value.grid(row=0, column=1, padx=16)
+            self.resolution_page_labels[item] = value
+        return frame
+
+    def build_readiness_view(self):
+        frame, body = self.page_shell("Market Readiness", "Readiness status by component")
+        for row, item in enumerate(("POS", "KVS", "ITONAS", "FOE", "COD", "STOREDB", "WAY")):
+            line = tk.Frame(body, bg=self.PANEL_ALT, highlightbackground=self.BORDER,
+                            highlightthickness=1)
+            line.grid(row=row, column=0, sticky="ew", padx=20,
+                      pady=(15 if row == 0 else 4, 4))
+            line.grid_columnconfigure(1, weight=1)
+            tk.Label(line, text=item, bg=self.PANEL_ALT, fg=self.TEXT, width=14,
+                     anchor="w", font=("Segoe UI", 11, "bold")).grid(
+                         row=0, column=0, padx=16, pady=12)
+            detail = tk.Label(line, text="Waiting for execution", bg=self.PANEL_ALT,
+                              fg=self.MUTED, anchor="w", font=("Segoe UI", 10))
+            detail.grid(row=0, column=1, sticky="w")
+            state = tk.Label(line, text="PENDING", bg="#29394b", fg=self.MUTED,
+                             padx=12, pady=4, font=("Segoe UI", 9, "bold"))
+            state.grid(row=0, column=2, padx=16)
+            self.readiness_page_rows[item] = (state, detail)
+        return frame
+
+    def build_output_view(self):
+        frame, body = self.page_shell("Output", "Open the latest generated files")
+        tk.Button(body, text="Open Output Folder", command=self.open_output,
+                  bg=self.PRIMARY, fg=self.TEXT, activebackground=self.PRIMARY_DARK,
+                  activeforeground=self.TEXT, relief="flat", cursor="hand2",
+                  padx=24, pady=10, font=("Segoe UI", 10, "bold")).grid(
+                      row=0, column=0, sticky="nw", padx=22, pady=22)
+        tk.Label(body, text=f"Output location:\n{self.output_folder}", bg=self.PANEL,
+                 fg=self.MUTED, justify="left", font=("Segoe UI", 10)).grid(
+                     row=1, column=0, sticky="nw", padx=22)
+        return frame
+
+    def build_settings_view(self):
+        frame, body = self.page_shell("Settings", "Current application defaults")
+        tk.Label(body, text="Default Laboratory", bg=self.PANEL, fg=self.MUTED,
+                 font=("Segoe UI", 10)).grid(row=0, column=0, sticky="w", padx=24, pady=(24, 4))
+        self.settings_lab_label = tk.Label(body, text=self.selected_lab.get(), bg=self.PANEL,
+                                           fg=self.TEXT, font=("Segoe UI", 12, "bold"))
+        self.settings_lab_label.grid(row=1, column=0, sticky="w", padx=24)
+        return frame
+
+    def show_view(self, name):
+        if name not in self.views:
+            return
+        for view in self.views.values():
+            view.grid_remove()
+        self.views[name].grid(row=0, column=0, sticky="nsew")
+        for nav_name, button in self.nav_buttons.items():
+            active = nav_name == name
+            button.configure(bg="#123765" if active else self.SIDEBAR,
+                             fg="#75b7ff" if active else self.TEXT)
+        self.status_var.set(f"{name} view")
+
+    def card(self, parent):
+        return tk.Frame(parent, bg=self.PANEL, highlightbackground=self.BORDER,
+                        highlightthickness=1)
+
+    def build_configuration_card(self, parent):
+        card = self.card(parent)
+        card.grid(row=0, column=0, sticky="nsew", padx=(0, 7), pady=(0, 7))
+        card.grid_columnconfigure(0, weight=1)
+        tk.Label(card, text="Configuration", bg=self.PANEL, fg=self.TEXT,
+                 font=("Segoe UI", 12, "bold")).grid(
+                     row=0, column=0, sticky="w", padx=18, pady=(14, 10))
+        form = tk.Frame(card, bg=self.PANEL)
+        form.grid(row=1, column=0, sticky="ew", padx=18)
+        form.grid_columnconfigure(0, weight=1)
+        self.current_entry, current_button = self.folder_field(
+            form, 0, "Current PosData Folder", self.current_folder, self.browse_current)
+        self.new_entry, new_button = self.folder_field(
+            form, 2, "New PosData Folder", self.new_folder, self.browse_new)
+        self.browse_buttons = [current_button, new_button]
+        tk.Label(form, text="Lab / Environment", bg=self.PANEL, fg=self.TEXT,
+                 font=("Segoe UI", 9)).grid(row=4, column=0, sticky="w", pady=(11, 6))
+        labs = tk.Frame(form, bg=self.PANEL)
+        labs.grid(row=5, column=0, sticky="ew")
+        for column, (name, network) in enumerate(self.LABS.items()):
+            labs.grid_columnconfigure(column, weight=1, uniform="lab")
+            button = tk.Button(labs, text=f"{name}\n{network}",
+                               command=lambda lab=name: self.select_lab(lab),
+                               bg=self.PANEL_ALT, fg=self.TEXT, relief="flat",
+                               highlightbackground=self.BORDER, highlightthickness=1,
+                               cursor="hand2", pady=8, font=("Segoe UI", 9))
+            button.grid(row=0, column=column, sticky="ew", padx=(0, 8))
+            self.lab_buttons[name] = button
+        actions = tk.Frame(form, bg=self.PANEL)
+        actions.grid(row=6, column=0, sticky="ew", pady=(14, 16))
+        actions.grid_columnconfigure(0, weight=1)
+        actions.grid_columnconfigure(1, weight=1)
+        self.run_button = tk.Button(actions, text="Execute Configuration",
+                                    command=self.run_configuration, bg=self.PRIMARY,
+                                    fg=self.TEXT, relief="flat", cursor="hand2",
+                                    pady=10, font=("Segoe UI", 10, "bold"))
+        self.run_button.grid(row=0, column=0, sticky="ew", padx=(0, 7))
+        self.clear_button = tk.Button(actions, text="Clear Configuration",
+                                      command=self.clear_configuration, bg=self.PANEL_ALT,
+                                      fg=self.TEXT, relief="flat", cursor="hand2", pady=10)
+        self.clear_button.grid(row=0, column=1, sticky="ew", padx=(7, 0))
+
+    def folder_field(self, parent, row, label, variable, command):
+        tk.Label(parent, text=label, bg=self.PANEL, fg=self.TEXT,
+                 font=("Segoe UI", 9)).grid(row=row, column=0, sticky="w", pady=(0, 5))
+        line = tk.Frame(parent, bg=self.PANEL)
+        line.grid(row=row + 1, column=0, sticky="ew", pady=(0, 7))
+        line.grid_columnconfigure(0, weight=1)
+        entry = tk.Entry(line, textvariable=variable, bg=self.ENTRY, fg=self.TEXT,
+                         insertbackground=self.TEXT, relief="flat", font=("Segoe UI", 9))
+        entry.grid(row=0, column=0, sticky="ew", ipady=8)
+        button = tk.Button(line, text="Browse", command=command, bg="#0d3765",
+                           fg=self.TEXT, relief="flat", cursor="hand2", padx=14, pady=7)
+        button.grid(row=0, column=1, padx=(8, 0))
+        return entry, button
+
+    def build_readiness_card(self, parent):
+        card = self.card(parent)
+        card.grid(row=0, column=1, sticky="nsew", padx=(7, 0), pady=(0, 7))
+        card.grid_columnconfigure(0, weight=1)
+        tk.Label(card, text="Market Readiness", bg=self.PANEL, fg=self.TEXT,
+                 font=("Segoe UI", 12, "bold")).grid(
+                     row=0, column=0, sticky="w", padx=16, pady=(14, 8))
+        self.readiness_badge = tk.Label(card, text="WAITING", bg="#29394b",
+                                        fg=self.MUTED, padx=10, pady=4,
+                                        font=("Segoe UI", 8, "bold"))
+        self.readiness_badge.grid(row=0, column=1, sticky="e", padx=16, pady=(14, 8))
+        body = tk.Frame(card, bg=self.PANEL_ALT, highlightbackground=self.BORDER,
+                        highlightthickness=1)
+        body.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=14, pady=(0, 12))
+        for row, item in enumerate(("POS", "KVS", "ITONAS", "FOE", "COD", "STOREDB", "WAY")):
+            tk.Label(body, text=item, bg=self.PANEL_ALT, fg=self.TEXT,
+                     font=("Segoe UI", 9)).grid(row=row, column=0, sticky="w", padx=12, pady=6)
+            state = tk.Label(body, text="PENDING", bg="#29394b", fg=self.MUTED,
+                             padx=8, pady=2, font=("Segoe UI", 8, "bold"))
+            state.grid(row=row, column=1, padx=8)
+            detail = tk.Label(body, text="Waiting for execution", bg=self.PANEL_ALT,
+                              fg=self.MUTED, font=("Segoe UI", 8))
+            detail.grid(row=row, column=2, sticky="w", padx=(4, 12))
+            self.readiness_rows[item] = (state, detail)
+
+    def build_discovery_card(self, parent):
+        card = self.card(parent)
+        card.grid(row=1, column=0, sticky="nsew", padx=(0, 7), pady=(7, 0))
+        tk.Label(card, text="Discovery Summary", bg=self.PANEL, fg=self.TEXT,
+                 font=("Segoe UI", 12, "bold")).pack(anchor="w", padx=18, pady=(14, 10))
+        counts = tk.Frame(card, bg=self.PANEL)
+        counts.pack(fill="x", padx=14)
+        self.discovery_values = {}
+        for column, (key, label, color) in enumerate((
+            ("POS", "POS Files", self.INFO), ("KVS", "KVS Services", self.SUCCESS),
+            ("ITONAS", "Itonas", "#b886ff"), ("WAY", "WAY Files", self.WARNING),
+            ("PRODUCTION", "Production", "#40d5d9"),
+        )):
+            counts.grid_columnconfigure(column, weight=1, uniform="count")
+            box = tk.Frame(counts, bg=self.PANEL_ALT, highlightbackground=color,
+                           highlightthickness=1)
+            box.grid(row=0, column=column, sticky="nsew", padx=4)
+            value = tk.Label(box, text="-", bg=self.PANEL_ALT, fg=color,
+                             font=("Segoe UI", 16, "bold"))
+            value.pack(pady=(10, 0))
+            tk.Label(box, text=label, bg=self.PANEL_ALT, fg=self.MUTED,
+                     font=("Segoe UI", 8)).pack(pady=(0, 10))
+            self.discovery_values[key] = value
+
+    def build_log_card(self, parent):
+        card = self.card(parent)
+        card.grid(row=1, column=1, sticky="nsew", padx=(7, 0), pady=(7, 0))
+        card.grid_columnconfigure(0, weight=1)
+        card.grid_rowconfigure(1, weight=1)
+        tk.Label(card, text="Execution Log", bg=self.PANEL, fg=self.TEXT,
+                 font=("Segoe UI", 12, "bold")).grid(row=0, column=0, sticky="w", padx=14, pady=12)
+        self.log = scrolledtext.ScrolledText(card, bg="#08111c", fg="#b9c8d8",
+                                             insertbackground=self.TEXT, relief="flat", bd=0,
+                                             font=("Consolas", 9), wrap=tk.WORD, padx=10, pady=10)
         self.log.grid(row=1, column=0, sticky="nsew", padx=12, pady=(0, 12))
-        self.log.tag_configure("header", foreground=self.RUNNING, font=("Consolas", 10, "bold"))
         self.log.tag_configure("success", foreground=self.SUCCESS)
         self.log.tag_configure("error", foreground=self.ERROR)
+        self.log.tag_configure("info", foreground=self.INFO)
         self.append_log("PosData Configurator ready.\n", "success")
 
-    def toggle_log(self):
-        if self.log_visible:
-            self.log_panel.grid_remove()
-            self.toggle_log_button.configure(text="SHOW LOG")
-            self.root.grid_rowconfigure(4, weight=0)
-            self.log_visible = False
-        else:
-            self.log_panel.grid()
-            self.toggle_log_button.configure(text="HIDE LOG")
-            self.root.grid_rowconfigure(4, weight=1)
-            self.log_visible = True
+    def build_footer(self):
+        footer = tk.Frame(self.main_frame, bg="#081422", highlightbackground=self.BORDER,
+                          highlightthickness=1)
+        footer.grid(row=3, column=0, sticky="ew")
+        footer.grid_columnconfigure(0, weight=1)
+        tk.Label(footer, textvariable=self.status_var, bg="#081422", fg=self.SUCCESS,
+                 font=("Segoe UI", 9)).grid(row=0, column=0, sticky="w", padx=20, pady=10)
+        self.generate_button = tk.Button(footer, text="Generate All",
+                                         command=self.run_configuration, bg="#155d34",
+                                         fg=self.TEXT, relief="flat", cursor="hand2",
+                                         padx=28, pady=8, font=("Segoe UI", 10, "bold"))
+        self.generate_button.grid(row=0, column=1, padx=10, pady=6)
+        tk.Button(footer, text="Open Output", command=self.open_output, bg=self.PANEL_ALT,
+                  fg=self.TEXT, relief="flat", cursor="hand2", padx=22, pady=8).grid(
+                      row=0, column=2, padx=(0, 20), pady=6)
 
-    def build_status_bar(self):
-        bar = tk.Frame(self.root, bg=self.PANEL)
-        bar.grid(row=5, column=0, sticky="ew")
-        bar.grid_columnconfigure(0, weight=1)
-
-        self.status_label = tk.Label(
-            bar,
-            textvariable=self.status_var,
-            bg=self.PANEL,
-            fg=self.SUCCESS,
-            anchor="w",
-            padx=16,
-            pady=8,
-            font=("Segoe UI", 9),
-        )
-        self.status_label.grid(row=0, column=0, sticky="ew")
-
-        self.lab_status_label = tk.Label(
-            bar,
-            text=f"Selected Lab: {self.selected_lab.get()}",
-            bg=self.PANEL,
-            fg=self.MUTED,
-            padx=16,
-            pady=8,
-            font=("Segoe UI", 9, "bold"),
-        )
-        self.lab_status_label.grid(row=0, column=1, sticky="e")
-
-    def set_status(self, text, state):
-        colors = {
-            "ready": self.SUCCESS,
-            "running": self.RUNNING,
-            "warning": self.WARNING,
-            "error": self.ERROR,
-            "success": self.SUCCESS,
-        }
-        labels = {
-            "ready": "READY",
-            "running": "RUNNING",
-            "warning": "REVIEW REQUIRED",
-            "error": "FAILED",
-            "success": "SUCCESS",
-        }
-        self.status_var.set(text)
-        self.status_label.configure(fg=colors[state])
-        self.header_status_label.configure(text=labels[state], fg=colors[state])
-
-    def defer_preflight_update(self):
-        if hasattr(self, "preflight_overall_label"):
-            self.root.after_idle(self.update_preflight_validation)
+    def select_lab(self, lab):
+        if self.running:
+            return
+        self.selected_lab.set(lab)
+        for name, button in self.lab_buttons.items():
+            active = name == lab
+            button.configure(bg="#123765" if active else self.PANEL_ALT,
+                             fg="#8bc5ff" if active else self.TEXT,
+                             highlightbackground=self.PRIMARY if active else self.BORDER,
+                             highlightthickness=2 if active else 1)
+        self.sidebar_lab.configure(text=lab)
+        self.sidebar_network.configure(text=self.LABS[lab])
+        self.settings_lab_label.configure(text=lab)
 
     def browse_current(self):
-        folder = filedialog.askdirectory(
-            title="Select Current PosData Folder",
-            initialdir=self.current_folder.get() or self.project_folder,
-        )
+        folder = filedialog.askdirectory(initialdir=self.current_folder.get() or self.project_folder)
         if folder:
             self.current_folder.set(folder)
 
     def browse_new(self):
-        folder = filedialog.askdirectory(
-            title="Select New PosData Folder",
-            initialdir=self.new_folder.get() or self.project_folder,
-        )
+        folder = filedialog.askdirectory(initialdir=self.new_folder.get() or self.project_folder)
         if folder:
             self.new_folder.set(folder)
+
+    def clear_configuration(self):
+        if self.running:
+            return
+        self.current_folder.set("")
+        self.new_folder.set("")
+        self.reset_progress()
+        self.clear_log()
+
+    def clear_log(self):
+        if not self.running:
+            self.log.delete("1.0", tk.END)
 
     def append_log(self, text, tag=None):
         def write():
@@ -812,142 +553,326 @@ class PosDataConfiguratorUI:
         else:
             self.root.after(0, write)
 
-    def clear_log(self):
-        if self.running:
-            return
-        self.log.delete("1.0", tk.END)
-
-    def open_output(self):
-        if not os.path.isdir(self.output_folder):
-            messagebox.showwarning("Output Folder", "The output folder was not found.")
-            return
-        os.startfile(self.output_folder)
-
     def validate_inputs(self):
         errors = []
-        if not os.path.isdir(self.current_folder.get().strip()):
+        current = self.current_folder.get().strip()
+        new = self.new_folder.get().strip()
+        if not os.path.isdir(current):
             errors.append("Current PosData folder does not exist.")
-        if not os.path.isdir(self.new_folder.get().strip()):
+        if not os.path.isdir(new):
             errors.append("New PosData folder does not exist.")
-        if self.selected_lab.get() not in self.LABS:
-            errors.append("Select a valid laboratory.")
+        if new and not os.path.isfile(os.path.join(new, "store-db.xml")):
+            errors.append("store-db.xml was not found in New PosData.")
+        if new and not os.path.isfile(os.path.join(new, "screen.xml")):
+            errors.append("screen.xml was not found in New PosData.")
         if errors:
             messagebox.showerror("Configuration Validation", "\n".join(errors))
             return False
         return True
 
     def run_configuration(self):
-        if self.running:
+        if self.running or not self.validate_inputs():
             return
-        if not self.update_preflight_validation():
-            messagebox.showwarning(
-                "Pre-Flight Validation",
-                "Resolve all required checks before running the configuration.",
-            )
-            return
-
         self.execution_options = {
             "selected_lab": self.selected_lab.get(),
             "current_posdata_folder": self.current_folder.get().strip(),
             "new_posdata_folder": self.new_folder.get().strip(),
         }
         self.running = True
-        self.set_controls_enabled(False)
-        self.set_summary_running()
-        self.set_hero_status(
-            "CONFIGURATION RUNNING",
-            f"Processing PosData for {self.execution_options['selected_lab']}. Please wait...",
-            "running",
-        )
-        self.set_status(
-            f"Running configuration for {self.execution_options['selected_lab']}...",
-            "running",
-        )
-        self.append_log("\n==================================================\n", "header")
-        self.append_log("STARTING CONFIGURATION\n", "header")
-        self.append_log("==================================================\n", "header")
-        self.append_log(f"Current PosData: {self.execution_options['current_posdata_folder']}\n")
-        self.append_log(f"New PosData: {self.execution_options['new_posdata_folder']}\n")
-        self.append_log(f"Target Lab: {self.execution_options['selected_lab']}\n\n")
-
+        self.set_controls(False)
+        self.start_progress_sequence()
+        self.status_var.set("Discovery running...")
+        self.append_log("\nConfiguration started.\n", "info")
         threading.Thread(target=self.execute_backend, daemon=True).start()
 
     def execute_backend(self):
         buffer = io.StringIO()
-        execution_error = None
+        error = None
+        runtime = None
         try:
             with redirect_stdout(buffer), redirect_stderr(buffer):
-                main(
-                    selected_lab=self.execution_options["selected_lab"],
-                    current_posdata_folder=self.execution_options["current_posdata_folder"],
-                    new_posdata_folder=self.execution_options["new_posdata_folder"],
+                runtime = main(
+                    selected_lab=
+                        self.execution_options[
+                            "selected_lab"
+                        ],
+
+                    current_posdata_folder=
+                        self.execution_options[
+                            "current_posdata_folder"
+                        ],
+
+                    new_posdata_folder=
+                        self.execution_options[
+                            "new_posdata_folder"
+                        ],
                 )
-        except Exception as error:
-            execution_error = error
-        output_text = buffer.getvalue()
-        if output_text:
-            self.append_log(output_text)
-        self.root.after(0, self.finish_execution, execution_error, output_text)
-
-    def finish_execution(self, execution_error, output_text):
+        except Exception as exc:
+            error = exc
+        output = buffer.getvalue()
+        if output:
+            self.append_log(output)
+        self.root.after(
+            0,
+            self.finish_execution,
+            error,
+            output,
+            runtime
+        )
+    def finish_execution(self, error, output, runtime):
         self.running = False
-        self.set_controls_enabled(True)
-        self.update_preflight_validation()
+        self.execution_id += 1
+        self.set_controls(True)
 
-        if execution_error is not None:
-            self.append_log("\nEXECUTION FAILED\n", "error")
-            self.append_log(f"{execution_error}\n", "error")
-            for key in self.SUMMARY_KEYS:
-                self.update_summary_card(key, "FAILED" if key == "OVERALL" else "INTERRUPTED", "error")
-            self.set_hero_status(
-                "EXECUTION FAILED",
-                str(execution_error),
-                "error",
+        if error:
+            self.set_progress(completed_steps=[], failed_step="Discovery")
+            self.status_var.set("Execution failed")
+            self.append_log(f"\nExecution failed: {error}\n", "error")
+            self.readiness_badge.configure(
+                text="FAILED",
+                bg="#4b1f28",
+                fg=self.ERROR,
             )
-            self.set_status("Configuration execution failed.", "error")
             return
 
-        summary = self.update_summary_from_output(output_text)
-        overall = summary.get("OVERALL", "UNKNOWN")
-        if overall == "SUCCESS":
-            self.set_hero_status(
-                "CONFIGURATION COMPLETED SUCCESSFULLY",
-                f"All generated components for {self.execution_options['selected_lab']} passed the final checks.",
-                "success",
+        if runtime is None:
+            self.set_progress(
+                completed_steps=["Discovery", "Resolutions", "Readiness"],
+                failed_step="Generation",
             )
-            self.set_status("Configuration completed successfully.", "success")
-            self.append_log("\nConfiguration completed successfully.\n", "success")
-        elif overall == "FAILED":
-            self.set_hero_status(
-                "CONFIGURATION FAILED",
-                "The process completed with errors. Review the summary and execution log.",
+            self.status_var.set("Runtime data was not returned")
+            self.readiness_badge.configure(
+                text="REVIEW REQUIRED",
+                bg="#4a3a15",
+                fg=self.WARNING,
+            )
+            self.append_log(
+                "\nThe backend completed but did not return RuntimeContext.\n",
                 "error",
             )
-            self.set_status("Configuration completed with errors.", "error")
-        else:
-            self.set_hero_status(
-                "REVIEW REQUIRED",
-                "The process completed, but one or more components require attention.",
-                "warning",
-            )
-            self.set_status("Configuration completed. Review is required.", "warning")
+            return
 
-    def set_controls_enabled(self, enabled):
+        success = self.is_runtime_successful(runtime)
+        self.update_dashboard_from_runtime(runtime, output)
+
+        if success:
+            self.set_progress(completed_steps=list(self.STEPS))
+            self.status_var.set("Configuration completed successfully")
+            self.readiness_badge.configure(
+                text="READY FOR GENERATION",
+                bg="#153c28",
+                fg=self.SUCCESS,
+            )
+        else:
+            self.set_progress(
+                completed_steps=["Discovery", "Resolutions", "Readiness"],
+                failed_step="Generation",
+            )
+            self.status_var.set("Review required")
+            self.readiness_badge.configure(
+                text="REVIEW REQUIRED",
+                bg="#4a3a15",
+                fg=self.WARNING,
+            )
+
+        self.append_log(
+            "\nConfiguration completed.\n",
+            "success" if success else "info",
+        )
+
+    def is_runtime_successful(self, runtime):
+        readiness = getattr(runtime, "market_readiness", {}) or {}
+        readiness_ok = (
+            readiness.get("overall_status") == "READY FOR GENERATION"
+        )
+
+        generated_pos = getattr(runtime, "generated_pos", []) or []
+        generated_itonas = getattr(runtime, "generated_itonas", []) or []
+        generated_way = getattr(runtime, "generated_way", {}) or {}
+        generated_cod = getattr(runtime, "generated_cod", {}) or {}
+        generated_store_cod = (
+            getattr(runtime, "generated_store_cod", {}) or {}
+        )
+        xmlrpccli = getattr(runtime, "xmlrpccli_result", {}) or {}
+
+        pos_ok = bool(generated_pos) and all(
+            item.get("generated", False)
+            for item in generated_pos
+        )
+        itonas_ok = all(
+            item.get("generated", False)
+            for item in generated_itonas
+        )
+
+        return all((
+            readiness_ok,
+            pos_ok,
+            itonas_ok,
+            generated_way.get("generated", False),
+            generated_cod.get("generated", False),
+            generated_store_cod.get("generated", False),
+            xmlrpccli.get("status") in {"SUCCESS", "NO CHANGES"},
+        ))
+
+    def count_kvs_services(self, runtime):
+        kvs_mapping = getattr(runtime, "kvs_mapping", {}) or {}
+        services = set()
+
+        for mapping in kvs_mapping.get("mappings", []):
+            for service in mapping.get("mapped_services", []):
+                service_id = service.get("service")
+                if service_id is not None:
+                    services.add(str(service_id).strip())
+
+        for service in kvs_mapping.get("extra_services", []):
+            service_id = service.get("service")
+            if service_id is not None:
+                services.add(str(service_id).strip())
+
+        return len(services)
+
+    def update_dashboard_from_runtime(self, runtime, output):
+        discovery = getattr(runtime, "dynamic_pos_discovery", {}) or {}
+        pos_count = len(discovery.get("pos_files", []))
+        kvs_count = self.count_kvs_services(runtime)
+        itona_count = sum(
+            bool(item.get("found", False))
+            for item in (getattr(runtime, "itonas", []) or [])
+        )
+        way_result = getattr(runtime, "generated_way", {}) or {}
+        way_count = 1 if way_result.get("generated", False) else 0
+        production_count = len(
+            getattr(runtime, "generated_production", []) or []
+        )
+
+        counters = {
+            "POS": pos_count,
+            "KVS": kvs_count,
+            "ITONAS": itona_count,
+            "WAY": way_count,
+            "PRODUCTION": production_count,
+        }
+        for key, value in counters.items():
+            self.discovery_values[key].configure(text=str(value))
+
+        self.update_resolution_data(runtime)
+        self.update_readiness_data(runtime)
+
+        discovery_text = (
+            "DISCOVERY RESULTS\n"
+            + "=" * 50
+            + "\n"
+            + "\n".join(
+                f"{key}: {value}"
+                for key, value in counters.items()
+            )
+        )
+        self.set_readonly_text(
+            self.discovery_page_text,
+            discovery_text,
+        )
+
+        generation_match = re.search(
+            r"GENERATION REPORT[\s\S]*",
+            output,
+            re.IGNORECASE,
+        )
+        self.set_readonly_text(
+            self.generation_page_text,
+            generation_match.group(0)
+            if generation_match
+            else output,
+        )
+
+    def update_resolution_data(self, runtime):
+        readiness = getattr(runtime, "market_readiness", {}) or {}
+        values = {
+            "Manual KVS Resolutions": readiness.get(
+                "manual_kvs_resolutions", 0
+            ),
+            "Manual POS Resolutions": readiness.get(
+                "manual_pos_resolutions", 0
+            ),
+            "Skipped POS": readiness.get("skipped_pos", 0),
+            "Unresolved POS": readiness.get("unresolved_pos", 0),
+        }
+        for name, value in values.items():
+            label = self.resolution_page_labels.get(name)
+            if label is not None:
+                label.configure(
+                    text=str(value),
+                    fg=self.ERROR if value else self.SUCCESS,
+                )
+
+    def update_readiness_data(self, runtime):
+        readiness = getattr(runtime, "market_readiness", {}) or {}
+        component_data = {
+            str(component.get("name", "")).upper(): component
+            for component in readiness.get("components", [])
+        }
+
+        aliases = {
+            "STOREDB": "STOREDB",
+            "STORE DB": "STOREDB",
+        }
+
+        normalized_components = {}
+        for name, component in component_data.items():
+            normalized_name = aliases.get(name, name)
+            normalized_components[normalized_name] = component
+
+        for collection in (
+            self.readiness_rows,
+            self.readiness_page_rows,
+        ):
+            for name, (state_label, detail_label) in collection.items():
+                component = normalized_components.get(name.upper())
+                status = (
+                    component.get("status", "UNKNOWN")
+                    if component
+                    else "UNKNOWN"
+                )
+                details = component.get("details", []) if component else []
+
+                if status == "READY":
+                    text, bg, fg = "READY", "#164a30", self.SUCCESS
+                elif status == "REVIEW REQUIRED":
+                    text, bg, fg = "REVIEW", "#4a3a15", self.WARNING
+                else:
+                    text, bg, fg = "FAIL", "#4b1f28", self.ERROR
+
+                state_label.configure(text=text, bg=bg, fg=fg)
+                detail_label.configure(
+                    text="; ".join(str(item) for item in details)
+                    if details
+                    else status.title()
+                )
+
+    def set_readonly_text(self, widget, text):
+        widget.configure(state=tk.NORMAL)
+        widget.delete("1.0", tk.END)
+        widget.insert(tk.END, text)
+        widget.configure(state=tk.DISABLED)
+
+    def set_controls(self, enabled):
         state = tk.NORMAL if enabled else tk.DISABLED
         self.current_entry.configure(state=state)
         self.new_entry.configure(state=state)
-        self.output_button.configure(state=state)
         self.clear_button.configure(state=state)
-        self.toggle_log_button.configure(state=state)
+        self.run_button.configure(state=state,
+                                  text="Execute Configuration" if enabled else "Configuration Running...",
+                                  bg=self.PRIMARY if enabled else "#31445a")
+        self.generate_button.configure(state=state)
         for button in self.browse_buttons:
             button.configure(state=state)
-        for card in self.lab_cards.values():
-            card.configure(state=state)
-        self.run_button.configure(
-            state=state,
-            text="RUN CONFIGURATION" if enabled else "CONFIGURATION RUNNING...",
-            bg=self.PRIMARY if enabled else "#374151",
-        )
+        for button in self.lab_buttons.values():
+            button.configure(state=state)
+
+    def open_output(self):
+        if not os.path.isdir(self.output_folder):
+            messagebox.showwarning("Output", "Output folder was not found.")
+            return
+        os.startfile(self.output_folder)
 
 
 def main_ui():
