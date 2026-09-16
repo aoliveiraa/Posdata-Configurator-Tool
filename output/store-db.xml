@@ -3722,7 +3722,7 @@
         <Parameter name="multicastPackageLength" value="5120"/>
         <Parameter name="multicastPort" value="4176"/>
         <Parameter name="multicastTTL" value="5"/>
-        <Parameter name="networkAdaptorBaseIp" value="10.118.51"/>
+        <Parameter name="networkAdaptorBaseIp" value="10.0.12"/>
         <Parameter name="networkCheckTime" value="5"/>
         <Parameter name="obligate" value="true"/>
         <Parameter name="serverPort"/>
@@ -5812,7 +5812,7 @@
         <Parameter name="drivername" value="npDrvHTTP.dll"/>
         <Parameter name="logicalname" value="XML RPC Client"/>
         <Parameter name="service" value="npAdpHttp.dll"/>
-        <Parameter name="url" value="http://10.118.51.25:8888/goform/RPC2"/>
+        <Parameter name="url" value="http://10.0.12.83:8888/goform/RPC2"/>
       </Section>
     </Adaptor>
     <Adaptor type="bunarea.serial.bumpbar" startonload="true">

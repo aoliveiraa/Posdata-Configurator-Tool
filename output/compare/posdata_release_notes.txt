@@ -1,0 +1,1351 @@
+POSDATA RELEASE NOTES
+========================================================================
+Current PosData: C:\Git\Posdata-Configurator-Tool\samples\current_posdata
+New PosData    : C:\Git\Posdata-Configurator-Tool\samples\new_posdata
+Generated at   : 2026-09-16T13:48:24
+
+SUMMARY
+------------------------------------------------------------------------
+Added files    : 22
+Removed files  : 58
+Modified files : 12
+Unchanged files: 0
+Errors         : 0
+
+ADDED FILES
+------------------------------------------------------------------------
+[KVS]
+  + _KVS0101_pos-db.xml
+  + _KVS0102_pos-db.xml
+  + _KVS0201_pos-db.xml
+  + _KVS0202_pos-db.xml
+  + _KVS0301_pos-db.xml
+  + _KVS0302_pos-db.xml
+  + _KVS0401_pos-db.xml
+  + _KVS0402_pos-db.xml
+  + _KVS0501_pos-db.xml
+  + _KVS0502_pos-db.xml
+  + _KVS0601_pos-db.xml
+  + _KVS0602_pos-db.xml
+  + _KVS0701_pos-db.xml
+  + _KVS0801_pos-db.xml
+  + _KVS0802_pos-db.xml
+
+[POS]
+  + _POS0006_pos-db.xml
+  + _POS0007_pos-db.xml
+  + _POS0008_pos-db.xml
+  + _POS0009_pos-db.xml
+  + _POS0010_pos-db.xml
+  + _POS0011_pos-db.xml
+  + _PROD_SEC_pos-db.xml
+
+REMOVED FILES
+------------------------------------------------------------------------
+[COD]
+  - store-db_codagami.xml
+
+[ITONA]
+  - _Itona1_pos-db.xml
+  - _Itona2_pos-db.xml
+  - _Itona3_pos-db.xml
+  - _Itona4_pos-db.xml
+  - _Itona5_pos-db.xml
+  - _Itona6_pos-db.xml
+  - _Itona7_pos-db.xml
+  - _Itona8_pos-db.xml
+
+[KVS]
+  - _KVS0001_pos-db.xml
+  - _KVS0002_pos-db.xml
+  - _KVS0003_pos-db.xml
+  - _KVS0004_pos-db.xml
+  - _KVS0005_pos-db.xml
+  - _KVS1001_pos-db.xml
+  - _KVS1002_pos-db.xml
+  - _KVS1003_pos-db.xml
+  - _KVS1004_pos-db.xml
+  - _KVS1005_pos-db.xml
+  - _KVS1006_pos-db.xml
+  - _KVS1007_pos-db.xml
+  - _KVS1008_pos-db.xml
+  - _KVS1009_pos-db.xml
+  - _KVS1010_pos-db.xml
+  - _KVS1011_pos-db.xml
+  - _KVS1013_pos-db.xml
+  - _KVS1014_pos-db.xml
+  - _KVS1017_pos-db.xml
+
+[OTHER]
+  - endpoints.xml
+  - manifest.np6
+  - Security.data
+  - security.data.history
+  - stt.xml
+
+[POS]
+  - _JS970WS_pos-db.xml
+  - _KIOSK09_pos-db.xml
+  - _KIOSK_pos-db.xml
+  - _KioskPerf_pos-db.xml
+  - _MiniORB0603_pos-db.xml
+  - _NCRXR7PR77_pos-db.xml
+  - _NCRXR7PR7_pos-db.xml
+  - _NCRXR7W10_pos-db.xml
+  - _np6WayCore_npsharp_pos-db.xml
+  - _ORB0602_pos-db.xml
+  - _ORB1012_pos-db.xml
+  - _POS0001_SA_pos-db.xml
+  - _POS0005_SA_pos-db.xml
+  - _POS01_pos-db.xml
+  - _POS02_pos-db.xml
+  - _POS03_pos-db.xml
+  - _POS04_pos-db.xml
+  - _POS05_pos-db.xml
+  - _POS06_pos-db.xml
+  - _POS07_pos-db.xml
+  - _POS08_pos-db.xml
+  - _POS10_pos-db.xml
+  - _PROD_BACK_pos-db.xml
+  - _PROD_PRI_npsharp_pos-db.xml
+
+[WAY]
+  - _WAYSTATION_npsharp_pos-db.xml
+
+MODIFIED FILES
+------------------------------------------------------------------------
+[OTHER]
+  * names-db.xml
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1000]/CSOGenericName[1]/#text: 'Cappuccino (Soy Milk)' -> 'Latte with sugar free syrup (2% Milk)'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1000]/CSOName[1]/#text: 'Sml Cappuccino (Soy Milk)' -> 'Lrg Latte with sugar free syrup (2% Milk)'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1000]/CSOSizeName[1]/#text: 'Small' -> 'Large'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1000]/DTName[1]/#text: 'S Cappuccino Soy' -> 'L Lat SgrFree 2%'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1000]/LongName[1]/#text: 'S Cappuccino Soy' -> 'L Latte SgrFree 2%'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1000]/ProductCode[1]/#text: '8877' -> '13116'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1000]/ShortName[1]/#text: 'S Cappuccino Soy' -> 'L Lat SgrFree 2%'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1001]/DTName[1]/#text: 'HM Chsb Chrg' -> 'L Latte Mint ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1001]/LongName[1]/#text: 'HM Chsb Party Charge' -> 'L Latte Mint ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1001]/ProductCode[1]/#text: '817' -> '99900935'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1001]/ShortName[1]/#text: 'HM Chsb Chrg' -> 'L Latte Mint ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1002]/CSOGenericName[1]/#text: 'Sugar Free Vanilla Syrup' -> 'Orange Pekoe Tea'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1002]/CSOName[1]/#text: 'Sugar Free Vanilla Syrup' -> 'XL Orange Pekoe Tea'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1002]/CSOSizeName[1]/#text: 'Sugar Free Vanilla Syrup' -> 'Extra Large'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1002]/DTName[1]/#text: 'SFV Syrup' -> 'XL Org Pekoe Tea'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1002]/LongName[1]/#text: 'SF Vanilla Syrup' -> 'XL Orange Pekoe Tea'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1002]/ProductCode[1]/#text: '7023' -> '15619'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1002]/ShortName[1]/#text: 'SFV Syrup' -> 'XL Org Pekoe Tea'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1003]/CSOGenericName[1]/#text: 'Blueberry Pomegranate Smoothie' -> 'McMuffin & S Coffee Offer'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1003]/CSOName[1]/#text: 'Small Blueberry Pomegranate Smoothie' -> 'McMuffin & S Coffee Offer'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1003]/CSOSizeName[1]/#text: 'Small' -> 'McMuffin & S Coffee Offer'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1003]/DTName[1]/#text: 'S Smo BluePom' -> 'McMuffin & S Coffee offer'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1003]/LongName[1]/#text: 'S BluePom Smooth R' -> 'McMuffin & S Coffee offer'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1003]/ProductCode[1]/#text: '6159' -> '12072'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1003]/ShortName[1]/#text: 'S Smo BluePom' -> 'McMuffin & S Coffee offer'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1004]/CSOGenericName[1]/#text: 'Classic Grilled Cheese on Multigrain Bread' -> 'Watermelon Lime Fruit Splash'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1004]/CSOName[1]/#text: 'Classic Grilled Cheese on Multigrain Bread' -> 'Sml Watermelon Lime Fruit Splash'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1004]/CSOSizeName[1]/#text: 'Classic Grilled Cheese' -> 'Small'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1004]/DTName[1]/#text: 'Grilled Chs' -> 'S Spl Wtrmln Lm'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1004]/LongName[1]/#text: 'MG Classic Grilled Cheese' -> 'S Watermelon Lime Splsh'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1004]/ProductCode[1]/#text: '8370' -> '19112'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1004]/ShortName[1]/#text: 'Grilled Chs' -> 'S Spl Wtrmln Lm'
+      REMOVED: /NamesDb/Language[@name='English']/ProductName[1005]/CSOGenericName[1]/#text: removed (was 'Meal Deal')
+      REMOVED: /NamesDb/Language[@name='English']/ProductName[1005]/CSOName[1]/#text: removed (was 'Meal Deal')
+      REMOVED: /NamesDb/Language[@name='English']/ProductName[1005]/CSOSizeName[1]/#text: removed (was 'Meal Deal')
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1005]/DTName[1]/#text: 'Meal Deal' -> 'S Hot Wht Choc ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1005]/LongName[1]/#text: 'Meal Deal' -> 'S Hot Wht Choc ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1005]/ProductCode[1]/#text: '14947' -> '99900901'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1005]/ShortName[1]/#text: 'Meal Deal' -> 'S Hot Wht Choc ***'
+      REMOVED: /NamesDb/Language[@name='English']/ProductName[1006]/CSOGenericName[1]/#text: removed (was 'Small Strawberry Shake')
+      REMOVED: /NamesDb/Language[@name='English']/ProductName[1006]/CSOName[1]/#text: removed (was 'Small Strawberry Shake')
+      REMOVED: /NamesDb/Language[@name='English']/ProductName[1006]/CSOSizeName[1]/#text: removed (was 'Small')
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1006]/DTName[1]/#text: 'S Shk Straw' -> 'SUB Vanilla Syrup'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1006]/LongName[1]/#text: 'S Strawberry Shake' -> 'Sub Van syp'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1006]/ProductCode[1]/#text: '1161' -> '40000051'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1006]/ShortName[1]/#text: 'S Shk Straw' -> 'SUB Vanilla Syrup'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1007]/CSOGenericName[1]/#text: 'Coffee Carafe w/ 12 Donuts Offer' -> 'World Famous Fries'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1007]/CSOName[1]/#text: 'Coffee Carafe w/ 12 Donuts Offer' -> 'Sml Fries'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1007]/CSOSizeName[1]/#text: 'Coffee Carafe w/ 12 Donuts Off' -> 'Small'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1007]/DTName[1]/#text: 'Carafe w/ 12 Donuts' -> 'S Fry'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1007]/LongName[1]/#text: 'Carafe w/ 12 Donuts' -> 'S Fries'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1007]/ProductCode[1]/#text: '15236' -> '2946'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1007]/ShortMonitorName[1]/#text: added = 'S'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1007]/ShortName[1]/#text: 'Carafe w/ 12 Donuts' -> 'S Fry'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1007]/SummaryMonitorName[1]/#text: added = 'Small'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/CSOGenericName[1]/#text: "Multigrain Sausage 'N Egg Bagel" -> 'Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/CSOName[1]/#text: "Multigrain Sausage 'N Egg Bagel Extra Value meal" -> 'Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/CSOSizeName[1]/#text: 'Make it a Meal' -> 'Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/DTName[1]/#text: 'Bagl Mgrn Sau Egg EVM' -> 'Select Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/LongName[1]/#text: 'M-Grain Sau Egg Bagel EVM' -> 'Select Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/ProductCode[1]/#text: '13689' -> '91000112'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/SR_Name[1]/#text: 'Side Item' -> 'Small Fry'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/SR_Question[1]/#text: 'Would that be with a hashbrown?' -> 'Please select a small fry.'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1008]/ShortName[1]/#text: 'Bagl Mgrn Sau Egg EVM' -> 'Select Side Item'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1009]/CSOGenericName[1]/#text: added = 'SA Lat M. Caramel ***'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1009]/CSOName[1]/#text: added = 'SA Lat M. Caramel***'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1009]/CSOSizeName[1]/#text: added = 'Sample'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1009]/DTName[1]/#text: 'OR - Food' -> 'SA Lat M. Crml ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1009]/LongName[1]/#text: 'OR - Food' -> 'SA Lat Maple Caramel ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1009]/ProductCode[1]/#text: '9804' -> '990647'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1009]/ShortName[1]/#text: 'OR - Food' -> 'SA Lat M. Crml ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[100]/DTName[1]/#text: 'McCafe Mug' -> 'M Chai Latte ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[100]/LongName[1]/#text: 'McCafe Mug' -> 'M Chai Latte ***'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[100]/ProductCode[1]/#text: '15009' -> '9900223'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[100]/ShortName[1]/#text: 'McCafe Mug' -> 'M Chai Latte ***'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1010]/CSOGenericName[1]/#text: added = 'Everything Bagel'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1010]/CSOName[1]/#text: added = 'Everything Bagel'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1010]/CSOSizeName[1]/#text: added = 'Everything Bagel'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1010]/DTName[1]/#text: 'Sub Scramble' -> 'Bagl Evry'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1010]/LongName[1]/#text: 'Sub Scramble' -> 'Everything Bagel'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1010]/ProductCode[1]/#text: '40000071' -> '13755'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1010]/ShortName[1]/#text: 'Sub Scramble' -> 'Bagl Evry'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1011]/CSOGenericName[1]/#text: added = 'Side Item'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1011]/CSOName[1]/#text: added = 'Side Item'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1011]/CSOSizeName[1]/#text: added = 'Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1011]/DTName[1]/#text: 'Stripes Tumbler' -> 'Select Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1011]/LongName[1]/#text: 'Stripes Tumbler' -> 'Select Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1011]/ProductCode[1]/#text: '14319' -> '91000111'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1011]/SR_Name[1]/#text: added = 'Small Fry'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1011]/SR_Question[1]/#text: added = 'Please select a small fry.'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1011]/ShortName[1]/#text: 'Stripes Tumbler' -> 'Select Side Item'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1012]/CSOGenericName[1]/#text: 'Organic Green Tea' -> 'McMuffin Sandwich'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1012]/CSOName[1]/#text: 'XL Organic Green Tea' -> 'McMuffin Sandwich'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1012]/CSOSizeName[1]/#text: 'Extra Large' -> 'McMuffin Sandwich'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1012]/DTName[1]/#text: 'XL Org Green Tea' -> 'Select McMuffin Sandwich'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1012]/LongName[1]/#text: 'XL Organic Green Tea' -> 'Select McMuffin Sandwich'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1012]/ProductCode[1]/#text: '15627' -> '91000210'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1012]/SR_Name[1]/#text: added = 'McMuffin'
+      ADDED: /NamesDb/Language[@name='English']/ProductName[1012]/SR_Question[1]/#text: added = 'Which McMuffin would you like?'
+      CHANGED: /NamesDb/Language[@name='English']/ProductName[1012]/ShortName[1]/#text: 'XL Org Green Tea' -> 'Select McMuffin Sandwich'
+      ... 54670 additional XML changes omitted
+  * promotion-db.xml
+      CHANGED: /PromotionDB/PromotionData[10]/@barcode: '' -> 'P20211102'
+      CHANGED: /PromotionDB/PromotionData[10]/@code: '202002068' -> '202504014'
+      ADDED: /PromotionDB/PromotionData[10]/@instanceID: added = '3129'
+      CHANGED: /PromotionDB/PromotionData[10]/@status: 'ACTIVE' -> 'INACTIVE'
+      CHANGED: /PromotionDB/PromotionData[10]/@template: 'Price Deal - Reduced Price' -> 'Price Deal - Two Product Sets - Reduced Price'
+      CHANGED: /PromotionDB/PromotionData[10]/@templateId: '7e0c328c-135c-49b0-b6a5-bff2046f4aea' -> 'cd580e86-3768-40d5-a654-86396187682b'
+      CHANGED: /PromotionDB/PromotionData[10]/Language[@name='English']/LongDescription[1]/#text: '2 ADB Sandwiches for $5.00' -> 'Two Can Dine Regular Menu for $18.58'
+      CHANGED: /PromotionDB/PromotionData[10]/Language[@name='English']/Name[1]/#text: 'NP6_5.2_2 Breakfast Sandwiches for $5 ADB' -> 'Two Can Dine Regular Menu for $18.58'
+      CHANGED: /PromotionDB/PromotionData[10]/Language[@name='English']/ShortDescription[1]/#text: 'NP6_5.2_2 Breakfast Sandwiches' -> 'Two Can Dine Regular Menu'
+      REMOVED: /PromotionDB/PromotionData[10]/Language[@name='French']/@code: removed (was 'fr_CA')
+      REMOVED: /PromotionDB/PromotionData[10]/Language[@name='French']/@name: removed (was 'French')
+      REMOVED: /PromotionDB/PromotionData[10]/Language[@name='French']/@parent: removed (was 'fr')
+      REMOVED: /PromotionDB/PromotionData[10]/Language[@name='French']/LongDescription[1]/#text: removed (was 'FR_2 ADB Sandwiches for $5.00')
+      REMOVED: /PromotionDB/PromotionData[10]/Language[@name='French']/Name[1]/#text: removed (was 'FR_NP6_5.2_2 Breakfast Sandwiches for $5 ADB')
+      REMOVED: /PromotionDB/PromotionData[10]/Language[@name='French']/ShortDescription[1]/#text: removed (was 'NP6_5.2_2 Breakfast Sandwiches')
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@EOLVEnhancedLogic: added = 'false'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@allowedQty: added = '1'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@barcode: added = 'P20211102'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@countTowardsPromotionLimit: added = 'true'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@exclusive: added = 'false'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@id: added = '598'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@redemptionMode: added = 'Manual'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@showIndividualPrices: added = 'true'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/@type: added = '2forPromotion'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Actions[1]/SetItemPrice[1]/@discountLimit: added = '0.00'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Actions[1]/SetItemPrice[1]/@item: added = 'Eligible Items 1'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Actions[1]/SetItemPrice[1]/@price: added = '9.29'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Actions[1]/SetItemPrice[2]/@discountLimit: added = '0.00'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Actions[1]/SetItemPrice[2]/@item: added = 'Eligible Items 2'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Actions[1]/SetItemPrice[2]/@price: added = '9.29'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/Date[1]/@from: added = '2025-12-27'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/Date[1]/@to: added = '2026-12-31'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/Pod[@type='FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT']/@type: added = 'FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|CSO|HOT'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@alias: added = 'Eligible Items 1'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@codes: added = '311|312|313|647|14091|14330|196|19087|19090'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@qty: added = '1'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@sort: added = 'MostExpensiveFirst'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 2']/@alias: added = 'Eligible Items 2'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 2']/@codes: added = '311|312|313|647|14091|14330|196|19087|19090'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 2']/@qty: added = '1'
+      ADDED: /PromotionDB/PromotionData[10]/Promotion[@type='2forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 2']/@sort: added = 'MostExpensiveFirst'
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/@allowedQty: removed (was '1')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/@countTowardsPromotionLimit: removed (was 'true')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/@exclusive: removed (was 'false')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/@id: removed (was '11')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/@redemptionMode: removed (was 'OnItemSold')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/@showIndividualPrices: removed (was 'true')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/@type: removed (was 'PriceDeal')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Actions[1]/SetItemPrice[1]/@discountLimit: removed (was '0.00')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Actions[1]/SetItemPrice[1]/@item: removed (was 'Eligible Items')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Actions[1]/SetItemPrice[1]/@price: removed (was '2.50')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Conditions[1]/Date[1]/@from: removed (was '2020-02-06')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Conditions[1]/Date[1]/@to: removed (was '2020-04-30')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Conditions[1]/ProductSet[@alias='Eligible Items']/@alias: removed (was 'Eligible Items')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Conditions[1]/ProductSet[@alias='Eligible Items']/@codes: removed (was '11955|11959|11963')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Conditions[1]/ProductSet[@alias='Eligible Items']/@qty: removed (was '2')
+      REMOVED: /PromotionDB/PromotionData[10]/Promotion[@type='PriceDeal']/Conditions[1]/ProductSet[@alias='Eligible Items']/@sort: removed (was 'MostExpensiveFirst')
+      CHANGED: /PromotionDB/PromotionData[11]/@barcode: '220162582' -> 'P20211105'
+      CHANGED: /PromotionDB/PromotionData[11]/@code: '202002069' -> '202504015'
+      ADDED: /PromotionDB/PromotionData[11]/@instanceID: added = '3130'
+      CHANGED: /PromotionDB/PromotionData[11]/@status: 'ACTIVE' -> 'INACTIVE'
+      CHANGED: /PromotionDB/PromotionData[11]/@template: 'Price Deal - Reduced Price' -> 'Price Deal - Four Product Sets - Reduced Price'
+      CHANGED: /PromotionDB/PromotionData[11]/@templateId: '7e0c328c-135c-49b0-b6a5-bff2046f4aea' -> '0e2813d7-da66-4498-8a47-df1b99e07064'
+      CHANGED: /PromotionDB/PromotionData[11]/Language[@name='English']/LongDescription[1]/#text: '2 Can Dine for $6.78 Breakfast - Meals' -> 'Four Can Dine Lunch (2x 2CD)'
+      CHANGED: /PromotionDB/PromotionData[11]/Language[@name='English']/Name[1]/#text: 'NP6_5.2_2 Can Dine for $6.78 Breakfast - Meals (Mailers)' -> 'Four Can Dine Lunch (2x 2CD)'
+      CHANGED: /PromotionDB/PromotionData[11]/Language[@name='English']/ShortDescription[1]/#text: 'NP6_5.2_2 Can Dine for $6.78 B' -> 'Four Can Dine Lunch (2x 2CD)'
+      REMOVED: /PromotionDB/PromotionData[11]/Language[@name='French']/@code: removed (was 'fr_CA')
+      REMOVED: /PromotionDB/PromotionData[11]/Language[@name='French']/@name: removed (was 'French')
+      REMOVED: /PromotionDB/PromotionData[11]/Language[@name='French']/@parent: removed (was 'fr')
+      REMOVED: /PromotionDB/PromotionData[11]/Language[@name='French']/LongDescription[1]/#text: removed (was 'FR 2 Can Dine for $6.78 Breakfast - Meals')
+      REMOVED: /PromotionDB/PromotionData[11]/Language[@name='French']/Name[1]/#text: removed (was 'FR NP6_5.2_2 Can Dine for $6.78 Breakfast - Meals (Mailers)')
+      REMOVED: /PromotionDB/PromotionData[11]/Language[@name='French']/ShortDescription[1]/#text: removed (was 'NP6_5.2_2 Can Dine for $6.78 B')
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@EOLVEnhancedLogic: added = 'false'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@allowedQty: added = '1'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@barcode: added = 'P20211105'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@countTowardsPromotionLimit: added = 'true'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@exclusive: added = 'false'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@id: added = '599'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@redemptionMode: added = 'Manual'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@showIndividualPrices: added = 'true'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/@type: added = '4forPromotion'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[1]/@discountLimit: added = '0.00'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[1]/@item: added = 'Eligible Items 1'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[1]/@price: added = '9.29'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[2]/@discountLimit: added = '0.00'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[2]/@item: added = 'Eligible Items 2'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[2]/@price: added = '9.29'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[3]/@discountLimit: added = '0.00'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[3]/@item: added = 'Eligible Items 3'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[3]/@price: added = '9.29'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[4]/@discountLimit: added = '0.00'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[4]/@item: added = 'Eligible Items 4'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Actions[1]/SetItemPrice[4]/@price: added = '9.29'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Conditions[1]/Date[1]/@from: added = '2025-12-27'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Conditions[1]/Date[1]/@to: added = '2026-12-31'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Conditions[1]/Pod[@type='FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|HOT']/@type: added = 'FRONT_COUNTER|DRIVE_THRU|WALK_THRU|MCCAFE|MCEXPRESS|COLDKIOSK|COLDKIOSK_DRINK|HOT'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@alias: added = 'Eligible Items 1'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@codes: added = '311|312|313|647|14091|14330|196'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@minQty: added = '1'
+      ADDED: /PromotionDB/PromotionData[11]/Promotion[@type='4forPromotion']/Conditions[1]/ProductSet[@alias='Eligible Items 1']/@qty: added = '1'
+      ... 1540 additional XML changes omitted
+
+[POS]
+  * _POS0001_pos-db.xml
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/@name: removed (was 'Messaging')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@name: removed (was 'networkAdaptorBaseIp')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@vau: removed (was '127.0.0.1')
+      CHANGED: /PosDB/Services[1]/Service[@name='0001']/@classname: 'com.ngpos.arch.services.printer.core.PrinterController' -> 'npRPR.dll'
+      CHANGED: /PosDB/Services[1]/Service[@name='0001']/@quitOnFail: 'true' -> 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@imports: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@name: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'CashDrawer01'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@imports: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@name: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='displayLineFeed']/@name: added = 'displayLineFeed'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='displayLineFeed']/@value: added = '\\r\\n'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'LineDisplay01'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='numLines']/@name: added = 'numLines'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='numLines']/@value: added = '2'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@name: added = 'AutoCutter'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@name: added = 'LinesAfter'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@value: added = '5'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@name: added = 'LinesBefore'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@value: added = '2'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@name: added = 'hostAddress'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@value: added = 'localhost'
+      CHANGED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='logicalname']/@value: 'RPR0001' -> 'PRINTER1'
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='nodeName']/@name: removed (was 'nodeName')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='nodeName']/@value: removed (was 'POS0001')
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@name: added = 'portNumber'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@value: added = '8123'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@name: added = 'printHiddenData'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@name: added = 'utf8table'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@value: added = 'Utf8ToAnsi.txt'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@name: added = 'websrmMode'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@value: added = 'false'
+      CHANGED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='xmlrpccli']/Section[@name='main']/Parameter[@name='url']/@value: 'http://127.0.0.1:8080/goform/RPC2' -> 'http://10.159.119.71:8080/goform/RPC2'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/@name: added = 'Component.Browser.POS0001'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Position']/@name: added = 'Position'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Position']/@value: added = '-10,0'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='ShowCursor']/@name: added = 'ShowCursor'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='ShowCursor']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='ShowFrame']/@name: added = 'ShowFrame'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='ShowFrame']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Size']/@name: added = 'Size'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Size']/@value: added = '1024x768'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Urn']/@name: added = 'Urn'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Urn']/@value: added = 'pos/POS0001'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Zoom']/@name: added = 'Zoom'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS0001']/Parameter[@name='Zoom']/@value: added = '100'
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/@name: removed (was 'Component.Browser.POS1')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Position']/@name: removed (was 'Position')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Position']/@value: removed (was '0,0')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='ShowCursor']/@name: removed (was 'ShowCursor')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='ShowCursor']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='ShowFrame']/@name: removed (was 'ShowFrame')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='ShowFrame']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Size']/@name: removed (was 'Size')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Size']/@value: removed (was '1024x768')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Urn']/@name: removed (was 'Urn')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Urn']/@value: removed (was 'pos/POS0001')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Zoom']/@name: removed (was 'Zoom')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='Zoom']/@value: removed (was '100')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='canMoveWindow']/@name: removed (was 'canMoveWindow')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.Browser.POS1']/Parameter[@name='canMoveWindow']/@value: removed (was 'true')
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/@name: added = 'Component.DriverHost.CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='AdapterFile']/@name: added = 'AdapterFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='AdapterFile']/@value: added = 'LegacyDSLOposAdapter'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DeviceType']/@name: added = 'DeviceType'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DeviceType']/@value: added = 'dslopos'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DriverFile']/@name: added = 'DriverFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DriverFile']/@value: added = 'DSLOposApp'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='LogicalName']/@name: added = 'LogicalName'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='LogicalName']/@value: added = 'CashDrawer01'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='NodeName']/@name: added = 'NodeName'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='NodeName']/@value: added = 'POS0001'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='OposDevice']/@name: added = 'OposDevice'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='OposDevice']/@value: added = 'CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='oposDriver']/@name: added = 'oposDriver'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='oposDriver']/@value: added = 'dslopos.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='profileName']/@name: added = 'profileName'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='profileName']/@value: added = 'Drawer1'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='programId']/@name: added = 'programId'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='programId']/@value: added = 'OPOS.CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.LineDisplay']/@name: added = 'Component.DriverHost.LineDisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.LineDisplay']/Parameter[@name='AdapterFile']/@name: added = 'AdapterFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.LineDisplay']/Parameter[@name='AdapterFile']/@value: added = 'LegacyDSLOposAdapter'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='Component.DriverHost.LineDisplay']/Parameter[@name='ClearBeforePrint']/@name: added = 'ClearBeforePrint'
+      ... 116 additional XML changes omitted
+  * _POS0002_pos-db.xml
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/@name: removed (was 'Messaging')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@name: removed (was 'networkAdaptorBaseIp')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@vau: removed (was '127.0.0.1')
+      CHANGED: /PosDB/Services[1]/Service[@name='0002']/@classname: 'com.ngpos.pos.NewPOS' -> 'npRPR.dll'
+      CHANGED: /PosDB/Services[1]/Service[@name='0002']/@quitOnFail: 'true' -> 'false'
+      CHANGED: /PosDB/Services[1]/Service[@name='0002']/@type: 'POS' -> 'RPR'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@imports: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@name: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'CashDrawer01'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@imports: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@name: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='displayLineFeed']/@name: added = 'displayLineFeed'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='displayLineFeed']/@value: added = '\\r\\n'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'LineDisplay01'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='numLines']/@name: added = 'numLines'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='numLines']/@value: added = '2'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/@imports: added = 'npAdpRpr'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/@name: added = 'npAdpRpr'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@name: added = 'AutoCutter'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@name: added = 'LinesAfter'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@value: added = '5'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@name: added = 'LinesBefore'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@value: added = '2'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@name: added = 'hostAddress'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@value: added = 'localhost'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'PRINTER1'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@name: added = 'portNumber'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@value: added = '8123'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@name: added = 'printHiddenData'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@name: added = 'utf8table'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@value: added = 'Utf8ToAnsi.txt'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@name: added = 'websrmMode'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@value: added = 'false'
+      CHANGED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpScanner']/Section[@name='main']/Parameter[@name='logicalname']/@value: 'Scanner2' -> 'Scanner1'
+      CHANGED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='xmlrpccli']/Section[@name='main']/Parameter[@name='url']/@value: 'http://127.0.0.1:8080/goform/RPC2' -> 'http://10.159.119.71:8080/goform/RPC2'
+      CHANGED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/@imports: 'POS' -> 'LocalWebView'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='AutoUpdate']/@name: added = 'AutoUpdate'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='AutoUpdate']/Parameter[@name='EnableAutoUpdate']/@name: added = 'EnableAutoUpdate'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='AutoUpdate']/Parameter[@name='EnableAutoUpdate']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='BaseHosts']/@name: added = 'BaseHosts'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='BaseHosts']/Parameter[@name='Urls']/@name: added = 'Urls'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='BaseHosts']/Parameter[@name='Urls']/@value: added = 'http://127.0.0.1:8123/npsharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/@name: added = 'Component.Browser.POS0002'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Position']/@name: added = 'Position'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Position']/@value: added = '-10,0'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='ShowCursor']/@name: added = 'ShowCursor'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='ShowCursor']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='ShowFrame']/@name: added = 'ShowFrame'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='ShowFrame']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Size']/@name: added = 'Size'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Size']/@value: added = '1024x768'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Urn']/@name: added = 'Urn'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Urn']/@value: added = 'pos/POS0002'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Zoom']/@name: added = 'Zoom'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.Browser.POS0002']/Parameter[@name='Zoom']/@value: added = '100'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/@name: added = 'Component.DriverHost.CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='AdapterFile']/@name: added = 'AdapterFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='AdapterFile']/@value: added = 'LegacyDSLOposAdapter'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DeviceType']/@name: added = 'DeviceType'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DeviceType']/@value: added = 'dslopos'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DriverFile']/@name: added = 'DriverFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DriverFile']/@value: added = 'DSLOposApp'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='LogicalName']/@name: added = 'LogicalName'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='LogicalName']/@value: added = 'CashDrawer01'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='NodeName']/@name: added = 'NodeName'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='NodeName']/@value: added = 'POS0002'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='OposDevice']/@name: added = 'OposDevice'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='OposDevice']/@value: added = 'CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='oposDriver']/@name: added = 'oposDriver'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='oposDriver']/@value: added = 'dslopos.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='profileName']/@name: added = 'profileName'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='profileName']/@value: added = 'Drawer1'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='programId']/@name: added = 'programId'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='programId']/@value: added = 'OPOS.CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.LineDisplay']/@name: added = 'Component.DriverHost.LineDisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.LineDisplay']/Parameter[@name='AdapterFile']/@name: added = 'AdapterFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0002']/Configuration[1]/Section[@name='Component.DriverHost.LineDisplay']/Parameter[@name='AdapterFile']/@value: added = 'LegacyDSLOposAdapter'
+      ... 110 additional XML changes omitted
+  * _POS0003_pos-db.xml
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/@name: removed (was 'Messaging')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@name: removed (was 'networkAdaptorBaseIp')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@vau: removed (was '127.0.0.1')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/@classname: removed (was 'npCODNew.dll')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/@name: removed (was '0001')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/@quitOnFail: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/@type: removed (was 'COD')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/@imports: removed (was 'npAdpABS')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/@name: removed (was 'npAdpABS')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/@name: removed (was 'main')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='drivername']/@name: removed (was 'drivername')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='drivername']/@value: removed (was 'NpSharp.Driver.HttpDrivers.dll')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: removed (was 'isNpSharp')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='logicalname']/@name: removed (was 'logicalname')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='logicalname']/@value: removed (was 'ABS0001')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='nodeName']/@name: removed (was 'nodeName')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='nodeName']/@value: removed (was 'POS0003')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='url']/@name: removed (was 'url')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='url']/@value: removed (was '10.154.255.70:9090')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodComm']/@imports: removed (was 'npAdpCodComm')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodComm']/@name: removed (was 'npAdpCodComm')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodComm']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/@imports: removed (was 'npAdpCodUI')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/@name: removed (was 'npAdpCodUI')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='Generic']/@name: removed (was 'Generic')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='Generic']/Parameter[@name='CODDumpEnabled']/@name: removed (was 'CODDumpEnabled')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='Generic']/Parameter[@name='CODDumpEnabled']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/@name: removed (was 'NGCODUnitSetting')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='OperationMode']/@name: removed (was 'OperationMode')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='OperationMode']/@value: removed (was 'DT')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='PODType']/@name: removed (was 'PODType')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='PODType']/@value: removed (was 'DT')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='TCPSETTING']/@name: removed (was 'TCPSETTING')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='TCPSETTING']/@value: removed (was '127.0.0.1:225')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/@name: removed (was 'codHost')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='address']/@name: removed (was 'address')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='address']/@value: removed (was '127.0.0.1')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='aliveInterval']/@name: removed (was 'aliveInterval')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='aliveInterval']/@value: removed (was '20')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='port']/@name: removed (was 'port')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='port']/@value: removed (was '225')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='timeout']/@name: removed (was 'timeout')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='timeout']/@value: removed (was '15000')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='version']/@name: removed (was 'version')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='version']/@value: removed (was '3')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/@name: removed (was 'main')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='adaptorname']/@name: removed (was 'adaptorname')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='adaptorname']/@value: removed (was 'npAdpCodUI')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='logicalname']/@name: removed (was 'logicalname')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='logicalname']/@value: removed (was 'COD0001')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='orderformatterscript']/@name: removed (was 'orderformatterscript')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='orderformatterscript']/@value: removed (was 'CODViewFormatterJS@CODUI.nps')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='service']/@name: removed (was 'service')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='service']/@value: removed (was 'npAdpCodUI.dll')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUpdt']/@imports: removed (was 'npAdpCodUpdt')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUpdt']/@name: removed (was 'npAdpCodUpdt')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpCodUpdt']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/@imports: removed (was 'COD')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='OperationMode']/@name: removed (was 'OperationMode')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='OperationMode']/Parameter[@name='isHtmlUi']/@name: removed (was 'isHtmlUi')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/Section[@name='OperationMode']/Parameter[@name='isHtmlUi']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0001']/UsedServices[1]/UsedService[1]/@serviceType: removed (was 'POS')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/@classname: removed (was 'npCODNew.dll')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/@name: removed (was '0002')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/@quitOnFail: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/@type: removed (was 'COD')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodComm']/@imports: removed (was 'npAdpCodComm')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodComm']/@name: removed (was 'npAdpCodComm')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodComm']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/@imports: removed (was 'npAdpCodUI')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/@name: removed (was 'npAdpCodUI')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='Generic']/@name: removed (was 'Generic')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='Generic']/Parameter[@name='CODDumpEnabled']/@name: removed (was 'CODDumpEnabled')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='Generic']/Parameter[@name='CODDumpEnabled']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/@name: removed (was 'NGCODUnitSetting')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='OperationMode']/@name: removed (was 'OperationMode')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='OperationMode']/@value: removed (was 'DT')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='PODType']/@name: removed (was 'PODType')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='PODType']/@value: removed (was 'DT')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='TCPSETTING']/@name: removed (was 'TCPSETTING')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='TCPSETTING']/@value: removed (was '127.0.0.1:226')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/@name: removed (was 'codHost')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='address']/@name: removed (was 'address')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='address']/@value: removed (was '127.0.0.1')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='aliveInterval']/@name: removed (was 'aliveInterval')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='aliveInterval']/@value: removed (was '20')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='port']/@name: removed (was 'port')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='port']/@value: removed (was '226')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='timeout']/@name: removed (was 'timeout')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='timeout']/@value: removed (was '15000')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='version']/@name: removed (was 'version')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='version']/@value: removed (was '3')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/@name: removed (was 'main')
+      REMOVED: /PosDB/Services[1]/Service[@name='0002']/Adaptors[1]/Adaptor[@name='npAdpCodUI']/Section[@name='main']/Parameter[@name='adaptorname']/@name: removed (was 'adaptorname')
+      ... 116 additional XML changes omitted
+  * _POS0004_pos-db.xml
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/@name: removed (was 'Messaging')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@name: removed (was 'networkAdaptorBaseIp')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@vau: removed (was '127.0.0.1')
+      CHANGED: /PosDB/Services[1]/Service[@name='0004']/@classname: 'com.ngpos.pos.NewPOS' -> 'npRPR.dll'
+      CHANGED: /PosDB/Services[1]/Service[@name='0004']/@quitOnFail: 'true' -> 'false'
+      CHANGED: /PosDB/Services[1]/Service[@name='0004']/@type: 'POS' -> 'RPR'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@imports: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@name: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'CashDrawer01'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@imports: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@name: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='LoadDriver']/@name: added = 'LoadDriver'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='LoadDriver']/@value: added = 'RCD'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/@imports: added = 'npAdpRpr'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/@name: added = 'npAdpRpr'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@name: added = 'AutoCutter'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@name: added = 'LinesAfter'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@value: added = '5'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@name: added = 'LinesBefore'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@value: added = '2'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@name: added = 'hostAddress'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@value: added = 'localhost'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'PRINTER1'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@name: added = 'portNumber'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@value: added = '8123'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@name: added = 'printHiddenData'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@name: added = 'utf8table'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@value: added = 'Utf8ToAnsi.txt'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@name: added = 'websrmMode'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@value: added = 'false'
+      CHANGED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='npAdpScanner']/Section[@name='main']/Parameter[@name='logicalname']/@value: 'Scanner4' -> 'Scanner1'
+      CHANGED: /PosDB/Services[1]/Service[@name='0004']/Adaptors[1]/Adaptor[@name='xmlrpccli']/Section[@name='main']/Parameter[@name='url']/@value: 'http://127.0.0.1:8080/goform/RPC2' -> 'http://10.159.119.71:8080/goform/RPC2'
+      CHANGED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/@imports: 'POS' -> 'LocalWebView'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='AutoUpdate']/@name: added = 'AutoUpdate'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='AutoUpdate']/Parameter[@name='EnableAutoUpdate']/@name: added = 'EnableAutoUpdate'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='AutoUpdate']/Parameter[@name='EnableAutoUpdate']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='BaseHosts']/@name: added = 'BaseHosts'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='BaseHosts']/Parameter[@name='Urls']/@name: added = 'Urls'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='BaseHosts']/Parameter[@name='Urls']/@value: added = 'http://127.0.0.1:8123/npsharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/@name: added = 'Component.Browser.POS0004'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Position']/@name: added = 'Position'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Position']/@value: added = '-10,0'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='ShowCursor']/@name: added = 'ShowCursor'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='ShowCursor']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='ShowFrame']/@name: added = 'ShowFrame'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='ShowFrame']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Size']/@name: added = 'Size'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Size']/@value: added = '1024x768'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Urn']/@name: added = 'Urn'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Urn']/@value: added = 'pos/POS0004'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Zoom']/@name: added = 'Zoom'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.Browser.POS0004']/Parameter[@name='Zoom']/@value: added = '100'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/@name: added = 'Component.DriverHost.CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='AdapterFile']/@name: added = 'AdapterFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='AdapterFile']/@value: added = 'LegacyDSLOposAdapter'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DeviceType']/@name: added = 'DeviceType'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DeviceType']/@value: added = 'dslopos'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DriverFile']/@name: added = 'DriverFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='DriverFile']/@value: added = 'DSLOposApp'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='LogicalName']/@name: added = 'LogicalName'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='LogicalName']/@value: added = 'CashDrawer01'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='NodeName']/@name: added = 'NodeName'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='NodeName']/@value: added = 'POS0004'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='OposDevice']/@name: added = 'OposDevice'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='OposDevice']/@value: added = 'CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='oposDriver']/@name: added = 'oposDriver'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='oposDriver']/@value: added = 'dslopos.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='profileName']/@name: added = 'profileName'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='profileName']/@value: added = 'Drawer1'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='programId']/@name: added = 'programId'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.CashDrawer']/Parameter[@name='programId']/@value: added = 'OPOS.CashDrawer'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/@name: added = 'Component.DriverHost.Printer'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='AdapterFile']/@name: added = 'AdapterFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='AdapterFile']/@value: added = 'LegacyPrinterAdapter'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='DeviceType']/@name: added = 'DeviceType'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='DeviceType']/@value: added = 'Printer'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='DriverFile']/@name: added = 'DriverFile'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='DriverFile']/@value: added = 'SerialPrinter.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='baudrate']/@name: added = 'baudrate'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='baudrate']/@value: added = '115200'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='escSeq']/@name: added = 'escSeq'
+      ADDED: /PosDB/Services[1]/Service[@name='0004']/Configuration[1]/Section[@name='Component.DriverHost.Printer']/Parameter[@name='escSeq']/@value: added = 'printerControlChar.properties'
+      ... 90 additional XML changes omitted
+  * _POS0005_pos-db.xml
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/@name: removed (was 'Messaging')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@name: removed (was 'networkAdaptorBaseIp')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='networkAdaptorBaseIp']/@vau: removed (was '127.0.0.1')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='NPScripts']/@name: removed (was 'NPScripts')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='NPScripts']/Parameter[@name='posScriptCommands']/@name: removed (was 'posScriptCommands')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='NPScripts']/Parameter[@name='posScriptCommands']/@value: removed (was 'BusinessComponentsCHF.nps')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='NPScripts']/Parameter[@name='scriptCommandsLocal']/@name: removed (was 'scriptCommandsLocal')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='NPScripts']/Parameter[@name='scriptCommandsLocal']/@value: removed (was 'BusinessComponentsCHFLocal.nps')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='OperationMode']/@name: removed (was 'OperationMode')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='OperationMode']/Parameter[@name='enableNpSharpWorkflows']/@name: removed (was 'enableNpSharpWorkflows')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='OperationMode']/Parameter[@name='enableNpSharpWorkflows']/@value: removed (was 'true')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='OperationMode']/Parameter[@name='isNpSharpRequired']/@name: removed (was 'isNpSharpRequired')
+      REMOVED: /PosDB/Configuration[1]/Section[@name='OperationMode']/Parameter[@name='isNpSharpRequired']/@value: removed (was 'true')
+      CHANGED: /PosDB/Services[1]/Service[@name='0005']/@classname: 'com.ngpos.arch.services.printer.core.PrinterController' -> 'npRPR.dll'
+      CHANGED: /PosDB/Services[1]/Service[@name='0005']/@quitOnFail: 'true' -> 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@imports: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@name: added = 'DSLDevDrv.cash'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'NpSharp.Driver.HttpDrivers.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@name: added = 'isNpSharp'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='isNpSharp']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@name: added = 'logicalname'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.cash']/Section[@name='main']/Parameter[@name='logicalname']/@value: added = 'CashDrawer01'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@imports: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@name: added = 'DSLDevDrv.linedisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='LoadDriver']/@name: added = 'LoadDriver'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='DSLDevDrv.linedisplay']/Section[@name='main']/Parameter[@name='LoadDriver']/@value: added = 'RCD'
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpPrd']/@imports: removed (was 'npAdpPrd')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpPrd']/@name: removed (was 'npAdpPrd')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpPrd']/@startonload: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpPrd']/Section[@name='main']/@name: removed (was 'main')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpPrd']/Section[@name='main']/Parameter[@name='SendOrder']/@name: removed (was 'SendOrder')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpPrd']/Section[@name='main']/Parameter[@name='SendOrder']/@value: removed (was 'ONPAID')
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@name: added = 'AutoCutter'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='AutoCutter']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@name: added = 'LinesAfter'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesAfter']/@value: added = '5'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@name: added = 'LinesBefore'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='LinesBefore']/@value: added = '2'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@name: added = 'hostAddress'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='hostAddress']/@value: added = 'localhost'
+      CHANGED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='logicalname']/@value: 'RPR0005' -> 'PRINTER1'
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='nodeName']/@name: removed (was 'nodeName')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='nodeName']/@value: removed (was 'POS0005')
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@name: added = 'portNumber'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='portNumber']/@value: added = '8123'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@name: added = 'printHiddenData'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='printHiddenData']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@name: added = 'utf8table'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='utf8table']/@value: added = 'Utf8ToAnsi.txt'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@name: added = 'websrmMode'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpRpr']/Section[@name='main']/Parameter[@name='websrmMode']/@value: added = 'false'
+      CHANGED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npAdpScanner']/Section[@name='main']/Parameter[@name='logicalname']/@value: 'Scanner5' -> 'Scanner1'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/@name: added = 'npCLayer'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='Telequipt']/@name: added = 'Telequipt'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='Telequipt']/Parameter[@name='CoinPort']/@name: added = 'CoinPort'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='Telequipt']/Parameter[@name='CoinPort']/@value: added = '3'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='Telequipt']/Parameter[@name='baudRate']/@name: added = 'baudRate'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='Telequipt']/Parameter[@name='baudRate']/@value: added = '2400'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='Telequipt']/Parameter[@name='extname']/@name: added = 'extname'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='Telequipt']/Parameter[@name='extname']/@value: added = 'telequip.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='main']/Parameter[@name='adaptorname']/@name: added = 'adaptorname'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='main']/Parameter[@name='adaptorname']/@value: added = 'npCLayer'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='main']/Parameter[@name='service']/@name: added = 'service'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='npCLayer']/Section[@name='main']/Parameter[@name='service']/@value: added = 'npCLayer'
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='standard.ui']/Section[@name='main']/@name: removed (was 'main')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='standard.ui']/Section[@name='main']/Parameter[@name='drivername']/@name: removed (was 'drivername')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='standard.ui']/Section[@name='main']/Parameter[@name='drivername']/@value: removed (was 'npposNewGUI.dll')
+      CHANGED: /PosDB/Services[1]/Service[@name='0005']/Adaptors[1]/Adaptor[@name='xmlrpccli']/Section[@name='main']/Parameter[@name='url']/@value: 'http://127.0.0.1:8080/goform/RPC2' -> 'http://10.159.119.71:8080/goform/RPC2'
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='CSO']/@name: removed (was 'CSO')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='CSO']/Parameter[@name='networkCheckServices']/@name: removed (was 'networkCheckServices')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='CSO']/Parameter[@name='networkCheckServices']/@value: removed (was 'QUE1000')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/@name: removed (was 'Component.Browser.Kiosk')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Position']/@name: removed (was 'Position')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Position']/@value: removed (was '0,0')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='ShowCursor']/@name: removed (was 'ShowCursor')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='ShowCursor']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='ShowFrame']/@name: removed (was 'ShowFrame')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='ShowFrame']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Size']/@name: removed (was 'Size')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Size']/@value: removed (was '607x1080')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Urn']/@name: removed (was 'Urn')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Urn']/@value: removed (was 'kiosk/POS0005')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Zoom']/@name: removed (was 'Zoom')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='Zoom']/@value: removed (was '100')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='canMoveWindow']/@name: removed (was 'canMoveWindow')
+      REMOVED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.Kiosk']/Parameter[@name='canMoveWindow']/@value: removed (was 'true')
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.POS0005']/@name: added = 'Component.Browser.POS0005'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.POS0005']/Parameter[@name='Position']/@name: added = 'Position'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.POS0005']/Parameter[@name='Position']/@value: added = '-10,0'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.POS0005']/Parameter[@name='ShowCursor']/@name: added = 'ShowCursor'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.POS0005']/Parameter[@name='ShowCursor']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.POS0005']/Parameter[@name='ShowFrame']/@name: added = 'ShowFrame'
+      ADDED: /PosDB/Services[1]/Service[@name='0005']/Configuration[1]/Section[@name='Component.Browser.POS0005']/Parameter[@name='ShowFrame']/@value: added = 'true'
+      ... 143 additional XML changes omitted
+  * _PROD_PRI_pos-db.xml
+      ADDED: /PosDB/Configuration[1]/Section[@name='Messaging']/@name: added = 'Messaging'
+      ADDED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='serverPort']/@name: added = 'serverPort'
+      ADDED: /PosDB/Configuration[1]/Section[@name='Messaging']/Parameter[@name='serverPort']/@value: added = '60002'
+      CHANGED: /PosDB/Services[1]/Service[@name='1001']/Adaptors[1]/Adaptor[@name='network.camera']/@startonload: 'false' -> 'true'
+      CHANGED: /PosDB/Services[1]/Service[@name='1001']/Adaptors[1]/Adaptor[@name='network.camera']/Section[@name='main']/Parameter[@name='url']/@value: 'http://127.0.0.1:8080/img/orderbg.png' -> 'http://10.159.119.28/cgi-bin/camera?resolution=640'
+      CHANGED: /PosDB/Services[1]/Service[@name='1001']/Adaptors[1]/Adaptor[@name='network.camera2']/@startonload: 'false' -> 'true'
+      CHANGED: /PosDB/Services[1]/Service[@name='1001']/Adaptors[1]/Adaptor[@name='network.camera2']/Section[@name='main']/Parameter[@name='url']/@value: 'http://127.0.0.1:8080/img/orderbg.png' -> 'http://10.159.119.29/cgi-bin/camera?resolution=640'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/@classname: added = 'com.ngpos.newprod.core.StoreArea'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/@name: added = '1003'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/@quitOnFail: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/@type: added = 'QUE'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/@imports: added = 'StoreProduction'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/@name: added = 'KvsOptions'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='autoTandem']/@name: added = 'autoTandem'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='autoTandem']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='enableDisplay']/@name: added = 'enableDisplay'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='enableDisplay']/@value: added = 'ONSTART'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='paidInFront']/@name: added = 'paidInFront'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='paidInFront']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='storeInFront']/@name: added = 'storeInFront'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='storeInFront']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/@name: added = 'WayOfWork'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='autoTakePicture']/@name: added = 'autoTakePicture'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='autoTakePicture']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='displayAsSingleProduct']/@name: added = 'displayAsSingleProduct'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='displayAsSingleProduct']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='forwardAlias']/@name: added = 'forwardAlias'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='forwardAlias']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='processOrders']/@name: added = 'processOrders'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='processOrders']/@value: added = 'ONSTART'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='turnOffKitchenEnabled']/@name: added = 'turnOffKitchenEnabled'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='turnOffKitchenEnabled']/@value: added = 'false'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/UsedServices[1]/UsedService[1]/@serviceType: added = 'KVS'
+      ADDED: /PosDB/Services[1]/Service[@name='1003']/UsedServices[1]/UsedService[2]/@serviceType: added = 'GPR'
+      CHANGED: /PosDB/Services[1]/Service[@name='2000']/@classname: 'com.ngpos.newprod.core.ExpeditionArea' -> 'com.ngpos.newprod.core.ProductionArea'
+      CHANGED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/@imports: 'Presentation' -> 'Production.Routing'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='GrillPrinter']/@name: added = 'GrillPrinter'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillEnabled']/@name: added = 'autoGrillEnabled'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillEnabled']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillItemsBehind']/@name: added = 'autoGrillItemsBehind'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillItemsBehind']/@value: added = '2'
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='bumpOnTotal']/@name: removed (was 'bumpOnTotal')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='bumpOnTotal']/@value: removed (was 'true')
+      CHANGED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='enableDisplay']/@value: 'ONPAID' -> 'ONTOTAL'
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='notifyServeTo']/@name: removed (was 'notifyServeTo')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='notifyServeTo']/@value: removed (was '')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='paidInFront']/@name: removed (was 'paidInFront')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='paidInFront']/@value: removed (was 'false')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='storeInFront']/@name: removed (was 'storeInFront')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='storeInFront']/@value: removed (was 'false')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='Volume.TurnOffSide']/@name: removed (was 'Volume.TurnOffSide')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='Volume.TurnOffSide']/Parameter[@name='Normal']/@name: removed (was 'Normal')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='Volume.TurnOffSide']/Parameter[@name='Normal']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='Volume.TurnOffSide']/Parameter[@name='Standard']/@name: removed (was 'Standard')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='Volume.TurnOffSide']/Parameter[@name='Standard']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='decomposeVM']/@name: removed (was 'decomposeVM')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='decomposeVM']/@value: removed (was 'false')
+      CHANGED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='displayAsSingleProduct']/@value: 'true' -> 'false'
+      CHANGED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='forwardAlias']/@value: 'false' -> 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='prioritization']/@name: added = 'prioritization'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='prioritization']/@value: added = 'true'
+      CHANGED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='processOrders']/@value: 'ONPAID' -> 'ONTOTAL'
+      CHANGED: /PosDB/Services[1]/Service[@name='2000']/Configuration[1]/Section[@name='WayOfWork']/Parameter[@name='turnOffKitchenEnabled']/@value: 'false' -> 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[1]/Member[@name='2001']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[1]/Member[@name='2001']/@name: added = '2001'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0101']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0101']/@name: added = '0101'
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0201']/@alias: removed (was '')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0201']/@name: removed (was '0201')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0601']/@alias: removed (was '')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0601']/@name: removed (was '0601')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0602']/@alias: removed (was '')
+      REMOVED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[2]/Member[@name='0602']/@name: removed (was '0602')
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[3]/Member[@name='0101']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[3]/Member[@name='0101']/@name: added = '0101'
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[3]/Member[@name='0601']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='2000']/UsedServices[1]/UsedService[3]/Member[@name='0601']/@name: added = '0601'
+      CHANGED: /PosDB/Services[1]/Service[@name='2001']/@classname: 'com.ngpos.newprod.core.ExpeditionArea' -> 'com.ngpos.newprod.core.ProductionArea'
+      CHANGED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/@imports: 'Presentation' -> 'Production.Routing'
+      ADDED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='GrillPrinter']/@name: added = 'GrillPrinter'
+      ADDED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillEnabled']/@name: added = 'autoGrillEnabled'
+      ADDED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillEnabled']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillItemsBehind']/@name: added = 'autoGrillItemsBehind'
+      ADDED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='GrillPrinter']/Parameter[@name='autoGrillItemsBehind']/@value: added = '2'
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='autoTandem']/@name: removed (was 'autoTandem')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='autoTandem']/@value: removed (was 'false')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='bumpOnTotal']/@name: removed (was 'bumpOnTotal')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='bumpOnTotal']/@value: removed (was 'false')
+      CHANGED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='enableDisplay']/@value: 'ONSTART' -> 'ONTOTAL'
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='notifyServeTo']/@name: removed (was 'notifyServeTo')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='notifyServeTo']/@value: removed (was '')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='paidInFront']/@name: removed (was 'paidInFront')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='paidInFront']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='skipCarPrdSrc']/@name: removed (was 'skipCarPrdSrc')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='skipCarPrdSrc']/@value: removed (was 'QUE1001')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='storeInFront']/@name: removed (was 'storeInFront')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='KvsOptions']/Parameter[@name='storeInFront']/@value: removed (was 'true')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='Volume.TurnOffSide']/@name: removed (was 'Volume.TurnOffSide')
+      REMOVED: /PosDB/Services[1]/Service[@name='2001']/Configuration[1]/Section[@name='Volume.TurnOffSide']/Parameter[@name='Normal']/@name: removed (was 'Normal')
+      ... 397 additional XML changes omitted
+
+[PRODUCTION]
+  * product-db.xml
+      ADDED: /ProductDb/Product[1000]/@grillGroup: added = 'BlendedIce'
+      CHANGED: /ProductDb/Product[1000]/@productClass: 'CHOICE' -> 'PRODUCT'
+      CHANGED: /ProductDb/Product[1000]/@statusCode: 'ACTIVE' -> 'INACTIVE'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/ChargeThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/CostInclusive[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/DefaultQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/DisplayOnCSO[1]/#text: added = 'true'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/MaxQuantity[1]/#text: added = '1'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/MinQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/ProductCode[1]/#text: added = '17053'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/RefundThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[1]/setParentProductOutage[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/ChargeThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/CostInclusive[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/DefaultQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/DisplayOnCSO[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/MaxQuantity[1]/#text: added = '5'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/MinQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/ProductCode[1]/#text: added = '3988'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/RefundThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[2]/setParentProductOutage[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/ChargeThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/CostInclusive[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/DefaultQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/DisplayOnCSO[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/MaxQuantity[1]/#text: added = '5'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/MinQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/ProductCode[1]/#text: added = '3989'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/RefundThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[3]/setParentProductOutage[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/ChargeThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/CostInclusive[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/DefaultQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/DisplayOnCSO[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/MaxQuantity[1]/#text: added = '5'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/MinQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/ProductCode[1]/#text: added = '4337'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/RefundThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[4]/setParentProductOutage[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/ChargeThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/CostInclusive[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/DefaultQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/DisplayOnCSO[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/MaxQuantity[1]/#text: added = '3'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/MinQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/ProductCode[1]/#text: added = '11186'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/RefundThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[5]/setParentProductOutage[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/ChargeThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/CostInclusive[1]/#text: added = 'false'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/DefaultQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/DisplayOnCSO[1]/#text: added = 'true'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/MaxQuantity[1]/#text: added = '1'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/MinQuantity[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/ProductCode[1]/#text: added = '89100051'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/RefundThreshold[1]/#text: added = '0'
+      ADDED: /ProductDb/Product[1000]/CanAdds[1]/Component[6]/setParentProductOutage[1]/#text: added = 'false'
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/ChargeThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/CostInclusive[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/DefaultQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/FlexibleChoice[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/MaxQuantity[1]/#text: removed (was '1')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/MinQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/PriceCalculationMode[1]/#text: removed (was 'regular')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/ProductCode[1]/#text: removed (was '91000116')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/RefundThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[1]/setParentProductOutage[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/ChargeThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/CostInclusive[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/DefaultQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/FlexibleChoice[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/MaxQuantity[1]/#text: removed (was '1')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/MinQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/PriceCalculationMode[1]/#text: removed (was 'regular')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/ProductCode[1]/#text: removed (was '91000061')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/RefundThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[2]/setParentProductOutage[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/ChargeThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/CostInclusive[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/DefaultQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/FlexibleChoice[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/MaxQuantity[1]/#text: removed (was '1')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/MinQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/PriceCalculationMode[1]/#text: removed (was 'regular')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/ProductCode[1]/#text: removed (was '91000063')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/RefundThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[3]/setParentProductOutage[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/ChargeThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/CostInclusive[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/DefaultQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/FlexibleChoice[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/MaxQuantity[1]/#text: removed (was '1')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/MinQuantity[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/PriceCalculationMode[1]/#text: removed (was 'regular')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/ProductCode[1]/#text: removed (was '91000060')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/RefundThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[4]/setParentProductOutage[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[5]/ChargeThreshold[1]/#text: removed (was '0')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[5]/CostInclusive[1]/#text: removed (was 'false')
+      REMOVED: /ProductDb/Product[1000]/Choices[1]/Component[5]/DefaultQuantity[1]/#text: removed (was '0')
+      ... 676802 additional XML changes omitted
+
+[SCREEN]
+  * screen.xml
+      CHANGED: /Screens/Screen[@type='1000']/@number: '99981' -> '8004'
+      CHANGED: /Screens/Screen[@type='1000']/@title: 'New Screen' -> 'M - Mobile Order Menu'
+      CHANGED: /Screens/Screen[@type='1000']/Button[10]/@productCode: '12482' -> '17882'
+      CHANGED: /Screens/Screen[@type='1000']/Button[10]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12482' -> '17882'
+      CHANGED: /Screens/Screen[@type='1000']/Button[10]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: '1' -> '3'
+      CHANGED: /Screens/Screen[@type='1000']/Button[11]/@productCode: '13088' -> '11186'
+      CHANGED: /Screens/Screen[@type='1000']/Button[11]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '13088' -> '11186'
+      CHANGED: /Screens/Screen[@type='1000']/Button[11]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: '2' -> '4'
+      REMOVED: /Screens/Screen[@type='1000']/Button[12]/@productCode: removed (was '13098')
+      ADDED: /Screens/Screen[@type='1000']/Button[12]/Action[@type='onactivate']/Parameter[@name='size']/@name: added = 'size'
+      ADDED: /Screens/Screen[@type='1000']/Button[12]/Action[@type='onactivate']/Parameter[@name='size']/@value: added = 'large'
+      REMOVED: /Screens/Screen[@type='1000']/Button[12]/Action[@type='onclick']/Parameter[@name='ProductCode']/@name: removed (was 'ProductCode')
+      REMOVED: /Screens/Screen[@type='1000']/Button[12]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: removed (was '13098')
+      CHANGED: /Screens/Screen[@type='1000']/Button[12]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: '3' -> '5'
+      ADDED: /Screens/Screen[@type='1000']/Button[12]/Action[@type='onclick']/Parameter[@name='size']/@name: added = 'size'
+      ADDED: /Screens/Screen[@type='1000']/Button[12]/Action[@type='onclick']/Parameter[@name='size']/@value: added = 'large'
+      CHANGED: /Screens/Screen[@type='1000']/Button[13]/@productCode: '8069' -> '35'
+      REMOVED: /Screens/Screen[@type='1000']/Button[13]/Action[@type='onactivate']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[13]/Action[@type='onactivate']/Parameter[@name='size']/@value: removed (was '47')
+      CHANGED: /Screens/Screen[@type='1000']/Button[13]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '8069' -> '35'
+      CHANGED: /Screens/Screen[@type='1000']/Button[13]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: '4' -> '6'
+      REMOVED: /Screens/Screen[@type='1000']/Button[13]/Action[@type='onclick']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[13]/Action[@type='onclick']/Parameter[@name='size']/@value: removed (was '47')
+      CHANGED: /Screens/Screen[@type='1000']/Button[14]/@productCode: '8070' -> '12081'
+      CHANGED: /Screens/Screen[@type='1000']/Button[14]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '8070' -> '12081'
+      CHANGED: /Screens/Screen[@type='1000']/Button[14]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: '5' -> '7'
+      CHANGED: /Screens/Screen[@type='1000']/Button[15]/@productCode: '7193' -> '11'
+      CHANGED: /Screens/Screen[@type='1000']/Button[15]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '7193' -> '11'
+      CHANGED: /Screens/Screen[@type='1000']/Button[15]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: '6' -> '8'
+      CHANGED: /Screens/Screen[@type='1000']/Button[16]/@productCode: '12614' -> '21'
+      CHANGED: /Screens/Screen[@type='1000']/Button[16]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12614' -> '21'
+      CHANGED: /Screens/Screen[@type='1000']/Button[16]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: '7' -> '8'
+      ADDED: /Screens/Screen[@type='1000']/Button[16]/Action[@type='onclick']/Parameter[@name='orderType']/@name: added = 'orderType'
+      CHANGED: /Screens/Screen[@type='1000']/Button[17]/@productCode: '12618' -> '2946'
+      REMOVED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onactivate']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onactivate']/Parameter[@name='size']/@value: removed (was 'small')
+      CHANGED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12618' -> '2946'
+      REMOVED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onclick']/Parameter[@name='Quantity']/@name: removed (was 'Quantity')
+      REMOVED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: removed (was '8')
+      ADDED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onclick']/Parameter[@name='orderType']/@name: added = 'orderType'
+      REMOVED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onclick']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[17]/Action[@type='onclick']/Parameter[@name='size']/@value: removed (was 'small')
+      CHANGED: /Screens/Screen[@type='1000']/Button[18]/@productCode: '12622' -> '12'
+      REMOVED: /Screens/Screen[@type='1000']/Button[18]/Action[@type='onactivate']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[18]/Action[@type='onactivate']/Parameter[@name='size']/@value: removed (was 'medium')
+      CHANGED: /Screens/Screen[@type='1000']/Button[18]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12622' -> '12'
+      REMOVED: /Screens/Screen[@type='1000']/Button[18]/Action[@type='onclick']/Parameter[@name='Quantity']/@name: removed (was 'Quantity')
+      REMOVED: /Screens/Screen[@type='1000']/Button[18]/Action[@type='onclick']/Parameter[@name='Quantity']/@value: removed (was '9')
+      REMOVED: /Screens/Screen[@type='1000']/Button[18]/Action[@type='onclick']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[18]/Action[@type='onclick']/Parameter[@name='size']/@value: removed (was 'medium')
+      CHANGED: /Screens/Screen[@type='1000']/Button[19]/@productCode: '12628' -> '11810'
+      CHANGED: /Screens/Screen[@type='1000']/Button[19]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12628' -> '11810'
+      ADDED: /Screens/Screen[@type='1000']/Button[19]/Language[@name='English']/bitmapdn[1]/#text: added = 'White-Keys-0.png'
+      CHANGED: /Screens/Screen[@type='1000']/Button[1]/@bitmap: '' -> 'ProcessPayment.png'
+      CHANGED: /Screens/Screen[@type='1000']/Button[1]/@h: '2' -> '4'
+      CHANGED: /Screens/Screen[@type='1000']/Button[1]/@title: 'PROCESS PAYMENT' -> 'Process Payment'
+      CHANGED: /Screens/Screen[@type='1000']/Button[1]/@v: '2' -> '3'
+      CHANGED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/@workflow: 'WF_ShowBtnMultiOrd' -> 'WF_AutomaticChangeDayStatus'
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='ButtonNumber']/@name: removed (was 'ButtonNumber')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='ButtonNumber']/@value: removed (was '0')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='imageoff']/@name: removed (was 'imageoff')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='imageoff']/@value: removed (was 'multiorderoff.png')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='imageon']/@name: removed (was 'imageon')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='imageon']/@value: removed (was 'multiorderon.png')
+      ADDED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='size']/@name: added = 'size'
+      ADDED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onactivate']/Parameter[@name='size']/@value: added = 'small'
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onclick']/Parameter[@name='imageoff']/@name: removed (was 'imageoff')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onclick']/Parameter[@name='imageoff']/@value: removed (was 'multiorderoff.png')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onclick']/Parameter[@name='imageon']/@name: removed (was 'imageon')
+      REMOVED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onclick']/Parameter[@name='imageon']/@value: removed (was 'multiorderon.png')
+      ADDED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onclick']/Parameter[@name='size']/@name: added = 'size'
+      ADDED: /Screens/Screen[@type='1000']/Button[1]/Action[@type='onclick']/Parameter[@name='size']/@value: added = 'small'
+      CHANGED: /Screens/Screen[@type='1000']/Button[1]/Language[@name='English']/bitmap[1]/#text: 'store_5.png' -> 'ProcessPayment.png'
+      CHANGED: /Screens/Screen[@type='1000']/Button[1]/Language[@name='English']/title[1]/#text: 'PROCESS PAYMENT' -> 'Process Payment'
+      CHANGED: /Screens/Screen[@type='1000']/Button[20]/@productCode: '12632' -> '239'
+      CHANGED: /Screens/Screen[@type='1000']/Button[20]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12632' -> '239'
+      CHANGED: /Screens/Screen[@type='1000']/Button[21]/@productCode: '12636' -> '11811'
+      CHANGED: /Screens/Screen[@type='1000']/Button[21]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12636' -> '11811'
+      CHANGED: /Screens/Screen[@type='1000']/Button[22]/@productCode: '7416' -> '12621'
+      REMOVED: /Screens/Screen[@type='1000']/Button[22]/Action[@type='onactivate']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[22]/Action[@type='onactivate']/Parameter[@name='size']/@value: removed (was 'large')
+      CHANGED: /Screens/Screen[@type='1000']/Button[22]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '7416' -> '12621'
+      REMOVED: /Screens/Screen[@type='1000']/Button[22]/Action[@type='onclick']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[22]/Action[@type='onclick']/Parameter[@name='size']/@value: removed (was 'large')
+      CHANGED: /Screens/Screen[@type='1000']/Button[23]/@productCode: '12617' -> '12625'
+      CHANGED: /Screens/Screen[@type='1000']/Button[23]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12617' -> '12625'
+      CHANGED: /Screens/Screen[@type='1000']/Button[24]/@productCode: '12621' -> '12701'
+      CHANGED: /Screens/Screen[@type='1000']/Button[24]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12621' -> '12701'
+      CHANGED: /Screens/Screen[@type='1000']/Button[25]/@productCode: '12625' -> '7407'
+      CHANGED: /Screens/Screen[@type='1000']/Button[25]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12625' -> '7407'
+      CHANGED: /Screens/Screen[@type='1000']/Button[26]/@productCode: '12631' -> '18067'
+      REMOVED: /Screens/Screen[@type='1000']/Button[26]/Action[@type='onactivate']/@type: removed (was 'onactivate')
+      REMOVED: /Screens/Screen[@type='1000']/Button[26]/Action[@type='onactivate']/@workflow: removed (was 'WF_SetSize_OnActivate')
+      REMOVED: /Screens/Screen[@type='1000']/Button[26]/Action[@type='onactivate']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[26]/Action[@type='onactivate']/Parameter[@name='size']/@value: removed (was 'child')
+      CHANGED: /Screens/Screen[@type='1000']/Button[26]/Action[@type='onclick']/Parameter[@name='ProductCode']/@value: '12631' -> '18067'
+      REMOVED: /Screens/Screen[@type='1000']/Button[26]/Action[@type='onclick']/Parameter[@name='size']/@name: removed (was 'size')
+      REMOVED: /Screens/Screen[@type='1000']/Button[26]/Action[@type='onclick']/Parameter[@name='size']/@value: removed (was 'child')
+      CHANGED: /Screens/Screen[@type='1000']/Button[27]/@productCode: '12635' -> '7425'
+      CHANGED: /Screens/Screen[@type='1000']/Button[27]/Action[@type='onactivate']/Parameter[@name='size']/@value: '17' -> '47'
+      ... 4964 additional XML changes omitted
+
+[STOREDB]
+  * store-db.xml
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='bunarea.serial.bumpbar']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM1'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='foe.xmlrpc']/Section[@name='Multichannel']/Parameter[@name='ServerEndpoint']/@value: 'http://ca-rst-castgr6.digitalecp.mcd.com:8195/RestaurantAdminService/CA' -> 'http://ca-rst-prod.mcd.com:8195/RestaurantAdminService/CA'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='foe.xmlrpc']/Section[@name='OffersChannel']/Parameter[@name='ServerEndpoint']/@value: 'http://ca-rst-castgr6.digitalecp.mcd.com:8195/RestaurantAdminService/CA' -> 'http://ca-rst-prod.mcd.com:8195/RestaurantAdminService/CA'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='hot.printer']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM1:'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='native.cash.drawer']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM3'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='native.customer.display']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM3'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='native.magnetic.card']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM3'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='ncr.customer.display']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM4'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='npAdpABS']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM1'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='npAdpABS']/Section[@name='main']/Parameter[@name='strMap']/@value: '105,1,1,0,1|107,1,3,0,1|108,1,5,0,1|109,1,2,0,1|112,2,1,0,1|114,2,3,0,1|115,2,5,0,1|116,2,2,0,1|118,3,1,0,1|120,3,3,0,1|121,3,5,0,1|123,3,2,0,1|211,1,1,0,1|219,0,1,0,1|14422,0,1,0,1|220,0,2,0,1|14423,0,2,0,1|221,0,5,0,1|14425,0,5,0,1|222,0,3,0,1|14427,0,3,0,1|722,0,4,0,1|14424,0,4,0,1|723,1,4,0,1|724,2,4,0,1|725,3,4,0,1|1319,1,2,0,1|1321,1,5,0,1|1322,1,3,0,1|1959,3,1,0,1|1960,3,2,0,1|1961,3,5,0,1|1962,3,3,0,1|1976,0,4,0,1|1977,1,4,0,1|1978,2,4,0,1|1979,3,4,0,1|2299,2,1,0,1|2321,1,4,0,1|2587,0,7,0,1|14428,0,7,0,1|2588,1,7,0,1|2589,2,7,0,1|2590,3,7,0,1|2643,1,7,0,1|3081,0,1,0,1|3178,2,2,0,1|3179,2,5,0,1|3181,2,3,0,1|3182,2,7,0,1|3255,3,7,0,1|3336,0,8,0,1|14429,0,8,0,1|3337,1,8,0,1|3338,2,8,0,1|3339,2,8,0,1|3340,3,8,0,1|3365,3,8,0,1|3373,1,8,0,1|3384,0,6,0,1|3385,1,6,0,1|3386,2,6,0,1|3387,3,6,0,1|3388,1,6,0,1|3543,0,2,0,1|3544,0,5,0,1|3546,0,3,0,1|3547,0,7,0,1|3548,1,1,0,1|3549,1,2,0,1|3550,1,5,0,1|3552,1,3,0,1|3553,1,7,0,1|4239,0,6,0,1|4240,1,6,0,1|4241,2,6,0,1|4242,3,6,0,1|4443,0,8,0,1|4444,1,8,0,1|9019,0,15,0,1|9020,1,15,0,1|9021,2,15,0,1|9022,3,15,0,1|40000002,0,0,0,2|40000001,0,0,0,1|40000000,0,0,0,0' -> '105,1,1,0,1|107,1,3,0,1|108,1,5,0,1|109,1,2,0,1|112,2,1,0,1|114,2,3,0,1|115,2,5,0,1|116,2,2,0,1|118,3,1,0,1|120,3,3,0,1|121,3,5,0,1|123,3,2,0,1|211,1,1,0,1|219,0,1,0,1|14422,0,1,0,1|220,0,2,0,1|14423,0,2,0,1|221,0,5,0,1|14425,0,5,0,1|222,0,3,0,1|14427,0,3,0,1|722,0,4,0,1|14424,0,4,0,1|723,1,4,0,1|724,2,4,0,1|725,3,4,0,1|1319,1,2,0,1|1321,1,5,0,1|1322,1,3,0,1|1959,3,1,0,1|1960,3,2,0,1|1961,3,5,0,1|1962,3,3,0,1|1976,0,4,0,1|1977,1,4,0,1|1978,2,4,0,1|1979,3,4,0,1|2299,2,1,0,1|2321,1,4,0,1|2587,0,7,0,1|14428,0,7,0,1|2588,1,7,0,1|2589,2,7,0,1|2590,3,7,0,1|2643,1,7,0,1|3081,0,1,0,1|3178,2,2,0,1|3179,2,5,0,1|3181,2,3,0,1|3182,2,7,0,1|3255,3,7,0,1|3336,0,8,0,1|14429,0,8,0,1|3337,1,8,0,1|3338,2,8,0,1|3339,2,8,0,1|3340,3,8,0,1|3365,3,8,0,1|3373,1,8,0,1|3384,0,6,0,1|3385,1,6,0,1|3386,2,6,0,1|3387,3,6,0,1|3388,1,6,0,1|3543,0,2,0,1|3544,0,5,0,1|3546,0,3,0,1|3547,0,7,0,1|3548,1,1,0,1|3549,1,2,0,1|3550,1,5,0,1|3552,1,3,0,1|3553,1,7,0,1|4239,0,6,0,1|4240,1,6,0,1|4241,2,6,0,1|4242,3,6,0,1|4443,0,8,0,1|4444,1,8,0,1|9019,0,15,0,1|9020,1,15,0,1|9021,2,15,0,1|9022,3,15,0,1|40000002,0,0,0,2|40000001,0,0,0,1|40000000,0,0,0,0|2298,1,1,0,1|16596,1,3,0,1|16595,1,5,0,1|16594,1,2,0,1|16601,2,1,0,1|16604,2,3,0,1|16603,2,5,0,1|16602,2,2,0,1|16609,3,1,0,1|16612,3,3,0,1|16611,3,5,0,1|16610,3,2,0,1|16586,0,1,0,1|16587,0,2,0,1|16588,0,5,0,1|16589,0,3,0,1|16591,0,4,0,1|16598,1,4,0,1|16606,2,4,0,1|16614,3,4,0,1|16590,0,7,0,1|16597,1,7,0,1|16605,2,7,0,1|16613,3,7,0,1|16592,0,8,0,1|16599,1,8,0,1|16607,2,8,0,1|16615,3,8,0,1|16593,0,6,0,1|16600,1,6,0,1|16608,2,6,0,1|16616,3,6,0,1|18964,0,4,0,1|18965,0,4,0,1|18966,0,4,0,1|18967,1,4,0,1|18968,1,4,0,1|18969,1,4,0,1|18970,2,4,0,1|18971,2,4,0,1|18972,2,4,0,1|18973,3,4,0,1|18974,3,4,0,1|18975,3,4,0,1|18976,0,4,0,1|19470,1,5,0,1|19471,2,5,0,1|19472,3,5,0,1'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='npAdpBumpBar']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM1'
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='BaudRate']/@name: removed (was 'BaudRate')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='BaudRate']/@value: removed (was '9600')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='ConnectionType']/@name: removed (was 'ConnectionType')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='ConnectionType']/@value: removed (was 'tcp')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='TCPIP']/@name: removed (was 'TCPIP')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='TCPIP']/@value: removed (was '127.0.0.1')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='TCPPort']/@name: removed (was 'TCPPort')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='TCPPort']/@value: removed (was '48501')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='utf8tablefolder']/@name: removed (was 'utf8tablefolder')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCOD']/Section[@name='main']/Parameter[@name='utf8tablefolder']/@value: removed (was '.\\newpos\\posdata\\')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='CODServiceCommunicationTimeout']/@name: removed (was 'CODServiceCommunicationTimeout')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='CODServiceCommunicationTimeout']/@value: removed (was '30000')
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='PODType']/@value: 'DT;FC' -> 'DT'
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='TCPSETTING']/@name: removed (was 'TCPSETTING')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='NGCODUnitSetting']/Parameter[@name='TCPSETTING']/@value: removed (was '127.0.0.1:225')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='version']/@name: removed (was 'version')
+      REMOVED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='codHost']/Parameter[@name='version']/@value: removed (was '3')
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/@name: added = 'multiLanguage'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='alternateLanguage']/@name: added = 'alternateLanguage'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='alternateLanguage']/@value: added = 'fr_CA'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='alternateLanguageName']/@name: added = 'alternateLanguageName'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='alternateLanguageName']/@value: added = '2'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='enable']/@name: added = 'enable'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='enable']/@value: added = 'false'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='mainLanguage']/@name: added = 'mainLanguage'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='mainLanguage']/@value: added = 'en_CA'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='mainLanguageName']/@name: added = 'mainLanguageName'
+      ADDED: /Document/Adaptors[1]/Adaptor[@type='npAdpCodUI']/Section[@name='multiLanguage']/Parameter[@name='mainLanguageName']/@value: added = '2'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='npAdpKvsSound']/Section[@name='Buzzer']/Parameter[@name='PortName']/@value: 'virtual' -> 'COM1'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='npAdpRpr.SRM']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM1'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='panasonic.cash.drawer']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM3'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='panasonic.line.display']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM3'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='par.customer.display']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM3'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='serial.bumpbar']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM1'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='surepos.customer.display']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM4'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='surepos.magnetic.card']/Section[@name='main']/Parameter[@name='portname']/@value: 'virtual' -> 'COM3'
+      CHANGED: /Document/Adaptors[1]/Adaptor[@type='xmlrpccli']/Section[@name='main']/Parameter[@name='url']/@value: 'http://10.118.57.25:8888/goform/RPC2' -> 'http://10.2.2.25:8888/goform/RPC2'
+      ADDED: /Document/Configurations[1]/Configuration[@type='COD']/Section[@name='main']/Parameter[@name='displayTotalPriceAfterDiscount']/@name: added = 'displayTotalPriceAfterDiscount'
+      ADDED: /Document/Configurations[1]/Configuration[@type='COD']/Section[@name='main']/Parameter[@name='displayTotalPriceAfterDiscount']/@value: added = 'false'
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='FC']/@name: removed (was 'FC')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='FC']/@value: removed (was 'ONRECALL')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='ShowConsoleWindow']/@name: removed (was 'ShowConsoleWindow')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='ShowConsoleWindow']/@value: removed (was 'true')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='TLOGDstName']/@name: removed (was 'TLOGDstName')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='TLOGDstName']/@value: removed (was 'ONRECALL')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='ValidateRPSState']/@name: removed (was 'ValidateRPSState')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='main']/Parameter[@name='ValidateRPSState']/@value: removed (was 'true')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/@name: removed (was 'podNameMapping')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='CURB']/@name: removed (was 'CURB')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='CURB']/@value: removed (was 'FOE0060')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='DLV']/@name: removed (was 'DLV')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='DLV']/@value: removed (was 'FOE0061')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='DT']/@name: removed (was 'DT')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='DT']/@value: removed (was 'FOE0062')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='FC']/@name: removed (was 'FC')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='FC']/@value: removed (was 'FOE0300')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='podNameMapping']/Parameter[@name='MCC']/@name: removed (was 'MCC')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/@name: removed (was 'routing')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='orderNumberPrefix']/@name: removed (was 'orderNumberPrefix')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='orderNumberPrefix']/@value: removed (was '0;0;0;0')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='paidStatus']/@name: removed (was 'paidStatus')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='paidStatus']/@value: removed (was 'PAID;PAID;PAID;PAID')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='podSource']/@name: removed (was 'podSource')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='podSource']/@value: removed (was 'FC;DT;DLV;CK')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='targetStoreArea']/@name: removed (was 'targetStoreArea')
+      REMOVED: /Document/Configurations[1]/Configuration[@type='FOE']/Section[@name='routing']/Parameter[@name='targetStoreArea']/@value: removed (was 'FC;DT;DLV;FC')
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='BumpbarCommandOnRecallMode']/@name: added = 'BumpbarCommandOnRecallMode'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='BumpbarCommandOnRecallMode']/Parameter[@name='enabled']/@name: added = 'enabled'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='BumpbarCommandOnRecallMode']/Parameter[@name='enabled']/@value: added = 'true'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='BumpbarCommandOnRecallMode']/Parameter[@name='recall']/@name: added = 'recall'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='BumpbarCommandOnRecallMode']/Parameter[@name='recall']/@value: added = 'next'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='BumpbarCommandOnRecallMode']/Parameter[@name='serve8']/@name: added = 'serve8'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='BumpbarCommandOnRecallMode']/Parameter[@name='serve8']/@value: added = 'pickList'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/@name: added = 'MultipleKitchenSides'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='imgMapToMultipleSide1']/@name: added = 'imgMapToMultipleSide1'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='imgMapToMultipleSide1']/@value: added = 'SideArrows_Right_Active.png'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='imgMapToMultipleSide2']/@name: added = 'imgMapToMultipleSide2'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='imgMapToMultipleSide2']/@value: added = 'SideArrows_Left_Active.png'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide1']/@name: added = 'mapToMultipleSide1'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide1']/@value: added = 'MFYL1'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide2']/@name: added = 'mapToMultipleSide2'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide2']/@value: added = 'MFYL2'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide3']/@name: added = 'mapToMultipleSide3'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide3']/@value: added = 'MFYB1'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide4']/@name: added = 'mapToMultipleSide4'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='mapToMultipleSide4']/@value: added = 'MFYB2'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='sideIndicatorType']/@name: added = 'sideIndicatorType'
+      ADDED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='MultipleKitchenSides']/Parameter[@name='sideIndicatorType']/@value: added = 'text'
+      CHANGED: /Document/Configurations[1]/Configuration[@type='KVSRedesign']/Section[@name='Touchscreen']/Parameter[@name='available']/@value: 'true' -> 'false'
+      ... 2744 additional XML changes omitted
+
+[WAY]
+  * _WAYSTATION_pos-db.xml
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/@classname: added = 'npAbs.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/@name: added = '0001'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/@quitOnFail: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/@type: added = 'ABS'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/@imports: added = 'npAdpABS'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/@name: added = 'npAdpABS'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/@startonload: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/@name: added = 'main'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='drivername']/@name: added = 'drivername'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='drivername']/@value: added = 'npDrvNGABS2.dll'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='url']/@name: added = 'url'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Adaptors[1]/Adaptor[@name='npAdpABS']/Section[@name='main']/Parameter[@name='url']/@value: added = '192.168.92.168:9090'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/Configuration[1]/@imports: added = 'ABS'
+      ADDED: /PosDB/Services[1]/Service[@name='0001']/UsedServices[1]/UsedService[1]/@serviceType: added = 'POS'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Adaptors[1]/Adaptor[@name='npAdpPubl']/Section[@name='main']/Parameter[@name='enableDetailedSOSDayOffset']/@name: added = 'enableDetailedSOSDayOffset'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Adaptors[1]/Adaptor[@name='npAdpPubl']/Section[@name='main']/Parameter[@name='enableDetailedSOSDayOffset']/@value: added = 'true'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/Adaptors[1]/Adaptor[@name='npAdpPubl']/Section[@name='main']/Parameter[@name='productionlist']/@value: 'FC|DT|MCC|FCE|DTE|MFY|FRY|CBS' -> 'FC|DT|MCC|DLV|MFYB:MFYB1|MFYB:MFYB2|FCE|DLVE|DTE|FRY|GM|MFYL:MFYL1|MFYL:MFYL2|B2|B1|ABS'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/Adaptors[1]/Adaptor[@name='xmlrpccli']/Section[@name='main']/Parameter[@name='url']/@value: 'http://10.115.57.25:8080/goform/RPC2' -> 'http://10.159.119.71:8080/goform/RPC2'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='FOEReceipt']/@name: added = 'FOEReceipt'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='FOEReceipt']/@value: added = 'receiptRPS@reports.nps'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='clientsList']/@value: 'FOE0021:FC=POS0021;FOE0022:FC=POS0022;FOE0025:CK=POS0025' -> 'FOE0021:FC=POS0021;FOE0022:DLV=POS0022;FOE0025:CK=POS0025'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='customerReceiptScript']/@name: added = 'customerReceiptScript'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='customerReceiptScript']/@value: added = 'receiptRPS@reports.nps'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='enableMultiplePrinters']/@name: added = 'enableMultiplePrinters'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='enableMultiplePrinters']/@value: added = 'true'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='failoverPrinterList']/@name: added = 'failoverPrinterList'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='failoverPrinterList']/@value: added = 'RPR0002=RPR0002|RPR0001'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='primaryReceiptPrinterList']/@name: added = 'primaryReceiptPrinterList'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/Configuration[1]/Section[@name='main']/Parameter[@name='primaryReceiptPrinterList']/@value: added = 'POS0021=RPR0002;POS0022=RPR0002;POS0025=RPR0002'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/@serviceType: 'RPR' -> 'STO'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0001']/@alias: '' -> 'POS0001'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0002']/@alias: '' -> 'POS0002'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0006']/@alias: added = 'POS0006'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0006']/@name: added = '0006'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0007']/@alias: added = 'POS0007'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0007']/@name: added = '0007'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0008']/@alias: added = 'POS0008'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0008']/@name: added = '0008'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0009']/@alias: added = 'POS0009'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0009']/@name: added = '0009'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0010']/@alias: added = 'POS0010'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0010']/@name: added = '0010'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0011']/@alias: added = 'POS0011'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0011']/@name: added = '0011'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0101']/@alias: added = 'KVS0101'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0101']/@name: added = '0101'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0201']/@alias: added = 'KVS0201'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0201']/@name: added = '0201'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0301']/@alias: added = 'KVS0301'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0301']/@name: added = '0301'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0401']/@alias: added = 'KVS0401'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0401']/@name: added = '0401'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0501']/@alias: added = 'KVS0501'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0501']/@name: added = '0501'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0601']/@alias: added = 'KVS0601'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0601']/@name: added = '0601'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0701']/@alias: added = 'KVS0701'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0701']/@name: added = '0701'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0801']/@alias: added = 'KVS0801'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='0801']/@name: added = '0801'
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1001']/@alias: removed (was 'KVS0001')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1001']/@name: removed (was '1001')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1002']/@alias: removed (was 'KVS0002')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1002']/@name: removed (was '1002')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1003']/@alias: removed (was 'KVS0003')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1003']/@name: removed (was '1003')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1004']/@alias: removed (was 'KVS0004')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1004']/@name: removed (was '1004')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1005']/@alias: removed (was 'KVS0005')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1005']/@name: removed (was '1005')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1006']/@alias: removed (was 'KVS0006')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='1006']/@name: removed (was '1006')
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='8201']/@alias: 'PRODPRI|STO0300' -> 'PRODPRI|WAY0300'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[1]/Member[@name='8202']/@alias: 'PRODSEC|STO0001' -> 'PRODSEC|POS0001'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0006']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0006']/@name: added = '0006'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0007']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0007']/@name: added = '0007'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0008']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0008']/@name: added = '0008'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0009']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0009']/@name: added = '0009'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0010']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0010']/@name: added = '0010'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0011']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='0011']/@name: added = '0011'
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='16']/@alias: removed (was 'FOE')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='16']/@name: removed (was '16')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='19']/@alias: removed (was 'FOE')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[2]/Member[@name='19']/@name: removed (was '19')
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[4]/@serviceType: 'FOE' -> 'PST'
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[4]/Member[@name='300']/@alias: removed (was '')
+      REMOVED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[4]/Member[@name='300']/@name: removed (was '300')
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[4]/Member[@name='8001']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[4]/Member[@name='8001']/@name: added = '8001'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[4]/Member[@name='8002']/@alias: added = ''
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[4]/Member[@name='8002']/@name: added = '8002'
+      CHANGED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[5]/@serviceType: 'RPS' -> 'FOE'
+      ADDED: /PosDB/Services[1]/Service[@name='0300']/UsedServices[1]/UsedService[6]/@serviceType: added = 'RPS'
+      ... 120 additional XML changes omitted

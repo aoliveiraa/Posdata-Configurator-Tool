@@ -4,7 +4,7 @@
   <ColorDB imports="default"/>
   <Configuration imports="Store.wide">
     <Section name="Messaging">
-      <Parameter name="networkAdaptorBaseIp" value="10.118.51"/>
+      <Parameter name="networkAdaptorBaseIp" value="10.0.12"/>
     </Section>
   </Configuration>
   <Services>
@@ -13,7 +13,7 @@
       <Adaptors>
         <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true">
           <Section name="main">
-            <Parameter name="url" value="http://10.118.51.25:8080/goform/RPC2"/>
+            <Parameter name="url" value="http://10.0.12.83:8080/goform/RPC2"/>
           </Section>
         </Adaptor>
       </Adaptors>

@@ -8,6 +8,10 @@ from tkinter import filedialog, messagebox, scrolledtext
 
 from app import main
 
+from src.comparison.posdata_compare import (
+    compare_and_generate_release_notes,
+    release_notes_text,
+)
 
 class PosDataConfiguratorUI:
     BG = "#07111f"
@@ -31,9 +35,16 @@ class PosDataConfiguratorUI:
         "BR": "10.0.12.0/24",
     }
     NAV_ITEMS = (
-        "Dashboard", "Discovery", "Resolutions", "Readiness",
-        "Generation", "Output", "Settings",
+        "Dashboard",
+        "Compare",
+        "Discovery",
+        "Resolutions",
+        "Readiness",
+        "Generation",
+        "Output",
+        "Settings",
     )
+
     STEPS = ("Discovery", "Resolutions", "Readiness", "Generation", "Output")
 
     def __init__(self, root):
@@ -48,6 +59,9 @@ class PosDataConfiguratorUI:
         self.readiness_rows = {}
         self.readiness_page_rows = {}
         self.execution_options = {}
+        self.compare_running = False
+        self.last_comparison = None
+        self.last_comparison_outputs = {}
 
         self.project_folder = os.path.dirname(os.path.abspath(__file__))
         self.output_folder = os.path.join(self.project_folder, "output")
@@ -101,7 +115,10 @@ class PosDataConfiguratorUI:
                            highlightbackground=self.BORDER, highlightthickness=1)
         sidebar.grid(row=1, column=0, sticky="nsew")
         sidebar.grid_propagate(False)
-        sidebar.grid_rowconfigure(8, weight=1)
+        sidebar.grid_rowconfigure(
+            len(self.NAV_ITEMS),
+            weight=1,
+        )
         for row, item in enumerate(self.NAV_ITEMS):
             button = tk.Button(
                 sidebar, text=f"  {item}", anchor="w",
@@ -116,7 +133,13 @@ class PosDataConfiguratorUI:
             self.nav_buttons[item] = button
 
         lab_card = self.card(sidebar)
-        lab_card.grid(row=9, column=0, sticky="ew", padx=14, pady=(10, 12))
+        lab_card.grid(
+            row=len(self.NAV_ITEMS) + 1,
+            column=0,
+            sticky="ew",
+            padx=14,
+            pady=(10, 12),
+        )        
         tk.Label(lab_card, text="CURRENT LAB", bg=self.PANEL, fg=self.MUTED,
                  font=("Segoe UI", 9, "bold")).pack(anchor="w", padx=16, pady=(14, 5))
         self.sidebar_lab = tk.Label(lab_card, text="RENEIGH", bg=self.PANEL,
@@ -212,10 +235,15 @@ class PosDataConfiguratorUI:
     def build_views(self):
         self.views = {
             "Dashboard": self.build_dashboard_view(),
-            "Discovery": self.build_discovery_view(),            
+            "Compare": self.build_compare_view(),
+            "Discovery": self.build_discovery_view(),
             "Resolutions": self.build_resolutions_view(),
             "Readiness": self.build_readiness_view(),
-            "Generation": self.build_text_view("Generation", "Generation results", "generation_page_text"),
+            "Generation": self.build_text_view(
+                "Generation",
+                "Generation results",
+                "generation_page_text",
+            ),
             "Output": self.build_output_view(),
             "Settings": self.build_settings_view(),
         }
@@ -284,6 +312,264 @@ class PosDataConfiguratorUI:
         )
 
         return frame
+
+    def build_compare_view(self):
+        frame, body = self.page_shell(
+            "Compare PosData",
+            "Compare Current and New PosData and generate release notes.",
+        )
+
+        body.grid_rowconfigure(4, weight=1)
+        body.grid_columnconfigure(0, weight=1)
+        body.grid_rowconfigure(0, weight=0)
+        body.grid_rowconfigure(1, weight=0)
+        body.grid_rowconfigure(2, weight=0)
+        body.grid_rowconfigure(3, weight=1)
+
+        # ==================================================
+        # HEADER
+        # ==================================================
+
+        header = tk.Frame(
+            body,
+            bg=self.PANEL,
+        )
+
+        header.grid(
+            row=0,
+            column=0,
+            sticky="ew",
+            padx=18,
+            pady=(18, 10),
+        )
+
+        header.grid_columnconfigure(
+            0,
+            weight=1,
+        )
+
+        tk.Label(
+            header,
+            text="Current vs New PosData",
+            bg=self.PANEL,
+            fg=self.TEXT,
+            font=("Segoe UI", 12, "bold"),
+        ).grid(
+            row=0,
+            column=0,
+            sticky="w",
+        )
+
+        self.compare_status_label = tk.Label(
+            header,
+            text="NOT RUN",
+            bg="#29394b",
+            fg=self.MUTED,
+            padx=10,
+            pady=4,
+            font=("Segoe UI", 8, "bold"),
+        )
+
+        self.compare_status_label.grid(
+            row=0,
+            column=1,
+            padx=(8, 0),
+        )
+
+        self.compare_button = tk.Button(
+            header,
+            text="Generate Release Notes",
+            command=self.run_posdata_comparison,
+            bg=self.PRIMARY,
+            fg=self.TEXT,
+            activebackground=self.PRIMARY_DARK,
+            activeforeground=self.TEXT,
+            relief="flat",
+            cursor="hand2",
+            padx=18,
+            pady=8,
+            font=("Segoe UI", 9, "bold"),
+        )
+
+        self.compare_button.grid(
+            row=0,
+            column=2,
+            padx=(8, 0),
+        )
+
+        self.open_compare_output_button = tk.Button(
+            header,
+            text="Open Compare Output",
+            command=self.open_compare_output,
+            bg="#0d3765",
+            fg=self.TEXT,
+            activebackground=self.PRIMARY,
+            activeforeground=self.TEXT,
+            relief="flat",
+            cursor="hand2",
+            padx=14,
+            pady=8,
+            state=tk.DISABLED,
+            font=("Segoe UI", 9),
+        )
+
+        self.open_compare_output_button.grid(
+            row=0,
+            column=3,
+            padx=(8, 0),
+        )
+
+        # ==================================================
+        # COUNTERS
+        # ==================================================
+
+        counters = tk.Frame(
+            body,
+            bg=self.PANEL,
+        )
+
+        counters.grid(
+            row=1,
+            column=0,
+            sticky="ew",
+            padx=18,
+            pady=(0, 10),
+        )
+
+        for column in range(3):
+            counters.grid_columnconfigure(
+                column,
+                weight=1,
+                uniform="compare_counter",
+            )
+
+        self.compare_added_value = self.create_compare_counter(
+            parent=counters,
+            column=0,
+            title="Added",
+            color=self.SUCCESS,
+        )
+
+        self.compare_removed_value = self.create_compare_counter(
+            parent=counters,
+            column=1,
+            title="Removed",
+            color=self.ERROR,
+        )
+
+        self.compare_modified_value = self.create_compare_counter(
+            parent=counters,
+            column=2,
+            title="Modified",
+            color=self.WARNING,
+        )
+
+        # ==================================================
+        # SUMMARY
+        # ==================================================
+
+        self.compare_summary_label = tk.Label(
+            body,
+            text=(
+                "Compare the selected Current and New PosData "
+                "folders to generate release notes."
+            ),
+            bg=self.PANEL,
+            fg=self.MUTED,
+            anchor="w",
+            font=("Segoe UI", 9),
+        )
+
+        self.compare_summary_label.grid(
+            row=2,
+            column=0,
+            sticky="ew",
+            padx=18,
+            pady=(0, 8),
+        )
+
+        # ==================================================
+        # RELEASE NOTES
+        # ==================================================
+
+        self.compare_release_notes_text = (
+            scrolledtext.ScrolledText(
+                body,
+                bg="#08111c",
+                fg="#b9c8d8",
+                insertbackground=self.TEXT,
+                relief="flat",
+                bd=0,
+                font=("Consolas", 9),
+                wrap=tk.WORD,
+                padx=12,
+                pady=12,
+            )
+        )
+
+        self.compare_release_notes_text.grid(
+            row=3,
+            column=0,
+            sticky="nsew",
+            padx=18,
+            pady=(0, 18),
+        )
+
+        self.compare_release_notes_text.insert(
+            tk.END,
+            "Release notes will appear here after comparison.\n",
+        )
+
+        self.compare_release_notes_text.configure(
+            state=tk.DISABLED,
+        )
+
+        return frame
+
+    def create_compare_counter(
+        self,
+        parent,
+        column,
+        title,
+        color,
+    ):
+        counter_card = tk.Frame(
+            parent,
+            bg=self.PANEL_ALT,
+            highlightbackground=color,
+            highlightthickness=1,
+        )
+
+        counter_card.grid(
+            row=0,
+            column=column,
+            sticky="nsew",
+            padx=5,
+        )
+
+        value_label = tk.Label(
+            counter_card,
+            text="0",
+            bg=self.PANEL_ALT,
+            fg=color,
+            font=("Segoe UI", 18, "bold"),
+        )
+
+        value_label.pack(
+            pady=(12, 2),
+        )
+
+        tk.Label(
+            counter_card,
+            text=title,
+            bg=self.PANEL_ALT,
+            fg=self.MUTED,
+            font=("Segoe UI", 9),
+        ).pack(
+            pady=(0, 10),
+        )
+
+        return value_label
 
     def build_text_view(self, title, subtitle, attribute):
         frame, body = self.page_shell(title, subtitle)
@@ -848,6 +1134,105 @@ class PosDataConfiguratorUI:
                     else status.title()
                 )
 
+    def run_posdata_comparison(self):
+        if self.compare_running:
+            return
+
+        current_folder = self.current_folder.get().strip()
+        new_folder = self.new_folder.get().strip()
+
+        if not os.path.isdir(current_folder):
+            messagebox.showerror(
+                "Compare PosData",
+                "Current PosData folder does not exist.",
+            )
+            return
+
+        if not os.path.isdir(new_folder):
+            messagebox.showerror(
+                "Compare PosData",
+                "New PosData folder does not exist.",
+            )
+            return
+
+        self.compare_running = True
+
+        self.compare_button.configure(
+            state=tk.DISABLED,
+            text="Comparing...",
+            bg="#31445a",
+        )
+
+        self.open_compare_output_button.configure(
+            state=tk.DISABLED,
+        )
+
+        self.compare_status_label.configure(
+            text="RUNNING",
+            bg="#4a3a15",
+            fg=self.WARNING,
+        )
+
+        self.compare_summary_label.configure(
+            text="Comparing Current and New PosData folders..."
+        )
+
+        self.set_readonly_text(
+            self.compare_release_notes_text,
+            "Comparison in progress...\n",
+        )
+
+        self.status_var.set(
+            "PosData comparison running..."
+        )
+
+        self.append_log(
+            "\nPosData comparison started.\n",
+            "info",
+        )
+
+        threading.Thread(
+            target=self.execute_posdata_comparison,
+            args=(
+                current_folder,
+                new_folder,
+            ),
+            daemon=True,
+        ).start()
+
+
+    def execute_posdata_comparison(
+        self,
+        current_folder,
+        new_folder,
+    ):
+        comparison = None
+        outputs = {}
+        error = None
+
+        try:
+            comparison, outputs = (
+                compare_and_generate_release_notes(
+                    current_folder=current_folder,
+                    new_folder=new_folder,
+                    output_folder=os.path.join(
+                        self.output_folder,
+                        "compare",
+                    ),
+                )
+            )
+
+        except Exception as exc:
+            error = exc
+
+        self.root.after(
+            0,
+            self.finish_compare,
+            comparison,
+            outputs,
+            error,
+        )
+
     def set_readonly_text(self, widget, text):
         widget.configure(state=tk.NORMAL)
         widget.delete("1.0", tk.END)
@@ -863,6 +1248,16 @@ class PosDataConfiguratorUI:
                                   text="Execute Configuration" if enabled else "Configuration Running...",
                                   bg=self.PRIMARY if enabled else "#31445a")
         self.generate_button.configure(state=state)
+        if hasattr(self, "compare_button"):
+            compare_state = (
+                tk.NORMAL
+                if enabled and not self.compare_running
+                else tk.DISABLED
+            )
+
+            self.compare_button.configure(
+                state=compare_state,
+            )
         for button in self.browse_buttons:
             button.configure(state=state)
         for button in self.lab_buttons.values():
@@ -874,6 +1269,482 @@ class PosDataConfiguratorUI:
             return
         os.startfile(self.output_folder)
 
+    def finish_compare(
+        self,
+        comparison,
+        outputs,
+        error,
+    ):
+        self.compare_running = False
+
+        self.compare_button.configure(
+            state=tk.NORMAL,
+            text="Generate Release Notes",
+            bg=self.PRIMARY,
+        )
+
+        if error is not None:
+            self.compare_status_label.configure(
+                text="FAILED",
+                bg="#4b1f28",
+                fg=self.ERROR,
+            )
+
+            self.compare_summary_label.configure(
+                text="Comparison failed. Review the error below."
+            )
+
+            self.set_readonly_text(
+                self.compare_release_notes_text,
+                (
+                    "POSDATA COMPARISON FAILED\n"
+                    + "=" * 80
+                    + "\n\n"
+                    + f"{type(error).__name__}: {error}\n"
+                ),
+            )
+
+            self.open_compare_output_button.configure(
+                state=tk.DISABLED,
+            )
+
+            self.status_var.set(
+                "PosData comparison failed"
+            )
+
+            self.append_log(
+                f"\nPosData comparison failed: {error}\n",
+                "error",
+            )
+
+            return
+
+        if comparison is None:
+            self.compare_status_label.configure(
+                text="FAILED",
+                bg="#4b1f28",
+                fg=self.ERROR,
+            )
+
+            self.compare_summary_label.configure(
+                text="Comparison completed without returning results."
+            )
+
+            self.set_readonly_text(
+                self.compare_release_notes_text,
+                "The comparison did not return a result object.\n",
+            )
+
+            self.open_compare_output_button.configure(
+                state=tk.DISABLED,
+            )
+
+            self.status_var.set(
+                "PosData comparison returned no results"
+            )
+
+            return
+
+        self.last_comparison = comparison
+        self.last_comparison_outputs = outputs or {}
+
+        #
+        # TOTALS
+        #
+        # PosDataComparison is an object, therefore attributes must be
+        # accessed with getattr instead of comparison.get(...).
+        #
+
+        added_count = getattr(
+            comparison,
+            "added_count",
+            None,
+        )
+
+        removed_count = getattr(
+            comparison,
+            "removed_count",
+            None,
+        )
+
+        modified_count = getattr(
+            comparison,
+            "modified_count",
+            None,
+        )
+
+        unchanged_count = getattr(
+            comparison,
+            "unchanged_count",
+            0,
+        ) or 0
+
+        #
+        # Obtain the collection containing the compared files.
+        # Different versions may call this collection results,
+        # files, file_results or comparisons.
+        #
+
+        file_results = getattr(
+            comparison,
+            "results",
+            None,
+        )
+
+        if file_results is None:
+            file_results = getattr(
+                comparison,
+                "files",
+                None,
+            )
+
+        if file_results is None:
+            file_results = getattr(
+                comparison,
+                "file_results",
+                None,
+            )
+
+        if file_results is None:
+            file_results = getattr(
+                comparison,
+                "comparisons",
+                None,
+            )
+
+        file_results = list(file_results or [])
+
+        #
+        # Fallback:
+        # calculate totals from each file result when explicit counters
+        # are not available in PosDataComparison.
+        #
+
+        if (
+            added_count is None
+            or removed_count is None
+            or modified_count is None
+        ):
+            calculated_added = 0
+            calculated_removed = 0
+            calculated_modified = 0
+            calculated_unchanged = 0
+
+            for file_result in file_results:
+                status = getattr(
+                    file_result,
+                    "status",
+                    None,
+                )
+
+                if status is None:
+                    status = getattr(
+                        file_result,
+                        "kind",
+                        None,
+                    )
+
+                if status is None:
+                    status = getattr(
+                        file_result,
+                        "change_type",
+                        None,
+                    )
+
+                status = str(status or "").strip().upper()
+
+                if status in {
+                    "ADDED",
+                    "NEW",
+                    "FILE_ADDED",
+                }:
+                    calculated_added += 1
+
+                elif status in {
+                    "REMOVED",
+                    "DELETED",
+                    "FILE_REMOVED",
+                }:
+                    calculated_removed += 1
+
+                elif status in {
+                    "MODIFIED",
+                    "CHANGED",
+                    "FILE_CHANGED",
+                }:
+                    calculated_modified += 1
+
+                elif status in {
+                    "EQUAL",
+                    "UNCHANGED",
+                    "SAME",
+                }:
+                    calculated_unchanged += 1
+
+                else:
+                    changes = getattr(
+                        file_result,
+                        "changes",
+                        [],
+                    ) or []
+
+                    if changes:
+                        calculated_modified += 1
+                    else:
+                        calculated_unchanged += 1
+
+            if added_count is None:
+                added_count = calculated_added
+
+            if removed_count is None:
+                removed_count = calculated_removed
+
+            if modified_count is None:
+                modified_count = calculated_modified
+
+            if not unchanged_count:
+                unchanged_count = calculated_unchanged
+
+        added_count = int(added_count or 0)
+        removed_count = int(removed_count or 0)
+        modified_count = int(modified_count or 0)
+        unchanged_count = int(unchanged_count or 0)
+
+        #
+        # If the result object exposes separate collections,
+        # use them when the explicit counters remain zero.
+        #
+
+        added_files = getattr(
+            comparison,
+            "added",
+            None,
+        )
+
+        if added_files is None:
+            added_files = getattr(
+                comparison,
+                "added_files",
+                None,
+            )
+
+        removed_files = getattr(
+            comparison,
+            "removed",
+            None,
+        )
+
+        if removed_files is None:
+            removed_files = getattr(
+                comparison,
+                "removed_files",
+                None,
+            )
+
+        modified_files = getattr(
+            comparison,
+            "modified",
+            None,
+        )
+
+        if modified_files is None:
+            modified_files = getattr(
+                comparison,
+                "modified_files",
+                None,
+            )
+
+        if added_count == 0 and added_files is not None:
+            added_count = len(added_files)
+
+        if removed_count == 0 and removed_files is not None:
+            removed_count = len(removed_files)
+
+        if modified_count == 0 and modified_files is not None:
+            modified_count = len(modified_files)
+
+        changed_files_count = (
+            added_count
+            + removed_count
+            + modified_count
+        )
+
+        total_files_count = (
+            changed_files_count
+            + unchanged_count
+        )
+
+        if total_files_count == 0 and file_results:
+            total_files_count = len(file_results)
+
+        #
+        # UPDATE CARDS
+        #
+
+        self.compare_added_value.configure(
+            text=str(added_count)
+        )
+
+        self.compare_removed_value.configure(
+            text=str(removed_count)
+        )
+
+        self.compare_modified_value.configure(
+            text=str(modified_count)
+        )
+
+        #
+        # RELEASE NOTES
+        #
+
+        try:
+            notes = release_notes_text(
+                comparison
+            )
+        except Exception as notes_error:
+            notes = (
+                "The comparison completed, but the formatted release "
+                "notes could not be loaded.\n\n"
+                f"{type(notes_error).__name__}: {notes_error}\n"
+            )
+
+        if not notes or not str(notes).strip():
+            notes = (
+                "Comparison completed successfully, but the generated "
+                "release notes are empty.\n"
+            )
+
+        notes = str(notes)
+
+        #
+        # SUMMARY
+        #
+
+        errors = getattr(
+            comparison,
+            "errors",
+            [],
+        ) or []
+
+        summary_parts = [
+            f"{total_files_count} file(s) compared",
+            f"{changed_files_count} changed",
+            f"{unchanged_count} unchanged",
+        ]
+
+        if errors:
+            summary_parts.append(
+                f"{len(errors)} error(s)"
+            )
+
+        self.compare_summary_label.configure(
+            text=" | ".join(summary_parts)
+        )
+
+        if errors:
+            self.compare_status_label.configure(
+                text="COMPLETE WITH WARNINGS",
+                bg="#4a3a15",
+                fg=self.WARNING,
+            )
+
+            error_section = [
+                "",
+                "",
+                "=" * 80,
+                "COMPARISON WARNINGS",
+                "=" * 80,
+            ]
+
+            for comparison_error in errors:
+                error_section.append(
+                    f"- {comparison_error}"
+                )
+
+            notes += "\n".join(error_section)
+
+        else:
+            self.compare_status_label.configure(
+                text="COMPLETE",
+                bg="#153c28",
+                fg=self.SUCCESS,
+            )
+
+        self.set_readonly_text(
+            self.compare_release_notes_text,
+            notes,
+        )
+
+        #
+        # OUTPUT
+        #
+
+        compare_output_exists = bool(
+            self.last_comparison_outputs
+        )
+
+        compare_folder = os.path.join(
+            self.output_folder,
+            "compare",
+        )
+
+        if os.path.isdir(compare_folder):
+            compare_output_exists = True
+
+        self.open_compare_output_button.configure(
+            state=(
+                tk.NORMAL
+                if compare_output_exists
+                else tk.DISABLED
+            )
+        )
+
+        self.status_var.set(
+            (
+                "PosData comparison completed: "
+                f"{total_files_count} file(s), "
+                f"{changed_files_count} change(s)"
+            )
+        )
+
+        self.append_log(
+            (
+                "\nPosData comparison completed.\n"
+                f"Files compared: {total_files_count}\n"
+                f"Added: {added_count}\n"
+                f"Removed: {removed_count}\n"
+                f"Modified: {modified_count}\n"
+                f"Unchanged: {unchanged_count}\n"
+            ),
+            "success",
+        )
+
+    def open_compare_output(self):
+        compare_folder = os.path.join(
+            self.output_folder,
+            "compare",
+        )
+
+        if not os.path.isdir(compare_folder):
+            messagebox.showwarning(
+                "Compare Output",
+                (
+                    "Compare output folder was not found.\n\n"
+                    f"{compare_folder}"
+                ),
+            )
+            return
+
+        try:
+            os.startfile(compare_folder)
+        except OSError as exc:
+            messagebox.showerror(
+                "Compare Output",
+                (
+                    "Could not open Compare output folder.\n\n"
+                    f"{exc}"
+                ),
+            )
 
 def main_ui():
     root = tk.Tk()
