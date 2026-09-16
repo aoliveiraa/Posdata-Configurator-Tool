@@ -1,0 +1,34 @@
+#################################################
+# PosData Configurator
+#################################################
+
+# Generated outputs
+output/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Env
+.venv/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+
+# Compare artifacts
+*.json.tmp
