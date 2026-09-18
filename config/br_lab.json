@@ -1,5 +1,5 @@
 {
-  "lab": "RIO",
+  "lab": "BR",
   "network_base": "10.0.12",
   "way_ip": "10.0.12.83",
 
@@ -51,19 +51,19 @@
 
   "reference_pos_files": [
     {
-      "source_file": "_US80421POS01_pos-db.xml",
+      "source_file": "_JS970WS_pos-db.xml",
       "target_node": "POS0001"
     },
     {
-      "source_file": "_US80421POS11_pos-db.xml",
+      "source_file": "_NCRXR7W10_pos-db.xml",
       "target_node": "POS0002"
     },
     {
-      "source_file": "_US80421POS02_pos-db.xml",
+      "source_file": "_NCRXR7PR77_pos-db.xml",
       "target_node": "POS0003"
     },
     {
-      "source_file": "_US80421POS12_pos-db.xml",
+      "source_file": "_NCRXR7PR7_pos-db.xml",
       "target_node": "POS0004"
     }  
   ],
