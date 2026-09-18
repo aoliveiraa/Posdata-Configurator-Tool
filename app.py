@@ -12,6 +12,7 @@ from src.phases import (
     run_generation_phase,
     run_mapping_phase,
     run_validation_phase,
+    print_validation_phase_report,
 )
 from src.phases.market_readiness_phase import run_market_readiness_phase
 from src.phases.reporting_phase import print_market_readiness_report
@@ -189,6 +190,7 @@ def main(
     print_analysis_report(runtime)
     print_generation_report(runtime)
     print_validation_report(runtime)
+    print_validation_phase_report(runtime)
 
     print_execution_summary(
         generated_pos=runtime.generated_pos or [],

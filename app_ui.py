@@ -62,6 +62,7 @@ class PosDataConfiguratorUI:
         self.compare_running = False
         self.last_comparison = None
         self.last_comparison_outputs = {}
+        
 
         self.project_folder = os.path.dirname(os.path.abspath(__file__))
         self.output_folder = os.path.join(self.project_folder, "output")

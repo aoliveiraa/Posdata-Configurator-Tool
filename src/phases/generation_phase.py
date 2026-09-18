@@ -35,6 +35,13 @@ from src.transformers.storedb_transformer import (
     update_storedb_runtime_configuration,
 )
 
+from src.transformers.store_db_operation_mode_transformer import (
+    StoreDbOperationModeTransformer,
+)
+
+from src.transformers.cashdrawer_transformer import (
+    CashDrawerTransformer,
+)
 
 def prepare_store_db(
     new_posdata_folder,
@@ -335,6 +342,122 @@ def run_generation_phase(
         store_db_config_result
     )
 
+    #
+    # STOREDB OPERATION MODE
+    #
+    operation_mode_transformer = (
+        StoreDbOperationModeTransformer()
+    )
+
+    operation_mode_result = (
+        operation_mode_transformer.transform_file(
+            source_file="output/store-db.xml",
+            output_file="output/store-db.xml",
+        )
+    )
+
+    import pathlib
+
+    xml_text = pathlib.Path(
+        "output/store-db.xml"
+    ).read_text(
+        encoding="utf-8"
+    )
+
+
+
+    runtime.store_db_operation_mode = (
+        operation_mode_result
+    )
+
+    print()
+    print("OPERATION MODE")
+    print("-" * 50)
+
+    print(
+        f"Modified: {operation_mode_result.modified}"
+    )
+
+    print(
+        f"Configuration Found: "
+        f"{operation_mode_result.configuration_found}"
+    )
+
+    print(
+        f"Section Created: "
+        f"{operation_mode_result.section_created}"
+    )
+
+    print(
+        f"Parameters Created: "
+        f"{operation_mode_result.parameters_created}"
+    )
+
+    print(
+        f"Parameters Updated: "
+        f"{operation_mode_result.parameters_updated}"
+    )
+
+    print(
+        f"Duplicates Removed: "
+        f"{operation_mode_result.duplicates_removed}"
+    )
+
+    #
+    # CASH DRAWER
+    #
+    cash_drawer_transformer = (
+        CashDrawerTransformer()
+    )
+
+    cash_drawer_result = (
+        cash_drawer_transformer.transform_file(
+            source_file="output/store-db.xml",
+            output_file="output/store-db.xml",
+        )
+    )
+
+    runtime.cash_drawer_configuration = (
+        cash_drawer_result
+    )
+
+    print()
+    print("CASH DRAWER")
+    print("-" * 50)
+
+    print(
+        "Status:",
+        (
+            "UPDATED"
+            if cash_drawer_result.modified
+            else "ALREADY DISABLED"
+        )
+    )
+
+    print(
+        "Adaptors Found:",
+        cash_drawer_result.adaptors_found,
+    )
+
+    print(
+        "Adaptors Modified:",
+        len(
+            cash_drawer_result.adaptors_modified
+        ),
+    )
+
+    for adaptor_type in (
+        cash_drawer_result.adaptors_modified
+    ):
+        print(
+            f"  - {adaptor_type}"
+        )
+
+    for warning in cash_drawer_result.warnings:
+        print(
+            f"WARNING: {warning}"
+        )
+
     print()
     print("STOREDB PREPARATION")
     print("-" * 50)
@@ -380,6 +503,12 @@ def run_generation_phase(
             store_file=
                 "output/store-db.xml",
         )
+    )
+
+    xml_text = pathlib.Path(
+        "output/store-db.xml"
+    ).read_text(
+        encoding="utf-8"
     )
 
     return runtime

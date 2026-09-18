@@ -1206,3 +1206,47 @@ def print_market_readiness_report(
         "=" * 50
     )
 
+def print_validation_phase_report(
+    runtime: RuntimeContext,
+):
+
+    validation = (
+        getattr(
+            runtime,
+            "validation_summary",
+            {}
+        )
+        or {}
+    )
+
+    print()
+    print(
+        "VALIDATION SUMMARY"
+    )
+
+    print(
+        "-" * 50
+    )
+
+    print(
+        f"Files Checked : "
+        f"{validation.get('total', 0)}"
+    )
+
+    print(
+        f"Passed : "
+        f"{validation.get('passed', 0)}"
+    )
+
+    print(
+        f"Failed : "
+        f"{validation.get('failed', 0)}"
+    )
+
+    print(
+        f"Status : "
+        f"{validation.get('status', 'UNKNOWN')}"
+    )
+
+
+    
