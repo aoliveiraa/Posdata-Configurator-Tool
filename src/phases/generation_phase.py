@@ -330,13 +330,20 @@ def run_generation_phase(
     # STORE COD
     #
 
+#
+# STOREDB RUNTIME CONFIGURATION
+#
+
     store_db_config_result = (
         update_storedb_runtime_configuration(
             store_db_path="output/store-db.xml",
             output_path="output/store-db.xml",
             lab=runtime.selected_lab,
+            market=runtime.market,
+            screen_xml_path=runtime.screen_xml_path,
         )
     )
+
 
     runtime.store_db_configuration = (
         store_db_config_result

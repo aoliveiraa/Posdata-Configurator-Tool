@@ -4,6 +4,7 @@
 
 # Generated outputs
 output/
+templates/
 
 # Logs
 logs/

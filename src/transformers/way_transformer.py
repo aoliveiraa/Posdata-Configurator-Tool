@@ -7,6 +7,18 @@ from src.utils.config_loader import load_json_config
 from src.utils.xml_loader import load_xml, save_xml
 
 
+from pathlib import Path
+from urllib.parse import urlparse, urlunparse
+
+from lxml import etree
+
+from src.transformers.foe_transformer import (
+    ensure_foe_standard,
+    validate_foe,
+)
+from src.utils.config_loader import load_json_config
+from src.utils.xml_loader import load_xml, save_xml
+
 LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
 UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -934,13 +946,31 @@ def generate_way_file(
         force_way_npw_disabled(tree)
     )
 
+    foe_transformation = ensure_foe_standard(
+        tree
+    )
+
+    changes.extend(
+        foe_transformation["changes"]
+    )
+
+    warnings.extend(
+        foe_transformation.get(
+            "warnings",
+            []
+        )
+    )
+
+    errors.extend(
+        foe_transformation["errors"]
+    )
+
     validation = validate_way_tree(
         tree,
         network_base,
         way_ip,
         pos_service_ids
     )
-
     errors.extend(
         validation["errors"]
     )
@@ -993,7 +1023,48 @@ def generate_way_file(
         )
     )
 
-    if post_save_validation["errors"]:
+    post_save_foe_validation = (
+        validate_foe(
+            validation_tree
+        )
+    )
+
+    post_save_errors = (
+        post_save_validation["errors"]
+        + post_save_foe_validation["errors"]
+    )
+
+    post_save_warnings = (
+        post_save_validation["warnings"]
+        + post_save_foe_validation.get(
+            "warnings",
+            []
+        )
+    )
+
+    post_save_errors = list(
+        dict.fromkeys(
+            post_save_errors
+        )
+    )
+
+    post_save_warnings = list(
+        dict.fromkeys(
+            post_save_warnings
+        )
+    )
+
+    warnings.extend(
+        post_save_warnings
+    )
+
+    warnings = list(
+        dict.fromkeys(
+            warnings
+        )
+    )
+
+    if post_save_errors:
         output_path.unlink(
             missing_ok=True
         )
@@ -1006,13 +1077,8 @@ def generate_way_file(
             "output_file": None,
             "changes": changes,
             "warnings": warnings,
-            "errors": (
-                post_save_validation[
-                    "errors"
-                ]
-            )
+            "errors": post_save_errors
         }
-
     return {
         "generated": True,
         "source_file": str(

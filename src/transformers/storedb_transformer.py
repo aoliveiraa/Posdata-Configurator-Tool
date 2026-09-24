@@ -39,23 +39,18 @@ STOREDB_MESSAGING_PARAMETERS = (
 )
 
 
-def normalize_lab_name(
-    lab
-):
+LUNCH_MENU_TITLE = "Lunch Menu"
+
+
+def normalize_lab_name(lab):
     if lab is None:
         return ""
 
-    return str(
-        lab
-    ).strip().upper()
+    return str(lab).strip().upper()
 
 
-def get_lab_network_prefix(
-    lab
-):
-    normalized_lab = normalize_lab_name(
-        lab
-    )
+def get_lab_network_prefix(lab):
+    normalized_lab = normalize_lab_name(lab)
 
     if not normalized_lab:
         raise ValueError(
@@ -63,17 +58,13 @@ def get_lab_network_prefix(
             "Messaging configuration."
         )
 
-    network_prefix = (
-        STORE_NETWORK_PREFIX_BY_LAB.get(
-            normalized_lab
-        )
+    network_prefix = STORE_NETWORK_PREFIX_BY_LAB.get(
+        normalized_lab
     )
 
     if network_prefix is None:
         supported_labs = ", ".join(
-            sorted(
-                STORE_NETWORK_PREFIX_BY_LAB
-            )
+            sorted(STORE_NETWORK_PREFIX_BY_LAB)
         )
 
         raise ValueError(
@@ -84,20 +75,12 @@ def get_lab_network_prefix(
     return network_prefix
 
 
-def get_direct_parameter(
-    section,
-    parameter_name
-):
+def get_direct_parameter(section, parameter_name):
     if section is None:
         return None
 
-    for parameter in section.findall(
-        "Parameter"
-    ):
-        if (
-            parameter.get("name")
-            == parameter_name
-        ):
+    for parameter in section.findall("Parameter"):
+        if parameter.get("name") == parameter_name:
             return parameter
 
     return None
@@ -106,22 +89,16 @@ def get_direct_parameter(
 def remove_duplicate_parameters(
     section,
     parameter_name,
-    parameter_to_keep
+    parameter_to_keep,
 ):
     removed = 0
 
-    for parameter in list(
-        section.findall("Parameter")
-    ):
+    for parameter in list(section.findall("Parameter")):
         if (
-            parameter.get("name")
-            == parameter_name
+            parameter.get("name") == parameter_name
             and parameter is not parameter_to_keep
         ):
-            section.remove(
-                parameter
-            )
-
+            section.remove(parameter)
             removed += 1
 
     return removed
@@ -130,19 +107,16 @@ def remove_duplicate_parameters(
 def update_main_screen(
     store_db_path,
     output_path,
-    new_screen
+    new_screen,
 ):
     """
     Updates the first mainScreenNumber parameter
     found in the StoreDB.
 
-    This function does not change Messaging or
-    any other StoreDB runtime configuration.
+    This helper remains available for callers that
+    only need to update mainScreenNumber.
     """
-
-    tree = load_xml(
-        store_db_path
-    )
+    tree = load_xml(store_db_path)
 
     nodes = tree.xpath(
         "//Parameter[@name='mainScreenNumber']"
@@ -153,17 +127,17 @@ def update_main_screen(
 
     nodes[0].set(
         "value",
-        str(new_screen)
+        str(new_screen),
     )
 
     etree.indent(
         tree,
-        space="  "
+        space="  ",
     )
 
     save_xml(
         tree,
-        output_path
+        output_path,
     )
 
     return True
@@ -172,21 +146,16 @@ def update_main_screen(
 def update_business_limits(
     store_db_path,
     output_path,
-    business_limits_file
+    business_limits_file,
 ):
     """
     Replaces the first BusinessLimits node in
     the StoreDB using the supplied XML file.
     """
-
-    tree = load_xml(
-        store_db_path
-    )
+    tree = load_xml(store_db_path)
 
     business_tree = etree.parse(
-        str(
-            business_limits_file
-        )
+        str(business_limits_file)
     )
 
     new_limits = deepcopy(
@@ -204,38 +173,96 @@ def update_business_limits(
 
     parent.replace(
         old_limits[0],
-        new_limits
+        new_limits,
     )
 
     etree.indent(
         tree,
-        space="  "
+        space="  ",
     )
 
     save_xml(
         tree,
-        output_path
+        output_path,
     )
 
     return True
 
 
+def find_lunch_menu_screen_number(
+    screen_xml_path,
+):
+    """
+    Finds the Screen whose title attribute is
+    'Lunch Menu' and returns its number attribute.
+
+    The comparison ignores title casing and leading
+    or trailing spaces, but requires the logical title
+    to be exactly 'Lunch Menu'.
+    """
+    if screen_xml_path is None:
+        raise ValueError(
+            "screen.xml path was not provided."
+        )
+
+    tree = load_xml(screen_xml_path)
+
+    lunch_screens = tree.xpath(
+        "//*[local-name()='Screen' "
+        "and translate(normalize-space(@title), "
+        "'ABCDEFGHIJKLMNOPQRSTUVWXYZ', "
+        "'abcdefghijklmnopqrstuvwxyz')="
+        "'lunch menu']"
+    )
+
+    if not lunch_screens:
+        raise ValueError(
+            "Screen with title='Lunch Menu' "
+            "was not found in screen.xml."
+        )
+
+    if len(lunch_screens) > 1:
+        screen_numbers = [
+            screen.get("number")
+            for screen in lunch_screens
+        ]
+
+        raise ValueError(
+            "Multiple screens with title='Lunch Menu' "
+            "were found in screen.xml: "
+            f"{screen_numbers}."
+        )
+
+    screen_number = lunch_screens[0].get(
+        "number"
+    )
+
+    if screen_number is None or not str(
+        screen_number
+    ).strip():
+        raise ValueError(
+            "The Lunch Menu screen does not "
+            "contain a valid number attribute."
+        )
+
+    return str(screen_number).strip()
+
+
 def update_storedb_messaging(
     tree,
-    network_prefix
+    network_prefix,
 ):
     """
     Normalizes the Messaging section inside:
 
     Document
       -> Configurations
-        -> Configuration type="Store.wide"
-          -> Section name="Messaging"
+        -> Configuration type='Store.wide'
+          -> Section name='Messaging'
 
     Existing children of the Messaging section
     are replaced by the approved standard.
     """
-
     changes = []
     warnings = []
     errors = []
@@ -293,7 +320,7 @@ def update_storedb_messaging(
 
     for section_index, messaging in enumerate(
         messaging_nodes,
-        start=1
+        start=1,
     ):
         current_parameters = [
             (
@@ -310,10 +337,7 @@ def update_storedb_messaging(
         for parameter_name, parameter_value in (
             STOREDB_MESSAGING_PARAMETERS
         ):
-            if (
-                parameter_name
-                == "networkAdaptorBaseIp"
-            ):
+            if parameter_name == "networkAdaptorBaseIp":
                 expected_parameters.append(
                     (
                         parameter_name,
@@ -326,8 +350,7 @@ def update_storedb_messaging(
                         parameter_name,
                         (
                             str(parameter_value)
-                            if parameter_value
-                            is not None
+                            if parameter_value is not None
                             else None
                         ),
                     )
@@ -340,8 +363,7 @@ def update_storedb_messaging(
         ]
 
         if (
-            current_parameters
-            == expected_parameters
+            current_parameters == expected_parameters
             and not unexpected_children
         ):
             changes.append(
@@ -349,42 +371,33 @@ def update_storedb_messaging(
                 f"{section_index} already matches "
                 "the expected configuration."
             )
-
             continue
 
-        for child in list(
-            messaging
-        ):
-            messaging.remove(
-                child
-            )
+        for child in list(messaging):
+            messaging.remove(child)
 
         for parameter_name, parameter_value in (
             STOREDB_MESSAGING_PARAMETERS
         ):
             parameter = etree.SubElement(
                 messaging,
-                "Parameter"
+                "Parameter",
             )
 
             parameter.set(
                 "name",
-                parameter_name
+                parameter_name,
             )
 
-            if (
-                parameter_name
-                == "networkAdaptorBaseIp"
-            ):
+            if parameter_name == "networkAdaptorBaseIp":
                 parameter.set(
                     "value",
-                    str(network_prefix)
+                    str(network_prefix),
                 )
-
             elif parameter_value is not None:
                 parameter.set(
                     "value",
-                    str(parameter_value)
+                    str(parameter_value),
                 )
 
         changes.append(
@@ -401,22 +414,12 @@ def update_storedb_messaging(
     }
 
 
-def update_storedb_pos_ui(
-    tree
-):
+def update_storedb_pos_ui(tree):
     """
     Ensures the required POS UI design parameters
-    exist with value=false inside:
-
-    Document
-      -> Configurations
-        -> Configuration type="POS"
-          -> Section name="UserInterface"
-
-    Existing unrelated UserInterface parameters
-    are preserved.
+    exist with value=false inside the POS
+    UserInterface section.
     """
-
     changes = []
     warnings = []
     errors = []
@@ -460,7 +463,7 @@ def update_storedb_pos_ui(
 
     for config_index, config in enumerate(
         configs,
-        start=1
+        start=1,
     ):
         ui_sections = config.xpath(
             "./Section[@name='UserInterface']"
@@ -469,12 +472,12 @@ def update_storedb_pos_ui(
         if not ui_sections:
             ui = etree.SubElement(
                 config,
-                "Section"
+                "Section",
             )
 
             ui.set(
                 "name",
-                "UserInterface"
+                "UserInterface",
             )
 
             changes.append(
@@ -482,7 +485,6 @@ def update_storedb_pos_ui(
                 f"section created for POS "
                 f"Configuration {config_index}."
             )
-
         else:
             ui = ui_sections[0]
 
@@ -500,23 +502,23 @@ def update_storedb_pos_ui(
         ):
             parameter = get_direct_parameter(
                 ui,
-                parameter_name
+                parameter_name,
             )
 
             if parameter is None:
                 parameter = etree.SubElement(
                     ui,
-                    "Parameter"
+                    "Parameter",
                 )
 
                 parameter.set(
                     "name",
-                    parameter_name
+                    parameter_name,
                 )
 
                 parameter.set(
                     "value",
-                    "false"
+                    "false",
                 )
 
                 changes.append(
@@ -524,7 +526,6 @@ def update_storedb_pos_ui(
                     f"parameter {parameter_name} "
                     "created with value=false."
                 )
-
             else:
                 current_value = parameter.get(
                     "value"
@@ -533,7 +534,7 @@ def update_storedb_pos_ui(
                 if current_value != "false":
                     parameter.set(
                         "value",
-                        "false"
+                        "false",
                     )
 
                     changes.append(
@@ -548,7 +549,7 @@ def update_storedb_pos_ui(
                 remove_duplicate_parameters(
                     ui,
                     parameter_name,
-                    parameter
+                    parameter,
                 )
             )
 
@@ -573,146 +574,230 @@ def update_storedb_pos_ui(
     }
 
 
+def synchronize_lunch_menu_main_screen(
+    tree,
+    screen_xml_path,
+):
+    """
+    Finds title='Lunch Menu' in screen.xml and
+    applies its number to every mainScreenNumber
+    parameter found in the StoreDB tree.
+    """
+    changes = []
+    warnings = []
+    errors = []
+
+    try:
+        screen_number = (
+            find_lunch_menu_screen_number(
+                screen_xml_path
+            )
+        )
+    except Exception as error:
+        errors.append(
+            "MainScreen synchronization failed: "
+            f"{error}"
+        )
+
+        return {
+            "updated": False,
+            "screen_number": None,
+            "changes": changes,
+            "warnings": warnings,
+            "errors": errors,
+        }
+
+    nodes = tree.xpath(
+        "//Parameter[@name='mainScreenNumber']"
+    )
+
+    if not nodes:
+        errors.append(
+            "StoreDB mainScreenNumber parameter "
+            "was not found."
+        )
+
+        return {
+            "updated": False,
+            "screen_number": screen_number,
+            "changes": changes,
+            "warnings": warnings,
+            "errors": errors,
+        }
+
+    if len(nodes) > 1:
+        warnings.append(
+            "Multiple mainScreenNumber parameters "
+            "were found. All parameters were updated."
+        )
+
+    modified = False
+
+    for index, node in enumerate(
+        nodes,
+        start=1,
+    ):
+        old_value = node.get("value")
+
+        if old_value == screen_number:
+            changes.append(
+                "StoreDB mainScreenNumber "
+                f"{index} already matches "
+                f"Lunch Menu screen {screen_number}."
+            )
+            continue
+
+        node.set(
+            "value",
+            screen_number,
+        )
+        modified = True
+
+        changes.append(
+            "StoreDB mainScreenNumber "
+            f"{index} updated: "
+            f"{old_value} -> {screen_number}."
+        )
+
+    return {
+        "updated": True,
+        "modified": modified,
+        "screen_number": screen_number,
+        "changes": changes,
+        "warnings": warnings,
+        "errors": errors,
+    }
+
+
 def update_storedb_runtime_configuration(
     store_db_path,
     output_path,
     lab,
-    update_pos_ui=True
+    update_pos_ui=True,
+    market=None,
+    screen_xml_path=None,
 ):
     """
-    Loads a StoreDB, applies runtime configuration,
-    validates the saved result and returns a report.
+    Loads StoreDB, applies runtime configuration,
+    synchronizes mainScreenNumber from the Screen
+    with title='Lunch Menu', validates the saved
+    result and returns a report.
 
-    Applied rules:
-        1. Store.wide Messaging normalization.
-        2. POS UserInterface flags, when enabled.
-
-    The function can update the same file in place:
-
-        store_db_path="output/store-db.xml"
-        output_path="output/store-db.xml"
+    The market argument is retained only for backward
+    compatibility. MainScreen discovery is based on
+    screen.xml and does not use market.
     """
-
     result = {
         "updated": False,
-        "store_db_path": str(
-            store_db_path
-        ),
-        "output_path": str(
-            output_path
-        ),
-        "lab": normalize_lab_name(
-            lab
-        ),
+        "store_db_path": str(store_db_path),
+        "output_path": str(output_path),
+        "lab": normalize_lab_name(lab),
+        "market": market,
         "network_prefix": None,
+        "main_screen_number": None,
         "changes": [],
         "warnings": [],
         "errors": [],
     }
 
     try:
-        network_prefix = (
-            get_lab_network_prefix(
-                lab
-            )
+        network_prefix = get_lab_network_prefix(
+            lab
         )
-
     except ValueError as error:
         result["errors"].append(
             str(error)
         )
-
         return result
 
-    result["network_prefix"] = (
-        network_prefix
-    )
+    result["network_prefix"] = network_prefix
 
     try:
         tree = load_xml(
             store_db_path
         )
-
     except Exception as error:
         result["errors"].append(
             "Unable to load StoreDB XML: "
             f"{error}"
         )
-
         return result
 
-    messaging_result = (
-        update_storedb_messaging(
-            tree,
-            network_prefix
-        )
+    messaging_result = update_storedb_messaging(
+        tree,
+        network_prefix,
     )
 
     result["changes"].extend(
-        messaging_result.get(
-            "changes",
-            []
-        )
+        messaging_result.get("changes", [])
     )
-
     result["warnings"].extend(
-        messaging_result.get(
-            "warnings",
-            []
-        )
+        messaging_result.get("warnings", [])
     )
-
     result["errors"].extend(
-        messaging_result.get(
-            "errors",
-            []
-        )
+        messaging_result.get("errors", [])
     )
 
     if update_pos_ui:
-        pos_ui_result = (
-            update_storedb_pos_ui(
-                tree
-            )
+        pos_ui_result = update_storedb_pos_ui(
+            tree
         )
 
         result["changes"].extend(
-            pos_ui_result.get(
-                "changes",
-                []
-            )
+            pos_ui_result.get("changes", [])
         )
-
         result["warnings"].extend(
-            pos_ui_result.get(
-                "warnings",
-                []
+            pos_ui_result.get("warnings", [])
+        )
+        result["errors"].extend(
+            pos_ui_result.get("errors", [])
+        )
+
+    if screen_xml_path:
+        main_screen_result = (
+            synchronize_lunch_menu_main_screen(
+                tree,
+                screen_xml_path,
             )
         )
 
-        result["errors"].extend(
-            pos_ui_result.get(
-                "errors",
-                []
+        result["main_screen_number"] = (
+            main_screen_result.get(
+                "screen_number"
             )
+        )
+        result["changes"].extend(
+            main_screen_result.get(
+                "changes",
+                [],
+            )
+        )
+        result["warnings"].extend(
+            main_screen_result.get(
+                "warnings",
+                [],
+            )
+        )
+        result["errors"].extend(
+            main_screen_result.get(
+                "errors",
+                [],
+            )
+        )
+    else:
+        result["warnings"].append(
+            "screen.xml path was not provided; "
+            "mainScreenNumber was not synchronized."
         )
 
     result["changes"] = list(
-        dict.fromkeys(
-            result["changes"]
-        )
+        dict.fromkeys(result["changes"])
     )
-
     result["warnings"] = list(
-        dict.fromkeys(
-            result["warnings"]
-        )
+        dict.fromkeys(result["warnings"])
     )
-
     result["errors"] = list(
-        dict.fromkeys(
-            result["errors"]
-        )
+        dict.fromkeys(result["errors"])
     )
 
     if result["errors"]:
@@ -720,73 +805,58 @@ def update_storedb_runtime_configuration(
 
     etree.indent(
         tree,
-        space="  "
+        space="  ",
     )
 
     try:
         save_xml(
             tree,
-            output_path
+            output_path,
         )
-
     except Exception as error:
         result["errors"].append(
             "Unable to save configured StoreDB: "
             f"{error}"
         )
-
         return result
 
     try:
         saved_tree = load_xml(
             output_path
         )
-
     except Exception as error:
         result["errors"].append(
             "Unable to reload configured StoreDB: "
             f"{error}"
         )
-
         return result
 
     validation = (
         validate_storedb_runtime_configuration(
             saved_tree,
             network_prefix,
-            validate_pos_ui=update_pos_ui
+            validate_pos_ui=update_pos_ui,
+            expected_main_screen_number=(
+                result["main_screen_number"]
+            ),
         )
     )
 
     result["warnings"].extend(
-        validation.get(
-            "warnings",
-            []
-        )
+        validation.get("warnings", [])
     )
-
     result["errors"].extend(
-        validation.get(
-            "errors",
-            []
-        )
+        validation.get("errors", [])
     )
 
     result["warnings"] = list(
-        dict.fromkeys(
-            result["warnings"]
-        )
+        dict.fromkeys(result["warnings"])
     )
-
     result["errors"] = list(
-        dict.fromkeys(
-            result["errors"]
-        )
+        dict.fromkeys(result["errors"])
     )
 
-    result["updated"] = (
-        not result["errors"]
-    )
+    result["updated"] = not result["errors"]
 
     return result
 
@@ -794,13 +864,14 @@ def update_storedb_runtime_configuration(
 def validate_storedb_runtime_configuration(
     tree,
     network_prefix,
-    validate_pos_ui=True
+    validate_pos_ui=True,
+    expected_main_screen_number=None,
 ):
     """
-    Validates Store.wide Messaging and optionally
-    validates the five POS UserInterface flags.
+    Validates Store.wide Messaging, optionally
+    validates the five POS UserInterface flags,
+    and validates mainScreenNumber when expected.
     """
-
     warnings = []
     errors = []
 
@@ -815,11 +886,10 @@ def validate_storedb_runtime_configuration(
             "Store.wide Messaging section "
             "was not found after generation."
         )
-
     else:
         for section_index, messaging in enumerate(
             messaging_nodes,
-            start=1
+            start=1,
         ):
             actual_parameters = [
                 (
@@ -836,10 +906,7 @@ def validate_storedb_runtime_configuration(
             for parameter_name, parameter_value in (
                 STOREDB_MESSAGING_PARAMETERS
             ):
-                if (
-                    parameter_name
-                    == "networkAdaptorBaseIp"
-                ):
+                if parameter_name == "networkAdaptorBaseIp":
                     expected_parameters.append(
                         (
                             parameter_name,
@@ -852,17 +919,13 @@ def validate_storedb_runtime_configuration(
                             parameter_name,
                             (
                                 str(parameter_value)
-                                if parameter_value
-                                is not None
+                                if parameter_value is not None
                                 else None
                             ),
                         )
                     )
 
-            if (
-                actual_parameters
-                != expected_parameters
-            ):
+            if actual_parameters != expected_parameters:
                 errors.append(
                     "StoreDB Messaging section "
                     f"{section_index} does not "
@@ -881,11 +944,10 @@ def validate_storedb_runtime_configuration(
                 "POS UserInterface section was "
                 "not found after generation."
             )
-
         else:
             for section_index, ui in enumerate(
                 ui_sections,
-                start=1
+                start=1,
             ):
                 for parameter_name in (
                     STOREDB_POS_UI_PARAMETERS
@@ -895,27 +957,23 @@ def validate_storedb_runtime_configuration(
                         for parameter in ui.findall(
                             "Parameter"
                         )
-                        if (
-                            parameter.get("name")
-                            == parameter_name
-                        )
+                        if parameter.get("name") == parameter_name
                     ]
 
                     if not matching_parameters:
                         errors.append(
                             "StoreDB POS "
-                            f"UserInterface parameter "
+                            "UserInterface parameter "
                             f"{parameter_name} was "
                             "not found in section "
                             f"{section_index}."
                         )
-
                         continue
 
                     if len(matching_parameters) > 1:
                         errors.append(
                             "StoreDB POS "
-                            f"UserInterface parameter "
+                            "UserInterface parameter "
                             f"{parameter_name} is "
                             "duplicated in section "
                             f"{section_index}."
@@ -930,14 +988,64 @@ def validate_storedb_runtime_configuration(
                     if actual_value != "false":
                         errors.append(
                             "StoreDB POS "
-                            f"UserInterface parameter "
+                            "UserInterface parameter "
                             f"{parameter_name} has "
                             "unexpected value "
                             f"{actual_value!r}."
                         )
+
+    if expected_main_screen_number is not None:
+        main_screen_nodes = tree.xpath(
+            "//Parameter[@name='mainScreenNumber']"
+        )
+
+        if not main_screen_nodes:
+            errors.append(
+                "mainScreenNumber was not found "
+                "after generation."
+            )
+        else:
+            for index, node in enumerate(
+                main_screen_nodes,
+                start=1,
+            ):
+                actual_value = node.get("value")
+
+                if actual_value != str(
+                    expected_main_screen_number
+                ):
+                    errors.append(
+                        "StoreDB mainScreenNumber "
+                        f"{index} must be "
+                        f"{expected_main_screen_number}, "
+                        f"found {actual_value}."
+                    )
 
     return {
         "valid": not errors,
         "warnings": warnings,
         "errors": errors,
     }
+
+
+def synchronize_main_screen(
+    store_db_path,
+    screen_xml_path,
+    output_path,
+    market=None,
+):
+    """
+    Backward-compatible file-based helper.
+
+    The market argument is ignored. The value is
+    discovered from Screen title='Lunch Menu'.
+    """
+    screen_number = find_lunch_menu_screen_number(
+        screen_xml_path
+    )
+
+    return update_main_screen(
+        store_db_path,
+        output_path,
+        screen_number,
+    )

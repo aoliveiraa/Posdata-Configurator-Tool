@@ -28,11 +28,13 @@ class StoreDbOperationModeTransformer:
     """
 
     REQUIRED_PARAMETERS = (
-        ("AnonymousOperatorName", "AutoLogin"),
-        ("AnonymousOperatorID", "99999"),
+        ("autoRecall", "false"),
         ("AutomaticOperatorLogin", "true"),
+        ("AnonymousOperatorID", "3"),
+        ("AnonymousOperatorName", "Carl Sagan"),
+        ("DisplayPrinterListOnError", "false"),
+        ("isHtmlUi", "true"),
     )
-
     def transform_file(
         self,
         source_file: str | Path,

@@ -355,6 +355,110 @@ def configure_auto_update(npw_service):
     return result
 
 
+def ensure_local_webview(
+    npw_service,
+):
+    """
+    Guarantees LocalWebView configuration
+    required by KVS Performance validation.
+    """
+
+    configuration = get_direct_configuration(
+        npw_service
+    )
+
+    if configuration is None:
+
+        return {
+            "updated": False,
+            "created_section": False,
+            "created_parameter": False,
+            "error": (
+                "NPW service does not contain "
+                "a Configuration element."
+            ),
+        }
+
+    current_imports = (
+        configuration.get(
+            "imports",
+            ""
+        )
+        .strip()
+    )
+
+    if not current_imports:
+
+        configuration.set(
+            "imports",
+            "LocalWebView",
+        )
+
+    elif (
+        "LOCALWEBVIEW"
+        not in current_imports.upper()
+    ):
+
+        imports = [
+            value.strip()
+            for value in (
+                current_imports
+                .replace(";", ",")
+                .split(",")
+            )
+            if value.strip()
+        ]
+
+        imports.append(
+            "LocalWebView"
+        )
+
+        configuration.set(
+            "imports",
+            ",".join(
+                dict.fromkeys(
+                    imports
+                )
+            )
+        )
+
+    local_webview, created_section = (
+        ensure_section(
+            configuration,
+            "LocalWebView",
+        )
+    )
+
+    location_result = set_parameter(
+        local_webview,
+        "Location",
+        "../NpWebView",
+    )
+
+    return {
+        "updated": True,
+        "created_section": (
+            created_section
+        ),
+        "created_parameter": (
+            location_result[
+                "created"
+            ]
+        ),
+        "old_value": (
+            location_result[
+                "old_value"
+            ]
+        ),
+        "new_value": (
+            location_result[
+                "new_value"
+            ]
+        ),
+        "error": None,
+    }
+
+
 def browser_section_for_service(
     npw_service,
     service_id
@@ -895,37 +999,89 @@ def apply_performance_kvs_configuration(
                 f"for KVS{service_id}."
             )
 
-    npw_service = get_npw_service(
-        generated_tree
-    )
-
-    if npw_service is None:
-        errors.append(
-            "NPW service was not found."
+        npw_service = get_npw_service(
+            generated_tree
         )
 
-    else:
-        try:
-            auto_update_result = (
-                configure_auto_update(
+        if npw_service is None:
+
+            errors.append(
+                "NPW service was not found."
+            )
+
+        else:
+
+            #
+            # LocalWebView
+            #
+            local_webview_result = (
+                ensure_local_webview(
                     npw_service
                 )
             )
 
-            if auto_update_result[
-                "created_section"
+            if not local_webview_result[
+                "updated"
             ]:
-                changes.append(
-                    "AutoUpdate section created."
+
+                errors.append(
+                    local_webview_result[
+                        "error"
+                    ]
                 )
 
-            changes.append(
-                "EnableAutoUpdate set to true."
-            )
+            else:
 
-        except ValueError as error:
-            errors.append(str(error))
+                if local_webview_result[
+                    "created_section"
+                ]:
 
+                    changes.append(
+                        "LocalWebView section created in NPW."
+                    )
+
+                elif local_webview_result[
+                    "created_parameter"
+                ]:
+
+                    changes.append(
+                        "LocalWebView Location parameter created in NPW."
+                    )
+
+                else:
+
+                    changes.append(
+                        "LocalWebView configuration validated in NPW."
+                    )
+
+            #
+            # AutoUpdate
+            #
+            try:
+
+                auto_update_result = (
+                    configure_auto_update(
+                        npw_service
+                    )
+                )
+
+                if auto_update_result[
+                    "created_section"
+                ]:
+
+                    changes.append(
+                        "AutoUpdate section created."
+                    )
+
+                changes.append(
+                    "EnableAutoUpdate set to true."
+                )
+
+            except ValueError as error:
+
+                errors.append(
+                    str(error)
+                )
         removed_sections = (
             remove_physical_driver_sections(
                 npw_service

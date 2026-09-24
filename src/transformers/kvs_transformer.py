@@ -177,6 +177,42 @@ def browser_section_key(section):
         .upper()
     )
 
+def create_browser_section(
+    service_id,
+):
+    """
+    Creates the minimum Browser section required
+    for a KVS service.
+
+    The mandatory Performance Coordinator
+    parameters are populated later by:
+
+        apply_performance_kvs_configuration()
+
+    This function only guarantees that the
+    expected section exists inside the shared NPW.
+    """
+
+    normalized_service_id = (
+        str(service_id)
+        .strip()
+        .upper()
+        .removeprefix("KVS")
+    )
+
+    section = etree.Element(
+        "Section"
+    )
+
+    section.set(
+        "name",
+        (
+            "Component.Browser.KVS"
+            f"{normalized_service_id}"
+        )
+    )
+
+    return section
 
 def collect_source_data(
     new_posdata_folder,
@@ -479,15 +515,19 @@ def create_shared_npw(
 
         if selected_section is None:
 
+            selected_section = (
+                create_browser_section(
+                    service_id
+                )
+            )
+
             warnings.append(
                 "Browser section was not found "
                 f"for KVS{service_id} in either "
                 "the new KVS source or the "
-                "reference Itona."
+                "reference Itona. "
+                "A new Browser section was created."
             )
-
-            continue
-
         section_key = browser_section_key(
             selected_section
         )
