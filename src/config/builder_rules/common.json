@@ -1,0 +1,45 @@
+{
+  "builder": {
+    "generation_mode": "FROM_SCRATCH",
+    "version": "2.0.1"
+  },
+
+  "webview": {
+    "required_for_pos": true,
+    "required_for_kvs": true
+  },
+
+  "browser": {
+    "required_for_pos": true,
+    "required_for_kvs": true
+  },
+
+  "cod": {
+    "enabled": true
+  },
+
+  "foe": {
+    "enabled": true
+  },
+
+  "way": {
+    "enabled": true
+  },
+
+  "production": {
+    "generate_primary": true,
+    "generate_backup": true
+  },
+
+  "itona": {
+    "max_kvs_per_itona": 2,
+    "allow_empty_itona": true
+  },
+
+  "validation": {
+    "strict": true,
+    "require_webview": true,
+    "require_browser": true,
+    "require_service_references": true
+  }
+}

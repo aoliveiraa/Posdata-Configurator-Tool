@@ -1,0 +1,18 @@
+{
+  "market": "ES",
+
+  "screen": {
+    "source": "screen.xml",
+    "lunch_screen_required": true
+  },
+
+  "production": {
+    "primary_file": "_PROD_PRI_pos-db.xml",
+    "backup_file": "_PROD_BACK_pos-db.xml"
+  },
+
+  "storedb": {
+    "requires_cod_routing": true,
+    "requires_mapping_routing": true
+  }
+}

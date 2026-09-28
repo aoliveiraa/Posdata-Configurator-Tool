@@ -18,6 +18,14 @@ from src.builder.builder_generation_report import (
     generate_builder_generation_report,
 )
 
+from src.builder.builder_build_plan import (
+    build_build_plan,
+)
+
+from src.builder.builder_build_plan_validator import (
+    validate_build_plan,
+)
+
 
 def run_builder_generation_phase(
     builder_context,
@@ -48,6 +56,125 @@ def run_builder_generation_phase(
     #
     output_paths = (
         clean_previous_output()
+    )
+
+    #
+    # Build Plan
+    #
+    build_plan = (
+        build_build_plan(
+            builder_context
+        )
+    )
+
+    print()
+    print(
+        "BUILD PLAN"
+    )
+    print(
+        "-" * 50
+    )
+
+    print(
+        "Mode:",
+        build_plan.get(
+            "generation_mode",
+            "UNKNOWN",
+        ),
+    )
+
+    print(
+        "POS:",
+        build_plan.get(
+            "metrics",
+            {},
+        ).get(
+            "pos_count",
+            0,
+        ),
+    )
+
+    print(
+        "Itonas:",
+        build_plan.get(
+            "metrics",
+            {},
+        ).get(
+            "itona_count",
+            0,
+        ),
+    )
+
+    #
+    # Validate Build Plan
+    #
+    build_plan_validation = (
+        validate_build_plan(
+            build_plan
+        )
+    )
+
+    print()
+    print(
+        "BUILD PLAN VALIDATION"
+    )
+    print(
+        "-" * 50
+    )
+
+    print(
+        "Status:",
+        build_plan_validation[
+            "status"
+        ]
+    )
+
+    for warning in (
+        build_plan_validation.get(
+            "warnings",
+            []
+        )
+    ):
+        print(
+            "WARNING:",
+            warning,
+        )
+
+    for error in (
+        build_plan_validation.get(
+            "errors",
+            []
+        )
+    ):
+        print(
+            "ERROR:",
+            error,
+        )
+
+    if (
+        build_plan_validation[
+            "status"
+        ]
+        == "FAIL"
+    ):
+        raise ValueError(
+            "Build Plan validation failed:\n- "
+            + "\n- ".join(
+                build_plan_validation[
+                    "errors"
+                ]
+            )
+        )
+
+    #
+    # Persist validation result
+    #
+    builder_context.build_plan = (
+        build_plan
+    )
+
+    builder_context.build_plan_validation = (
+        build_plan_validation
     )
 
     #

@@ -18,22 +18,24 @@ class StoreDbOperationModeTransformer:
 
     Target structure:
 
-    <Configuration type="POS">
-        <Section name="OperationMode">
-            <Parameter name="AnonymousOperatorName" value="AutoLogin" />
-            <Parameter name="AnonymousOperatorID" value="99999" />
-            <Parameter name="AutomaticOperatorLogin" value="true" />
-        </Section>
-    </Configuration>
     """
 
     REQUIRED_PARAMETERS = (
-        ("autoRecall", "false"),
-        ("AutomaticOperatorLogin", "true"),
-        ("AnonymousOperatorID", "3"),
-        ("AnonymousOperatorName", "Carl Sagan"),
-        ("DisplayPrinterListOnError", "false"),
-        ("isHtmlUi", "true"),
+        ("CheckWorkflowDependency", "false"),
+        ("NGCODErrorPeriodBeforePopup", "30"),
+        (
+            "ShowButtonOnMissingWFRule",
+            "(OnClick=1 AND OnActivate=1) OR (OnClick=1 AND OnActivate=0)"
+        ),
+        ("SkipPromotionForUberEats", "true"),
+        ("autoRecall", "true"),
+        ("automaticOperatorLogin", "false"),
+        ("consolidateTenders", "2"),
+        ("doubleCrewServeOnProduction", "false"),
+        ("fiscal", "off"),
+        ("highlightPassword", "false"),
+        ("restartAfterOpen", "false"),
+        ("smartReminder", "true"),
     )
     def transform_file(
         self,

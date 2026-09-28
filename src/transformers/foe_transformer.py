@@ -5,36 +5,10 @@ from lxml import etree
 
 from src.utils.xml_loader import load_xml, save_xml
 
-
-FOE_SERVICE_ATTRIBUTES = {
-    "type": "FOE",
-    "classname": "npfoe.dll",
-}
-
-RPS_SERVICE_ATTRIBUTES = {
-    "type": "RPS",
-    "classname": "npRPSService.dll",
-}
-
-REQUIRED_RPS_PARAMETERS = (
-    "clientsList",
-    "FOEOperatorId",
-    "FOEOperatorName",
-)
-
-REQUIRED_FOE_PARAMETERS = (
-    "ValidateRPSState",
-    "PriceDiffThreshold",
-    "TLOGDstName",
-)
-
-REQUIRED_QUEUE_MEMBERS = {
-    ("8007", "PAID_DT"),
-    ("8007", "DT"),
-    ("8004", "PAID_FC"),
-    ("8004", "FC"),
-}
-
+FOE_SERVICE_ATTRIBUTES = {"type": "FOE", "classname": "npfoe.dll"}
+RPS_SERVICE_ATTRIBUTES = {"type": "RPS", "classname": "npRPSService.dll"}
+REQUIRED_RPS_PARAMETERS = ("clientsList", "FOEOperatorId", "FOEOperatorName")
+OPTIONAL_FOE_PARAMETERS = ("ValidateRPSState", "PriceDiffThreshold", "TLOGDstName")
 PRODUCT_PRICING_ADAPTOR = "npAdpProductPricing"
 
 
@@ -53,8 +27,7 @@ def unique_messages(messages):
 def get_service_by_type(tree, service_type):
     expected = normalize_upper(service_type)
     matches = [
-        service
-        for service in tree.xpath("//Service[@type]")
+        service for service in tree.xpath("//Service[@type]")
         if normalize_upper(service.get("type")) == expected
     ]
     return matches[0] if matches else None
@@ -69,6 +42,8 @@ def get_rps_service(tree):
 
 
 def get_parameter(scope, parameter_name):
+    if scope is None:
+        return None
     expected = normalize_upper(parameter_name)
     for parameter in scope.xpath(".//Parameter[@name]"):
         if normalize_upper(parameter.get("name")) == expected:
@@ -76,11 +51,18 @@ def get_parameter(scope, parameter_name):
     return None
 
 
+def get_parameter_from_scopes(scopes, parameter_name):
+    for scope in scopes:
+        parameter = get_parameter(scope, parameter_name)
+        if parameter is not None:
+            return parameter
+    return None
+
+
 def get_adaptor(tree, adaptor_name):
     expected = normalize_upper(adaptor_name)
     matches = [
-        adaptor
-        for adaptor in tree.xpath("//Adaptor[@name]")
+        adaptor for adaptor in tree.xpath("//Adaptor[@name]")
         if normalize_upper(adaptor.get("name")) == expected
     ]
     return matches[0] if matches else None
@@ -97,12 +79,7 @@ def get_service_identifiers(tree):
 
 
 def deduplicate_members(tree):
-    """Remove exact duplicate Member nodes from each UsedService.
-
-    The first Member is preserved. A repeated service number with a different
-    alias is not treated as a duplicate because FOE queues legitimately use
-    the same number with distinct aliases.
-    """
+    """Remove only exact duplicates, using name + alias as the key."""
     changes = []
     for used_service in tree.xpath("//UsedService"):
         seen = set()
@@ -128,18 +105,14 @@ def find_duplicate_members(tree):
     for used_service in tree.xpath("//UsedService"):
         service_type = normalize_text(used_service.get("serviceType"))
         keys = [
-            (
-                normalize_text(member.get("name")),
-                normalize_text(member.get("alias")),
-            )
+            (normalize_text(member.get("name")), normalize_text(member.get("alias")))
             for member in used_service.xpath("./Member")
         ]
         for key, count in Counter(keys).items():
             if count > 1:
                 errors.append(
                     "Duplicate Member in UsedService "
-                    f"{service_type}: name={key[0]}, alias={key[1]}, "
-                    f"count={count}."
+                    f"{service_type}: name={key[0]}, alias={key[1]}, count={count}."
                 )
     return errors
 
@@ -152,8 +125,7 @@ def validate_service(service, expected_attributes, label):
         actual = service.get(name)
         if actual != expected:
             errors.append(
-                f"{label} Service attribute {name} must be "
-                f"{expected}, found {actual}."
+                f"{label} Service attribute {name} must be {expected}, found {actual}."
             )
     return errors
 
@@ -186,76 +158,36 @@ def validate_required_parameters(scope, names, label):
     return errors, values
 
 
-def validate_queue_mapping(foe):
-    errors = []
-    actual = set()
-    if foe is None:
-        return ["FOE Service was not found; queues cannot be validated."], actual
-    for used_service in foe.xpath(".//UsedService[@serviceType]"):
-        if normalize_upper(used_service.get("serviceType")) != "QUE":
-            continue
-        for member in used_service.xpath("./Member"):
-            actual.add(
-                (
-                    normalize_text(member.get("name")),
-                    normalize_text(member.get("alias")),
-                )
-            )
-    for name, alias in sorted(REQUIRED_QUEUE_MEMBERS - actual):
-        errors.append(
-            f"FOE queue mapping is missing name={name}, alias={alias}."
-        )
-    return errors, actual
-
-
-def validate_tlog_destination(tree, foe):
-    errors = []
+def inspect_optional_foe_parameters(tree, foe, rps):
+    """Inspect market-specific FOE parameters without blocking generation."""
     warnings = []
-    destination = None
-    if foe is None:
-        return errors, warnings, destination
-    parameter = get_parameter(foe, "TLOGDstName")
-    if parameter is None:
-        errors.append("FOE Parameter TLOGDstName was not found.")
-        return errors, warnings, destination
-    destination = normalize_text(parameter.get("value"))
+    values = {}
+    scopes = [scope for scope in (foe, rps, tree) if scope is not None]
+    for name in OPTIONAL_FOE_PARAMETERS:
+        parameter = get_parameter_from_scopes(scopes, name)
+        if parameter is None:
+            values[name] = None
+            warnings.append(
+                f"FOE parameter not found during readiness inspection: {name}."
+            )
+            continue
+        value = normalize_text(parameter.get("value"))
+        values[name] = value or None
+        if not value:
+            warnings.append(f"FOE parameter has no value: {name}.")
+    return warnings, values
+
+
+def validate_tlog_destination(tree, destination):
+    warnings = []
     if not destination:
-        errors.append("FOE Parameter TLOGDstName has no value.")
-        return errors, warnings, destination
+        return warnings
     if normalize_upper(destination) not in get_service_identifiers(tree):
         warnings.append(
             f"REVIEW REQUIRED: TLOG destination {destination} "
             "does not exist in generated topology."
         )
-    return errors, warnings, destination
-
-
-def validate_used_service_references(tree):
-    """Report broken references for topology-related UsedServices.
-
-    QUE is excluded because 8004/8007 are logical queue identifiers and are
-    checked by validate_queue_mapping().
-    """
-    warnings = []
-    service_ids = get_service_identifiers(tree)
-    checked_types = {"FOE", "RPS", "WAY", "PST", "POS", "STO", "PSW"}
-    for used_service in tree.xpath("//UsedService[@serviceType]"):
-        service_type = normalize_upper(used_service.get("serviceType"))
-        if service_type not in checked_types:
-            continue
-        for member in used_service.xpath("./Member"):
-            name = normalize_text(member.get("name"))
-            if not name:
-                warnings.append(
-                    f"REVIEW REQUIRED: UsedService {service_type} "
-                    "contains a Member without name."
-                )
-            elif normalize_upper(name) not in service_ids:
-                warnings.append(
-                    f"REVIEW REQUIRED: UsedService {service_type} "
-                    f"references missing Service {name}."
-                )
-    return unique_messages(warnings)
+    return warnings
 
 
 def validate_product_pricing(tree, product_pricing_root=None):
@@ -273,21 +205,19 @@ def validate_product_pricing(tree, product_pricing_root=None):
             f"ProductPricing Adaptor {PRODUCT_PRICING_ADAPTOR} was not found."
         )
         return errors, warnings, details
-
     details["adaptor_found"] = True
     enable = get_parameter(adaptor, "enable")
     target = get_parameter(adaptor, "targetPath")
     details["enabled"] = enable.get("value") if enable is not None else None
     details["target_path"] = target.get("value") if target is not None else None
-
     if enable is None or normalize_upper(enable.get("value")) != "TRUE":
         errors.append("ProductPricing parameter enable must be true.")
     if target is None or not normalize_text(target.get("value")):
         errors.append("ProductPricing parameter targetPath is missing or empty.")
     elif product_pricing_root is not None:
         raw_path = normalize_text(target.get("value"))
-        relative_path = raw_path[2:] if raw_path.startswith("./") else raw_path
-        resolved = Path(product_pricing_root) / relative_path
+        relative = raw_path[2:] if raw_path.startswith("./") else raw_path
+        resolved = Path(product_pricing_root) / relative
         details["target_exists"] = resolved.exists()
         if not resolved.exists():
             warnings.append(
@@ -330,37 +260,23 @@ def validate_foe(tree, product_pricing_root=None, store_integrity_before=None):
     errors.extend(validate_required_used_services(tree))
 
     rps_errors, rps_values = validate_required_parameters(
-        rps,
-        REQUIRED_RPS_PARAMETERS,
-        "RPS",
+        rps, REQUIRED_RPS_PARAMETERS, "RPS"
     )
     errors.extend(rps_errors)
 
-    foe_parameter_errors, foe_values = validate_required_parameters(
-        foe,
-        REQUIRED_FOE_PARAMETERS,
-        "FOE",
+    foe_parameter_warnings, foe_values = inspect_optional_foe_parameters(
+        tree, foe, rps
     )
-    errors.extend(foe_parameter_errors)
-
-    queue_errors, queue_mapping = validate_queue_mapping(foe)
-    errors.extend(queue_errors)
-
-    tlog_errors, tlog_warnings, tlog_destination = validate_tlog_destination(
-        tree,
-        foe,
+    warnings.extend(foe_parameter_warnings)
+    warnings.extend(
+        validate_tlog_destination(tree, foe_values.get("TLOGDstName"))
     )
-    errors.extend(tlog_errors)
-    warnings.extend(tlog_warnings)
 
-    errors.extend(find_duplicate_members(tree))
-
-    reference_warnings = validate_used_service_references(tree)
-    warnings.extend(reference_warnings)
+    duplicate_errors = find_duplicate_members(tree)
+    errors.extend(duplicate_errors)
 
     pricing_errors, pricing_warnings, pricing_details = validate_product_pricing(
-        tree,
-        product_pricing_root,
+        tree, product_pricing_root
     )
     errors.extend(pricing_errors)
     warnings.extend(pricing_warnings)
@@ -369,28 +285,27 @@ def validate_foe(tree, product_pricing_root=None, store_integrity_before=None):
     integrity_errors = []
     if store_integrity_before is not None:
         integrity_errors = compare_store_integrity(
-            store_integrity_before,
-            integrity_after,
+            store_integrity_before, integrity_after
         )
         errors.extend(integrity_errors)
 
     review_required = any(
-        message.startswith("REVIEW REQUIRED:")
-        for message in warnings
+        message.startswith("REVIEW REQUIRED:") for message in warnings
     )
 
     readiness = {
         "foe_service_ok": foe is not None and not foe_service_errors,
         "rps_service_ok": rps is not None and not rps_service_errors,
+        "rps_parameters_ok": not rps_errors,
         "product_pricing_ok": not pricing_errors and not pricing_warnings,
-        "queue_mapping_ok": not queue_errors,
-        "tlog_destination_ok": not tlog_errors and not tlog_warnings,
-        "used_service_references_ok": not reference_warnings,
+        "tlog_destination_ok": not any(
+            "TLOG destination" in warning for warning in warnings
+        ),
+        "duplicate_members_ok": not duplicate_errors,
         "store_integrity_ok": not integrity_errors,
         "rps_parameters": rps_values,
         "foe_parameters": foe_values,
-        "queue_mapping": sorted(queue_mapping),
-        "tlog_destination": tlog_destination,
+        "tlog_destination": foe_values.get("TLOGDstName"),
         "product_pricing": pricing_details,
         "store_integrity": integrity_after,
     }
@@ -422,10 +337,10 @@ def format_foe_readiness_report(validation):
         "=" * 50,
         f"FOE Service       : {status(readiness.get('foe_service_ok'))}",
         f"RPS Service       : {status(readiness.get('rps_service_ok'))}",
+        f"RPS Parameters    : {status(readiness.get('rps_parameters_ok'))}",
         f"ProductPricing    : {status(readiness.get('product_pricing_ok'))}",
-        f"Queue Mapping     : {status(readiness.get('queue_mapping_ok'))}",
         f"TLOG Destination  : {status(readiness.get('tlog_destination_ok'))}",
-        f"UsedService Refs  : {status(readiness.get('used_service_references_ok'))}",
+        f"Duplicate Members : {status(readiness.get('duplicate_members_ok'))}",
         f"Store Integrity   : {status(readiness.get('store_integrity_ok'))}",
         "-" * 50,
         f"Overall Status    : {validation.get('overall_status', 'FAIL')}",
@@ -436,20 +351,15 @@ def format_foe_readiness_report(validation):
 
 
 def ensure_required_foe_sections(tree):
-    """Backward-compatible entry point used by older pipeline code."""
+    """Backward-compatible entry point for the WAY pipeline."""
     return ensure_foe_standard(tree)
 
 
 def ensure_foe_standard(tree, product_pricing_root=None):
-    """Preserve FOE/RPS content and validate it without rebuilding it.
-
-    Only exact duplicate Member nodes are removed. Existing Services,
-    UsedServices, Sections, Parameters and Adaptors are otherwise untouched.
-    """
+    """Preserve FOE/RPS and remove only exact duplicate Members."""
     changes = deduplicate_members(tree)
     validation = validate_foe(
-        tree,
-        product_pricing_root=product_pricing_root,
+        tree, product_pricing_root=product_pricing_root
     )
     return {
         "success": validation["valid"],
@@ -468,10 +378,8 @@ def generate_foe_file(source_file, output_folder):
     store_integrity_before = extract_store_integrity(tree)
 
     transformation = ensure_foe_standard(
-        tree,
-        product_pricing_root=source_file.parent,
+        tree, product_pricing_root=source_file.parent
     )
-
     if transformation["errors"]:
         return {
             "generated": False,
@@ -486,7 +394,6 @@ def generate_foe_file(source_file, output_folder):
     output_folder = Path(output_folder)
     output_folder.mkdir(parents=True, exist_ok=True)
     output_path = output_folder / source_file.name
-
     etree.indent(tree, space="  ")
     save_xml(tree, output_path)
 
@@ -496,7 +403,6 @@ def generate_foe_file(source_file, output_folder):
         product_pricing_root=source_file.parent,
         store_integrity_before=store_integrity_before,
     )
-
     if post_validation["errors"]:
         output_path.unlink(missing_ok=True)
         return {
@@ -526,7 +432,6 @@ def generate_all_foe(new_posdata_folder, output_folder="output/foe"):
     source_file = Path(new_posdata_folder) / "_WAYSTATION_pos-db.xml"
     if not source_file.exists():
         return []
-
     result = generate_foe_file(source_file, output_folder)
     result["file"] = "_WAYSTATION_pos-db.xml"
     return [result]

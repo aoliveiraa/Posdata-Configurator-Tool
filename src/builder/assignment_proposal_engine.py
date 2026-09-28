@@ -19,6 +19,10 @@ from src.discovery.dynamic_pos_mapping import (
     load_lab_pos_targets,
 )
 
+from src.builder.lab_naming_resolver import (
+    load_lab_config,
+)
+
 SUPPORTED_POS_ROLES = ("FC", "DT")
 CONFIDENCE_RANK = {
     "HIGH": 0,
@@ -236,70 +240,186 @@ def build_pos_assignment_proposal(
 
     return result
 
+def _normalize_itona_slot(
+    value: Any,
+) -> Optional[Dict[str, Any]]:
+    """
+    Normalize a configured Itona machine.
 
-def _extract_itona_number(value: Any) -> Optional[int]:
-    match = re.search(r"ITONA[\s_.-]*(\d+)", _upper(value))
-    return int(match.group(1)) if match else None
+    Accepted examples:
+        Itona1
+        ITONA01
+        itona_2
+        Itona-3
+
+    Returns:
+        {
+            "slot_index": 1,
+            "slot": "Itona1",
+        }
+
+    Returns None when the value does not represent
+    a supported Itona slot.
+    """
+
+    raw_value = _text(value)
+
+    if not raw_value:
+        return None
+
+    match = re.fullmatch(
+        r"ITONA[\s_.-]*0*(\d+)",
+        raw_value,
+        re.IGNORECASE,
+    )
+
+    if match is None:
+        return None
+
+    number = int(
+        match.group(1)
+    )
+
+    if number < 1:
+        return None
+
+    return {
+        "slot_index": number,
+        "slot": f"Itona{number}",
+    }
 
 
-def _discover_template_itona_slots(
-    template_folder: str | Path,
+def _load_lab_itona_slots(
+    config_path: str | Path,
 ) -> Dict[str, Any]:
-    folder = Path(template_folder)
+    """
+    Sprint 2.0.1
+
+    Load Itona slots from the selected laboratory
+    configuration.
+
+    The laboratory field `kvs_machines` is now the
+    source of truth for Builder Itona slots.
+
+    No template folder or template XML is used.
+    """
+
     result: Dict[str, Any] = {
         "status": "READY",
+        "config_path": str(
+            config_path
+        ),
+        "source": "LAB_CONFIG",
         "slots": [],
         "warnings": [],
         "errors": [],
     }
 
-    if not folder.is_dir():
-        result["status"] = "FAIL"
-        result["errors"].append(
-            f"Template folder was not found: {folder}"
+    try:
+        config = load_lab_config(
+            config_path
         )
+
+    except (
+        FileNotFoundError,
+        ValueError,
+        OSError,
+    ) as error:
+
+        result["status"] = "FAIL"
+
+        result["errors"].append(
+            "Unable to load laboratory configuration: "
+            f"{error}"
+        )
+
         return result
 
-    by_number: Dict[int, Path] = {}
-    duplicates: Dict[int, List[str]] = {}
+    configured_machines = (
+        config.get(
+            "kvs_machines"
+        )
+        or []
+    )
 
-    for path in sorted(folder.glob("*_pos-db.xml")):
-        number = _extract_itona_number(path.name)
-        if number is None:
-            continue
-        if number in by_number:
-            duplicates.setdefault(number, [by_number[number].name]).append(
-                path.name
+    if not isinstance(
+        configured_machines,
+        list,
+    ):
+        result["status"] = "FAIL"
+
+        result["errors"].append(
+            "Laboratory configuration field "
+            "'kvs_machines' must be a list."
+        )
+
+        return result
+
+    normalized_slots: Dict[
+        int,
+        Dict[str, Any],
+    ] = {}
+
+    for configured_value in configured_machines:
+
+        normalized = _normalize_itona_slot(
+            configured_value
+        )
+
+        if normalized is None:
+            result["warnings"].append(
+                "Ignoring invalid Itona machine "
+                "configured in laboratory JSON: "
+                f"{configured_value!r}"
             )
+
             continue
-        by_number[number] = path
 
-    for number, path in sorted(by_number.items()):
-        result["slots"].append(
-            {
-                "slot_index": number,
-                "slot": f"Itona{number}",
-                "template_file": path.name,
-                "template_path": str(path),
-            }
-        )
+        slot_index = normalized[
+            "slot_index"
+        ]
 
-    for number, files in duplicates.items():
-        result["warnings"].append(
-            f"Duplicate template files for Itona{number}: "
-            + ", ".join(files)
+        if slot_index in normalized_slots:
+            result["warnings"].append(
+                "Duplicate Itona slot configured "
+                "in laboratory JSON: "
+                f"{normalized['slot']}"
+            )
+
+            continue
+
+        normalized_slots[
+            slot_index
+        ] = {
+            **normalized,
+            "configured_value": str(
+                configured_value
+            ),
+            "origin": "LAB_CONFIG",
+        }
+
+    result["slots"] = [
+        normalized_slots[number]
+        for number in sorted(
+            normalized_slots
         )
+    ]
 
     if not result["slots"]:
         result["status"] = "FAIL"
+
         result["errors"].append(
-            "No Itona slots were found in the selected template."
+            "No valid Itona slots were found in "
+            "the laboratory configuration field "
+            "'kvs_machines'."
         )
+
     elif result["warnings"]:
-        result["status"] = "REVIEW REQUIRED"
+        result["status"] = (
+            "REVIEW REQUIRED"
+        )
 
     return result
-
 
 def _candidate_sort_key(
     candidate: Mapping[str, Any],
@@ -384,42 +504,85 @@ def _normalize_itona_candidates(
     return sorted(normalized, key=_candidate_sort_key)
 
 
+
 def build_itona_assignment_proposal(
-    template_folder: str | Path,
-    discovered_candidates: Iterable[Mapping[str, Any]],
-) -> Dict[str, Any]:
-    """Assign ranked market KVS candidates to template Itona slots."""
-    result: Dict[str, Any] = {
+    config_path,
+    discovered_candidates,
+):
+    """
+    Sprint 2.0.1
+
+    Itona slots come from:
+        config/<lab>_lab.json
+        -> kvs_machines
+
+    No template dependency.
+    """
+
+    result = {
         "status": "READY",
-        "template_folder": str(template_folder),
+        "config_path": str(config_path),
+        "slot_source": "LAB_CONFIG",
+        "generation_mode": "FROM_SCRATCH",
         "assignments": [],
         "extra_candidates": [],
         "warnings": [],
         "errors": [],
     }
 
-    slot_result = _discover_template_itona_slots(template_folder)
-    result["warnings"].extend(slot_result.get("warnings") or [])
-    result["errors"].extend(slot_result.get("errors") or [])
+    slot_result = _load_lab_itona_slots(
+        config_path
+    )
+
+    result["warnings"].extend(
+        slot_result.get("warnings", [])
+    )
+
+    result["errors"].extend(
+        slot_result.get("errors", [])
+    )
 
     if result["errors"]:
         result["status"] = "FAIL"
         return result
 
-    candidates = _normalize_itona_candidates(discovered_candidates)
-    slot_count = len(slot_result["slots"])
+    slots = slot_result.get(
+        "slots",
+        []
+    )
+
+    candidates = (
+        _normalize_itona_candidates(
+            discovered_candidates
+        )
+    )
+
+    slot_count = len(slots)
+
     selected = candidates[:slot_count]
     extras = candidates[slot_count:]
 
-    for position, slot in enumerate(slot_result["slots"]):
-        candidate = selected[position] if position < len(selected) else None
+    for index, slot in enumerate(slots):
+
+        candidate = (
+            selected[index]
+            if index < len(selected)
+            else None
+        )
+
+        slot_name = slot["slot"]
 
         if candidate is None:
+
             result["assignments"].append(
                 {
-                    **slot,
+                    "slot_index": slot["slot_index"],
+                    "slot": slot_name,
+                    "output_file": f"_{slot_name}_pos-db.xml",
                     "source_file": None,
+                    "source_files": [],
                     "source_path": None,
+                    "source_paths": [],
                     "source_types": [],
                     "source_confidence": "NONE",
                     "kvs_services": [],
@@ -427,63 +590,126 @@ def build_itona_assignment_proposal(
                     "selection_mode": "AUTOMATIC",
                     "status": "SKIPPED",
                     "requires_user_decision": True,
+                    "origin": "LAB_CONFIG",
                     "warnings": [
-                        f"No Itona candidate is available for {slot['slot']}."
+                        f"No KVS candidate available for {slot_name}"
                     ],
                     "errors": [],
                 }
             )
+
             continue
 
         candidate_is_safe = (
             candidate["discovery_status"] == "READY"
-            and candidate["confidence"] in {"HIGH", "MEDIUM"}
+            and candidate["confidence"] in ["HIGH", "MEDIUM"]
             and len(candidate["types"]) == 1
             and candidate["types"][0] != "UNKNOWN"
         )
 
+        assignment_status = (
+            "READY"
+            if candidate_is_safe
+            else "REVIEW REQUIRED"
+        )
+
+        source_file = candidate.get(
+            "file"
+        )
+
+        source_path = candidate.get(
+            "path"
+        )
+
         result["assignments"].append(
             {
-                **slot,
-                "source_file": candidate.get("file"),
-                "source_path": candidate.get("path"),
-                "source_types": list(candidate.get("types") or []),
-                "source_confidence": candidate.get("confidence"),
+                "slot_index": slot["slot_index"],
+                "slot": slot_name,
+                "output_file": f"_{slot_name}_pos-db.xml",
+                "source_file": source_file,
+                "source_files": (
+                    [source_file]
+                    if source_file
+                    else []
+                ),
+                "source_path": source_path,
+                "source_paths": (
+                    [source_path]
+                    if source_path
+                    else []
+                ),
+                "source_types": list(
+                    candidate.get(
+                        "types",
+                        [],
+                    )
+                ),
+                "source_confidence": candidate.get(
+                    "confidence"
+                ),
                 "kvs_services": list(
-                    candidate.get("kvs_services") or []
+                    candidate.get(
+                        "kvs_services",
+                        [],
+                    )
                 ),
                 "selection_reason": (
                     "highest ranked available Itona candidate"
                 ),
                 "selection_mode": "AUTOMATIC",
-                "status": (
-                    "READY" if candidate_is_safe else "REVIEW REQUIRED"
-                ),
+                "status": assignment_status,
                 "requires_user_decision": not candidate_is_safe,
-                "warnings": list(candidate.get("warnings") or []),
-                "errors": list(candidate.get("errors") or []),
+                "origin": "LAB_CONFIG",
+                "warnings": list(
+                    candidate.get(
+                        "warnings",
+                        [],
+                    )
+                ),
+                "errors": list(
+                    candidate.get(
+                        "errors",
+                        [],
+                    )
+                ),
             }
         )
 
-    result["extra_candidates"] = [
-        {
-            "file": candidate.get("file"),
-            "path": candidate.get("path"),
-            "types": list(candidate.get("types") or []),
-            "confidence": candidate.get("confidence"),
-            "kvs_services": list(
-                candidate.get("kvs_services") or []
-            ),
-            "decision": "IGNORED_BY_TEMPLATE_LIMIT",
-            "status": "IGNORED",
-        }
-        for candidate in extras
-    ]
+    result["extra_candidates"] = []
+
+    for candidate in extras:
+
+        result["extra_candidates"].append(
+            {
+                "file": candidate.get(
+                    "file"
+                ),
+                "path": candidate.get(
+                    "path"
+                ),
+                "types": list(
+                    candidate.get(
+                        "types",
+                        [],
+                    )
+                ),
+                "confidence": candidate.get(
+                    "confidence"
+                ),
+                "kvs_services": list(
+                    candidate.get(
+                        "kvs_services",
+                        [],
+                    )
+                ),
+                "decision": "UNASSIGNED_BY_LAB_LIMIT",
+                "status": "UNASSIGNED",
+            }
+        )
 
     if extras:
         result["warnings"].append(
-            f"{len(extras)} Itona candidate(s) were ignored because "
-            "the template slot limit was reached."
+            f"{len(extras)} extra Itona candidate(s) found."
         )
 
     if any(
@@ -491,76 +717,154 @@ def build_itona_assignment_proposal(
         for assignment in result["assignments"]
     ):
         result["status"] = "REVIEW REQUIRED"
-    elif slot_result["status"] != "READY":
-        result["status"] = "REVIEW REQUIRED"
 
     return result
 
-
 def build_assignment_proposal(
-    context: Any,
-) -> Dict[str, Any]:
-    """Build and store POS and Itona proposals in BuilderContext."""
-    missing: List[str] = []
+    context,
+):
+    """
+    Sprint 2.0.1
+
+    Assignment proposal without
+    template dependency.
+    """
+
+    missing = []
+
     if not context.config_path:
-        missing.append("config_path")
-    if not context.template_folder:
-        missing.append("template_folder")
+        missing.append(
+            "config_path"
+        )
 
     if missing:
+
         proposal = {
             "status": "FAIL",
+            "generation_mode": "FROM_SCRATCH",
             "pos": {},
             "itonas": {},
             "warnings": [],
             "errors": [
-                "Assignment proposal cannot start. Missing context values: "
+                "Assignment proposal cannot start. Missing: "
                 + ", ".join(missing)
             ],
         }
+
         context.proposed_pos_mapping = {}
         context.proposed_itona_mapping = {}
-        context.errors.extend(proposal["errors"])
+
+        context.errors.extend(
+            proposal["errors"]
+        )
+
         return proposal
 
-    pos_proposal = build_pos_assignment_proposal(
-        discovered_pos=context.discovered_pos or {},
-        config_path=context.config_path,
-    )
-    itona_proposal = build_itona_assignment_proposal(
-        template_folder=context.template_folder,
-        discovered_candidates=(
-            context.discovered_itona_candidates or []
-        ),
+    pos_proposal = (
+        build_pos_assignment_proposal(
+            discovered_pos=(
+                context.discovered_pos
+                or {}
+            ),
+            config_path=context.config_path,
+        )
     )
 
-    context.proposed_pos_mapping = pos_proposal
-    context.proposed_itona_mapping = itona_proposal
+    itona_proposal = (
+        build_itona_assignment_proposal(
+            config_path=context.config_path,
+            discovered_candidates=(
+                context.discovered_itona_candidates
+                or []
+            ),
+        )
+    )
 
-    warnings = list(pos_proposal.get("warnings") or [])
-    warnings.extend(itona_proposal.get("warnings") or [])
-    errors = list(pos_proposal.get("errors") or [])
-    errors.extend(itona_proposal.get("errors") or [])
+    context.proposed_pos_mapping = (
+        pos_proposal
+    )
+
+    context.proposed_itona_mapping = (
+        itona_proposal
+    )
+
+    warnings = list(
+        pos_proposal.get(
+            "warnings",
+            [],
+        )
+    )
+
+    warnings.extend(
+        itona_proposal.get(
+            "warnings",
+            [],
+        )
+    )
+
+    errors = list(
+        pos_proposal.get(
+            "errors",
+            [],
+        )
+    )
+
+    errors.extend(
+        itona_proposal.get(
+            "errors",
+            [],
+        )
+    )
 
     if errors:
         status = "FAIL"
+
     elif (
-        pos_proposal.get("status") != "READY"
-        or itona_proposal.get("status") != "READY"
+        pos_proposal.get("status")
+        != "READY"
+        or
+        itona_proposal.get("status")
+        != "READY"
     ):
         status = "REVIEW REQUIRED"
+
     else:
         status = "READY"
 
-    context.warnings.extend(warnings)
-    context.errors.extend(errors)
-    context.warnings = list(dict.fromkeys(context.warnings))
-    context.errors = list(dict.fromkeys(context.errors))
+    context.warnings.extend(
+        warnings
+    )
+
+    context.errors.extend(
+        errors
+    )
+
+    context.warnings = list(
+        dict.fromkeys(
+            context.warnings
+        )
+    )
+
+    context.errors = list(
+        dict.fromkeys(
+            context.errors
+        )
+    )
 
     return {
         "status": status,
+        "generation_mode": "FROM_SCRATCH",
+        "slot_source": "LAB_CONFIG",
         "pos": pos_proposal,
         "itonas": itona_proposal,
-        "warnings": list(dict.fromkeys(warnings)),
-        "errors": list(dict.fromkeys(errors)),
+        "warnings": list(
+            dict.fromkeys(
+                warnings
+            )
+        ),
+        "errors": list(
+            dict.fromkeys(
+                errors
+            )
+        ),
     }
