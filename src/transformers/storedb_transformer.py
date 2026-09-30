@@ -573,6 +573,101 @@ def update_storedb_pos_ui(tree):
         "errors": errors,
     }
 
+def disable_automatic_change_business_day(
+    tree
+):
+    """
+    Garantir:
+
+        <Section name="AutomaticChangeBusinessDay">
+            <Parameter name="enable" value="false"/>
+        </Section>
+
+    independente do valor existente.
+    """
+
+    changes = []
+    warnings = []
+    errors = []
+
+    sections = tree.xpath(
+        "//Section[@name='AutomaticChangeBusinessDay']"
+    )
+
+    if not sections:
+        warnings.append(
+            "AutomaticChangeBusinessDay section "
+            "was not found."
+        )
+
+        return {
+            "updated": False,
+            "changes": changes,
+            "warnings": warnings,
+            "errors": errors,
+        }
+
+    for section in sections:
+
+        parameter = get_direct_parameter(
+            section,
+            "enable"
+        )
+
+        if parameter is None:
+
+            parameter = etree.SubElement(
+                section,
+                "Parameter"
+            )
+
+            parameter.set(
+                "name",
+                "enable"
+            )
+
+            parameter.set(
+                "value",
+                "false"
+            )
+
+            changes.append(
+                "AutomaticChangeBusinessDay "
+                "enable created: false."
+            )
+
+            continue
+
+        old_value = parameter.get(
+            "value"
+        )
+
+        if old_value != "false":
+
+            parameter.set(
+                "value",
+                "false"
+            )
+
+            changes.append(
+                "AutomaticChangeBusinessDay "
+                f"enable changed: "
+                f"{old_value} -> false."
+            )
+
+        else:
+            changes.append(
+                "AutomaticChangeBusinessDay "
+                "already disabled."
+            )
+
+    return {
+        "updated": True,
+        "changes": changes,
+        "warnings": warnings,
+        "errors": errors,
+    }
+
 
 def synchronize_lunch_menu_main_screen(
     tree,
@@ -741,6 +836,33 @@ def update_storedb_runtime_configuration(
     if update_pos_ui:
         pos_ui_result = update_storedb_pos_ui(
             tree
+        )
+
+        automatic_change_result = (
+            disable_automatic_change_business_day(
+                tree
+            )
+        )
+
+        result["changes"].extend(
+            automatic_change_result.get(
+                "changes",
+                []
+            )
+        )
+
+        result["warnings"].extend(
+            automatic_change_result.get(
+                "warnings",
+                []
+            )
+        )
+
+        result["errors"].extend(
+            automatic_change_result.get(
+                "errors",
+                []
+            )
         )
 
         result["changes"].extend(
