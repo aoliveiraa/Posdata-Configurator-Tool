@@ -20,6 +20,13 @@ from src.resolution import resolve_missing_kvs
 from src.resolution.pos_resolver import resolve_missing_positions
 from src.runtime_context import RuntimeContext
 
+import sys
+from pathlib import Path
+
+if getattr(sys, "frozen", False):
+    APP_ROOT = Path(sys.executable).parent
+else:
+    APP_ROOT = Path(__file__).resolve().parent
 
 SUPPORTED_LABS = {
     "RIO",
@@ -48,12 +55,12 @@ def normalize_inputs(
 
     current_folder = Path(
         current_posdata_folder
-        or "samples/current_posdata"
+        or APP_ROOT / "samples" / "current_posdata"
     )
 
     new_folder = Path(
         new_posdata_folder
-        or "samples/new_posdata"
+        or APP_ROOT / "samples" / "new_posdata"
     )
 
     if not current_folder.is_dir():
@@ -121,6 +128,7 @@ def main(
     selected_lab=None,
     current_posdata_folder=None,
     new_posdata_folder=None,
+    kvs_selection_function=None,
 ):
     inputs = normalize_inputs(
         selected_lab=selected_lab,
@@ -162,7 +170,8 @@ def main(
     runtime = run_analysis_phase(runtime)
 
     runtime.kvs_mapping = resolve_missing_kvs(
-        runtime.kvs_mapping
+        runtime.kvs_mapping,
+        selection_function=kvs_selection_function,
     )
 
     # ==================================================

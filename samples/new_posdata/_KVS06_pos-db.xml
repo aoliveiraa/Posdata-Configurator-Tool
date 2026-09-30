@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43" />
+  </RTM_Generated>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide" />
+  <Services>
+    <Service name="1005" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="groupMultiOrder" value="false" />
+        </Section>
+        <Section name="Beep">
+          <Parameter name="beepOnNewOrder" value="FIRST" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1005" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

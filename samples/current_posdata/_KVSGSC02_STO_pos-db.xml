@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all"/>
+  <ColorDB imports="default"/>
+  <Configuration imports="Store.wide">
+    <Section name="OperationMode">
+      <Parameter name="applyUpdateOperationMode" value="1"/>
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="400" type="STO" classname="npUpdtRcv.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="STO"/>
+    </Service>
+  </Services>
+</PosDB>

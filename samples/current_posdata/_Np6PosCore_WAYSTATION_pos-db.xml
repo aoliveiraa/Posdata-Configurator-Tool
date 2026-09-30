@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="OperationMode">
+      <Parameter name="applyUpdateOperationMode" value="1" />
+    </Section>
+    <Section name="NPScripts">
+      <Parameter name="posScriptCommands" />
+      <Parameter name="posCoinDispenser" />
+      <Parameter name="posCSOBusComp" />
+      <Parameter name="scriptCommands" value="BusinessComponents.nps" />
+      <Parameter name="scriptCommandsLocal" value="BusinessComponentsLocal.nps" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="300" type="PSW" classname="npPswMgr.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="300" alias="WAYSTATION" />
+        </UsedService>
+        <UsedService serviceType="POS">
+          <Member name="01" alias="" />
+          <Member name="02" alias="" />
+          <Member name="03" alias="" />
+          <Member name="04" alias="" />
+          <Member name="05" alias="" />
+          <Member name="13" alias="" />
+          <Member name="21" alias="" />
+          <Member name="25" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="PSW" />
+    </Service>
+    <Service name="300" type="RPS" classname="npRPSService.dll" startonload="true" quitOnFail="true">
+      <Configuration imports="RPS" />
+      <Adaptors>
+        <Adaptor name="standard.account" imports="standard.account" startonload="true" />
+      </Adaptors>
+    </Service>
+    <Service name="300" type="FOE" classname="npfoe.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="300" alias="" />
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8000" alias="" />
+          <Member name="8001" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="FOE">
+        <Section name="main">
+          <Parameter name="ShowConsoleWindow" value="true" />
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="isNpSharp" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="foe.xmlrpc" imports="foe.xmlrpc" startonload="true" />
+        <Adaptor name="virtual.linedisplay" imports="virtual.linedisplay" startonload="true">
+          <Section name="main">
+            <Parameter name="LoadDriver" value="RCD" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

@@ -3,6 +3,8 @@
   "network_base": "10.0.12",
   "way_ip": "10.0.12.83",
 
+  "disable_rpr_printers": true,
+
   "scope": {
     "pos_count": 4,
     "active_itonas": [

@@ -140,21 +140,20 @@ def run_market_readiness_phase(
         {}
     )
 
-    foe_status = (
-        "READY"
-        if foe_result.get(
-            "found",
-            False
-        )
-        else "REVIEW REQUIRED"
-    )
+    foe_status = "REVIEW REQUIRED"
 
-    components.append(
-        _build_component_status(
-            name="FOE",
-            status=foe_status,
+    if foe_result:
+        if foe_result.get("generated", False):
+            foe_status = "READY"
+        elif foe_result.get("found", False):
+            foe_status = "READY"
+
+        components.append(
+            _build_component_status(
+                name="FOE",
+                status=foe_status,
+            )
         )
-    )
     #
     # COD
     #
@@ -323,9 +322,5 @@ def run_market_readiness_phase(
                 0
             ),
     }
-
-    print()
-    print("DEBUG GENERATED WAY")
-    print(runtime.generated_way)
 
     return runtime

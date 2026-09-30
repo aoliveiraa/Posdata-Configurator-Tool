@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43" />
+  </RTM_Generated>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="OperationMode">
+      <Parameter name="enableNpSharpWorkflows" value="true" />
+      <Parameter name="isNpSharpRequired" value="true" />
+    </Section>
+    <Section name="NPScripts">
+      <Parameter name="posScriptCommands" value="BusinessComponentsCHF.nps" />
+      <Parameter name="scriptCommandsLocal" value="BusinessComponentsCHFLocal.nps" />
+    </Section>
+    <Section name="OrderNumber">
+      <Parameter name="PosIdFormat" value="0" />
+      <Parameter name="OrderNumberBigger" value="1" />
+      <Parameter name="OrderIdFormat" value="00" />
+      <Parameter name="OrderNumberSeperator" value="" />
+      <Parameter name="OrderNumberFormat" value="2" />
+      <Parameter name="FirstReceiptEmpty" value="0" />
+    </Section>
+    <Section name="Security">
+      <Parameter name="managerAuthorization" value="login" />
+    </Section>
+    <Section name="Cashless">
+      <Parameter name="enableEndOfDayReport" value="true" />
+      <Parameter name="KioskMode" value="1" />
+      <Parameter name="Server_IP" value="10.171.242.200" />
+      <Parameter name="Client_IP" value="10.171.242.200" />
+    </Section>
+    <Section name="OrbMatch">
+      <Parameter name="ShowORBNumberOnReceipt" value="true" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="0027" type="POS" classname="npPOS.dll" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="WAY">
+          <Member name="300" alias="" />
+        </UsedService>
+        <UsedService serviceType="PSW">
+          <Member name="300" alias="" />
+        </UsedService>
+        <UsedService serviceType="RPR">
+          <Member name="0027" alias="" />
+          <Member name="0004" alias="" />
+          <Member name="0005" alias="" />
+          <Member name="0013" alias="" />
+          <Member name="0001" alias="" />
+          <Member name="0025" alias="" />
+          <Member name="0026" alias="" />
+          <Member name="0028" alias="" />
+          <Member name="0029" alias="" />
+          <Member name="0030" alias="" />
+          <Member name="0031" alias="" />
+          <Member name="0032" alias="" />
+        </UsedService>
+        <UsedService serviceType="PST">
+          <Member name="8000" alias="PRODMAIN" />
+          <Member name="8001" alias="PRODBACK" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="POS">
+        <Section name="Cash">
+          <Parameter name="initialFloat" value="0" />
+          <Parameter name="OverringBehaviour" value="0" />
+        </Section>
+        <Section name="UserInterface">
+          <Parameter name="PrintBigNumber" value="true" />
+        </Section>
+        <Section name="PosType">
+          <Parameter name="POD" value="CSO" />
+          <Parameter name="RemPOD" value="CSO" />
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="automaticOperatorLogin" value="true" />
+          <Parameter name="DisplayPrinterListOnError" value="false" />
+          <Parameter name="isHtmlUi" value="true" />
+        </Section>
+        <Section name="WorkflowHttpServer">
+          <Parameter name="port" value="8123" />
+          <Parameter name="prefix" value="POS0027" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="standard.ui" imports="standard.ui" startonload="true">
+          <Section name="main">
+            <Parameter name="drivername" value="npGuiSharp.dll" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
+        <Adaptor name="npAdpPrd" imports="npAdpPrd" startonload="true">
+          <Section name="main">
+            <Parameter name="SendOrder" value="ONPAID" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="tlog" imports="tlog" startonload="true" />
+        <Adaptor name="npCLayer" imports="npCLayer" startonload="true" />
+        <Adaptor name="standard.account" imports="standard.account" startonload="true" />
+        <Adaptor name="keyboard.scanner" imports="keyboard.scanner" startonload="true">
+          <Section name="main">
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+            <Parameter name="nodeName" value="POS0027" />
+            <Parameter name="logicalname" value="Scanner1" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="0027" type="RPR" classname="" startonload="true" quitOnFail="true">
+      <Adaptors>
+        <Adaptor name="npAdpRpr" imports="npAdpRpr" startonload="true">
+          <Section name="main">
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="logicalname" value="PRINTER1" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="0027" type="NPW" classname="" startonload="true" quitOnFail="true">
+      <Configuration imports="LocalWebView">
+        <Section name="Component.DriverHost.Printer">
+          <Parameter name="DriverFile" value="SerialPrinter.dll" />
+          <Parameter name="DeviceType" value="Printer" />
+          <Parameter name="LogicalName" value="PRINTER1" />
+          <Parameter name="NodeName" value="RPR0027" />
+          <Parameter name="AdapterFile" value="LegacyPrinterAdapter" />
+          <Parameter name="portname" value="COM2" />
+          <Parameter name="baudrate" value="19200" />
+          <Parameter name="getStatusTimeout" value="1000" />
+        </Section>
+        <Section name="LocalWebView">
+          <Parameter name="Location" value="../npwebview" />
+          <Parameter name="ConfigurationFileName" value="POS0027.xml" />
+        </Section>
+        <Section name="BaseHosts">
+          <Parameter name="Urls" value="http://localhost:8123/NpSharp" />
+        </Section>
+        <Section name="Log">
+          <Parameter name="EnableDebug" value="true" />
+        </Section>
+        <Section name="AutoUpdate">
+          <Parameter name="EnableAutoUpdate" value="true" />
+        </Section>
+        <Section name="Monitoring.Memory">
+          <Parameter name="MonitoringInterval" value="60000" />
+          <Parameter name="MaxMemoryPercentage" value="80" />
+          <Parameter name="LauncherLimit" value="1500" />
+          <Parameter name="BrowserLimit" value="1500" />
+          <Parameter name="DriverHostLimit" value="1500" />
+        </Section>
+        <Section name="Component.Browser.POS0027">
+          <Parameter name="ShowFrame" value="false" />
+          <Parameter name="ShowCursor" value="false" />
+          <Parameter name="AutoFocus" value="true" />
+          <Parameter name="Size" value="0" />
+          <Parameter name="Urn" value="KIOSK/POS0027/" />
+          <Parameter name="urlLoadDelay" value="30000" />
+          <Parameter name="EnableCefViewRaceCondDetection" value="true" />
+        </Section>
+        <Section name="Component.DriverHost.Scanner">
+          <Parameter name="DriverFile" value="SerialScanner.dll" />
+          <Parameter name="DeviceType" value="Scanner" />
+          <Parameter name="LogicalName" value="Scanner1" />
+          <Parameter name="NodeName" value="POS0027" />
+          <Parameter name="AdapterFile" value="LegacyScannerAdapter.dll" />
+          <Parameter name="portname" value="COM10" />
+        </Section>
+      </Configuration>
+    </Service>
+  </Services>
+</PosDB>

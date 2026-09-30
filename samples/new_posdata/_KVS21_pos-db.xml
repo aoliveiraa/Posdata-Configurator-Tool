@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43" />
+  </RTM_Generated>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="OperationMode">
+      <Parameter name="applyUpdateOperationMode" value="1" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="1003" type="KVS" classname="npKVS.dll" startonload="true" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="KVSRedesign">
+        <Section name="UserInterface">
+          <Parameter name="displaySaleType" value="false" />
+          <Parameter name="displaySideIndicator" value="true" />
+          <Parameter name="height" value="768" />
+          <Parameter name="width" value="1024" />
+          <Parameter name="orderItemFont" value="Arial-BOLD-12" />
+          <Parameter name="orderItemFont1" value="Arial-BOLD-16" />
+          <Parameter name="orderItemFont2" value="Arial-BOLD-18" />
+          <Parameter name="grillItemFont" value="Arial-REGULAR-11" />
+          <Parameter name="grillItemFont1" value="Arial-BOLD-14" />
+          <Parameter name="grillItemFont2" value="Arial-BOLD-16" />
+          <Parameter name="cellHeaderFont" value="Arial-BOLD-12" />
+          <Parameter name="cellHeaderFont1" value="Arial-BOLD-14" />
+          <Parameter name="cellHeaderFont2" value="Arial-BOLD-18" />
+          <Parameter name="cellFooterFont" value="Arial-BOLD-12" />
+          <Parameter name="cellFooterFont1" value="Arial-BOLD-14" />
+          <Parameter name="cellFooterFont2" value="Arial-BOLD-16" />
+          <Parameter name="presenterMonitor" value="true" />
+          <Parameter name="dtConsumerMonitor" value="false" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="printReceiptOnServe" value="true" />
+        </Section>
+        <Section name="OperationMode">
+          <Parameter name="kvsSelectionMode" value="BUMPONLY" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="npAdpKvsComm" imports="npAdpKvsComm" startonload="true" />
+        <Adaptor name="xmlrpccli" imports="xmlrpccli" startonload="true" />
+        <Adaptor name="npAdpKvsUI" imports="npAdpKvsUI" startonload="true">
+          <Section name="main">
+            <Parameter name="kvsUIPort" value="1003" />
+          </Section>
+        </Adaptor>
+        <Adaptor name="npAdpKvsSound" imports="npAdpKvsSound" startonload="true" />
+        <Adaptor name="npAdpBumpBar" imports="npAdpBumpBar" startonload="true">
+          <Section name="main">
+            <Parameter name="globalserve" value="0xe1" />
+            <Parameter name="recall" value="0xa1" />
+            <Parameter name="print" value="0xa2" />
+            <Parameter name="next" value="0xb1" />
+            <Parameter name="previous" value="0xb2" />
+            <Parameter name="home" value="" />
+            <Parameter name="serveheld" value="" />
+            <Parameter name="heldscroll" value="0xe2" />
+            <Parameter name="undo" value="" />
+            <Parameter name="held" value="0xd2" />
+            <Parameter name="zoom" value="0xd1" />
+            <Parameter name="SideOn" value="0xc2" />
+            <Parameter name="SideOff" value="0xc1" />
+            <Parameter name="logicalname" value="BumpBar1" />
+            <Parameter name="isNpSharp" value="true" />
+            <Parameter name="drivername" value="NpSharp.Driver.HttpDrivers.dll" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+  </Services>
+</PosDB>

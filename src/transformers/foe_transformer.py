@@ -61,11 +61,24 @@ def get_parameter_from_scopes(scopes, parameter_name):
 
 def get_adaptor(tree, adaptor_name):
     expected = normalize_upper(adaptor_name)
-    matches = [
-        adaptor for adaptor in tree.xpath("//Adaptor[@name]")
-        if normalize_upper(adaptor.get("name")) == expected
-    ]
-    return matches[0] if matches else None
+
+    for adaptor in tree.xpath("//Adaptor"):
+
+        name = normalize_upper(
+            adaptor.get("name")
+        )
+
+        adaptor_type = normalize_upper(
+            adaptor.get("type")
+        )
+
+        if (
+            name == expected
+            or adaptor_type == expected
+        ):
+            return adaptor
+
+    return None
 
 
 def get_service_identifiers(tree):
@@ -248,16 +261,90 @@ def compare_store_integrity(before, after):
 
 
 def validate_foe(tree, product_pricing_root=None, store_integrity_before=None):
+
+
+    print()
+    print("FOE VALIDATION DEBUG")
+    print("-" * 50)
+
+    print(
+        "FOE FOUND:",
+        get_foe_service(tree) is not None
+    )
+
+    print(
+        "RPS FOUND:",
+        get_rps_service(tree) is not None
+    )
+
+    print(
+        "PRODUCT PRICING FOUND:",
+        get_adaptor(
+            tree,
+            "npAdpProductPricing"
+        ) is not None
+    )
+
+
     errors = []
     warnings = []
     foe = get_foe_service(tree)
     rps = get_rps_service(tree)
+
+    print()
+    print("FOE VALIDATION SOURCE")
+    print("-" * 50)
+
+    print(
+        "Tree object id:",
+        id(tree)
+    )
+
+    print(
+        "Root tag:",
+        tree.getroot().tag
+    )
+
+    print(
+        "FOE services:",
+        len(
+            tree.xpath(
+                "//Service[@type='FOE']"
+            )
+        )
+    )
+
+    print(
+        "RPS services:",
+        len(
+            tree.xpath(
+                "//Service[@type='RPS']"
+            )
+        )
+    )
+
+    print(
+        "ProductPricing adaptors:",
+        len(
+            tree.xpath(
+                "//Adaptor[contains(@name,'ProductPricing')]"
+            )
+        )
+    )
 
     foe_service_errors = validate_service(foe, FOE_SERVICE_ATTRIBUTES, "FOE")
     rps_service_errors = validate_service(rps, RPS_SERVICE_ATTRIBUTES, "RPS")
     errors.extend(foe_service_errors)
     errors.extend(rps_service_errors)
     errors.extend(validate_required_used_services(tree))
+
+
+    print()
+    print("RPS PARAMETERS FOUND")
+    print("-" * 50)
+
+    for parameter in rps.xpath(".//Parameter"):
+        print(parameter.get("name"))
 
     rps_errors, rps_values = validate_required_parameters(
         rps, REQUIRED_RPS_PARAMETERS, "RPS"
@@ -350,88 +437,339 @@ def format_foe_readiness_report(validation):
     return "\n".join(lines)
 
 
-def ensure_required_foe_sections(tree):
-    """Backward-compatible entry point for the WAY pipeline."""
-    return ensure_foe_standard(tree)
+def ensure_required_foe_sections(
+    tree,
+):
+    """
+    Backward-compatible entry point used by
+    the WAY generation pipeline.
 
+    This phase preserves FOE/RPS and must not
+    perform final readiness validation.
+    """
 
-def ensure_foe_standard(tree, product_pricing_root=None):
-    """Preserve FOE/RPS and remove only exact duplicate Members."""
-    changes = deduplicate_members(tree)
-    validation = validate_foe(
-        tree, product_pricing_root=product_pricing_root
+    return ensure_foe_standard(
+        tree
     )
+
+def ensure_foe_standard(
+    tree,
+    product_pricing_root=None,
+):
+    """
+    Preserves FOE and RPS during WAY generation.
+
+    This function is intentionally non-blocking.
+
+    It does not rebuild FOE/RPS and does not run
+    final FOE readiness validation. Final validation
+    must run only after the transformed WAY has been
+    saved to output/way.
+    """
+
+    changes = deduplicate_members(
+        tree
+    )
+
+    warnings = []
+
+    foe = get_foe_service(
+        tree
+    )
+
+    rps = get_rps_service(
+        tree
+    )
+
+    if foe is None:
+        warnings.append(
+            "FOE Service was not found during "
+            "WAY preparation."
+        )
+
+    if rps is None:
+        warnings.append(
+            "RPS Service was not found during "
+            "WAY preparation."
+        )
+
     return {
-        "success": validation["valid"],
-        "overall_status": validation["overall_status"],
-        "changes": unique_messages(changes),
-        "warnings": validation["warnings"],
-        "errors": validation["errors"],
-        "readiness": validation["readiness"],
-        "report": format_foe_readiness_report(validation),
+        "success": True,
+        "overall_status": "PRESERVED",
+        "changes": unique_messages(
+            changes
+        ),
+        "warnings": unique_messages(
+            warnings
+        ),
+        "errors": [],
+        "readiness": {
+            "foe_service_found": (
+                foe is not None
+            ),
+            "rps_service_found": (
+                rps is not None
+            ),
+        },
+        "report": (
+            "FOE/RPS preserved during "
+            "WAY preparation."
+        ),
     }
 
+def generate_foe_file(
+    source_file,
+    output_folder,
+):
 
-def generate_foe_file(source_file, output_folder):
-    source_file = Path(source_file)
-    tree = load_xml(source_file)
-    store_integrity_before = extract_store_integrity(tree)
+    print()
+    print("FOE INPUT FILE")
+    print("-" * 50)
+    print(source_file)
 
-    transformation = ensure_foe_standard(
-        tree, product_pricing_root=source_file.parent
+    print()
+    print("FOE FILE EXISTS")
+    print("-" * 50)
+    print(source_file.exists())
+
+    """
+    Validates the final transformed WAY and exports
+    the validated FOE result.
+
+    This function must receive the generated WAY,
+    not the raw WAY from new_posdata.
+    """
+
+    source_file = Path(
+        source_file
     )
-    if transformation["errors"]:
+
+    if not source_file.exists():
         return {
             "generated": False,
             "output_file": None,
-            "errors": transformation["errors"],
-            "warnings": transformation["warnings"],
-            "changes": transformation["changes"],
-            "readiness": transformation["readiness"],
-            "report": transformation["report"],
+            "errors": [
+                "FOE source file was not found: "
+                f"{source_file}"
+            ],
+            "warnings": [],
+            "changes": [],
+            "readiness": {},
+            "report": (
+                "FOE source file was not found."
+            ),
         }
 
-    output_folder = Path(output_folder)
-    output_folder.mkdir(parents=True, exist_ok=True)
-    output_path = output_folder / source_file.name
-    etree.indent(tree, space="  ")
-    save_xml(tree, output_path)
-
-    validation_tree = load_xml(output_path)
-    post_validation = validate_foe(
-        validation_tree,
-        product_pricing_root=source_file.parent,
-        store_integrity_before=store_integrity_before,
+    tree = load_xml(
+        source_file
     )
-    if post_validation["errors"]:
-        output_path.unlink(missing_ok=True)
+
+    print()
+    print("FOE XML PATH")
+    print("-" * 50)
+    print(source_file.resolve())
+
+
+    store_integrity_before = (
+        extract_store_integrity(
+            tree
+        )
+    )
+
+    changes = deduplicate_members(
+        tree
+    )
+
+    validation = validate_foe(
+        tree,
+        product_pricing_root=(
+            source_file.parent
+        ),
+        store_integrity_before=(
+            store_integrity_before
+        ),
+    )
+
+    if validation["errors"]:
         return {
             "generated": False,
             "output_file": None,
-            "errors": post_validation["errors"],
-            "warnings": post_validation["warnings"],
-            "changes": transformation["changes"],
-            "readiness": post_validation["readiness"],
-            "report": format_foe_readiness_report(post_validation),
+            "errors": validation["errors"],
+            "warnings": validation["warnings"],
+            "changes": changes,
+            "readiness": validation[
+                "readiness"
+            ],
+            "report": (
+                format_foe_readiness_report(
+                    validation
+                )
+            ),
+        }
+
+    output_folder = Path(
+        output_folder
+    )
+
+    output_folder.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    output_path = (
+        output_folder
+        / source_file.name
+    )
+
+    etree.indent(
+        tree,
+        space="  ",
+    )
+
+    save_xml(
+        tree,
+        output_path,
+    )
+
+    saved_tree = load_xml(
+        output_path
+    )
+
+    post_validation = validate_foe(
+        saved_tree,
+        product_pricing_root=(
+            source_file.parent
+        ),
+        store_integrity_before=(
+            store_integrity_before
+        ),
+    )
+
+    if post_validation["errors"]:
+        output_path.unlink(
+            missing_ok=True
+        )
+
+        return {
+            "generated": False,
+            "output_file": None,
+            "errors": (
+                post_validation["errors"]
+            ),
+            "warnings": (
+                post_validation["warnings"]
+            ),
+            "changes": changes,
+            "readiness": (
+                post_validation[
+                    "readiness"
+                ]
+            ),
+            "report": (
+                format_foe_readiness_report(
+                    post_validation
+                )
+            ),
         }
 
     return {
         "generated": True,
-        "output_file": str(output_path),
-        "errors": [],
-        "warnings": post_validation["warnings"],
-        "changes": unique_messages(
-            transformation["changes"] + ["FOE/RPS preserved and validated."]
+        "output_file": str(
+            output_path
         ),
-        "readiness": post_validation["readiness"],
-        "report": format_foe_readiness_report(post_validation),
+        "errors": [],
+        "warnings": (
+            post_validation["warnings"]
+        ),
+        "changes": unique_messages(
+            changes
+            + [
+                "FOE/RPS preserved and "
+                "validated."
+            ]
+        ),
+        "readiness": (
+            post_validation["readiness"]
+        ),
+        "report": (
+            format_foe_readiness_report(
+                post_validation
+            )
+        ),
     }
 
+def generate_all_foe(
+    new_posdata_folder,
+    output_folder="output/foe",
+    generated_way_folder="output/way",
+):
+    """
+    Validates FOE/RPS using the transformed WAY.
 
-def generate_all_foe(new_posdata_folder, output_folder="output/foe"):
-    source_file = Path(new_posdata_folder) / "_WAYSTATION_pos-db.xml"
-    if not source_file.exists():
-        return []
-    result = generate_foe_file(source_file, output_folder)
-    result["file"] = "_WAYSTATION_pos-db.xml"
+    The raw WAY from new_posdata is not accepted as
+    a fallback, because it may not contain the final
+    FOE/RPS/ProductPricing configuration.
+    """
+
+    generated_way_file = (
+        Path(generated_way_folder)
+        / "_WAYSTATION_pos-db.xml"
+    )
+
+    if not generated_way_file.exists():
+        return [
+            {
+                "file": (
+                    "_WAYSTATION_pos-db.xml"
+                ),
+                "generated": False,
+                "output_file": None,
+                "errors": [
+                    "Generated WAY file was not "
+                    "found for FOE validation: "
+                    f"{generated_way_file}"
+                ],
+                "warnings": [],
+                "changes": [],
+                "readiness": {},
+                "report": (
+                    "FOE validation could not run "
+                    "because the generated WAY file "
+                    "was not found."
+                ),
+                "source_file": None,
+                "source_type": (
+                    "GENERATED WAY NOT FOUND"
+                ),
+            }
+        ]
+
+    print()
+    print("FOE SOURCE SELECTION")
+    print("-" * 50)
+    print("Source type: GENERATED WAY")
+    print(
+        f"Source file: "
+        f"{generated_way_file.resolve()}"
+    )
+
+    result = generate_foe_file(
+        generated_way_file,
+        output_folder,
+    )
+
+    result["file"] = (
+        generated_way_file.name
+    )
+
+    result["source_file"] = str(
+        generated_way_file.resolve()
+    )
+
+    result["source_type"] = (
+        "GENERATED WAY"
+    )
+
     return [result]
+
+

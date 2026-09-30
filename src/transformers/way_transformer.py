@@ -14,7 +14,6 @@ from lxml import etree
 
 from src.transformers.foe_transformer import (
     ensure_foe_standard,
-    validate_foe,
 )
 from src.utils.config_loader import load_json_config
 from src.utils.xml_loader import load_xml, save_xml
@@ -951,7 +950,10 @@ def generate_way_file(
     )
 
     changes.extend(
-        foe_transformation["changes"]
+        foe_transformation.get(
+            "changes",
+            []
+        )
     )
 
     warnings.extend(
@@ -962,7 +964,10 @@ def generate_way_file(
     )
 
     errors.extend(
-        foe_transformation["errors"]
+        foe_transformation.get(
+            "errors",
+            []
+        )
     )
 
     validation = validate_way_tree(
@@ -1023,22 +1028,21 @@ def generate_way_file(
         )
     )
 
-    post_save_foe_validation = (
-        validate_foe(
-            validation_tree
+    post_save_errors = list(
+        dict.fromkeys(
+            post_save_validation.get(
+                "errors",
+                []
+            )
         )
     )
 
-    post_save_errors = (
-        post_save_validation["errors"]
-        + post_save_foe_validation["errors"]
-    )
-
-    post_save_warnings = (
-        post_save_validation["warnings"]
-        + post_save_foe_validation.get(
-            "warnings",
-            []
+    post_save_warnings = list(
+        dict.fromkeys(
+            post_save_validation.get(
+                "warnings",
+                []
+            )
         )
     )
 

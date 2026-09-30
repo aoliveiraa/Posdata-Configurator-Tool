@@ -793,6 +793,26 @@ def generate_pos_file(
         output_folder
     )
 
+
+    disable_rpr_printers = False
+
+    try:
+        from src.utils.config_loader import (
+            load_json_config
+        )
+
+        config = load_json_config(
+            "config/rio_lab.json"
+        )
+
+        disable_rpr_printers = config.get(
+            "disable_rpr_printers",
+            False
+        )
+
+    except Exception:
+        disable_rpr_printers = False
+
     output_folder.mkdir(
         parents=True,
         exist_ok=True
@@ -842,6 +862,36 @@ def generate_pos_file(
     changes = []
     warnings = []
     errors = []
+
+    from src.transformers.rpr_transformer import (
+        apply_rpr_configuration,
+    )
+
+    rpr_result = apply_rpr_configuration(
+        tree,
+        disable_rpr_printers=disable_rpr_printers
+    )
+
+    changes.extend(
+        rpr_result.get(
+            "changes",
+            []
+        )
+    )
+
+    warnings.extend(
+        rpr_result.get(
+            "warnings",
+            []
+        )
+    )
+
+    errors.extend(
+        rpr_result.get(
+            "errors",
+            []
+        )
+    )
 
     changes.extend(
         normalize_messaging_section(

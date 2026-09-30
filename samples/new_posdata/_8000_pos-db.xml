@@ -1,0 +1,1268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PosDB>
+  <RTM_Generated>
+    <Parameter name="generationTimestamp" value="2026-03-03T14:25:43" />
+  </RTM_Generated>
+  <StoreDB imports="all" />
+  <ColorDB imports="default" />
+  <Configuration imports="Store.wide">
+    <Section name="Messaging">
+      <Parameter name="serverPort" value="60004" />
+    </Section>
+    <Section name="OperationMode">
+      <Parameter name="dualPointDoubleBumpActive" value="true" />
+      <Parameter name="singleReportInstance" value="true" />
+    </Section>
+  </Configuration>
+  <Services>
+    <Service name="8000" type="PST" classname="com.ngpos.newprod.persistence.HsqlPersistenceNode" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="PST">
+          <Member name="8001" alias="" />
+        </UsedService>
+      </UsedServices>
+    </Service>
+    <Service name="8004" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System1" imports="external.System1" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8004" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8007" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System2" imports="external.System2" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8007" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8018" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System3" imports="external.System3" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8018" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8019" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System4" imports="external.System4" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8019" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8020" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System5" imports="external.System5" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8020" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8021" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System6" imports="external.System6" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8021" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8063" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System7" imports="external.System7" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8063" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8066" type="QUE" classname="com.ngpos.newprod.core.StoreArea" startonload="true" quitOnFail="true">
+      <Configuration imports="StoreProduction">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+      <Adaptors>
+        <Adaptor name="external.System8" imports="external.System8" startonload="true">
+          <Section name="main">
+            <Parameter name="service" value="CODDriver" />
+            <Parameter name="eventsToSend" value="SALE|VOID|STORE|BUMP_SERVE|RECALL" />
+            <Parameter name="port" value="2221" />
+            <Parameter name="MapToSide2" value="Side2" />
+            <Parameter name="includeKVSSide" value="false" />
+            <Parameter name="MapToSide1" value="Side1" />
+            <Parameter name="logicalname" value="COCDriver8066" />
+            <Parameter name="ip" value="10.171.242.64" />
+          </Section>
+        </Adaptor>
+      </Adaptors>
+    </Service>
+    <Service name="8067" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1067" alias="KVS17 DLV EXPO" />
+          <Member name="1267" alias="KVS19 DLV OAT" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+          <Parameter name="notifyDeliverTo" value="NPORB2" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8069" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8070" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8070" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8069" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8071" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8072" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8072" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8071" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8073" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8074" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8074" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8073" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8075" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8076" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8076" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8075" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8077" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8078" alias="" />
+          <Member name="8079" alias="" />
+          <Member name="8080" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1001" alias="GPR1001" />
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="1001" alias="KVS01 MFY1" />
+          <Member name="1004" alias="KVS05 MFY1" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8078" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8077" alias="" />
+          <Member name="8079" alias="" />
+          <Member name="8080" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1011" alias="" />
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="1011" alias="KVS02 MFY2" />
+          <Member name="1005" alias="KVS06 MFY2" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8079" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8077" alias="" />
+          <Member name="8078" alias="" />
+          <Member name="8080" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1121" alias="" />
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="1121" alias="KVS03 MFY3" />
+          <Member name="1204" alias="KVS07 MFY3" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8080" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8077" alias="" />
+          <Member name="8078" alias="" />
+          <Member name="8079" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1131" alias="" />
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="1131" alias="KVS04 MFY4" />
+          <Member name="1205" alias="KVS08 MFY4" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8094" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8095" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1009" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8095" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8094" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1010" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8097" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8098" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1031" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8098" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8097" alias="" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1032" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8005" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="true" quitOnFail="true">
+      <Configuration imports="Production.Routing">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8006" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="ABS">
+          <Member name="" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8031" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8032" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8033" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8034" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8035" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8003" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8017" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1049" alias="MCCPROD" />
+          <Member name="1149" alias="MCCPRODM" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1049" alias="" />
+          <Member name="1149" alias="" />
+          <Member name="1007" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8023" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1209" alias="KVS38 DRKHOT" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8024" type="QUE" classname="com.ngpos.newprod.core.ProductionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Production.Routing" />
+    </Service>
+    <Service name="8026" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1007" alias="DRKDES" />
+          <Member name="1008" alias="DRKDESM" />
+          <Member name="1109" alias="DRKDESM" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1007" alias="" />
+          <Member name="1008" alias="" />
+          <Member name="1109" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8036" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8037" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8038" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8039" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1209" alias="DRKCOLD" />
+        </UsedService>
+        <UsedService serviceType="GPR">
+          <Member name="1007" alias="" />
+          <Member name="1008" alias="" />
+          <Member name="1109" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8040" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8603" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8604" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8605" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1033" alias="KVS13 OAT" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8606" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1033" alias="KVS13 OAT" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8607" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8608" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8099" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8100" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration type="Summary">
+        <Section name="QueueService">
+          <Parameter name="nodeType" value="SummaryArea" />
+        </Section>
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8004,QUE8007,QUE8020" />
+        </Section>
+      </Configuration>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8100" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8099" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration type="Summary">
+        <Section name="QueueService">
+          <Parameter name="nodeType" value="SummaryArea" />
+        </Section>
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8004,QUE8007,QUE8020" />
+        </Section>
+      </Configuration>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8081" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1013" alias="KVS09 DP1" />
+          <Member name="1033" alias="KVS13 OAT" />
+        </UsedService>
+        <UsedService serviceType="QUE">
+          <Member name="8082" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+          <Parameter name="notifyDeliverTo" value="NPORB" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+          <Parameter name="acceptCLC" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8082" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8081" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+          <Parameter name="notifyDeliverTo" value="" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+          <Parameter name="acceptCLC" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8083" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8081" alias="" />
+          <Member name="8082" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+          <Parameter name="notifyDeliverTo" value="" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+          <Parameter name="acceptCLC" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8084" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8081" alias="" />
+          <Member name="8082" alias="" />
+          <Member name="8083" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+          <Parameter name="notifyDeliverTo" value="" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+          <Parameter name="acceptCLC" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8028" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="processOrders" value="ONTOTAL" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8121" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="processOrders" value="ONTOTAL" />
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8122" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="processOrders" value="ONTOTAL" />
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8044" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8046" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8054" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8055" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8056" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8057" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8027" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8047" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8060" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8061" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8014" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1003" alias="KVS21 DT Expo TPL" />
+          <Member name="1103" alias="DT-Runner" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONSTORE" />
+          <Parameter name="paidInFront" value="true" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="autoTandem" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="skipCarPrdSrc" value="QUE8007" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+          <Parameter name="runnerEnabled" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="processOrders" value="ONSTORE" />
+          <Parameter name="autoTakePicture" value="false" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8041" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8049" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8050" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8013" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8119" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1033" alias="KVS13 OAT" />
+        </UsedService>
+        <UsedService serviceType="QUE">
+          <Member name="8120" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8120" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8119" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8042" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8043" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8045" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8051" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8052" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8053" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8012" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="notifyKVSServeInStoreArea" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="displayAsSingleProduct" value="false" />
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8015" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8016" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="acceptGlobalServe" value="true" />
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8029" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8048" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <UsedServices />
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="displayAsSingleProduct" value="false" />
+          <Parameter name="decomposeVM" value="ONLY_VM" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8058" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8059" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8062" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="false" quitOnFail="true">
+      <Configuration imports="Presentation" />
+    </Service>
+    <Service name="8199" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1070" alias="ORB01 NPORB" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9989" type="QUE" classname="com.ngpos.newprod.core.ExpeditionArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="KVS">
+          <Member name="1078" alias="ORB05 NPORB DLV" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Presentation">
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="bumpOnTotal" value="false" />
+          <Parameter name="acceptGlobalServe" value="true" />
+        </Section>
+        <Section name="WayOfWork">
+          <Parameter name="forwardAlias" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8601" type="QUE" classname="com.ngpos.newprod.core.RapidTurnoverArea" startonload="true" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8601" alias="" />
+        </UsedService>
+        <UsedService serviceType="KVS">
+          <Member name="1601" alias="KVS29 BB" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="turnOffKitchenEnabled" value="false" />
+        </Section>
+        <Section name="LoadBalance">
+          <Parameter name="FilterBy" value="Order" />
+          <Parameter name="TurnTaking" value="First" />
+        </Section>
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="paidInFront" value="false" />
+          <Parameter name="bumpOnTotal" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="8602" type="QUE" classname="com.ngpos.newprod.core.RapidTurnoverArea" startonload="false" quitOnFail="true">
+      <UsedServices>
+        <UsedService serviceType="QUE">
+          <Member name="8601" alias="" />
+          <Member name="8602" alias="" />
+        </UsedService>
+      </UsedServices>
+      <Configuration imports="Production.Routing">
+        <Section name="WayOfWork">
+          <Parameter name="turnOffKitchenEnabled" value="true" />
+        </Section>
+        <Section name="LoadBalance">
+          <Parameter name="FilterBy" value="Order" />
+          <Parameter name="TurnTaking" value="First" />
+        </Section>
+        <Section name="KvsOptions">
+          <Parameter name="enableDisplay" value="ONTOTAL" />
+          <Parameter name="paidInFront" value="false" />
+          <Parameter name="bumpOnTotal" value="true" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9000" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8004" />
+          <Parameter name="routes" value="5059,5061,5063,5065,5067,5069,5704,5781,5782,5783,5784,5785,5786,6770,8610,15280,15285,15291,15297,15323,15410,16930,16931,16932,16933,16934,16935,16936" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9001" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8007" />
+          <Parameter name="routes" value="5047,5049,5051,5053,5055,5704,5774,5776,5777,5778,5779,6772,8610,15281,15286,15292,15298,15313,15317,15322,15430,16923,16924,16925,16926,16927,16928,16929,15955" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9002" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8018" />
+          <Parameter name="routes" value="5386,5388,5390,5392,5394,5396,5704,5733,5734,5735,5736,5737,5738,5739,5740,5741,5742,5743,5744,5745,5746,5747,5748,5749,5750,5751,5752,5802,5803,5804,5805,5806,5807,6768,8610,15283,15288,15294,15300,15315,15320,15325,16951,16952,16953,16954,16955,16956,16957" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9003" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8019" />
+          <Parameter name="routes" value="5362,5364,5366,5368,5370,5372,5704,5795,5796,5797,5798,5799,5800,6769,11339,11340,11341,11342,11343,11344,11345,11346,11347,11348,11349,11350,11351,11352,11353,15290,15296,15302,15314,15321,15327,16944,16945,16946,16947,16948,16949,16950" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9004" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8020" />
+          <Parameter name="routes" value="5083,5085,5087,5089,5091,5093,5704,5788,5789,5790,5791,5792,5793,6771,8610,15282,15287,15293,15299,15308,15309,15310,15311,15312,15319,15324,15412,15418,15421,15424,15427,16937,16938,16939,16940,16941,16942,16943" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9005" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8021" />
+          <Parameter name="routes" value="5399,5401,5403,5405,5407,5409,5704,5753,5754,5755,5756,5757,5758,5759,5760,5761,5762,5763,5764,5765,5766,5767,5768,5769,5770,5771,5772,5809,5810,5811,5812,5813,5814,6773,8610,15284,15289,15295,15301,15316,15326,16958,16959,16960,16961,16962,16963,16964" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9006" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8063" />
+          <Parameter name="routes" value="5704" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9007" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8019" />
+          <Parameter name="routes" value="5704,5728,5729,5730,5731,5732,15321,15327" />
+          <Parameter name="ksGroup" value="MCC - KS" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9008" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8020" />
+          <Parameter name="routes" value="5579,5580,5581,5582,5583,5584,5585,5586,5587,5588,5589,5590,5591,5592,5593,5594,5704,15319,15324,15345,15346,15347,15348,15349,15350,15351,15352,15353,15354,15355,15356,15357,15358,15359,15360,15415" />
+          <Parameter name="ksGroup" value="CSO - KS" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9009" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8004" />
+          <Parameter name="routes" value="5563,5564,5565,5566,5567,5568,5569,5570,5571,5572,5573,5574,5575,5576,5577,5578,5704,15303,15304,15305,15306,15307,15318,15420,15423,15426,15429,15323,15329,15330,15331,15332,15333,15334,15335,15336,15337,15338,15339,15340,15341,15342,15343,15344,15416" />
+          <Parameter name="ksGroup" value="FC-KS" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9010" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8007" />
+          <Parameter name="routes" value="5527,5528,5529,5530,5531,5532,5533,5534,5535,5536,5537,5538,5539,5540,5541,5542,5543,5544,5545,5546,5704,15317,15322,15413" />
+          <Parameter name="ksGroup" value="DT - KS" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9011" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8018" />
+          <Parameter name="routes" value="5563,5564,5565,5566,5567,5568,5569,5570,5571,5572,5573,5574,5575,5576,5577,5578,5704,15318,15323,15329,15330,15331,15332,15333,15334,15335,15336,15337,15338,15339,15340,15341,15342,15343,15344" />
+          <Parameter name="ksGroup" value="WT-KS" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="9012" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="QUE8066" />
+          <Parameter name="routes" value="6790,6791,6792,6793,6794,6795,6796,6797,6798,6799,6800,6801,6802,6803,6804,6805,6824,6826,6829,6832,6835,8610,15361,15362,15363,15364,15365,15366,15367,15368,15369,15370,15371,15372,15373,15374,15375,15392,15393,15394,15395,15396,15397,15398,15399,15400,15401,15402,15403,15404,15405,15406,15407,15408,15409,15414,16965,16966,16967,16968,16969,16970,16971,16972,16973,16974,16975,16976,16977" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="4335" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="" />
+          <Parameter name="routes" value="" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="4336" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="" />
+          <Parameter name="routes" value="" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="4338" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="" />
+          <Parameter name="routes" value="" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+    <Service name="4347" type="QUE" classname="com.ngpos.newprod.core.RouterNode" startonload="true" quitOnFail="true">
+      <Configuration imports="Router">
+        <Section name="KvsRoutes">
+          <Parameter name="queueSource" value="" />
+          <Parameter name="routes" value="" />
+          <Parameter name="ksGroup" value="" />
+        </Section>
+      </Configuration>
+    </Service>
+  </Services>
+</PosDB>
